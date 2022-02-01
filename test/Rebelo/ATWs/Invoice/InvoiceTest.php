@@ -1,0 +1,183 @@
+<?php
+
+/**
+ * MIT License
+ *
+ * Copyright (c) 2019 João M F Rebelo
+ */
+declare(strict_types=1);
+
+namespace Rebelo\ATWs\Invoice;
+
+use PHPUnit\Framework\TestCase;
+use Rebelo\ATWs\ATWsException;
+use Rebelo\Base;
+use Rebelo\Date\Date;
+
+/**
+ * Class InvoiceTest
+ *
+ * @author João Rebelo
+ */
+class InvoiceTest extends TestCase
+{
+
+    /**
+     * @test
+     * @return void
+     */
+    public function testReflection(): void
+    {
+        (new Base())->testReflection(Invoice::class);
+        $this->assertTrue(true);
+    }
+
+    /**
+     * @test
+     * @return void
+     * @throws ATWsException
+     * @throws \Rebelo\Date\DateFormatException
+     */
+    public function testInstanceNationalCustomer(): void
+    {
+        $taxRegistrationNumber = "555555550";
+        $invoiceNo = "FT A/9";
+        $invoiceDate = new Date();
+        $invoiceType = "FT";
+        $invoiceStatus = "N";
+        $customerTaxID = "999999990";
+        $lines = [
+            new Line(9.99, null, "IVA", "PT", 23.0, null)
+        ];
+        $documentTotals = new DocumentTotals(1.00, 2.99, 3.99);
+
+        $invoice = new Invoice(
+            $taxRegistrationNumber,
+            $invoiceNo,
+            $invoiceDate,
+            $invoiceType,
+            $invoiceStatus,
+            $customerTaxID,
+            $lines,
+            $documentTotals
+        );
+
+        $this->assertSame($taxRegistrationNumber, $invoice->getTaxRegistrationNumber());
+        $this->assertSame($invoiceNo, $invoice->getInvoiceNo());
+        $this->assertSame($invoiceDate, $invoice->getInvoiceDate());
+        $this->assertSame($invoiceType, $invoice->getInvoiceType());
+        $this->assertSame($invoiceStatus, $invoice->getInvoiceStatus());
+        $this->assertSame($customerTaxID, $invoice->getCustomerID());
+        $this->assertSame($lines, $invoice->getLines());
+        $this->assertSame($documentTotals, $invoice->getDocumentTotals());
+    }
+
+    /**
+     * @test
+     * @return void
+     * @throws \Rebelo\ATWs\ATWsException
+     * @throws \Rebelo\Date\DateFormatException
+     */
+    public function testInstanceInternationalCustomer(): void
+    {
+        $taxRegistrationNumber = "555555550";
+        $invoiceNo = "FT A/9";
+        $invoiceDate = new Date();
+        $invoiceType = "FT";
+        $invoiceStatus = "N";
+        $customerTaxID = new InternationalCustomerTaxID("99999999", "ES");
+        $lines = [
+            new Line(9.99, null, "IVA", "PT", 23.0, null)
+        ];
+        $documentTotals = new DocumentTotals(1.00, 2.99, 3.99);
+
+        $invoice = new Invoice(
+            $taxRegistrationNumber,
+            $invoiceNo,
+            $invoiceDate,
+            $invoiceType,
+            $invoiceStatus,
+            $customerTaxID,
+            $lines,
+            $documentTotals
+        );
+
+        $this->assertSame($taxRegistrationNumber, $invoice->getTaxRegistrationNumber());
+        $this->assertSame($invoiceNo, $invoice->getInvoiceNo());
+        $this->assertSame($invoiceDate, $invoice->getInvoiceDate());
+        $this->assertSame($invoiceType, $invoice->getInvoiceType());
+        $this->assertSame($invoiceStatus, $invoice->getInvoiceStatus());
+        $this->assertSame($customerTaxID, $invoice->getCustomerID());
+        $this->assertSame($lines, $invoice->getLines());
+        $this->assertSame($documentTotals, $invoice->getDocumentTotals());
+    }
+
+    /**
+     * @test
+     * @return void
+     * @throws \Rebelo\ATWs\ATWsException
+     * @throws \Rebelo\Date\DateFormatException
+     */
+    public function testInstanceWrongInvoiceType(): void
+    {
+        $taxRegistrationNumber = "555555550";
+        $invoiceNo = "FT A/9";
+        $invoiceDate = new Date();
+        $invoiceType = "FA";
+        $invoiceStatus = "N";
+        $customerTaxID = new InternationalCustomerTaxID("99999999", "ES");
+        $lines = [
+            new Line(9.99, null, "IVA", "PT", 23.0, null)
+        ];
+        $documentTotals = new DocumentTotals(1.00, 2.99, 3.99);
+
+        $this->expectException(ATWsException::class);
+        $this->expectExceptionMessage("Invoice type only can be 'FT', 'FR', 'FS', 'NC', 'ND'");
+
+        new Invoice(
+            $taxRegistrationNumber,
+            $invoiceNo,
+            $invoiceDate,
+            $invoiceType,
+            $invoiceStatus,
+            $customerTaxID,
+            $lines,
+            $documentTotals
+        );
+    }
+
+    /**
+     * @test
+     * @return void
+     * @throws \Rebelo\ATWs\ATWsException
+     * @throws \Rebelo\Date\DateFormatException
+     */
+    public function testInstanceWrongInvoiceStatus(): void
+    {
+        $taxRegistrationNumber = "555555550";
+        $invoiceNo = "FT A/9";
+        $invoiceDate = new Date();
+        $invoiceType = "FR";
+        $invoiceStatus = "F";
+        $customerTaxID = new InternationalCustomerTaxID("99999999", "ES");
+        $lines = [
+            new Line(9.99, null, "IVA", "PT", 23.0, null)
+        ];
+        $documentTotals = new DocumentTotals(1.00, 2.99, 3.99);
+
+        $this->expectException(ATWsException::class);
+        $this->expectExceptionMessage("Invoice status only can be 'A', 'N'");
+
+        new Invoice(
+            $taxRegistrationNumber,
+            $invoiceNo,
+            $invoiceDate,
+            $invoiceType,
+            $invoiceStatus,
+            $customerTaxID,
+            $lines,
+            $documentTotals
+        );
+    }
+
+}

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+                   xmlns:ns="http://autenticacao.portaldasfinancas.gov.pt/services/ValidateCredencialService/2012/11"
+>
+    <SOAP-ENV:Header/>
+    <SOAP-ENV:Body>
+        <SOAP-ENV:Fault>
+            <faultcode>Client.Authentication</faultcode>
+            <faultstring>Ocorreu um erro na autentica&#231;&#227;o dos contribuintes.</faultstring>
+            <faultactor/>
+            <detail>
+                <ns:AuthenticationException>
+                    <AuthenticationFailed
+                    >
+                        <Code>16</Code>
+                        <Message>Created: Chave de sess&#227;o inv&#225;lida. N&#227;o foi poss&#237;vel decifrar o campo Created
+                        </Message>
+                        <NumberOfTriesRemaining>-1</NumberOfTriesRemaining>
+                    </AuthenticationFailed>
+                </ns:AuthenticationException>
+            </detail>
+        </SOAP-ENV:Fault>
+    </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

@@ -1,0 +1,34 @@
+<xsd:complexType name="anularSerie">
+            <xsd:sequence>
+               <xsd:element name="serie" type="ns0:serieType">
+                  <xsd:annotation>
+                    <xsd:documentation>Indique o identificador da Série cuja comunicação pretende anular.</xsd:documentation>
+                  </xsd:annotation>
+               </xsd:element>
+               <xsd:element name="classeDoc" type="ns0:classeDocType">
+                  <xsd:annotation>
+                    <xsd:documentation>Indique a classificação dada ao documento a que pertence a Série cuja comunicação pretende anular.</xsd:documentation>
+                  </xsd:annotation>
+               </xsd:element>
+               <xsd:element name="tipoDoc" type="ns0:tipoDocType">
+                  <xsd:annotation>
+                    <xsd:documentation>Indique o tipo de documento a que pertence a Série cuja comunicação pretende anular.</xsd:documentation>
+                  </xsd:annotation>
+               </xsd:element>
+               <xsd:element name="codValidacaoSerie" type="ns0:codValidacaoSerieType">
+                  <xsd:annotation>
+                    <xsd:documentation>Indique o código de validação da série, atribuído pela AT, cuja comunicação pretende anular.</xsd:documentation>
+                  </xsd:annotation>
+               </xsd:element>
+               <xsd:element name="motivo" type="ns0:motivoType">
+                  <xsd:annotation>
+                    <xsd:documentation>Indique o motivo pelo qual pretende anular a comunicação da Série.</xsd:documentation>
+                  </xsd:annotation>
+               </xsd:element>
+			            <xsd:element name="declaracaoNaoEmissao" type="xsd:boolean">
+				              <xsd:annotation>
+                    <xsd:documentation>Indicação informativa de que o sujeito passivo teve conhecimento de que não deve anular a comunicação de uma Série se já utilizou documentos emitidos com a informação da mesma. A comunicação não será aceite se o sujeito passivo não indicar (preenchendo com o valor verdadeiro este parâmetro) que teve conhecimento da condição apresentada.</xsd:documentation>
+                  </xsd:annotation>
+               </xsd:element>
+            </xsd:sequence>
+         </xsd:complexType>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<env:Envelope xmlns:env="http://schemas.xmlsoap.org/soap/envelope/">
+    <env:Header/>
+    <env:Body>
+        <ns0:RegisterInvoiceResponseElem xmlns:ns0="http://servicos.portaldasfinancas.gov.pt/faturas/">
+            <ReturnCode>-1</ReturnCode>
+            <ReturnMessage>O NIF do emitente do documento &#233; inv&#225;lido.</ReturnMessage>
+        </ns0:RegisterInvoiceResponseElem>
+    </env:Body>
+</env:Envelope>

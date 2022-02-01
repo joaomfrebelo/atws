@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+    <S:Header>
+        <WorkContext xmlns="http://oracle.com/weblogic/soap/workarea/">
+            rO0ABXdWABV3ZWJsb2dpYy5hcHAuc2VyaWVzYm8AAADWAAAAI3dlYmxvZ2ljLndvcmthcmVhLlN0cmluZ1dvcmtDb250ZXh0ABAyMDIyMDIwMTA5MDY1OC4wAAA=
+        </WorkContext>
+    </S:Header>
+    <S:Body>
+        <ns0:registarSerieResponse xmlns:ns0="http://at.gov.pt/">
+            <registarSerieResp>
+                <infoSerie>
+                    <serie>2511232477</serie>
+                    <tipoSerie>N</tipoSerie>
+                    <classeDoc>SI</classeDoc>
+                    <tipoDoc>FT</tipoDoc>
+                    <numInicialSeq>999</numInicialSeq>
+                    <dataInicioPrevUtiliz>2022-04-01</dataInicioPrevUtiliz>
+                    <meioProcessamento>PF</meioProcessamento>
+                    <numCertSWFatur>9999</numCertSWFatur>
+                    <codValidacaoSerie>AAJFF5JWJN</codValidacaoSerie>
+                    <dataRegisto>2022-02-01</dataRegisto>
+                    <estado>A</estado>
+                    <dataEstado>2022-02-01T12:31:20Z</dataEstado>
+                    <nifComunicou>555555550</nifComunicou>
+                </infoSerie>
+                <infoSerie>
+                    <serie>2511232999</serie>
+                    <tipoSerie>N</tipoSerie>
+                    <classeDoc>SI</classeDoc>
+                    <tipoDoc>FT</tipoDoc>
+                    <numInicialSeq>1</numInicialSeq>
+                    <dataInicioPrevUtiliz>2022-09-01</dataInicioPrevUtiliz>
+                    <seqUltimoDocEmitido>999</seqUltimoDocEmitido>
+                    <meioProcessamento>PF</meioProcessamento>
+                    <numCertSWFatur>9999</numCertSWFatur>
+                    <codValidacaoSerie>AAJFF5J999</codValidacaoSerie>
+                    <dataRegisto>2022-02-19</dataRegisto>
+                    <estado>A</estado>
+                    <motivoEstado>The status reason</motivoEstado>
+                    <justificacao>The justify</justificacao>
+                    <dataEstado>2022-02-01T19:31:20Z</dataEstado>
+                    <nifComunicou>999999999</nifComunicou>
+                </infoSerie>
+                <infoResultOper>
+                    <codResultOper>2001</codResultOper>
+                    <msgResultOper>S&#233;rie registada com sucesso. A situa&#231;&#227;o ficou ativa e foi atribu&#237;do
+                        o seguinte c&#243;digo de valida&#231;&#227;o : AAJFF5JWJN
+                    </msgResultOper>
+                </infoResultOper>
+            </registarSerieResp>
+        </ns0:registarSerieResponse>
+    </S:Body>
+</S:Envelope>

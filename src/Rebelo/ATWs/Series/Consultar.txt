@@ -1,0 +1,48 @@
+            <xsd:sequence>
+               <xsd:element name="serie" type="ns0:serieType" minOccurs="0">
+                  <xsd:annotation>
+                    <xsd:documentation>Indique o identificador da Série que pretende consultar.</xsd:documentation>
+                  </xsd:annotation>
+               </xsd:element>
+               <xsd:element name="tipoSerie" type="ns0:tipoSerieType" minOccurs="0">
+                  <xsd:annotation>
+                    <xsd:documentation>Indique o tipo da Série que pretende consultar.</xsd:documentation>
+                  </xsd:annotation>
+               </xsd:element>
+               <xsd:element name="classeDoc" type="ns0:classeDocType" minOccurs="0">
+                  <xsd:annotation>
+                    <xsd:documentation>Indique a classificação dada ao documento a que pertence a Série que pretende consultar.</xsd:documentation>
+                  </xsd:annotation>
+               </xsd:element>
+               <xsd:element name="tipoDoc" type="ns0:tipoDocType" minOccurs="0">
+                  <xsd:annotation>
+                    <xsd:documentation>Indique o tipo de documento a que pertence a Série que pretende consultar.</xsd:documentation>
+                  </xsd:annotation>
+               </xsd:element>
+               <xsd:element name="codValidacaoSerie" type="ns0:codValidacaoSerieType" minOccurs="0">
+                  <xsd:annotation>
+                    <xsd:documentation>Indique o código de validação da Série, atribuído pela AT, que pretende consultar.</xsd:documentation>
+                  </xsd:annotation>
+               </xsd:element>
+               <xsd:element name="dataRegistoDe" type="xsd:date" minOccurs="0">
+                  <xsd:annotation>
+                    <xsd:documentation>Indique a data inicial do intervalo de pesquisa.</xsd:documentation>
+                  </xsd:annotation>
+               </xsd:element>
+               <xsd:element name="dataRegistoAte" type="xsd:date" minOccurs="0">
+                  <xsd:annotation>
+                    <xsd:documentation>Indique a data final do intervalo de pesquisa.</xsd:documentation>
+                  </xsd:annotation>
+               </xsd:element>
+               <xsd:element name="estado" type="ns0:estadoType" minOccurs="0">
+                  <xsd:annotation>
+                    <xsd:documentation>Indique o estado da Série que pretende consultar.</xsd:documentation>
+                  </xsd:annotation>
+               </xsd:element>
+               <xsd:element name="meioProcessamento" type="ns0:meioProcessamentoType" minOccurs="0">
+                  <xsd:annotation>
+                    <xsd:documentation>Código de meio de processamento dos documentos a emitir.</xsd:documentation>
+                  </xsd:annotation>
+               </xsd:element>
+            </xsd:sequence>
+         </xsd:complexType>

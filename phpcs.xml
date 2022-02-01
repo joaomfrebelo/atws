@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+
+<ruleset  name="PHP_CodeSniffer">
+
+    <description>PHPCS configuration file.</description>
+    <!-- check all files in the app directory-->
+    <file>src</file>
+    <file>test/Rebelo</file>
+
+    <arg  value="nps"/>
+
+    <rule ref="Zend">
+        <exclude name="Zend.NamingConventions.ValidVariableName.PrivateNoUnderscore"/>
+    </rule>
+
+    <rule ref="PEAR.ControlStructures.ControlSignature.Found">
+        <exclude name="PEAR.ControlStructures.ControlSignature.Found"/>
+    </rule>
+
+    <rule ref="Generic.Files.LineLength">
+        <properties>
+            <property name="ignoreComments" value="true" />
+            <property name="absoluteLineLimit" value="199"/>
+        </properties>
+    </rule>
+
+    <rule ref="Generic.Functions.OpeningFunctionBraceBsdAllman">
+        <properties>
+            <property name="checkFunctions" value="true" />
+            <property name="checkClosures" value="true" />
+        </properties>
+    </rule>
+</ruleset>

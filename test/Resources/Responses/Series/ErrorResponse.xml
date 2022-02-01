@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+    <S:Header>
+        <WorkContext xmlns="http://oracle.com/weblogic/soap/workarea/">
+            rO0ABXdWABV3ZWJsb2dpYy5hcHAuc2VyaWVzYm8AAADWAAAAI3dlYmxvZ2ljLndvcmthcmVhLlN0cmluZ1dvcmtDb250ZXh0ABAyMDIxMDczMDE1NDg1My4wAAA=
+        </WorkContext>
+    </S:Header>
+    <S:Body>
+        <ns0:registarSerieResponse xmlns:ns0="http://at.gov.pt/">
+            <registarSerieResp>
+                <infoResultOper>
+                    <codResultOper>5000</codResultOper>
+                    <msgResultOper>Erro T&#233;cnico Inespec&#237;fico</msgResultOper>
+                </infoResultOper>
+            </registarSerieResp>
+        </ns0:registarSerieResponse>
+    </S:Body>
+</S:Envelope>

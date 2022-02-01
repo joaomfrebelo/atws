@@ -1,0 +1,17 @@
+{
+    "name": "ATWS",
+    "version": "1.0.0",
+    "description": "AT web services clients",
+    "main": "index.js",
+    "directories": {
+        "test": "test"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "João Rebelo",
+    "license": "",
+    "devDependencies": {
+        "chokidar": "^3.5.1"
+    }
+}

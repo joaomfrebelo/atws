@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="GuiasAquisicaoProdAgricola"
+                  xmlns="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:tns="https://servicos.portaldasfinancas.gov.pt/sgdtws/GuiasAquisicaoProdAgricola/"
+                  targetNamespace="https://servicos.portaldasfinancas.gov.pt/sgdtws/GuiasAquisicaoProdAgricola/">
+
+    <wsdl:types>
+        <xsd:schema targetNamespace="https://servicos.portaldasfinancas.gov.pt/sgdtws/GuiasAquisicaoProdAgricola/"
+                    xmlns="http://www.w3.org/2001/XMLSchema">
+
+            <xsd:element name="registerFarmersPurchaseDocRequestElem" type="tns:FarmersPurchaseDocRequest"/>
+            <xsd:element name="registerFarmersPurchaseDocResponseElem" type="tns:FarmersPurchaseDocResponse"/>
+
+            <xsd:element name="registerFarmersPurchasePartialDocRequestElem"
+                         type="tns:FarmersPurchasePartialDocRequest"/>
+            <xsd:element name="registerFarmersPurchasePartialDocResponseElem"
+                         type="tns:FarmersPurchasePartialDocResponse"/>
+
+            <xsd:complexType name="FarmersPurchaseDocRequest">
+                <xsd:annotation>
+                    <xsd:documentation>Comunicação Prévia de Guia Global de Aquisição de Produtos de Produtores
+                        Agrícolas
+                    </xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                    <xsd:element name="TaxRegistrationNumber" type="tns:SAFPTPortugueseVatNumber"/>
+                    <xsd:element name="CompanyName" type="tns:SAFPTtextTypeMandatoryMax100Car"/>
+                    <xsd:element name="CompanyAddress" type="tns:AddressStructurePT"/>
+                    <xsd:element name="DocumentNumber" type="tns:SAFPTtextTypeMandatoryMax60Car"/>
+                    <xsd:element name="ATDocCodeID" type="tns:SAFPTtextTypeMandatoryMax200Car" minOccurs="0"/>
+                    <xsd:element name="MovementStatus" type="tns:MovementStatus"/>
+                    <xsd:element name="MovementDate" type="tns:SAFdateType"/>
+                    <xsd:element name="MovementType" type="tns:MovementType"/>
+                    <xsd:element name="MovementStartTime" type="tns:SAFdateType"/>
+                    <xsd:element name="InAcores" type="xsd:boolean"/>
+                    <xsd:element name="FarmerTaxID" type="tns:SAFPTPortugueseVatNumber" maxOccurs="unbounded"
+                                 minOccurs="1"/>
+                </xsd:sequence>
+            </xsd:complexType>
+
+            <xsd:complexType name="FarmersPurchasePartialDocRequest">
+                <xsd:annotation>
+                    <xsd:documentation>Comunicação Posterior de Guias de Aquisição de Produtos de Produtores Agrícolas
+                    </xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                    <xsd:element name="TaxRegistrationNumber" type="tns:SAFPTPortugueseVatNumber"/>
+                    <xsd:element name="CompanyName" type="tns:SAFPTtextTypeMandatoryMax100Car"/>
+                    <xsd:element name="CompanyAddress" type="tns:AddressStructurePT"/>
+                    <xsd:element name="DocumentNumber" type="tns:SAFPTtextTypeMandatoryMax60Car"/>
+                    <xsd:element name="MovementStatus" type="tns:MovementStatus"/>
+                    <xsd:element name="MovementDate" type="tns:SAFdateType"/>
+                    <xsd:element name="MovementType" type="tns:MovementType"/>
+                    <xsd:element name="FarmerTaxID" type="tns:SAFPTPortugueseVatNumber"/>
+                    <xsd:element name="AddressTo" type="tns:AddressStructurePT" minOccurs="0"/>
+                    <xsd:element name="AddressFrom" type="tns:AddressStructurePT"/>
+                    <xsd:element name="MovementEndTime" type="tns:SAFdateTimeType" minOccurs="0"/>
+                    <xsd:element name="MovementStartTime" type="tns:SAFdateTimeType"/>
+                    <xsd:element name="VehicleId" type="tns:SAFPTtextTypeMandatoryMax20Car" minOccurs="0"/>
+                    <xsd:element name="OrderReference" type="tns:OrderReference"/>
+                    <xsd:element name="Line" type="tns:Line" maxOccurs="unbounded" minOccurs="1"/>
+                </xsd:sequence>
+            </xsd:complexType>
+
+            <xsd:complexType name="FarmersPurchaseDocResponse">
+                <xsd:annotation>
+                    <xsd:documentation>Resposta da AT ao envio da Comunicação Prévia de Guia Global de Aquisição de
+                        Produtos de Produtores Agrícolas
+                    </xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                    <xsd:element name="ResponseStatus" type="tns:ResponseStatus" maxOccurs="unbounded" minOccurs="1"/>
+                    <xsd:element name="DocumentNumber" type="tns:SAFPTtextTypeMandatoryMax60Car" minOccurs="0"/>
+                    <xsd:element name="ATDocCodeID" type="tns:SAFPTtextTypeMandatoryMax200Car" minOccurs="0"/>
+                </xsd:sequence>
+            </xsd:complexType>
+
+            <xsd:complexType name="FarmersPurchasePartialDocResponse">
+                <xsd:annotation>
+                    <xsd:documentation>Resposta da AT ao envio da Comunicação Posterior de Guias de Aquisição de
+                        Produtos de Produtores Agrícolas
+                    </xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                    <xsd:element name="ResponseStatus" type="tns:ResponseStatus" maxOccurs="unbounded" minOccurs="1"/>
+                    <xsd:element name="DocumentNumber" type="tns:SAFPTtextTypeMandatoryMax60Car" minOccurs="0"/>
+                </xsd:sequence>
+            </xsd:complexType>
+
+            <xsd:complexType name="ResponseStatus">
+                <xsd:sequence>
+                    <xsd:element name="ReturnCode" type="xsd:integer" maxOccurs="1" minOccurs="1"/>
+                    <xsd:element name="ReturnMessage" minOccurs="0">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="256"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+
+            <xsd:complexType name="Line">
+                <xsd:sequence>
+                    <xsd:element name="ProductDescription" type="tns:SAFPTtextTypeMandatoryMax200Car"/>
+                    <xsd:element name="Quantity" type="tns:SAFdecimalType"/>
+                    <xsd:element name="UnitOfMeasure" type="tns:SAFPTtextTypeMandatoryMax20Car"/>
+                    <xsd:element name="UnitPrice" type="tns:SAFmonetaryType"/>
+                </xsd:sequence>
+            </xsd:complexType>
+
+            <xsd:complexType name="OrderReference">
+                <xsd:sequence>
+                    <xsd:element name="OriginatingON" type="tns:SAFPTtextTypeMandatoryMax60Car"/>
+                    <xsd:element name="MovementType" type="tns:MovementType"/>
+                </xsd:sequence>
+            </xsd:complexType>
+
+            <xsd:complexType name="AddressStructurePT">
+                <xsd:sequence>
+                    <xsd:element name="Addressdetail" type="tns:SAFPTtextTypeMandatoryMax100Car" minOccurs="0"/>
+                    <xsd:element name="City" type="tns:SAFPTtextTypeMandatoryMax50Car" minOccurs="0"/>
+                    <xsd:element name="PostalCode" type="tns:PostalCodePT" minOccurs="0"/>
+                    <xsd:element fixed="PT" name="Country" type="xsd:string" minOccurs="0"/>
+                </xsd:sequence>
+            </xsd:complexType>
+
+            <xsd:simpleType name="MovementType">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Restrição:Tipos de Documento (GR-Guia de remessa, GT-Guia de transporte, GA-Guia de movimentação
+                        de ativos próprios,GC-Guia de consignação, GD-Guia ou nota de devolução afetuada pelo cliente.
+                    </xsd:documentation>
+                </xsd:annotation>
+                <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="GR"/>
+                    <xsd:enumeration value="GT"/>
+                    <xsd:enumeration value="GA"/>
+                    <xsd:enumeration value="GC"/>
+                    <xsd:enumeration value="GD"/>
+                </xsd:restriction>
+            </xsd:simpleType>
+
+            <xsd:simpleType name="SAFPTtextTypeMandatoryMax200Car">
+                <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="1"/>
+                    <xsd:maxLength value="200"/>
+                </xsd:restriction>
+            </xsd:simpleType>
+
+            <xsd:simpleType name="SAFPTtextTypeMandatoryMax100Car">
+                <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="1"/>
+                    <xsd:maxLength value="100"/>
+                </xsd:restriction>
+            </xsd:simpleType>
+
+            <xsd:simpleType name="SAFPTtextTypeMandatoryMax60Car">
+                <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="1"/>
+                    <xsd:maxLength value="60"/>
+                </xsd:restriction>
+            </xsd:simpleType>
+
+            <xsd:simpleType name="SAFPTtextTypeMandatoryMax50Car">
+                <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="1"/>
+                    <xsd:maxLength value="50"/>
+                </xsd:restriction>
+            </xsd:simpleType>
+
+            <xsd:simpleType name="SAFPTtextTypeMandatoryMax20Car">
+                <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="1"/>
+                    <xsd:maxLength value="20"/>
+                </xsd:restriction>
+            </xsd:simpleType>
+
+            <xsd:simpleType name="SAFdateType">
+                <xsd:restriction base="xsd:date"/>
+            </xsd:simpleType>
+
+            <xsd:simpleType name="SAFdecimalType">
+                <xsd:restriction base="xsd:decimal"/>
+            </xsd:simpleType>
+
+            <xsd:simpleType name="SAFmonetaryType">
+                <xsd:restriction base="xsd:decimal"/>
+            </xsd:simpleType>
+
+            <xsd:simpleType name="SAFPTPortugueseVatNumber">
+                <xsd:restriction base="xsd:integer">
+                    <xsd:minInclusive value="100000000"/>
+                    <xsd:maxInclusive value="999999999"/>
+                </xsd:restriction>
+            </xsd:simpleType>
+
+            <xsd:simpleType name="SAFdateTimeType">
+                <xsd:restriction base="xsd:dateTime"/>
+            </xsd:simpleType>
+
+            <xsd:simpleType name="MovementStatus">
+                <xsd:annotation>
+                    <documentation>N para Normal, T para Por conta de terceiros, A para Documento anulado, M para
+                        Documento alterado
+                    </documentation>
+                </xsd:annotation>
+                <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="T"/>
+                    <xsd:enumeration value="A"/>
+                    <xsd:enumeration value="M"/>
+                </xsd:restriction>
+            </xsd:simpleType>
+
+            <xsd:simpleType name="DocumentNumber">
+                <xsd:restriction base="xsd:string">
+                    <xsd:pattern value="([a-zA-Z0-9./_\-])+ ([a-zA-Z0-9]*/[0-9]+)"/>
+                    <xsd:minLength value="1"/>
+                    <xsd:maxLength value="60"/>
+                </xsd:restriction>
+            </xsd:simpleType>
+
+            <xsd:simpleType name="PostalCodePT">
+                <xsd:restriction base="xsd:string">
+                    <xsd:pattern value="([0-9]{4}-[0-9]{3})"/>
+                </xsd:restriction>
+            </xsd:simpleType>
+        </xsd:schema>
+    </wsdl:types>
+
+    <!-- wsdl -->
+
+    <wsdl:message name="FarmersPurchaseDocRequest">
+        <wsdl:part element="tns:registerFarmersPurchaseDocRequestElem" name="FarmersPurchaseDocRequest"/>
+    </wsdl:message>
+
+    <wsdl:message name="FarmersPurchaseDocResponse">
+        <wsdl:part element="tns:registerFarmersPurchaseDocResponseElem" name="FarmersPurchaseDocResponse"/>
+    </wsdl:message>
+
+    <wsdl:message name="FarmersPurchasePartialDocRequest">
+        <wsdl:part element="tns:registerFarmersPurchasePartialDocRequestElem" name="FarmersPurchasePartialDocRequest"/>
+    </wsdl:message>
+
+    <wsdl:message name="FarmersPurchasePartialDocResponse">
+        <wsdl:part element="tns:registerFarmersPurchasePartialDocResponseElem"
+                   name="FarmersPurchasePartialDocResponse"/>
+    </wsdl:message>
+
+    <wsdl:portType name="farmersPurchaseDoc">
+        <wsdl:operation name="registerFarmersPurchaseDoc">
+            <wsdl:input message="tns:FarmersPurchaseDocRequest"/>
+            <wsdl:output message="tns:FarmersPurchaseDocResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="registerFarmersPurchasePartialDoc">
+            <wsdl:input message="tns:FarmersPurchasePartialDocRequest"/>
+            <wsdl:output message="tns:FarmersPurchasePartialDocResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <wsdl:binding name="farmersPurchaseDocSOAP" type="tns:farmersPurchaseDoc">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="registerFarmersPurchaseDoc">
+            <soap:operation soapAction="https://servicos.portaldasfinancas.gov.pt/sgdtws/GuiasAquisicaoProdAgricola/"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="registerFarmersPurchasePartialDoc">
+            <soap:operation soapAction="https://servicos.portaldasfinancas.gov.pt/sgdtws/GuiasAquisicaoProdAgricola/"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+
+
+    <wsdl:service name="GuiasAquisicaoProdAgricola">
+        <wsdl:port binding="tns:farmersPurchaseDocSOAP" name="farmersPurchaseDocSOAP">
+            <soap:address location="https://servicos.portaldasfinancas.gov.pt/sgdtws/GuiasAquisicaoProdAgricola/"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

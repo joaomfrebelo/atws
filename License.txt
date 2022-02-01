@@ -1,0 +1,6 @@
+
+/**
+ * MIT License
+ *
+ * Copyright (c) 2019 João M F Rebelo
+ */
