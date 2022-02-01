@@ -28,7 +28,7 @@
   ],
   "license": "MIT",
   "name": "joaomfrebelo/atws",
-  "description": "Portuguese Authority Webservice client",
+  "description": "Portuguese Tax Authority Webservice client",
   "prefer-stable": true,
   "require": {
     "apache/log4php": "^2.3",

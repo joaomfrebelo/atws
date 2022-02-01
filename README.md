@@ -3,7 +3,7 @@ ATWS
 
 About
 --------------
-Portuguese Authority Webservice client.
+Portuguese Tax Authority Webservice client.
 
 - Invoices submission
 - Stock movement submission
