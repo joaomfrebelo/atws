@@ -44,7 +44,7 @@ class WsTest extends TestCase
             throw new \Exception("Fail opening credentials file . " . ATWS_TEST_CREDENTIALS);
         }
         static::$credentials = $credentials;
-        list(static::$taxRegistrationNumber,) = \explode("/", static::$credentials["username"]);
+        [static::$taxRegistrationNumber,] = \explode("/", static::$credentials["username"]);
     }
 
     /**
@@ -474,8 +474,8 @@ class WsTest extends TestCase
         $response = $ws->submit($agriculture);
         $this->assertInstanceOf(Response::class, $response);
         $this->assertIsInt($response->getCode());
+        $this->assertDoesNotMatchRegularExpression("/error/i", $response->getMessage(), "Response message has error");
         $this->assertNotEmpty($response->getMessage());
     }
-
 
 }

@@ -38,28 +38,33 @@ class LineTest extends TestCase
      */
     public function testInstanceDebit(): void
     {
-        $debit = 1.99;
-        $credit = null;
-        $taxType = "IVA";
-        $taxRegion = "PT";
-        $taxPercentage = 23.0;
+        $debit              = 1.99;
+        $credit             = null;
+        $taxType            = "IVA";
+        $taxRegion          = "PT";
+        $taxPercentage      = 23.0;
         $taxExemptionReason = null;
 
-        $line = new Line(
-            $debit,
-            $credit,
-            $taxType,
-            $taxRegion,
-            $taxPercentage,
-            $taxExemptionReason
-        );
+        foreach ([null, []] as $oderReference) {
 
-        $this->assertSame($debit, $line->getDebitAmount());
-        $this->assertSame($credit, $line->getCreditAmount());
-        $this->assertSame($taxType, $line->getTaxType());
-        $this->assertSame($taxRegion, $line->getTaxCountryRegion());
-        $this->assertSame($taxPercentage, $line->getTaxPercentage());
-        $this->assertNull($line->getTaxExemptionReason());
+            $line = new Line(
+                $oderReference,
+                $debit,
+                $credit,
+                $taxType,
+                $taxRegion,
+                $taxPercentage,
+                $taxExemptionReason
+            );
+
+            $this->assertSame($oderReference, $line->getOrderReference());
+            $this->assertSame($debit, $line->getDebitAmount());
+            $this->assertSame($credit, $line->getCreditAmount());
+            $this->assertSame($taxType, $line->getTaxType());
+            $this->assertSame($taxRegion, $line->getTaxCountryRegion());
+            $this->assertSame($taxPercentage, $line->getTaxPercentage());
+            $this->assertNull($line->getTaxExemptionReason());
+        }
     }
 
     /**
@@ -77,6 +82,7 @@ class LineTest extends TestCase
         $taxExemptionReason = null;
 
         $line = new Line(
+            null,
             $debit,
             $credit,
             $taxType,
@@ -108,6 +114,7 @@ class LineTest extends TestCase
         $taxExemptionReason = "M09";
 
         $line = new Line(
+            null,
             $debit,
             $credit,
             $taxType,
@@ -143,6 +150,7 @@ class LineTest extends TestCase
         );
 
         new Line(
+            null,
             $debit,
             $credit,
             $taxType,
@@ -171,6 +179,7 @@ class LineTest extends TestCase
         );
 
         new Line(
+            null,
             $debit,
             $credit,
             $taxType,

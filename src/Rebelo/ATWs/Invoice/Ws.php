@@ -94,24 +94,38 @@ class Ws extends AATWs
         if (\is_string($this->invoice->getCustomerID())) {
             $xml->writeElement("CustomerTaxID", $this->invoice->getCustomerID());
         } else {
-            $xml->startElementNs(AATWs::NS_ENVELOPE, "InternationalCustomerTaxID", null);
-            $xml->writeElementNs(
-                static::NS_REGISTERINVOICE,
-                "TaxIDNumber",
-                null,
-                $this->invoice->getCustomerID()->getTaxIDNumber()
-            );
-            $xml->writeElementNs(
-                static::NS_REGISTERINVOICE,
-                "TaxIDCountry",
-                null,
-                $this->invoice->getCustomerID()->getTaxIDCountry()
-            );
+            $xml->startElementNs(static::NS_REGISTERINVOICE, "InternationalCustomerTaxID", null);
+            $xml->writeElement("TaxIDNumber", $this->invoice->getCustomerID()->getTaxIDNumber());
+            $xml->writeElement("TaxIDCountry", $this->invoice->getCustomerID()->getTaxIDCountry());
             $xml->endElement(); //InternationalCustomerTaxID
         }
 
         foreach ($this->invoice->getLines() as $line) {
             $xml->startElement("Line");
+
+            $orderReferenceStack = $line->getOrderReference() ?? [];
+
+            if (\count($orderReferenceStack) > 0) {
+                $xml->startElementNs(static::NS_REGISTERINVOICE, "OrderReferences", null);
+                foreach ($orderReferenceStack as $orderReference) {
+                    $xml->startElementNs(static::NS_REGISTERINVOICE, "OrderReference", null);
+                    $xml->writeElementNs(
+                        static::NS_REGISTERINVOICE,
+                        "OriginatingON",
+                        null,
+                        $orderReference->getOriginatingON()
+                    );
+                    $xml->writeElementNs(
+                        static::NS_REGISTERINVOICE,
+                        "OrderDate",
+                        null,
+                        $orderReference->getOrderDate()->format(Date::SQL_DATE)
+                    );
+                    $xml->endElement();
+                }
+                $xml->endElement();
+            }
+
             $xml->writeElementNs(
                 static::NS_REGISTERINVOICE,
                 $line->getDebitAmount() ? "DebitAmount" : "CreditAmount",
@@ -146,7 +160,18 @@ class Ws extends AATWs
                     $line->getTaxPercentage(), 2, ".", ""
                 )
             );
+
             $xml->endElement(); //Tax
+
+            if ($line->getTaxExemptionReason() !== null) {
+                $xml->writeElementNs(
+                    static::NS_REGISTERINVOICE,
+                    "TaxExemptionReason",
+                    null,
+                    $line->getTaxExemptionReason()
+                );
+            }
+
             $xml->endElement(); //Line
         }
 

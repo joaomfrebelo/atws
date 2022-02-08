@@ -35,6 +35,7 @@ class Invoice
      * @param Date                              $invoiceDate           Document issue date
      * @param string                            $invoiceType           Document Type. FT, FR, FS, NC, ND
      * @param string                            $invoiceStatus         Document status. N - Normal; A - Canceled
+     * @param string|null                       $eacCode               EACCode
      * @param string|InternationalCustomerTaxID $customerTaxID         National purchaser's TIN or Foreign Buyer TIN
      * @param Line[]                            $lines                 Document Lines by Rate (Line)
      * @param DocumentTotals                    $documentTotals        The Document Totals
@@ -48,6 +49,7 @@ class Invoice
         protected Date                              $invoiceDate,
         protected string                            $invoiceType,
         protected string                            $invoiceStatus,
+        protected ?string                           $eacCode,
         protected string|InternationalCustomerTaxID $customerTaxID,
         protected array                             $lines,
         protected DocumentTotals                    $documentTotals
@@ -56,8 +58,8 @@ class Invoice
         $this->log = \Logger::getLogger(\get_class($this));
         $this->log->debug(__METHOD__);
 
-        if (\in_array($invoiceType, ['FT', 'FR', 'FS', 'NC', 'ND']) === false) {
-            $msg = "Invoice type only can be 'FT', 'FR', 'FS', 'NC', 'ND'";
+        if (\in_array($invoiceType, ['FT', 'FR', 'FS', 'NC', 'ND', 'DC']) === false) {
+            $msg = "Invoice type only can be 'FT', 'FR', 'FS', 'NC', 'ND', 'DC'";
             $this->log->error($msg);
             throw new ATWsException($msg);
         }
@@ -77,6 +79,12 @@ class Invoice
         );
         $this->log->debug("InvoiceType set to: " . $invoiceType);
         $this->log->debug("InvoiceStatus set to: " . $invoiceStatus);
+        if ($this->eacCode !== null && \preg_match("/^[0-9]{5}$/", $this->eacCode) !== 1) {
+            $msg = "Invoice EACCode must respect the regexp ^[0-9]{5}$";
+            $this->log->error($msg);
+            throw new ATWsException($msg);
+        }
+        $this->log->debug("EACCOde set to: " . $this->eacCode);
         if (\is_string($customerTaxID)) {
             $this->log->debug("CustomerID set to: " . $customerTaxID);
         }
@@ -143,6 +151,16 @@ class Invoice
     public function getInvoiceStatus(): string
     {
         return $this->invoiceStatus;
+    }
+
+    /**
+     * Get the EACCOde
+     * @return string|null
+     * @since 1.0.0
+     */
+    public function getEacCode(): ?string
+    {
+        return $this->eacCode;
     }
 
     /**

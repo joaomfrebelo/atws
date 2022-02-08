@@ -34,16 +34,18 @@ class Line
      * There must be one and only one line for each
      * fee (TaxType, TaxCountryRegion, TaxCode) and reason
      * for exemption or non-settlement (TaxExemptionReason)
-     * @param float|null  $debitAmount
-     * @param float|null  $creditAmount
-     * @param string      $taxType
-     * @param string      $taxCountryRegion
-     * @param float       $taxPercentage
-     * @param string|null $taxExemptionReason
+     * @param \Rebelo\ATWs\Invoice\OrderReference[]|null $orderReference
+     * @param float|null                                 $debitAmount
+     * @param float|null                                 $creditAmount
+     * @param string                                     $taxType
+     * @param string                                     $taxCountryRegion
+     * @param float                                      $taxPercentage
+     * @param string|null                                $taxExemptionReason
      * @throws ATWsException
      * @since 1.0.0
      */
     public function __construct(
+        protected ?array  $orderReference,
         protected ?float  $debitAmount,
         protected ?float  $creditAmount,
         protected string  $taxType,
@@ -81,6 +83,16 @@ class Line
     }
 
     /**
+     * Get the OrderReferences stack
+     * @return \Rebelo\ATWs\Invoice\OrderReference[]|null
+     * @since 1.0.0
+     */
+    public function getOrderReference(): ?array
+    {
+        return $this->orderReference;
+    }
+
+    /**
      * Get the debit amount<br>
      * Sum of the value of the lines, excluding tax,
      * less line and header discounts, where the rate and/or reason
@@ -91,7 +103,8 @@ class Line
      * @return float|null
      * @since 1.0.0
      */
-    public function getDebitAmount(): ?float
+    public
+    function getDebitAmount(): ?float
     {
         return $this->debitAmount;
     }
@@ -107,7 +120,8 @@ class Line
      * @return float|null
      * @since 1.0.0
      */
-    public function getCreditAmount(): ?float
+    public
+    function getCreditAmount(): ?float
     {
         return $this->creditAmount;
     }
@@ -119,7 +133,8 @@ class Line
      * @return string
      * @since 1.0.0
      */
-    public function getTaxType(): string
+    public
+    function getTaxType(): string
     {
         return $this->taxType;
     }
@@ -133,7 +148,8 @@ class Line
      * @return string
      * @since 1.0.0
      */
-    public function getTaxCountryRegion(): string
+    public
+    function getTaxCountryRegion(): string
     {
         return $this->taxCountryRegion;
     }
@@ -150,7 +166,8 @@ class Line
      * @return float
      * @since 1.0.0
      */
-    public function getTaxPercentage(): float
+    public
+    function getTaxPercentage(): float
     {
         return $this->taxPercentage;
     }
@@ -166,7 +183,8 @@ class Line
      * @return string|null
      * @since 1.0.0
      */
-    public function getTaxExemptionReason(): ?string
+    public
+    function getTaxExemptionReason(): ?string
     {
         return $this->taxExemptionReason;
     }
