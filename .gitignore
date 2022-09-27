@@ -25,3 +25,4 @@ phive.phar
 test/temp
 .phpunit.result.cache
 AtWebservicesTestCredentials.ini
+./test/AtWebservicesTestCredentials.ini

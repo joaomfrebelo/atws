@@ -1,13 +1,13 @@
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.5/phpunit.xsd"
          backupGlobals="true"
          backupStaticAttributes="false"
          colors="true"
          convertErrorsToExceptions="true"
          convertNoticesToExceptions="true"
          convertWarningsToExceptions="true"
-	 convertDeprecationsToExceptions="false"
-	 failOnRisky="true"
+         convertDeprecationsToExceptions="false"
+         failOnRisky="true"
          forceCoversAnnotation="false"
          processIsolation="false"
          stopOnError="false"
@@ -21,17 +21,19 @@
          verbose="true"
          bootstrap="test/bootstrap.php">
     <php>
-        <ini name="display_errors" value="On" />
-        <ini name="display_startup_errors" value="On" />
-	<ini name="memory_limit" value="-1" />
+        <ini name="display_errors" value="On"/>
+        <ini name="display_startup_errors" value="On"/>
+        <ini name="memory_limit" value="-1"/>
     </php>
+    <!--
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">../src</directory>
         </whitelist>
     </filter>
+    -->
     <logging>
-        <log type="coverage-clover" target="./docs/build/coverage/index.xml"/>
+        <testdoxXml outputFile="./docs/build/coverage/index.xml"/>
     </logging>
 </phpunit>
 

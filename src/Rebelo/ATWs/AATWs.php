@@ -233,6 +233,7 @@ abstract class AATWs
             );
             $this->buildHeader($xml);
             $this->buildBody($xml);
+            $xml->endElement();// EndEnvelop
             $xml->endDocument();
 
             $soap = new \SoapClient(
@@ -250,7 +251,7 @@ abstract class AATWs
                 ]
             );
 
-            $soapXml = $xml->outputMemory(true);
+            $soapXml = $xml->outputMemory();
             $this->log->debug($soapXml);
 
             $response = $soap->__doRequest(

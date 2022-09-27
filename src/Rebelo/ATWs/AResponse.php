@@ -85,32 +85,66 @@ abstract class AResponse
      */
     protected static function factory(string $xml): self
     {
-        if (false === $simpleXml = \simplexml_load_string(\trim($xml), SimpleXMLElement::class)) {
+        if (false === $simpleXml = \simplexml_load_string($xml, SimpleXMLElement::class)) {
             throw new ATWsException("Wrong response from soap request");
         }
 
-        $resp = new static(); //@phpstan-ignore-line
+        $resp                   = new static(); //@phpstan-ignore-line
         $resp->simpleXMLElement = $simpleXml;
 
         try {
 
-            $registerInvoiceCode = $simpleXml->xpath("//ReturnCode");
-            if (\count($registerInvoiceCode) > 0) {
-                $resp->code = (int)$registerInvoiceCode[0];
-                $resp->message = (string)$simpleXml->xpath("//ReturnMessage")[0];
-                return $resp;
+            try {
+                if (false !== $body = $simpleXml->xpath("//env:Body")) {
+
+                    if (\count($body) > 0) {
+
+                        $registerInvoiceCode = $body[0]->children()->children()->children();
+
+                        if ($registerInvoiceCode !== null) {
+                            $code          = (string)$registerInvoiceCode->{"CodigoResposta"};
+                            $message       = (string)$registerInvoiceCode->{"Mensagem"};
+                            $resp->code    = \is_numeric($code) ? (int)$code : 9999;
+                            $resp->message = \trim($message) === "" ?
+                                "Unknown response message" :
+                                \html_entity_decode($message);
+                            return $resp;
+                        }
+                    }
+                }
+            } catch (\Throwable) {
+
+            }
+
+            try {
+                if (false !== $simpleXml->xpath("//ResponseStatus")) {
+
+                    $codeXml = $simpleXml->xpath("//ReturnCode");
+                    if (\count($codeXml) > 0) {
+                        $code          = (string)$codeXml[0];
+                        $message       = (string)(($simpleXml->xpath("//ReturnMessage") ?: [])[0]);
+                        $resp->code    = \is_numeric($code) ? (int)$code : 9999;
+                        $resp->message = \trim($message) === "" ?
+                            "Unknown response message" :
+                            \html_entity_decode($message);
+                        return $resp;
+                    }
+                }
+            } catch (\Throwable) {
+
             }
 
             $authenticationException = $simpleXml->xpath("//Code");
+
             if (\count($authenticationException) > 0) {
-                $resp->code = (int)$authenticationException[0];
+                $resp->code    = (int)$authenticationException[0];
                 $resp->message = (string)$simpleXml->xpath("//Message")[0];
                 return $resp;
             }
 
             $atInternalError = $simpleXml->children("http://www.w3.org/2003/05/soap-envelope");
             if ($atInternalError->count() > 0) {
-                $resp->code = 999999999;
+                $resp->code    = 999999999;
                 $resp->message = (string)$atInternalError->{"Body"}->{"Fault"}->{"Code"}->{"Value"};
                 $resp->message .= " - " . $atInternalError->{"Body"}->{"Fault"}->{"Reason"}->{"Text"};
                 return $resp;
@@ -118,7 +152,7 @@ abstract class AResponse
 
             $fault = $simpleXml->xpath("//faultcode");
             if (\count($fault) > 0) {
-                $resp->code = (int)$fault[0];
+                $resp->code    = (int)$fault[0];
                 $resp->message = (string)$simpleXml->xpath("//faultstring")[0];
                 return $resp;
             }

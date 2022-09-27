@@ -40,6 +40,6 @@ trait TCredentials
             throw new \Exception("Fail opening credentials file . " . ATWS_TEST_CREDENTIALS);
         }
         static::$credentials = $credentials;
-        list(static::$taxRegistrationNumber,) = \explode("/", static::$credentials["username"]);
+        [static::$taxRegistrationNumber,] = \explode("/", static::$credentials["username"]);
     }
 }
