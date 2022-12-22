@@ -30,6 +30,7 @@ abstract class AStockMovement
      *
      *
      * @param string                 $taxRegistrationNumber
+     * @param string                 $atcud
      * @param string                 $companyName
      * @param Address                $companyAddress
      * @param string                 $documentNumber
@@ -46,6 +47,7 @@ abstract class AStockMovement
      */
     public function __construct(
         protected string   $taxRegistrationNumber,
+        protected string   $atcud,
         protected string   $companyName,
         protected Address  $companyAddress,
         protected string   $documentNumber,
@@ -63,6 +65,7 @@ abstract class AStockMovement
         $this->log->debug(__METHOD__);
 
         $this->log->debug("TaxRegistrationNumber set to: " . $taxRegistrationNumber);
+        $this->log->debug("ATCUD set to: " . $atcud);
         $this->log->debug("CompanyName set to: " . $companyName);
         $this->log->debug("DocumentNumber set to: " . $documentNumber);
         $this->log->debug(
@@ -156,6 +159,17 @@ abstract class AStockMovement
     public function getMovementStatus(): string
     {
         return $this->movementStatus;
+    }
+
+    /**
+     * It consists of the series validation code of the document, followed by a hyphen (-), and the sequential number
+     * of the document within the series There cannot be records with the same ATCUD
+     * @return string
+     * @since 2.1.0
+     */
+    public function getAtcud(): string
+    {
+        return $this->atcud;
     }
 
 }

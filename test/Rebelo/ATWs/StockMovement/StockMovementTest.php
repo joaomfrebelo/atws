@@ -66,23 +66,24 @@ class StockMovementTest extends TestCase
 
         $base = [
             "taxRegistrationNumber" => "594239427",
-            "companyName" => "The Company name",
-            "companyAddress" => $companyAddress,
-            "documentNumber" => "GTA 9999/29",
-            "ATDocCodeID" => "999999",
-            "movementStatus" => "N",
-            "movementDate" => new Date(),
-            "movementType" => "GR",
-            "customerTaxID" => "540359700",
-            "supplierTaxID" => null,
-            "customerName" => "Customer fresquinho",
-            "customerAddress" => $customerAddr,
-            "addressTo" => $addressTo,
-            "addressFrom" => $addressFrom,
-            "movementEndTime" => (new Date())->addHours(2),
-            "movementStartTime" => (new Date())->addHours(1),
-            "vehicleID" => "99 AA 99",
-            "lines" => [
+            "atcud"                 => "ABCDEF-999",
+            "companyName"           => "The Company name",
+            "companyAddress"        => $companyAddress,
+            "documentNumber"        => "GTA 9999/29",
+            "ATDocCodeID"           => "999999",
+            "movementStatus"        => "N",
+            "movementDate"          => new Date(),
+            "movementType"          => "GR",
+            "customerTaxID"         => "540359700",
+            "supplierTaxID"         => null,
+            "customerName"          => "Customer fresquinho",
+            "customerAddress"       => $customerAddr,
+            "addressTo"             => $addressTo,
+            "addressFrom"           => $addressFrom,
+            "movementEndTime"       => (new Date())->addHours(2),
+            "movementStartTime"     => (new Date())->addHours(1),
+            "vehicleID"             => "99 AA 99",
+            "lines"                 => [
                 new Line("Product description", 999.99, "UN", 9.99, ["GR A/1"])
             ]
         ];
@@ -92,16 +93,16 @@ class StockMovementTest extends TestCase
             \array_merge(
                 $base,
                 [
-                    "ATDocCodeID" => null,
-                    "customerTaxID" => null,
-                    "movementStatus" => "T",
-                    "movementType" => "GT",
-                    "supplierTaxID" => "541507150",
-                    "customerName" => null,
+                    "ATDocCodeID"     => null,
+                    "customerTaxID"   => null,
+                    "movementStatus"  => "T",
+                    "movementType"    => "GT",
+                    "supplierTaxID"   => "541507150",
+                    "customerName"    => null,
                     "customerAddress" => null,
-                    "addressTo" => null,
+                    "addressTo"       => null,
                     "movementEndTime" => null,
-                    "vehicleID" => null,
+                    "vehicleID"       => null,
                 ]
             ),
             \array_merge($base, ["movementStatus" => "A"]),
@@ -115,6 +116,7 @@ class StockMovementTest extends TestCase
      * @dataProvider provider
      * @test
      * @param string       $taxRegistrationNumber
+     * @param string       $atcud
      * @param string       $companyName
      * @param Address      $companyAddress
      * @param string       $documentNumber
@@ -138,6 +140,7 @@ class StockMovementTest extends TestCase
      */
     public function testInstance(
         string   $taxRegistrationNumber,
+        string   $atcud,
         string   $companyName,
         Address  $companyAddress,
         string   $documentNumber,
@@ -159,6 +162,7 @@ class StockMovementTest extends TestCase
     {
         $atockMovement = new StockMovement(
             $taxRegistrationNumber,
+            $atcud,
             $companyName,
             $companyAddress,
             $documentNumber,
@@ -180,6 +184,9 @@ class StockMovementTest extends TestCase
 
         $this->assertSame(
             $taxRegistrationNumber, $atockMovement->getTaxRegistrationNumber()
+        );
+        $this->assertSame(
+            $atcud, $atockMovement->getAtcud()
         );
         $this->assertSame($companyName, $atockMovement->getCompanyName());
         $this->assertSame($companyAddress, $atockMovement->getCompanyAddress());
@@ -212,6 +219,7 @@ class StockMovementTest extends TestCase
         $this->expectExceptionMessage("MovementType only can be 'GR', 'GT', 'GA', 'GC', 'GD'");
         new StockMovement(
             "594239427",
+            "ABCDEF-" . \rand(999, 99999),
             "The Company name",
             new Address("Rua A", "Lisboa", "9999-999"),
             "GTA 9999/29",
@@ -246,6 +254,7 @@ class StockMovementTest extends TestCase
         $this->expectExceptionMessage("MovementStatus only can be 'N', 'T', 'A'");
         new StockMovement(
             "594239427",
+            "ABCDEF-" . \rand(999, 99999),
             "The Company name",
             new Address("Rua A", "Lisboa", "9999-999"),
             "GTA 9999/29",
@@ -279,6 +288,7 @@ class StockMovementTest extends TestCase
         $this->expectExceptionMessage("SupplierTaxID and CustomerTaxID can not be mull at same time");
         new StockMovement(
             "594239427",
+            "ABCDEF-" . \rand(999, 99999),
             "The Company name",
             new Address("Rua A", "Lisboa", "9999-999"),
             "GTA 9999/29",
@@ -312,6 +322,7 @@ class StockMovementTest extends TestCase
         $this->expectExceptionMessage("SupplierTaxID and CustomerTaxID can not be set at same time");
         new StockMovement(
             "594239427",
+            "ABCDEF-" . \rand(999, 99999),
             "The Company name",
             new Address("Rua A", "Lisboa", "9999-999"),
             "GTA 9999/29",

@@ -28,6 +28,7 @@ class StockMovement extends AStockMovement
      * Stock movement
      *
      * @param string                 $taxRegistrationNumber Sender's TIN Fill in the Portuguese TIN without spaces
+     * @param string                 $atcud                 It consists of the series validation code of the document, followed by a hyphen (-), and the sequential number of the document within the series There cannot be records with the same ATCUD
      * @param string                 $companyName           Company Name Corporate name of the company or name of the passive subject.
      * @param Address                $companyAddress        You must include the street name, police number and floor, if applicable.
      * @param string                 $documentNumber        Unique identification of the transport document It must be identical to that contained in the SAFT (PT) file, when generated from the computer system that issued this document;
@@ -47,10 +48,11 @@ class StockMovement extends AStockMovement
      * @param array                  $lines                 Document lines with goods (Line)
      * @throws \Rebelo\ATWs\ATWsException
      * @throws \Rebelo\Date\DateFormatException
-     * @since 1.0.0
+     * @since 2.1.0
      */
     public function __construct(
         string             $taxRegistrationNumber,
+        string             $atcud,
         string             $companyName,
         Address            $companyAddress,
         string             $documentNumber,
@@ -73,6 +75,7 @@ class StockMovement extends AStockMovement
 
         parent::__construct(
             $taxRegistrationNumber,
+            $atcud,
             $companyName,
             $companyAddress,
             $documentNumber,

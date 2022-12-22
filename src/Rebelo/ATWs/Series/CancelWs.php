@@ -16,7 +16,7 @@ use Rebelo\ATWs\AATWs;
  *
  * @since 1.0.0
  */
-class CancelWs extends ASeriesWs
+class CancelWs extends ASeriesWs implements ICancelWs
 {
 
     /**

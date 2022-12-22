@@ -28,7 +28,13 @@ class Response extends AResponse
      */
     protected ?string $aTDocCodeID = null;
 
-    /**     *
+    /**
+     * @var string|null
+     * @since 2.1.0
+     */
+    protected ?string $atcud = null;
+
+    /**
      * Identification code assigned by the AT to the document,
      * pursuant to Decree-Law No. 198/2012, of 24 August.
      * @return string|null
@@ -37,6 +43,19 @@ class Response extends AResponse
     public function getATDocCodeID(): ?string
     {
         return $this->aTDocCodeID;
+    }
+
+    /**
+     * It consists of the series validation code of the document,
+     * followed by a hyphen (-), and the sequential number of the
+     * document within the series There cannot be records with the
+     * same ATCUD
+     * @return string|null
+     * @since 2.1.0
+     */
+    public function getAtcud(): ?string
+    {
+        return $this->atcud;
     }
 
     /**
@@ -54,6 +73,10 @@ class Response extends AResponse
         $aTDocCodeID = $response->simpleXMLElement->xpath("//ATDocCodeID");
         if (\count($aTDocCodeID) > 0) {
             $response->aTDocCodeID = (string)$aTDocCodeID[0];
+        }
+        $atcud = $response->simpleXMLElement->xpath("//ATCUD");
+        if (\count($atcud) > 0) {
+            $response->atcud = (string)$atcud[0];
         }
         return $response;//@phpstan-ignore-line
     }

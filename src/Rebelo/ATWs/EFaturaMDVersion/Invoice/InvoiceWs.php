@@ -20,7 +20,7 @@ use Rebelo\Date\Date;
  * @author João Rebelo
  * @since  2.0.0
  */
-class InvoiceWs extends AWs
+class InvoiceWs extends AWs implements IInvoiceWs
 {
 
     /**

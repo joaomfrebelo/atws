@@ -17,7 +17,7 @@ use Rebelo\Date\Date;
  * Consult Webservice
  * @since 1.0.0
  */
-class ConsultWs extends ASeriesWs
+class ConsultWs extends ASeriesWs implements IConsultWs
 {
 
     /**

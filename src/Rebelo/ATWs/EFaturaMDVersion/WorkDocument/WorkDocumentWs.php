@@ -20,7 +20,7 @@ use Rebelo\Date\Date;
  * @author João Rebelo
  * @since  2.0.0
  */
-class WorkDocumentWs extends AWs
+class WorkDocumentWs extends AWs implements IWorkDocumentWs
 {
 
     /**

@@ -18,7 +18,7 @@ use Rebelo\ATWs\EFaturaMDVersion\Response;
  * @author João Rebelo
  * @since  2.0.0
  */
-class ChangePaymentStatusWs extends AWs
+class ChangePaymentStatusWs extends AWs implements IChangePaymentStatusWs
 {
 
     /**

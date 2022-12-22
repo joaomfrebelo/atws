@@ -19,7 +19,7 @@ use Rebelo\Date\Date;
  * @author João Rebelo
  * @since  1.0.0
  */
-class Ws extends AATWs
+class Ws extends AATWs implements IWs
 {
 
     /**
@@ -86,6 +86,7 @@ class Ws extends AATWs
             "envioDocumentoTransporteRequestElem",
             "https://servicos.portaldasfinancas.gov.pt/sgdtws/documentosTransporte/"
         );
+
         $xml->writeElement(
             "TaxRegistrationNumber",
             $doc->getTaxRegistrationNumber()
@@ -98,6 +99,11 @@ class Ws extends AATWs
         $xml->endElement(); //CompanyAddress
 
         $xml->writeElement("DocumentNumber", $doc->getDocumentNumber());
+
+        $xml->writeElement(
+            "ATCUD",
+            $doc->getTaxRegistrationNumber()
+        );
 
         if ($doc->getATDocCodeID() !== null) {
             $xml->writeElement("ATDocCodeID", $doc->getATDocCodeID());
@@ -194,6 +200,11 @@ class Ws extends AATWs
             $xml->writeElement("ATDocCodeID", $doc->getATDocCodeID());
         }
 
+        $xml->writeElement(
+            "ATCUD",
+            $doc->getTaxRegistrationNumber()
+        );
+
         $xml->writeElement("MovementStatus", $doc->getMovementStatus());
 
         $xml->writeElement(
@@ -252,6 +263,11 @@ class Ws extends AATWs
         $xml->endElement(); //CompanyAddress
 
         $xml->writeElement("DocumentNumber", $doc->getDocumentNumber());
+
+        $xml->writeElement(
+            "ATCUD",
+            $doc->getTaxRegistrationNumber()
+        );
 
         $xml->writeElement("MovementStatus", $doc->getMovementStatus());
 

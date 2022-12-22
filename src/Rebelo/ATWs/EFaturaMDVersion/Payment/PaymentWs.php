@@ -19,7 +19,7 @@ use Rebelo\Date\Date;
  * @author João Rebelo
  * @since  2.0.0
  */
-class PaymentWs extends AWs
+class PaymentWs extends AWs implements IPaymentWs
 {
     /**
      * @var \Rebelo\ATWs\EFaturaMDVersion\Payment\Payment

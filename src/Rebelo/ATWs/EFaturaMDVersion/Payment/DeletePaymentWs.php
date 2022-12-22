@@ -18,7 +18,7 @@ use Rebelo\ATWs\EFaturaMDVersion\Response;
  * @since  2.0.0
  * @author João Rebelo
  */
-class DeletePaymentWs extends AWs
+class DeletePaymentWs extends AWs implements IDeletePaymentWs
 {
 
     /**

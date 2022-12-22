@@ -19,7 +19,7 @@ use Rebelo\ATWs\EFaturaMDVersion\Response;
  * @author João Rebelo
  * @since  2.0.0
  */
-class ChangeWorkDocumentStatusWs extends AWs
+class ChangeWorkDocumentStatusWs extends AWs implements IChangeWorkDocumentStatusWs
 {
 
     /**

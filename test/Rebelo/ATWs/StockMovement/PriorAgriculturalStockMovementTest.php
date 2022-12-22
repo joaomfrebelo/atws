@@ -48,16 +48,17 @@ class PriorAgriculturalStockMovementTest extends TestCase
 
         $base = [
             "taxRegistrationNumber" => "594239427",
-            "companyName" => "The Company name",
-            "companyAddress" => $companyAddress,
-            "documentNumber" => "GTA 9999/29",
-            "ATDocCodeID" => "999999",
-            "movementStatus" => "N",
-            "movementDate" => new Date(),
-            "movementType" => "GT",
-            "movementStartTime" => new Date(),
-            "inAcores" => false,
-            "farmerTaxID" => "561248923",
+            "atcud"                 => "ABCDEF-999",
+            "companyName"           => "The Company name",
+            "companyAddress"        => $companyAddress,
+            "documentNumber"        => "GTA 9999/29",
+            "ATDocCodeID"           => "999999",
+            "movementStatus"        => "N",
+            "movementDate"          => new Date(),
+            "movementType"          => "GT",
+            "movementStartTime"     => new Date(),
+            "inAcores"              => false,
+            "farmerTaxID"           => "561248923",
         ];
 
         return [
@@ -72,6 +73,7 @@ class PriorAgriculturalStockMovementTest extends TestCase
      * @dataProvider provider
      * @test
      * @param string       $taxRegistrationNumber
+     * @param string       $atcud
      * @param string       $companyName
      * @param Address      $companyAddress
      * @param string       $documentNumber
@@ -88,6 +90,7 @@ class PriorAgriculturalStockMovementTest extends TestCase
      */
     public function testInstance(
         string       $taxRegistrationNumber,
+        string       $atcud,
         string       $companyName,
         Address      $companyAddress,
         string       $documentNumber,
@@ -102,6 +105,7 @@ class PriorAgriculturalStockMovementTest extends TestCase
     {
         $priorAgrStkMov = new PriorAgriculturalStockMovement(
             $taxRegistrationNumber,
+            $atcud,
             $companyName,
             $companyAddress,
             $documentNumber,
@@ -117,6 +121,7 @@ class PriorAgriculturalStockMovementTest extends TestCase
         $this->assertSame(
             $taxRegistrationNumber, $priorAgrStkMov->getTaxRegistrationNumber()
         );
+        $this->assertSame($atcud, $priorAgrStkMov->getAtcud());
         $this->assertSame($companyAddress, $priorAgrStkMov->getCompanyAddress());
         $this->assertSame($documentNumber, $priorAgrStkMov->getDocumentNumber());
         $this->assertSame($ATDocCodeID, $priorAgrStkMov->getATDocCodeID());
@@ -140,6 +145,7 @@ class PriorAgriculturalStockMovementTest extends TestCase
         $this->expectExceptionMessage("MovementType only can be 'GR', 'GT'");
         new PriorAgriculturalStockMovement(
             "594239427",
+            "ABCDEF-".\rand(999, 9999),
             "The Company name",
             new Address("Rua A", "Lisboa", "9999-999"),
             "GTA 9999/29",
@@ -165,6 +171,7 @@ class PriorAgriculturalStockMovementTest extends TestCase
         $this->expectExceptionMessage("MovementStatus only can be 'N', 'T', 'A', 'M'");
         new PriorAgriculturalStockMovement(
             "594239427",
+            "ABCDEF-".\rand(999, 9999),
             "The Company name",
             new Address("Rua A", "Lisboa", "9999-999"),
             "GTA 9999/" . (new Date())->getTimestamp(),

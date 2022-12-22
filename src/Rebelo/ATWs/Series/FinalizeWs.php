@@ -16,7 +16,7 @@ use Rebelo\ATWs\AATWs;
  * Finalize series webservice
  * @since 1.0.0
  */
-class FinalizeWs extends ASeriesWs
+class FinalizeWs extends ASeriesWs implements IFinalizeWs
 {
 
     /**

@@ -17,7 +17,7 @@ use Rebelo\Date\Date;
  *
  * @since 1.0.0
  */
-class RegisterWs extends ASeriesWs
+class RegisterWs extends ASeriesWs implements IRegisterWs
 {
     /**
      * @var \Rebelo\ATWs\Series\SeriesRegister
