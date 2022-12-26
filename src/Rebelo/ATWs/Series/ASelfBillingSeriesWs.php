@@ -14,15 +14,15 @@ use Rebelo\ATWs\AATWs;
 use Rebelo\ATWs\ATWsException;
 
 /**
- *
- * @since 1.0.0
+ * Self billing series register base class
+ * @since 2.0.2
  */
-abstract class ASeriesWs extends AATWs
+abstract class ASelfBillingSeriesWs extends AATWs
 {
 
     /**
      * Namespace prefix
-     * @since 1.0.0
+     * @since 2.0.2
      */
     const NS_REGISTARSERIE = "ns0";
 
@@ -30,11 +30,11 @@ abstract class ASeriesWs extends AATWs
      * Get the Invoice webservice WSDL URI
      * @return string
      * @throws \Rebelo\ATWs\ATWsException
-     * @since 1.0.0
+     * @since 2.0.2
      */
     public function getWsdl(): string
     {
-        $wsdl = __DIR__ . DIRECTORY_SEPARATOR . "Comunicacao_Series.wsdl";
+        $wsdl = __DIR__ . DIRECTORY_SEPARATOR . "SeriesAutoFaturacaoWSService.wsdl";
         if (\file_exists($wsdl) === false) {
             throw new ATWsException("WSDL file not exist: " . $wsdl);
         }
@@ -44,12 +44,12 @@ abstract class ASeriesWs extends AATWs
     /**
      * Get the Webservice location
      * @return string
-     * @since 1.0.0
+     * @since 2.0.2
      */
     public function getWsLocation(): string
     {
         return $this->isTest ?
-            "https://servicos.portaldasfinancas.gov.pt:722/SeriesWSService" :
-            "https://servicos.portaldasfinancas.gov.pt:422/SeriesWSService";
+            "https://servicos.portaldasfinancas.gov.pt:722/SeriesAutoFaturacaoWSService" :
+            "https://servicos.portaldasfinancas.gov.pt:422/SeriesAutoFaturacaoWSService";
     }
 }
