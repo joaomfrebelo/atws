@@ -18,7 +18,7 @@ use Rebelo\Date\Date;
  * Self billing series WS client register
  * @since 2.0.2
  */
-class SelfBillingRegisterWs extends ASeriesWs implements ISelfBillingRegisterWs
+class SelfBillingRegisterWs extends ASelfBillingSeriesWs implements ISelfBillingRegisterWs
 {
     /**
      * @var \Rebelo\ATWs\Series\SelfBillingSeriesRegister

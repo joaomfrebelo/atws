@@ -162,5 +162,4 @@ class ConsultSeries extends ASeries
         return $this->processingMediumCodes;
     }
 
-
 }
