@@ -7,7 +7,6 @@
  */
 declare(strict_types=1);
 
-
 namespace Rebelo\ATWs\Series;
 
 use Rebelo\ATWs\ATWsException;
@@ -15,12 +14,11 @@ use Rebelo\Date\Date;
 use SimpleXMLElement;
 
 /**
- * The Response from the SOAP server
+ * response of consult self billing agreement
  * @since 2.0.2
  */
-class SelfBillingResponse
+class ConsultSelfBillingAgreementResponse
 {
-
     /**
      * @var \Rebelo\ATWs\Series\OperationResultInformation
      * @since 2.0.2
@@ -28,10 +26,10 @@ class SelfBillingResponse
     private OperationResultInformation $operationResultInformation;
 
     /**
-     * @var \Rebelo\ATWs\Series\SelfBillingSeriesInformation[]
+     * @var SelfBillingAgreementInfo[]
      * @since 2.0.2
      */
-    private array $seriesInformation = [];
+    private array $selfBillingAgreementInfo;
 
     /**
      * Stores if the response is OK
@@ -51,18 +49,20 @@ class SelfBillingResponse
     /**
      * Parse the XML response
      * @param string $xml
-     * @return \Rebelo\ATWs\Series\SelfBillingResponse
+     * @return \Rebelo\ATWs\Series\ConsultSelfBillingAgreementResponse
      * @throws \Rebelo\ATWs\ATWsException
      * @since 2.0.2
      */
-    public static function factory(string $xml): SelfBillingResponse
+    public static function factory(string $xml): ConsultSelfBillingAgreementResponse
     {
         if (false === $simpleXml = \simplexml_load_string(\trim($xml), SimpleXMLElement::class)) {
             throw new ATWsException("Wrong response from soap request");
         }
 
-        $response = new SelfBillingResponse();
+        $response = new ConsultSelfBillingAgreementResponse();
+
         try {
+
             $simpleXml->xpath("//ReturnCode");
 
             $fault = $simpleXml->xpath("//faultcode");
@@ -82,45 +82,37 @@ class SelfBillingResponse
                     (string)$simpleXml->xpath("//msgResultOper")[0]
                 );
 
-                $infoSeriesStack = $simpleXml->xpath("//infoSerie") ?? [];
+                $infoStack = $simpleXml->xpath("//infoAcordoAutofaturacao") ?? [];
 
-                for ($index = 0; $index < \count($infoSeriesStack); $index++) {
+                for ($index = 0; $index < \count($infoStack); $index++) {
 
-                    $infoSeries = $infoSeriesStack[$index];
+                    $info = $infoStack[$index];
 
-                    $response->seriesInformation[] = new SelfBillingSeriesInformation(
-                        (string)$infoSeries->{"serie"},
-                        new SelfBillingDocumentTypeCode((string)$infoSeries->{"tipoDoc"}),
-                        (int)$infoSeries->{"numInicialSeq"},
-                        Date::parse(Date::SQL_DATE, (string)$infoSeries->{"dataInicioPrevUtiliz"}),
-                        \count($infoSeries->{"seqUltimoDocEmitido"}) === 0 ?
-                            null : (int)$infoSeries->{"seqUltimoDocEmitido"},
-                        new ProcessingMediumCodes((string)$infoSeries->{"meioProcessamento"}),
-                        (int)$infoSeries->{"numCertSWFatur"},
-                        (string)$infoSeries->{"codValidacaoSerie"},
-                        Date::parse(Date::SQL_DATE, (string)$infoSeries->{"dataRegisto"}),
-                        new SeriesStatusCode((string)$infoSeries->{"estado"}),
-                        \count($infoSeries->{"motivoEstado"}) === 0 ?
-                            null : (string)$infoSeries->{"motivoEstado"},
-                        \count($infoSeries->{"justificacao"}) === 0 ?
-                            null : (string)$infoSeries->{"justificacao"},
-                        \count($infoSeries->{"dataEstado"}) === 0 ?
-                            null : Date::parse(Date::DATE_T_TIME, \substr((string)$infoSeries->{"dataEstado"}, 0, 19)),
-                        (string)$infoSeries->{"nifComunicou"}
+                    $response->selfBillingAgreementInfo[] = new SelfBillingAgreementInfo(
+                        new SelfBillingEntityCode((string)$info->{"acordoRegistadoCom"}),
+                        (string)$info->{"nifAdquirente"},
+                        (string)$info->{"nomeAdquirente"},
+                        (string)$info->{"nifAssociadoAoAcordo"},
+                        (string)$info->{"nomeNifAssociadoAoAcordo"},
+                        \count($info->{"paisEstrangeiro"}) === 0 ?
+                            null : (string)$info->{"paisEstrangeiro"},
+                        new SelfBillingSettlementStatus((string)$info->{"estado"}),
+                        Date::parse(Date::SQL_DATE, (string)$info->{"periodoAutorizacaoDe"}),
+                        \count($info->{"periodoAutorizacaoAte"}) === 0 ?
+                            null : Date::parse(Date::SQL_DATE, (string)$info->{"periodoAutorizacaoDe"})
                     );
                 }
-
-                return $response;
             }
 
         } catch (\Throwable $e) {
             throw new ATWsException("Error parsing XML soap response: " . $e->getMessage());
         }
 
-        throw new ATWsException("XML parser not available for XML response");
+        return $response;
     }
 
     /**
+     * Get the operation result
      * @return \Rebelo\ATWs\Series\OperationResultInformation
      * @since 2.0.2
      */
@@ -130,16 +122,17 @@ class SelfBillingResponse
     }
 
     /**
-     * @return \Rebelo\ATWs\Series\SelfBillingSeriesInformation[]
+     * Get the self billing agreement info
+     * @return \Rebelo\ATWs\Series\SelfBillingAgreementInfo[]
      * @since 2.0.2
      */
-    public function getSeriesInformation(): array
+    public function getSelfBillingAgreementInfo(): array
     {
-        return $this->seriesInformation;
+        return $this->selfBillingAgreementInfo;
     }
 
     /**
-     * get if the response is OK (Not error)
+     * Get is the response is OK or error
      * @return bool
      * @since 2.0.2
      */

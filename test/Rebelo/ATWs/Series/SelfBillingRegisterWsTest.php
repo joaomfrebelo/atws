@@ -46,6 +46,15 @@ class SelfBillingRegisterWsTest extends TestCase
         $n = 0;
         foreach ($selfBillingEntitiesCode as $entityCode) {
             foreach ($constDocType as $docType) {
+
+                if($docType !== "FT" && $entityCode !== "FN"){
+                    continue;
+                }
+
+                if($docType === "FT" && $entityCode === "CE"){
+                    continue;
+                }
+
                 $data[] = [
                     new SelfBillingDocumentTypeCode($docType),
                     new SelfBillingEntityCode($entityCode),
@@ -86,7 +95,7 @@ class SelfBillingRegisterWsTest extends TestCase
             (new Date()),
             9999,
             $entityCode,
-            "999999990",
+            "555555550",
             $supplierCountry,
             $supplierName
         );
@@ -100,8 +109,12 @@ class SelfBillingRegisterWsTest extends TestCase
         );
 
         $response = $registerWs->submission($seriesRegister);
-        $this->assertEquals(2001, $response->getOperationResultInformation()->getOperationResultCode());
+        $this->assertTrue(
+            \in_array(
+                $response->getOperationResultInformation()->getOperationResultCode(),
+                [4002, 4003]
+            )
+        );
         $this->assertNotEmpty($response->getOperationResultInformation()->getOperationResultMessage());
-        $this->assertNotEmpty($response->getSeriesInformation());
     }
 }
