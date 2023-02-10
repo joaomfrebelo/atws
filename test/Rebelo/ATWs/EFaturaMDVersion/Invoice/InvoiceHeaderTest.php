@@ -11,7 +11,8 @@ declare(strict_types=1);
 namespace Rebelo\ATWs\EFaturaMDVersion\Invoice;
 
 
-use PHPStan\Testing\TestCase;
+
+use PHPUnit\Framework\TestCase;
 use Rebelo\ATWs\ATWsException;
 use Rebelo\Base;
 use Rebelo\Date\Date;

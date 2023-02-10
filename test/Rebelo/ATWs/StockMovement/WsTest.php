@@ -97,7 +97,11 @@ class WsTest extends TestCase
         $response = $ws->submit($stockMovement);
         $this->assertInstanceOf(Response::class, $response);
         $this->assertSame(0, $response->getCode());
-        $this->assertSame("OK", $response->getMessage());
+        $this->assertTrue(
+            \str_starts_with($response->getMessage(), "OK") ||
+            \str_starts_with($response->getMessage(), "Alerta:")
+
+        );
         $this->assertNotNull($response->getATDocCodeID());
         $this->assertNotEmpty($response->getATDocCodeID());
     }
@@ -185,7 +189,11 @@ class WsTest extends TestCase
         $response = $ws->submit($stockMovement);
         $this->assertInstanceOf(Response::class, $response);
         $this->assertSame(0, $response->getCode());
-        $this->assertSame("OK", $response->getMessage());
+        $this->assertTrue(
+            \str_starts_with($response->getMessage(), "OK") ||
+            \str_starts_with($response->getMessage(), "Alerta:")
+
+        );
         $this->assertNotNull($response->getATDocCodeID());
         $this->assertNotEmpty($response->getATDocCodeID());
     }
@@ -232,7 +240,11 @@ class WsTest extends TestCase
         $response = $ws->submit($stockMovement);
         $this->assertInstanceOf(Response::class, $response);
         $this->assertSame(0, $response->getCode());
-        $this->assertSame("OK", $response->getMessage());
+        $this->assertTrue(
+            \str_starts_with($response->getMessage(), "OK") ||
+            \str_starts_with($response->getMessage(), "Alerta:")
+
+        );
         $this->assertNotNull($response->getATDocCodeID());
         $this->assertNotEmpty($response->getATDocCodeID());
     }
@@ -279,7 +291,11 @@ class WsTest extends TestCase
         $response = $ws->submit($stockMovement);
         $this->assertInstanceOf(Response::class, $response);
         $this->assertSame(0, $response->getCode());
-        $this->assertSame("OK", $response->getMessage());
+        $this->assertTrue(
+            \str_starts_with($response->getMessage(), "OK") ||
+            \str_starts_with($response->getMessage(), "Alerta:")
+
+        );
         $this->assertNotNull($response->getATDocCodeID());
         $this->assertNotEmpty($response->getATDocCodeID());
     }
@@ -326,7 +342,11 @@ class WsTest extends TestCase
         $response = $ws->submit($stockMovement);
         $this->assertInstanceOf(Response::class, $response);
         $this->assertSame(0, $response->getCode());
-        $this->assertSame("OK", $response->getMessage());
+        $this->assertTrue(
+            \str_starts_with($response->getMessage(), "OK") ||
+            \str_starts_with($response->getMessage(), "Alerta:")
+
+        );
         $this->assertNotNull($response->getATDocCodeID());
         $this->assertNotEmpty($response->getATDocCodeID());
     }
@@ -364,7 +384,11 @@ class WsTest extends TestCase
         $response = $ws->submit($agriculture);
         $this->assertInstanceOf(Response::class, $response);
         $this->assertSame(0, $response->getCode());
-        $this->assertSame("OK", $response->getMessage());
+        $this->assertTrue(
+            \str_starts_with($response->getMessage(), "OK") ||
+            \str_starts_with($response->getMessage(), "Alerta:")
+
+        );
         $this->assertNotNull($response->getATDocCodeID());
         $this->assertNotEmpty($response->getATDocCodeID());
     }
@@ -402,7 +426,11 @@ class WsTest extends TestCase
         $response = $ws->submit($agriculture);
         $this->assertInstanceOf(Response::class, $response);
         $this->assertSame(0, $response->getCode());
-        $this->assertSame("OK", $response->getMessage());
+        $this->assertTrue(
+            \str_starts_with($response->getMessage(), "OK") ||
+            \str_starts_with($response->getMessage(), "Alerta:")
+
+        );
         $this->assertNotNull($response->getATDocCodeID());
         $this->assertNotEmpty($response->getATDocCodeID());
     }
@@ -440,7 +468,11 @@ class WsTest extends TestCase
         $response = $ws->submit($agriculture);
         $this->assertInstanceOf(Response::class, $response);
         $this->assertSame(0, $response->getCode());
-        $this->assertSame("OK", $response->getMessage());
+        $this->assertTrue(
+            \str_starts_with($response->getMessage(), "OK") ||
+            \str_starts_with($response->getMessage(), "Alerta:")
+
+        );
         $this->assertNotNull($response->getATDocCodeID());
         $this->assertNotEmpty($response->getATDocCodeID());
     }

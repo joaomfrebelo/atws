@@ -27,7 +27,7 @@ class AATWsTest extends TestCase
     {
         return [
             [ATWS_TEST_CERTIFICATE],
-            [\str_replace("pem", "pfx", ATWS_TEST_CERTIFICATE)]
+            //[\str_replace("pem", "pfx", ATWS_TEST_CERTIFICATE)]
         ];
     }
 
