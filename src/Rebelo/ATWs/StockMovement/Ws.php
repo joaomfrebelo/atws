@@ -102,7 +102,7 @@ class Ws extends AATWs implements IWs
 
         $xml->writeElement(
             "ATCUD",
-            $doc->getTaxRegistrationNumber()
+            $doc->getAtcud()
         );
 
         if ($doc->getATDocCodeID() !== null) {
