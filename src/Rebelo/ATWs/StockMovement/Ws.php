@@ -202,7 +202,7 @@ class Ws extends AATWs implements IWs
 
         $xml->writeElement(
             "ATCUD",
-            $doc->getTaxRegistrationNumber()
+            $doc->getAtcud()
         );
 
         $xml->writeElement("MovementStatus", $doc->getMovementStatus());
