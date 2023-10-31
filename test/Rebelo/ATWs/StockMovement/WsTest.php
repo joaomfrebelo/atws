@@ -100,7 +100,6 @@ class WsTest extends TestCase
         $this->assertTrue(
             \str_starts_with($response->getMessage(), "OK") ||
             \str_starts_with($response->getMessage(), "Alerta:")
-
         );
         $this->assertNotNull($response->getATDocCodeID());
         $this->assertNotEmpty($response->getATDocCodeID());
@@ -192,7 +191,6 @@ class WsTest extends TestCase
         $this->assertTrue(
             \str_starts_with($response->getMessage(), "OK") ||
             \str_starts_with($response->getMessage(), "Alerta:")
-
         );
         $this->assertNotNull($response->getATDocCodeID());
         $this->assertNotEmpty($response->getATDocCodeID());
@@ -243,7 +241,6 @@ class WsTest extends TestCase
         $this->assertTrue(
             \str_starts_with($response->getMessage(), "OK") ||
             \str_starts_with($response->getMessage(), "Alerta:")
-
         );
         $this->assertNotNull($response->getATDocCodeID());
         $this->assertNotEmpty($response->getATDocCodeID());
@@ -294,7 +291,6 @@ class WsTest extends TestCase
         $this->assertTrue(
             \str_starts_with($response->getMessage(), "OK") ||
             \str_starts_with($response->getMessage(), "Alerta:")
-
         );
         $this->assertNotNull($response->getATDocCodeID());
         $this->assertNotEmpty($response->getATDocCodeID());
@@ -345,7 +341,6 @@ class WsTest extends TestCase
         $this->assertTrue(
             \str_starts_with($response->getMessage(), "OK") ||
             \str_starts_with($response->getMessage(), "Alerta:")
-
         );
         $this->assertNotNull($response->getATDocCodeID());
         $this->assertNotEmpty($response->getATDocCodeID());
@@ -387,7 +382,6 @@ class WsTest extends TestCase
         $this->assertTrue(
             \str_starts_with($response->getMessage(), "OK") ||
             \str_starts_with($response->getMessage(), "Alerta:")
-
         );
         $this->assertNotNull($response->getATDocCodeID());
         $this->assertNotEmpty($response->getATDocCodeID());
@@ -429,7 +423,6 @@ class WsTest extends TestCase
         $this->assertTrue(
             \str_starts_with($response->getMessage(), "OK") ||
             \str_starts_with($response->getMessage(), "Alerta:")
-
         );
         $this->assertNotNull($response->getATDocCodeID());
         $this->assertNotEmpty($response->getATDocCodeID());
@@ -471,7 +464,6 @@ class WsTest extends TestCase
         $this->assertTrue(
             \str_starts_with($response->getMessage(), "OK") ||
             \str_starts_with($response->getMessage(), "Alerta:")
-
         );
         $this->assertNotNull($response->getATDocCodeID());
         $this->assertNotEmpty($response->getATDocCodeID());

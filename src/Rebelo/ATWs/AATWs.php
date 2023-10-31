@@ -262,7 +262,6 @@ abstract class AATWs
                 false
             );
 
-            /** @phpstan-ignore-next-line */
             if ($response === null) {
                 throw new ATWsException("atws_con_error " . \openssl_error_string());
             }
