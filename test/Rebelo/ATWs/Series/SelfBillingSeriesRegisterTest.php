@@ -47,17 +47,18 @@ class SelfBillingSeriesRegisterTest extends TestCase
      * @param string $series
      *
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
+     * @throws \Rebelo\Date\DateException
+     * @throws \Rebelo\Date\DateIntervalException
      * @throws \Rebelo\Date\DateParseException
      */
     public function testInstance(string $series): void
     {
-        $documentTypeCode            = SelfBillingDocumentTypeCode::FT();
+        $documentTypeCode            = SelfBillingDocumentTypeCode::FT;
         $seriesInitialSequenceNumber = 999;
         $expectedInitialDateUse      = (new Date())->addMinutes(1);
         $softwareCertificate         = 9999;
         $supplierTin                 = (string)\rand(111111111, 999999999);
-        $entityCode                  = SelfBillingEntityCode::CE();
+        $entityCode                  = SelfBillingEntityCode::CE;
 
         $seriesRegister = new SelfBillingSeriesRegister(
             $series,
@@ -77,9 +78,9 @@ class SelfBillingSeriesRegisterTest extends TestCase
         $this->assertSame($seriesInitialSequenceNumber, $seriesRegister->getSeriesInitialSequenceNumber());
         $this->assertSame($expectedInitialDateUse, $seriesRegister->getExpectedInitialDateUse());
         $this->assertSame($softwareCertificate, $seriesRegister->getSoftwareCertificate());
-         $this->assertSame(
-            DocumentClassCode::mapDocTypeToClassDoc($seriesRegister->getDocumentTypeCode()->get())->get(),
-            $seriesRegister->getClassDocumentCode()->get()
+        $this->assertSame(
+            DocumentClassCode::mapDocTypeToClassDoc($seriesRegister->getDocumentTypeCode()->value),
+            $seriesRegister->getClassDocumentCode()
         );
         $this->assertSame($entityCode, $seriesRegister->getSelfBillingEntityCode());
         $this->assertSame($supplierTin, $seriesRegister->getSupplierTin());
@@ -123,20 +124,21 @@ class SelfBillingSeriesRegisterTest extends TestCase
      * @param string $series
      *
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
      * @throws \Rebelo\Date\DateParseException
+     * @throws \Rebelo\Date\DateException
+     * @throws \Rebelo\Date\DateIntervalException
      */
     public function testInstanceWrongSeries(string $series): void
     {
         $this->expectException(ATWsException::class);
         $this->expectExceptionMessage("Series identifier not valid");
 
-        $documentTypeCode            = SelfBillingDocumentTypeCode::FT();
+        $documentTypeCode            = SelfBillingDocumentTypeCode::FT;
         $seriesInitialSequenceNumber = 999;
         $expectedInitialDateUse      = (new Date())->addMinutes(1);
         $softwareCertificate         = 9999;
         $supplierTin                 = (string)\rand(111111111, 999999999);
-        $entityCode                  = SelfBillingEntityCode::CE();
+        $entityCode                  = SelfBillingEntityCode::CE;
 
         new SelfBillingSeriesRegister(
             $series,
@@ -169,7 +171,8 @@ class SelfBillingSeriesRegisterTest extends TestCase
      * @param int $seriesInitialSequenceNumber
      *
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
+     * @throws \Rebelo\Date\DateException
+     * @throws \Rebelo\Date\DateIntervalException
      * @throws \Rebelo\Date\DateParseException
      */
     public function testInstanceWrongNumber(int $seriesInitialSequenceNumber): void
@@ -178,11 +181,11 @@ class SelfBillingSeriesRegisterTest extends TestCase
         $this->expectExceptionMessage("SeriesInitialSequenceNumber identifier not valid");
 
         $series                      = "A";
-        $documentTypeCode            = SelfBillingDocumentTypeCode::FT();
+        $documentTypeCode            = SelfBillingDocumentTypeCode::FT;
         $expectedInitialDateUse      = (new Date())->addMinutes(1);
         $softwareCertificate         = 9999;
         $supplierTin                 = (string)\rand(111111111, 999999999);
-        $entityCode                  = SelfBillingEntityCode::CE();
+        $entityCode                  = SelfBillingEntityCode::CE;
 
         new SelfBillingSeriesRegister(
             $series,
@@ -200,7 +203,8 @@ class SelfBillingSeriesRegisterTest extends TestCase
     /**
      * @test
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
+     * @throws \Rebelo\Date\DateException
+     * @throws \Rebelo\Date\DateIntervalException
      * @throws \Rebelo\Date\DateParseException
      */
     public function testInstanceWrongDate(): void
@@ -209,12 +213,12 @@ class SelfBillingSeriesRegisterTest extends TestCase
         $this->expectExceptionMessage("ExpectedInitialDateUse can not be earlier that NOW");
 
         $series                      = "A";
-        $documentTypeCode            = SelfBillingDocumentTypeCode::FT();
+        $documentTypeCode            = SelfBillingDocumentTypeCode::FT;
         $seriesInitialSequenceNumber = 999;
         $expectedInitialDateUse      = (new Date())->addDays(-1);
         $softwareCertificate         = 9999;
         $supplierTin                 = (string)\rand(111111111, 999999999);
-        $entityCode                  = SelfBillingEntityCode::CE();
+        $entityCode                  = SelfBillingEntityCode::CE;
 
         new SelfBillingSeriesRegister(
             $series,

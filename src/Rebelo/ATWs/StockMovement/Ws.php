@@ -11,7 +11,7 @@ namespace Rebelo\ATWs\StockMovement;
 
 use Rebelo\ATWs\AATWs;
 use Rebelo\ATWs\ATWsException;
-use Rebelo\Date\Date;
+use Rebelo\Date\Pattern;
 
 /**
  * StockMovement Ws
@@ -26,7 +26,7 @@ class Ws extends AATWs implements IWs
      * The WSDL file path
      * @since 1.0.0
      */
-    const WSDL = __DIR__ . DIRECTORY_SEPARATOR . "documentosTransporte.wsdl";
+    const string WSDL = __DIR__ . DIRECTORY_SEPARATOR . "documentosTransporte.wsdl";
 
     /**
      *
@@ -43,10 +43,11 @@ class Ws extends AATWs implements IWs
 
     /**
      * Build the document request xml body
+     *
      * @param \XMLWriter $xml
+     *
      * @return void
-     * @throws ATWsException
-     * @throws \Rebelo\Date\DateFormatException
+     * @throws \Rebelo\ATWs\ATWsException
      * @since 1.0.0
      */
     protected function buildBody(\XMLWriter $xml): void
@@ -72,9 +73,10 @@ class Ws extends AATWs implements IWs
 
     /**
      * Build the Stock Movement request xml body
+     *
      * @param \XMLWriter $xml
+     *
      * @return void
-     * @throws \Rebelo\Date\DateFormatException
      * @since 1.0.0
      */
     public function buildBodyStockMovement(\XMLWriter $xml): void
@@ -113,7 +115,7 @@ class Ws extends AATWs implements IWs
 
         $xml->writeElement(
             "MovementDate",
-            $doc->getMovementDate()->format(Date::SQL_DATE)
+            $doc->getMovementDate()->format(Pattern::SQL_DATE)
         );
 
         $xml->writeElement("MovementType", $doc->getMovementType());
@@ -145,13 +147,13 @@ class Ws extends AATWs implements IWs
         if ($doc->getMovementEndTime() !== null) {
             $xml->writeElement(
                 "MovementEndTime",
-                $doc->getMovementEndTime()->format(Date::DATE_T_TIME)
+                $doc->getMovementEndTime()->format(Pattern::DATE_T_TIME)
             );
         }
 
         $xml->writeElement(
             "MovementStartTime",
-            $doc->getMovementStartTime()->format(Date::DATE_T_TIME)
+            $doc->getMovementStartTime()->format(Pattern::DATE_T_TIME)
         );
 
         if ($doc->getVehicleID() !== null) {
@@ -169,9 +171,10 @@ class Ws extends AATWs implements IWs
 
     /**
      * Build the Prior Agricultural request xml body
+     *
      * @param \XMLWriter $xml
+     *
      * @return void
-     * @throws \Rebelo\Date\DateFormatException
      * @since 1.0.0
      */
     public function buildBodyPriorAgricultural(\XMLWriter $xml): void
@@ -209,14 +212,14 @@ class Ws extends AATWs implements IWs
 
         $xml->writeElement(
             "MovementDate",
-            $doc->getMovementDate()->format(Date::SQL_DATE)
+            $doc->getMovementDate()->format(Pattern::SQL_DATE)
         );
 
         $xml->writeElement("MovementType", $doc->getMovementType());
 
         $xml->writeElement(
             "MovementStartTime",
-            $doc->getMovementStartTime()->format(Date::SQL_DATE)
+            $doc->getMovementStartTime()->format(Pattern::SQL_DATE)
         );
 
         $xml->writeElement(
@@ -237,9 +240,10 @@ class Ws extends AATWs implements IWs
 
     /**
      * Build the Subsequent Agricultural request xml body
+     *
      * @param \XMLWriter $xml
+     *
      * @return void
-     * @throws \Rebelo\Date\DateFormatException
      * @since 1.0.0
      */
     public function buildBodySubsequentAgricultural(\XMLWriter $xml): void
@@ -273,7 +277,7 @@ class Ws extends AATWs implements IWs
 
         $xml->writeElement(
             "MovementDate",
-            $doc->getMovementDate()->format(Date::SQL_DATE)
+            $doc->getMovementDate()->format(Pattern::SQL_DATE)
         );
 
         $xml->writeElement("MovementType", $doc->getMovementType());
@@ -293,13 +297,13 @@ class Ws extends AATWs implements IWs
         if ($doc->getMovementEndTime() !== null) {
             $xml->writeElement(
                 "MovementEndTime",
-                $doc->getMovementEndTime()->format(Date::DATE_T_TIME)
+                $doc->getMovementEndTime()->format(Pattern::DATE_T_TIME)
             );
         }
 
         $xml->writeElement(
             "MovementStartTime",
-            $doc->getMovementStartTime()->format(Date::DATE_T_TIME)
+            $doc->getMovementStartTime()->format(Pattern::DATE_T_TIME)
         );
 
         if ($doc->getVehicleID() !== null) {
@@ -328,9 +332,13 @@ class Ws extends AATWs implements IWs
 
     /**
      * Submit the stock movement
+     *
      * @param \Rebelo\ATWs\StockMovement\StockMovement|\Rebelo\ATWs\StockMovement\PriorAgriculturalStockMovement|\Rebelo\ATWs\StockMovement\SubsequentAgriculturalStockMovement $stockMovement
+     *
      * @return \Rebelo\ATWs\StockMovement\Response
      * @throws \Rebelo\ATWs\ATWsException
+     * @throws \Rebelo\Date\DateException
+     * @throws \Rebelo\Date\DateParseException
      * @since 1.0.0
      */
     public function submit(StockMovement|PriorAgriculturalStockMovement|SubsequentAgriculturalStockMovement $stockMovement): Response

@@ -12,7 +12,7 @@ namespace Rebelo\ATWs\Series;
 use PHPUnit\Framework\TestCase;
 use Rebelo\ATWs\ATWsException;
 use Rebelo\Base;
-use Rebelo\Date\Date;
+use Rebelo\Date\Pattern;
 
 /**
  * Class LineTest
@@ -76,7 +76,6 @@ class ResponseTest extends TestCase
     /**
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
      * @throws \Exception
      */
     public function testRegisterResponse(): void
@@ -92,17 +91,17 @@ class ResponseTest extends TestCase
         $seriesInformation = $response->getSeriesInformation()[0];
 
         $this->assertSame("2511232477", $seriesInformation->getSeries());
-        $this->assertSame("N", $seriesInformation->getSeriesTypeCode()->get());
-        $this->assertSame("SI", $seriesInformation->getDocumentClassCode()->get());
-        $this->assertSame("FT", $seriesInformation->getDocumentTypeCode()->get());
+        $this->assertSame("N", $seriesInformation->getSeriesTypeCode());
+        $this->assertSame("SI", $seriesInformation->getDocumentClassCode());
+        $this->assertSame("FT", $seriesInformation->getDocumentTypeCode());
         $this->assertSame(999, $seriesInformation->getSeriesInitialSequenceNumber());
-        $this->assertSame("2022-04-01", $seriesInformation->getExpectedInitialDateUse()->format(Date::SQL_DATE));
-        $this->assertSame("PF", $seriesInformation->getProcessingMediumCode()->get());
+        $this->assertSame("2022-04-01", $seriesInformation->getExpectedInitialDateUse()->format(Pattern::SQL_DATE));
+        $this->assertSame("PF", $seriesInformation->getProcessingMediumCode());
         $this->assertSame(9999, $seriesInformation->getSoftwareCertificate());
         $this->assertSame("AAJFF5JWJN", $seriesInformation->getSeriesValidationCode());
-        $this->assertSame("2022-02-01", $seriesInformation->getRegisterDate()->format(Date::SQL_DATE));
-        $this->assertSame("A", $seriesInformation->getSeriesStatusCode()->get());
-        $this->assertSame("2022-02-01T12:31:20", $seriesInformation->getStatusDate()->format(Date::DATE_T_TIME));
+        $this->assertSame("2022-02-01", $seriesInformation->getRegisterDate()->format(Pattern::SQL_DATE));
+        $this->assertSame("A", $seriesInformation->getSeriesStatusCode());
+        $this->assertSame("2022-02-01T12:31:20", $seriesInformation->getStatusDate()->format(Pattern::DATE_T_TIME));
         $this->assertSame("555555550", $seriesInformation->getRegistrationNif());
         $this->assertNull($seriesInformation->getStatusReasonCode());
         $this->assertNull($seriesInformation->getStatusReason());
@@ -112,7 +111,6 @@ class ResponseTest extends TestCase
     /**
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
      * @throws \Exception
      */
     public function testRegisterResponseMultiple(): void
@@ -128,17 +126,17 @@ class ResponseTest extends TestCase
         $seriesInformation = $response->getSeriesInformation()[0];
 
         $this->assertSame("2511232477", $seriesInformation->getSeries());
-        $this->assertSame("N", $seriesInformation->getSeriesTypeCode()->get());
-        $this->assertSame("SI", $seriesInformation->getDocumentClassCode()->get());
-        $this->assertSame("FT", $seriesInformation->getDocumentTypeCode()->get());
+        $this->assertSame("N", $seriesInformation->getSeriesTypeCode());
+        $this->assertSame("SI", $seriesInformation->getDocumentClassCode());
+        $this->assertSame("FT", $seriesInformation->getDocumentTypeCode());
         $this->assertSame(999, $seriesInformation->getSeriesInitialSequenceNumber());
-        $this->assertSame("2022-04-01", $seriesInformation->getExpectedInitialDateUse()->format(Date::SQL_DATE));
-        $this->assertSame("PF", $seriesInformation->getProcessingMediumCode()->get());
+        $this->assertSame("2022-04-01", $seriesInformation->getExpectedInitialDateUse()->format(Pattern::SQL_DATE));
+        $this->assertSame("PF", $seriesInformation->getProcessingMediumCode());
         $this->assertSame(9999, $seriesInformation->getSoftwareCertificate());
         $this->assertSame("AAJFF5JWJN", $seriesInformation->getSeriesValidationCode());
-        $this->assertSame("2022-02-01", $seriesInformation->getRegisterDate()->format(Date::SQL_DATE));
-        $this->assertSame("A", $seriesInformation->getSeriesStatusCode()->get());
-        $this->assertSame("2022-02-01T12:31:20", $seriesInformation->getStatusDate()->format(Date::DATE_T_TIME));
+        $this->assertSame("2022-02-01", $seriesInformation->getRegisterDate()->format(Pattern::SQL_DATE));
+        $this->assertSame("A", $seriesInformation->getSeriesStatusCode());
+        $this->assertSame("2022-02-01T12:31:20", $seriesInformation->getStatusDate()->format(Pattern::DATE_T_TIME));
         $this->assertSame("555555550", $seriesInformation->getRegistrationNif());
         $this->assertNull($seriesInformation->getStatusReasonCode());
         $this->assertNull($seriesInformation->getStatusReason());
@@ -147,17 +145,17 @@ class ResponseTest extends TestCase
         $seriesInformation = $response->getSeriesInformation()[1];
 
         $this->assertSame("2511232999", $seriesInformation->getSeries());
-        $this->assertSame("N", $seriesInformation->getSeriesTypeCode()->get());
-        $this->assertSame("SI", $seriesInformation->getDocumentClassCode()->get());
-        $this->assertSame("FT", $seriesInformation->getDocumentTypeCode()->get());
+        $this->assertSame("N", $seriesInformation->getSeriesTypeCode());
+        $this->assertSame("SI", $seriesInformation->getDocumentClassCode());
+        $this->assertSame("FT", $seriesInformation->getDocumentTypeCode());
         $this->assertSame(1, $seriesInformation->getSeriesInitialSequenceNumber());
-        $this->assertSame("2022-09-01", $seriesInformation->getExpectedInitialDateUse()->format(Date::SQL_DATE));
-        $this->assertSame("PF", $seriesInformation->getProcessingMediumCode()->get());
+        $this->assertSame("2022-09-01", $seriesInformation->getExpectedInitialDateUse()->format(Pattern::SQL_DATE));
+        $this->assertSame("PF", $seriesInformation->getProcessingMediumCode());
         $this->assertSame(9999, $seriesInformation->getSoftwareCertificate());
         $this->assertSame("AAJFF5J999", $seriesInformation->getSeriesValidationCode());
-        $this->assertSame("2022-02-19", $seriesInformation->getRegisterDate()->format(Date::SQL_DATE));
-        $this->assertSame("A", $seriesInformation->getSeriesStatusCode()->get());
-        $this->assertSame("2022-02-01T19:31:20", $seriesInformation->getStatusDate()->format(Date::DATE_T_TIME));
+        $this->assertSame("2022-02-19", $seriesInformation->getRegisterDate()->format(Pattern::SQL_DATE));
+        $this->assertSame("A", $seriesInformation->getSeriesStatusCode());
+        $this->assertSame("2022-02-01T19:31:20", $seriesInformation->getStatusDate()->format(Pattern::DATE_T_TIME));
         $this->assertSame("999999999", $seriesInformation->getRegistrationNif());
         $this->assertSame("The status reason", $seriesInformation->getStatusReasonCode());
         $this->assertSame("The justify", $seriesInformation->getStatusReason());

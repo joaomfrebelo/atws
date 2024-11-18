@@ -12,6 +12,7 @@ namespace Rebelo\ATWs\EFaturaMDVersion\WorkDocument;
 use Rebelo\ATWs\ATWsException;
 use Rebelo\ATWs\EFaturaMDVersion\DocumentTotals;
 use Rebelo\Date\Date;
+use Rebelo\Date\Pattern;
 
 /**
  * Conference Document Data (WorkData)
@@ -61,7 +62,7 @@ class WorkData
             throw new ATWsException($msg);
         }
 
-        $this->log->info("SystemEntryDate set to " . $this->systemEntryDate->format(Date::DATE_T_TIME));
+        $this->log->info("SystemEntryDate set to " . $this->systemEntryDate->format(Pattern::DATE_T_TIME));
     }
 
     /**

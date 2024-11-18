@@ -17,6 +17,7 @@ use Rebelo\ATWs\EFaturaMDVersion\RecordChannel;
 use Rebelo\ATWs\TCredentials;
 use Rebelo\Base;
 use Rebelo\Date\Date;
+use Rebelo\Date\Pattern;
 
 /**
  * Delete Work Document Ws Test
@@ -40,7 +41,6 @@ class DeleteWorkDocumentWsTest extends TestCase
     /**
      * @return \Rebelo\ATWs\EFaturaMDVersion\WorkDocument\DeleteWorkDocument[]
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
      */
     public function deleteWorkDataProvider(): array
     {
@@ -110,7 +110,6 @@ class DeleteWorkDocumentWsTest extends TestCase
      * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
      */
     public function testInstanceDocumentList(): void
     {
@@ -138,7 +137,6 @@ class DeleteWorkDocumentWsTest extends TestCase
      * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
      * @throws \ReflectionException
      */
     public function testXml(): void
@@ -176,6 +174,7 @@ class DeleteWorkDocumentWsTest extends TestCase
             $xmlWriter->endElement();
             $xmlWriter->endDocument();
 
+            /** @var string $xmlStr */
             $xmlStr = $xmlWriter->flush();
 
             if (false === $xml = \simplexml_load_string($xmlStr)) {
@@ -216,7 +215,7 @@ class DeleteWorkDocumentWsTest extends TestCase
                 );
 
                 $this->assertSame(
-                    $header->getWorkDate()->format(Date::SQL_DATE),
+                    $header->getWorkDate()->format(Pattern::SQL_DATE),
                     (string)(($xml->xpath("//doc:WorkDate") ?: [])[$k])
                 );
 
@@ -242,12 +241,12 @@ class DeleteWorkDocumentWsTest extends TestCase
             } else {
 
                 $this->assertSame(
-                    $deleteWork->getDateRange()->getStartDate()->format(Date::SQL_DATE),
+                    $deleteWork->getDateRange()->getStartDate()->format(Pattern::SQL_DATE),
                     (string)(($xml->xpath("//doc:StartDate") ?: [])[0])
                 );
 
                 $this->assertSame(
-                    $deleteWork->getDateRange()->getStartDate()->format(Date::SQL_DATE),
+                    $deleteWork->getDateRange()->getStartDate()->format(Pattern::SQL_DATE),
                     (string)(($xml->xpath("//doc:EndDate") ?: [])[0])
                 );
             }

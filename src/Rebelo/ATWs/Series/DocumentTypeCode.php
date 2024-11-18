@@ -14,144 +14,145 @@ namespace Rebelo\ATWs\Series;
  *
  * The Document Type Code
  *
- * @method static DocumentTypeCode FT()
- * @method static DocumentTypeCode FS()
- * @method static DocumentTypeCode FR()
- * @method static DocumentTypeCode ND()
- * @method static DocumentTypeCode NC()
- * @method static DocumentTypeCode GR()
- * @method static DocumentTypeCode GT()
- * @method static DocumentTypeCode GA()
- * @method static DocumentTypeCode GC()
- * @method static DocumentTypeCode GD()
- * @method static DocumentTypeCode CM()
- * @method static DocumentTypeCode CC()
- * @method static DocumentTypeCode FC()
- * @method static DocumentTypeCode FO()
- * @method static DocumentTypeCode NE()
- * @method static DocumentTypeCode OU()
- * @method static DocumentTypeCode OR()
- * @method static DocumentTypeCode PF()
- * @method static DocumentTypeCode RP()
- * @method static DocumentTypeCode RE()
- * @method static DocumentTypeCode CS()
- * @method static DocumentTypeCode LD()
- * @method static DocumentTypeCode RA()
- * @method static DocumentTypeCode RC()
- * @method static DocumentTypeCode RG()
  * @since 1.0.0
  */
-class DocumentTypeCode extends SelfBillingDocumentTypeCode
+enum DocumentTypeCode: string
 {
 
     /**
      * @since 1.0.0
      */
-    const GR = "GR";
+    case GR = "GR";
 
     /**
      * @since 1.0.0
      */
-    const GT = "GT";
+    case GT = "GT";
 
     /**
      * @since 1.0.0
      */
-    const GA = "GA";
+    case GA = "GA";
 
     /**
      * @since 1.0.0
      */
-    const GC = "GC";
+    case GC = "GC";
 
     /**
      * @since 1.0.0
      */
-    const GD = "GD";
+    case GD = "GD";
 
     /**
      * @since 1.0.0
      */
-    const CM = "CM";
+    case CM = "CM";
 
     /**
      * @since 1.0.0
      */
-    const CC = "CC";
+    case CC = "CC";
 
     /**
      * @since 1.0.0
      */
-    const FC = "FC";
+    case FC = "FC";
 
     /**
      * @since 1.0.0
      */
-    const FO = "FO";
+    case FO = "FO";
 
     /**
      * @since 1.0.0
      */
-    const NE = "NE";
+    case NE = "NE";
 
     /**
      * @since 1.0.0
      */
-    const OU = "OU";
+    case OU = "OU";
 
     /**
      * @since 1.0.0
      */
-    const OR = "OR";
+    case OR = "OR";
 
     /**
      * @since 1.0.0
      */
-    const PF = "PF";
+    case PF = "PF";
 
     /**
      * @since 1.0.0
      */
-    const RP = "RP";
+    case RP = "RP";
 
     /**
      * @since 1.0.0
      */
-    const RE = "RE";
+    case RE = "RE";
 
     /**
      * @since 1.0.0
      */
-    const CS = "CS";
+    case CS = "CS";
 
     /**
      * @since 1.0.0
      */
-    const LD = "LD";
+    case LD = "LD";
 
     /**
      * @since 1.0.0
      */
-    const RA = "RA";
+    case RA = "RA";
 
     /**
      * @since 1.0.0
      */
-    const RC = "RC";
+    case RC = "RC";
 
     /**
      * @since 1.0.0
      */
-    const RG = "RG";
+    case RG = "RG";
 
     /**
-     * @param string $value
-     * @throws \Rebelo\Enum\EnumException
      * @since 1.0.0
      */
-    public function __construct(string $value)
+    case FT = "FT";
+
+    /**
+     * @since 1.0.0
+     */
+    case FS = "FS";
+
+    /**
+     * @since 1.0.0
+     */
+    case FR = "FR";
+
+    /**
+     * @since 1.0.0
+     */
+    case ND = "ND";
+
+    /**
+     * @since 1.0.0
+     */
+    case NC = "NC";
+
+    /**
+     * Get the Document Class Code for this Document Type Code
+     *
+     * @return \Rebelo\ATWs\Series\DocumentClassCode
+     * @throws \Rebelo\ATWs\ATWsException
+     * @since 1.0.0
+     */
+    public function getDocumentClassCode(): DocumentClassCode
     {
-        parent::__construct($value);
+        return DocumentClassCode::mapDocTypeToClassDoc($this->value);
     }
-
 }

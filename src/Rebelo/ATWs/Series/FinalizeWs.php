@@ -65,14 +65,14 @@ class FinalizeWs extends ASeriesWs implements IFinalizeWs
             null,
             "classeDoc",
             null,
-            $this->finalizeSeries->getDocumentTypeCode()->getDocumentClassCode()->get(),
+            $this->finalizeSeries->getDocumentTypeCode()->getDocumentClassCode()->value,
         );
 
         $xml->writeElementNs(
             null,
             "tipoDoc",
             null,
-            $this->finalizeSeries->getDocumentTypeCode()->get()
+            $this->finalizeSeries->getDocumentTypeCode()->value
         );
 
         $xml->writeElementNs(

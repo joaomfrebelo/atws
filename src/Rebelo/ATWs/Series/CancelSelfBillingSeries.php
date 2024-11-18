@@ -35,21 +35,21 @@ class CancelSelfBillingSeries extends ASeries
      * @since 2.0.2
      */
     public function __construct(
-        private string                $series,
-        private DocumentTypeCode      $documentTypeCode,
-        private string                $seriesValidationCode,
-        private bool                  $noIssueDeclaration,
-        private SelfBillingEntityCode $selfBillingEntityCode,
-        private string                $supplierTin,
+        private readonly string                $series,
+        private readonly DocumentTypeCode      $documentTypeCode,
+        private readonly string                $seriesValidationCode,
+        private readonly bool                  $noIssueDeclaration,
+        private readonly SelfBillingEntityCode $selfBillingEntityCode,
+        private readonly string                $supplierTin,
     )
     {
         parent::__construct();
         $this->log->debug(__METHOD__);
         $this->log->debug("Series set to: " . $this->series);
-        $this->log->debug("DocumentTypeCode set to: " . $this->documentTypeCode->get());
+        $this->log->debug("DocumentTypeCode set to: " . $this->documentTypeCode->value);
         $this->log->debug("SeriesValidationCode: " . $this->seriesValidationCode);
         $this->log->debug("NoIssueDeclaration: " . ($this->noIssueDeclaration ? "true" : "false"));
-        $this->log->debug("selfBillingEntityCode set to: " . $this->selfBillingEntityCode->get());
+        $this->log->debug("selfBillingEntityCode set to: " . $this->selfBillingEntityCode->value);
         $this->log->debug("Supplier tin set to: " . $this->supplierTin);
 
         if (!static::isValidSeries($this->series)) {

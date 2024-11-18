@@ -30,6 +30,8 @@ class CancelSelfBillingWs extends ASelfBillingSeriesWs implements ICancelSelfBil
      *
      * @return \Rebelo\ATWs\Series\SelfBillingResponse
      * @throws \Rebelo\ATWs\ATWsException
+     * @throws \Rebelo\Date\DateException
+     * @throws \Rebelo\Date\DateParseException
      * @since 2.0.2
      */
     public function submission(CancelSelfBillingSeries $cancelSeries): SelfBillingResponse
@@ -67,14 +69,14 @@ class CancelSelfBillingWs extends ASelfBillingSeriesWs implements ICancelSelfBil
             null,
             "classeDoc",
             null,
-            $this->cancelSeries->getDocumentTypeCode()->getDocumentClassCode()->get()
+            $this->cancelSeries->getDocumentTypeCode()->getDocumentClassCode()->value
         );
 
         $xml->writeElementNs(
             null,
             "tipoDoc",
             null,
-            $this->cancelSeries->getDocumentTypeCode()->get()
+            $this->cancelSeries->getDocumentTypeCode()->value
         );
 
         $xml->writeElementNs(
@@ -102,14 +104,14 @@ class CancelSelfBillingWs extends ASelfBillingSeriesWs implements ICancelSelfBil
             null,
             "acordoRegistadoCom",
             null,
-            $this->cancelSeries->getSelfBillingEntityCode()->get()
+            $this->cancelSeries->getSelfBillingEntityCode()->value
         );
 
         $xml->writeElementNs(
             null,
             "nifAssociadoAoAcordo",
             null,
-            $this->cancelSeries->getSelfBillingEntityCode()->get()
+            $this->cancelSeries->getSelfBillingEntityCode()->value
         );
 
         $xml->endElement(); //registarSerie

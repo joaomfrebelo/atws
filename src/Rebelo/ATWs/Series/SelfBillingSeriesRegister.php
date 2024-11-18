@@ -12,10 +12,12 @@ namespace Rebelo\ATWs\Series;
 
 use Rebelo\ATWs\ATWsException;
 use Rebelo\Date\Date;
+use Rebelo\Date\Pattern;
 
 /**
  * This functionality aims to allow the communication of the Self billing Series to the AT,
  * through their registration, so that a unique validation code for the Series is assigned.
+ *
  * @since 2.0.2
  */
 class SelfBillingSeriesRegister extends ASeries
@@ -36,35 +38,35 @@ class SelfBillingSeriesRegister extends ASeries
      * @param string|null                                     $foreignSupplierName         If not portuguese Indicate the name of the entity with whom established the prior Self-invoicing Agreement.
      *
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
+     * @throws \Rebelo\Date\DateException
      * @throws \Rebelo\Date\DateParseException
      * @since 2.0.2
      */
     public function __construct(
-        private string                      $series,
-        private SelfBillingDocumentTypeCode $documentTypeCode,
-        private int                         $seriesInitialSequenceNumber,
-        private Date                        $expectedInitialDateUse,
-        private int                         $softwareCertificate,
-        private SelfBillingEntityCode       $selfBillingEntityCode,
-        private string                      $supplierTin,
-        private ?string                     $supplierCountry,
-        private ?string                     $foreignSupplierName
+        private readonly string                      $series,
+        private readonly SelfBillingDocumentTypeCode $documentTypeCode,
+        private readonly int                         $seriesInitialSequenceNumber,
+        private readonly Date                        $expectedInitialDateUse,
+        private readonly int                         $softwareCertificate,
+        private readonly SelfBillingEntityCode       $selfBillingEntityCode,
+        private readonly string                      $supplierTin,
+        private readonly ?string                     $supplierCountry,
+        private readonly ?string                     $foreignSupplierName
     )
     {
         parent::__construct();
         $this->log->debug(__METHOD__);
         $this->log->debug("Series set to: " . $this->series);
-        $this->log->debug("DocumentTypeCode set to: " . $this->documentTypeCode->get());
+        $this->log->debug("DocumentTypeCode set to: " . $this->documentTypeCode->value);
         $this->log->debug("SeriesInitialSequenceNumber set to: " . $this->seriesInitialSequenceNumber);
-        $this->log->debug("ExpectedInitialDateUse set to: " . $this->expectedInitialDateUse->format(Date::SQL_DATE));
+        $this->log->debug("ExpectedInitialDateUse set to: " . $this->expectedInitialDateUse->format(Pattern::SQL_DATE));
         $this->log->debug("SoftwareCertificate set to: " . $this->softwareCertificate);
-        $this->log->debug("selfBillingEntityCode set to: " . $this->selfBillingEntityCode->get());
+        $this->log->debug("selfBillingEntityCode set to: " . $this->selfBillingEntityCode->value);
         $this->log->debug("Supplier tin set to: " . $this->supplierTin);
         $this->log->debug("Supplier country set to: " . ($this->supplierCountry ?? "null"));
         $this->log->debug("ForeignSupplierName set to: " . ($this->foreignSupplierName ?? "null"));
 
-        $today = Date::parse(Date::SQL_DATE, (new Date())->format(Date::SQL_DATE));
+        $today = Date::parse(Pattern::SQL_DATE, (new Date())->format(Pattern::SQL_DATE));
         if ($this->getExpectedInitialDateUse()->isEarlier($today)) {
             $msg = "ExpectedInitialDateUse can not be earlier that NOW";
             $this->log->error($msg);
@@ -86,6 +88,7 @@ class SelfBillingSeriesRegister extends ASeries
 
     /**
      * Indicate the identifier of the Series you want to communicate to AT.
+     *
      * @return string
      * @since 2.0.2
      */
@@ -97,6 +100,7 @@ class SelfBillingSeriesRegister extends ASeries
 
     /**
      * Indicate the type of document to which the Series belongs to communicate to AT.
+     *
      * @return \Rebelo\ATWs\Series\SelfBillingDocumentTypeCode
      * @since 2.0.2
      */
@@ -107,6 +111,7 @@ class SelfBillingSeriesRegister extends ASeries
 
     /**
      * Indicate the beginning of the document's sequence numbering in the Series.
+     *
      * @return int
      * @since 2.0.2
      */
@@ -117,6 +122,7 @@ class SelfBillingSeriesRegister extends ASeries
 
     /**
      * Indicate the date from which the Series is expected to be used
+     *
      * @return \Rebelo\Date\Date
      * @since 2.0.2
      */
@@ -127,6 +133,7 @@ class SelfBillingSeriesRegister extends ASeries
 
     /**
      * Indicate the invoicing program certificate number assigned by AT. If not applicable, it must be filled in with “0” (zero).
+     *
      * @return int
      * @since 2.0.2
      */
@@ -138,6 +145,7 @@ class SelfBillingSeriesRegister extends ASeries
     /**
      * Indicate the classification given to the document to which the Series belongs to be communicated to the AT.
      * Composed of a set of values
+     *
      * @return \Rebelo\ATWs\Series\DocumentClassCode
      * @throws \Rebelo\ATWs\ATWsException
      * @since 2.0.2
@@ -149,6 +157,7 @@ class SelfBillingSeriesRegister extends ASeries
 
     /**
      * Indicate the type of entity with whom established the prior Self-invoicing Agreement.
+     *
      * @return \Rebelo\ATWs\Series\SelfBillingEntityCode
      * @since 2.0.2
      */
@@ -159,6 +168,7 @@ class SelfBillingSeriesRegister extends ASeries
 
     /**
      * Indicate the TIN of the entity with whom established the prior Self-invoicing Agreement.
+     *
      * @return string
      * @since 2.0.2
      */
@@ -169,6 +179,7 @@ class SelfBillingSeriesRegister extends ASeries
 
     /**
      * If not portuguese Indicate the country of the entity with whom established the prior Self-invoicing Agreement.
+     *
      * @return string|null
      * @since 2.0.2
      */
@@ -179,6 +190,7 @@ class SelfBillingSeriesRegister extends ASeries
 
     /**
      * If not portuguese Indicate the name of the entity with whom established the prior Self-invoicing Agreement.
+     *
      * @return string|null
      * @since 2.0.2
      */

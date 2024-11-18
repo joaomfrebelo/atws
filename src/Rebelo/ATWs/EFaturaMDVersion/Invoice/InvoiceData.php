@@ -12,6 +12,7 @@ namespace Rebelo\ATWs\EFaturaMDVersion\Invoice;
 use Rebelo\ATWs\ATWsException;
 use Rebelo\ATWs\EFaturaMDVersion\DocumentTotals;
 use Rebelo\Date\Date;
+use Rebelo\Date\Pattern;
 
 /**
  * Commercial Document Data (InvoiceData)
@@ -38,7 +39,6 @@ class InvoiceData
      * @param \Rebelo\ATWs\EFaturaMDVersion\Line[]                $lines                  Document Lines by Rate (Line)
      * @param \Rebelo\ATWs\EFaturaMDVersion\DocumentTotals        $documentTotals         The Document Totals
      * @param \Rebelo\ATWs\EFaturaMDVersion\WithholdingTax[]|null $withholdingTax         Withholding Tax
-     * @throws \Rebelo\Date\DateFormatException
      * @throws \Rebelo\ATWs\ATWsException
      * @since 2.0.0
      */
@@ -81,7 +81,9 @@ class InvoiceData
             throw new ATWsException($msg);
         }
 
-        $this->log->info("SystemEntryDate set to " . $this->systemEntryDate->format(Date::DATE_T_TIME));
+        $this->log->info(
+            "SystemEntryDate set to " . $this->systemEntryDate->format(Pattern::DATE_T_TIME)
+        );
     }
 
     /**

@@ -12,6 +12,7 @@ namespace Rebelo\ATWs\Series;
 
 use Rebelo\ATWs\ATWsException;
 use Rebelo\Date\Date;
+use Rebelo\Date\Pattern;
 
 /**
  * This functionality aims to allow the communication of the Series to the AT,
@@ -50,14 +51,14 @@ class SeriesRegister extends ASeries
         parent::__construct();
         $this->log->debug(__METHOD__);
         $this->log->debug("Series set to: " . $this->series);
-        $this->log->debug("SeriesTypeCode set to: " . $this->seriesTypeCode->get());
-        $this->log->debug("DocumentTypeCode set to: " . $this->documentTypeCode->get());
+        $this->log->debug("SeriesTypeCode set to: " . $this->seriesTypeCode->value);
+        $this->log->debug("DocumentTypeCode set to: " . $this->documentTypeCode->value);
         $this->log->debug("SeriesInitialSequenceNumber set to: " . $this->seriesInitialSequenceNumber);
-        $this->log->debug("ExpectedInitialDateUse set to: " . $this->expectedInitialDateUse->format(Date::SQL_DATE));
+        $this->log->debug("ExpectedInitialDateUse set to: " . $this->expectedInitialDateUse->format(Pattern::SQL_DATE));
         $this->log->debug("SoftwareCertificate set to: " . $this->softwareCertificate);
-        $this->log->debug("ProcessingMediumCode set to: " . $this->processingMediumCode->get());
+        $this->log->debug("ProcessingMediumCode set to: " . $this->processingMediumCode->value);
 
-        $today = Date::parse(Date::SQL_DATE, (new Date())->format(Date::SQL_DATE));
+        $today = Date::parse(Pattern::SQL_DATE, (new Date())->format(Pattern::SQL_DATE));
         if ($this->getExpectedInitialDateUse()->isEarlier($today)) {
             $msg = "ExpectedInitialDateUse can not be earlier that NOW";
             $this->log->error($msg);

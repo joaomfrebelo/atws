@@ -11,6 +11,7 @@ namespace Rebelo\ATWs\EFaturaMDVersion\Payment;
 use Rebelo\ATWs\ATWsException;
 use Rebelo\ATWs\EFaturaMDVersion\AWs;
 use Rebelo\Date\Date;
+use Rebelo\Date\Pattern;
 
 /**
  * Payment Header
@@ -51,7 +52,9 @@ class PaymentHeader
 
         $this->log->info("PaymentRefNo set to " . $paymentRefNo);
         $this->log->info("ATCUD set to " . $atcud);
-        $this->log->info("TransactionDate set to " . $transactionDate->format(Date::SQL_DATE));
+        $this->log->info(
+            "TransactionDate set to " . $transactionDate->format(Pattern::SQL_DATE)
+        );
 
         if ($this->paymentType !== "RC") {
             $msg = "PaymentType type only can be 'RC' Cash vat payment";
@@ -172,7 +175,7 @@ class PaymentHeader
             AWs::NS_AT_WS_BODY,
             "TransactionDate",
             null,
-            $this->getTransactionDate()->format(Date::SQL_DATE)
+            $this->getTransactionDate()->format(Pattern::SQL_DATE)
         );
 
         $xml->writeElementNs(

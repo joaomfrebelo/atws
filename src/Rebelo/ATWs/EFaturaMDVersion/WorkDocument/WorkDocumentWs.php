@@ -12,7 +12,7 @@ namespace Rebelo\ATWs\EFaturaMDVersion\WorkDocument;
 use Rebelo\ATWs\AATWs;
 use Rebelo\ATWs\EFaturaMDVersion\AWs;
 use Rebelo\ATWs\EFaturaMDVersion\Response;
-use Rebelo\Date\Date;
+use Rebelo\Date\Pattern;
 
 /**
  * Work Document Webservice
@@ -136,7 +136,7 @@ class WorkDocumentWs extends AWs implements IWorkDocumentWs
             static::NS_AT_WS_BODY,
             "SystemEntryDate",
             null,
-            $data->getSystemEntryDate()->format(Date::DATE_T_TIME)
+            $data->getSystemEntryDate()->format(Pattern::DATE_T_TIME)
         );
 
         foreach ($data->getLines() as $line) {

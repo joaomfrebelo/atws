@@ -34,26 +34,22 @@ class RegisterWsTest extends TestCase
 
     /**
      * @return array
-     * @throws \Rebelo\Enum\EnumException
      */
     public function codesDataProvider(): array
     {
-        $constProcMedium = [ProcessingMediumCodes::PF];//(new \ReflectionClass(ProcessingMediumCodes::class))->getConstants();
-        $constSeriesType = [SeriesTypeCode::N];//(new \ReflectionClass(SeriesTypeCode::class))->getConstants();
-        $constDocType = (new \ReflectionClass(DocumentTypeCode::class))->getConstants();
+        $constProcMedium = [ProcessingMediumCodes::PF]; // ProcessingMediumCodes::cases();
+        $constSeriesType = [SeriesTypeCode::N];         // SeriesTypeCode::cases();
+        $constDocType    = DocumentTypeCode::cases();
 
         $data = [];
         foreach ($constProcMedium as $procMedium) {
             foreach ($constSeriesType as $seriesType) {
                 foreach ($constDocType as $docType) {
-                    $data[] = [
-                        new ProcessingMediumCodes($procMedium),
-                        new SeriesTypeCode($seriesType),
-                        new DocumentTypeCode($docType)
-                    ];
+                    $data[] = [$procMedium, $seriesType, $docType];
                 }
             }
         }
+
         return $data;
     }
 
@@ -61,10 +57,13 @@ class RegisterWsTest extends TestCase
      *
      * @test
      * @dataProvider codesDataProvider
+     *
      * @param \Rebelo\ATWs\Series\ProcessingMediumCodes $procMedium
      * @param \Rebelo\ATWs\Series\SeriesTypeCode        $seriesType
      * @param \Rebelo\ATWs\Series\DocumentTypeCode      $docType
+     *
      * @throws \Rebelo\ATWs\ATWsException
+     * @throws \Rebelo\Date\DateException
      * @throws \Rebelo\Date\DateFormatException
      * @throws \Rebelo\Date\DateParseException
      */

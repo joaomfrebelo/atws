@@ -12,6 +12,7 @@ namespace Rebelo\ATWs\Series;
 
 use Rebelo\ATWs\ATWsException;
 use Rebelo\Date\Date;
+use Rebelo\Date\Pattern;
 use SimpleXMLElement;
 
 /**
@@ -82,6 +83,7 @@ class SelfBillingResponse
                     (string)$simpleXml->xpath("//msgResultOper")[0]
                 );
 
+                // @phpstan-ignore-next-line
                 $infoSeriesStack = $simpleXml->xpath("//infoSerie") ?? [];
 
                 for ($index = 0; $index < \count($infoSeriesStack); $index++) {
@@ -90,22 +92,22 @@ class SelfBillingResponse
 
                     $response->seriesInformation[] = new SelfBillingSeriesInformation(
                         (string)$infoSeries->{"serie"},
-                        new SelfBillingDocumentTypeCode((string)$infoSeries->{"tipoDoc"}),
+                        SelfBillingDocumentTypeCode::from((string)$infoSeries->{"tipoDoc"}),
                         (int)$infoSeries->{"numInicialSeq"},
-                        Date::parse(Date::SQL_DATE, (string)$infoSeries->{"dataInicioPrevUtiliz"}),
+                        Date::parse(Pattern::SQL_DATE, (string)$infoSeries->{"dataInicioPrevUtiliz"}),
                         \count($infoSeries->{"seqUltimoDocEmitido"}) === 0 ?
                             null : (int)$infoSeries->{"seqUltimoDocEmitido"},
-                        new ProcessingMediumCodes((string)$infoSeries->{"meioProcessamento"}),
+                        ProcessingMediumCodes::from((string)$infoSeries->{"meioProcessamento"}),
                         (int)$infoSeries->{"numCertSWFatur"},
                         (string)$infoSeries->{"codValidacaoSerie"},
-                        Date::parse(Date::SQL_DATE, (string)$infoSeries->{"dataRegisto"}),
-                        new SeriesStatusCode((string)$infoSeries->{"estado"}),
+                        Date::parse(Pattern::SQL_DATE, (string)$infoSeries->{"dataRegisto"}),
+                        SeriesStatusCode::from((string)$infoSeries->{"estado"}),
                         \count($infoSeries->{"motivoEstado"}) === 0 ?
                             null : (string)$infoSeries->{"motivoEstado"},
                         \count($infoSeries->{"justificacao"}) === 0 ?
                             null : (string)$infoSeries->{"justificacao"},
                         \count($infoSeries->{"dataEstado"}) === 0 ?
-                            null : Date::parse(Date::DATE_T_TIME, \substr((string)$infoSeries->{"dataEstado"}, 0, 19)),
+                            null : Date::parse(Pattern::DATE_T_TIME, \substr((string)$infoSeries->{"dataEstado"}, 0, 19)),
                         (string)$infoSeries->{"nifComunicou"}
                     );
                 }

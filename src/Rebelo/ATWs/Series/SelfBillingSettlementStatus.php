@@ -2,8 +2,6 @@
 
 namespace Rebelo\ATWs\Series;
 
-use Rebelo\Enum\AEnum;
-
 /**
  * Status of Self-billing Agreements
  *
@@ -12,39 +10,19 @@ use Rebelo\Enum\AEnum;
  *
  * @since 2.0.2
  */
-class SelfBillingSettlementStatus extends AEnum
+enum SelfBillingSettlementStatus: string
 {
 
     /**
      * Status active
      * @since 2.0.2
      */
-    const A = "A";
+    case A = "A";
 
     /**
      * Status finalized. The self billing settlement had terminated
      * @since 2.0.2
      */
-    const F = "F";
+    case F = "F";
 
-    /**
-     * @param string $value
-     *
-     * @throws \Rebelo\Enum\EnumException
-     * @since 1.0.0
-     */
-    public function __construct(string $value)
-    {
-        parent::__construct($value);
-    }
-
-    /**
-     * Get the string value
-     * @return string
-     * @since 2.0.2
-     */
-    public function get(): string
-    {
-        return (string)parent::get();
-    }
 }

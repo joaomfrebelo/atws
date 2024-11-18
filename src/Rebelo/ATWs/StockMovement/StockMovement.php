@@ -11,6 +11,7 @@ namespace Rebelo\ATWs\StockMovement;
 
 use Rebelo\ATWs\ATWsException;
 use Rebelo\Date\Date;
+use Rebelo\Date\Pattern;
 
 /**
  * StockMovement<br>
@@ -96,7 +97,7 @@ class StockMovement extends AStockMovement
         $this->log->debug("CustomerName set to: " . $customerName);
         $this->log->debug(
             "MovementEndTime set to: " . (
-                ($movementEndTime?->format(Date::DATE_T_TIME)) ?? "null")
+                ($movementEndTime?->format(Pattern::DATE_T_TIME)) ?? "null")
         );
 
         if (\in_array($movementType, ["GR", "GT", "GA", "GC", "GD"]) === false) {

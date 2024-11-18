@@ -34,20 +34,22 @@ class ConsultSeriesTest extends TestCase
     /**
      * @test
      * @return void
-     * @throws \Rebelo\Date\DateFormatException
      * @throws \Rebelo\ATWs\ATWsException
+     * @throws \Rebelo\Date\DateException
+     * @throws \Rebelo\Date\DateIntervalException
+     * @throws \Rebelo\Date\DateParseException
      */
     public function testInstance(): void
     {
         $series = "A999";
-        $seriesTypeCode = SeriesTypeCode::N();
-        $documentClassCode = DocumentClassCode::SI();
-        $documentTypeCode = DocumentTypeCode::FT();
+        $seriesTypeCode = SeriesTypeCode::N;
+        $documentClassCode = DocumentClassCode::SI;
+        $documentTypeCode = DocumentTypeCode::FT;
         $seriesValidationCode = "AAA999";
         $fromRegistrationDate = (new Date())->addDays(-99);
         $toRegistrationDate = new Date();
-        $seriesStatusCode = SeriesStatusCode::A();
-        $processingMediumCodes = ProcessingMediumCodes::PF();
+        $seriesStatusCode = SeriesStatusCode::A;
+        $processingMediumCodes = ProcessingMediumCodes::PF;
 
         $consultSeries = new ConsultSeries(
             $series,
@@ -93,7 +95,10 @@ class ConsultSeriesTest extends TestCase
     /**
      * @test
      * @return void
-     * @throws \Rebelo\Date\DateFormatException
+     * @throws \Rebelo\ATWs\ATWsException
+     * @throws \Rebelo\Date\DateException
+     * @throws \Rebelo\Date\DateIntervalException
+     * @throws \Rebelo\Date\DateParseException
      */
     public function testWrongDates(): void
     {

@@ -15,6 +15,7 @@ use Rebelo\ATWs\EFaturaMDVersion\RecordChannel;
 use Rebelo\ATWs\TCredentials;
 use Rebelo\Base;
 use Rebelo\Date\Date;
+use Rebelo\Date\Pattern;
 
 /**
  * Payment Ws Test
@@ -139,6 +140,7 @@ class ChangePaymentStatusWsTest extends TestCase
             $xmlWriter->endElement();
             $xmlWriter->endDocument();
 
+            /** @var string $xmlStr */
             $xmlStr = $xmlWriter->flush();
 
             if (false === $xml = \simplexml_load_string($xmlStr)) {
@@ -171,7 +173,7 @@ class ChangePaymentStatusWsTest extends TestCase
             );
 
             $this->assertSame(
-                $changePaymentStatus->getPaymentHeader()->getTransactionDate()->format(Date::SQL_DATE),
+                $changePaymentStatus->getPaymentHeader()->getTransactionDate()->format(Pattern::SQL_DATE),
                 (string)(($xml->xpath("//doc:TransactionDate") ?: [])[0])
             );
 
@@ -196,7 +198,7 @@ class ChangePaymentStatusWsTest extends TestCase
             );
 
             $this->assertSame(
-                $changePaymentStatus->getNewPaymentStatus()->getPaymentStatusDate()->format(Date::DATE_T_TIME),
+                $changePaymentStatus->getNewPaymentStatus()->getPaymentStatusDate()->format(Pattern::DATE_T_TIME),
                 (string)(($xml->xpath("//doc:PaymentStatusDate") ?: [])[0])
             );
 

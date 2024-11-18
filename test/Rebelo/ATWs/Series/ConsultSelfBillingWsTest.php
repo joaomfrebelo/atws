@@ -14,6 +14,7 @@ use PHPUnit\Framework\TestCase;
 use Rebelo\ATWs\TCredentials;
 use Rebelo\Base;
 use Rebelo\Date\Date;
+use Rebelo\Date\Pattern;
 
 /**
  * Consult Webservice Test
@@ -35,6 +36,8 @@ class ConsultSelfBillingWsTest extends TestCase
     /**
      * @test
      * @throws \Rebelo\ATWs\ATWsException
+     * @throws \Rebelo\Date\DateException
+     * @throws \Rebelo\Date\DateParseException
      */
     public function testSubmission(): void
     {
@@ -55,18 +58,18 @@ class ConsultSelfBillingWsTest extends TestCase
     /**
      * @test
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
+     * @throws \Rebelo\Date\DateException
      * @throws \Rebelo\Date\DateParseException
      */
     public function testSubmissionNotNull(): void
     {
         $consultSeries = new ConsultSelfBillingSeries(
             "A999",
-            SelfBillingDocumentTypeCode::FT(),
+            SelfBillingDocumentTypeCode::FT,
             "12345678",
-            Date::parse(Date::SQL_DATE, "2021-01-09"),
-            Date::parse(Date::SQL_DATE, "2021-01-10"),
-            SelfBillingEntityCode::CE(),
+            Date::parse(Pattern::SQL_DATE, "2021-01-09"),
+            Date::parse(Pattern::SQL_DATE, "2021-01-10"),
+            SelfBillingEntityCode::CE,
             "999999999"
         );
 

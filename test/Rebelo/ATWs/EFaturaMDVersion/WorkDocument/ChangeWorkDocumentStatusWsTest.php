@@ -15,6 +15,7 @@ use Rebelo\ATWs\EFaturaMDVersion\RecordChannel;
 use Rebelo\ATWs\TCredentials;
 use Rebelo\Base;
 use Rebelo\Date\Date;
+use Rebelo\Date\Pattern;
 
 /**
  * Change Work Document Status Ws Test
@@ -38,7 +39,6 @@ class ChangeWorkDocumentStatusWsTest extends TestCase
     /**
      * @return \Rebelo\ATWs\EFaturaMDVersion\WorkDocument\ChangeWokDocumentStatus[]
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
      */
     public function changeWorkStatusDataProvider(): array
     {
@@ -83,7 +83,6 @@ class ChangeWorkDocumentStatusWsTest extends TestCase
      * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
      */
     public function testInstance(): void
     {
@@ -109,7 +108,6 @@ class ChangeWorkDocumentStatusWsTest extends TestCase
      * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
      * @throws \ReflectionException
      */
     public function testXml(): void
@@ -147,6 +145,7 @@ class ChangeWorkDocumentStatusWsTest extends TestCase
             $xmlWriter->endElement();
             $xmlWriter->endDocument();
 
+            /** @var string $xmlStr */
             $xmlStr = $xmlWriter->flush();
 
             if (false === $xml = \simplexml_load_string($xmlStr)) {
@@ -179,7 +178,7 @@ class ChangeWorkDocumentStatusWsTest extends TestCase
             );
 
             $this->assertSame(
-                $changeWorkStatus->getWorkHeader()->getWorkDate()->format(Date::SQL_DATE),
+                $changeWorkStatus->getWorkHeader()->getWorkDate()->format(Pattern::SQL_DATE),
                 (string)(($xml->xpath("//doc:WorkDate") ?: [])[0])
             );
 
@@ -204,7 +203,7 @@ class ChangeWorkDocumentStatusWsTest extends TestCase
             );
 
             $this->assertSame(
-                $changeWorkStatus->getNewWorkStatus()->getWorkStatusDate()->format(Date::DATE_T_TIME),
+                $changeWorkStatus->getNewWorkStatus()->getWorkStatusDate()->format(Pattern::DATE_T_TIME),
                 (string)(($xml->xpath("//doc:WorkStatusDate") ?: [])[0])
             );
 

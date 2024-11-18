@@ -18,6 +18,7 @@ use Rebelo\ATWs\EFaturaMDVersion\WithholdingTax;
 use Rebelo\ATWs\TCredentials;
 use Rebelo\Base;
 use Rebelo\Date\Date;
+use Rebelo\Date\Pattern;
 
 /**
  * Payment Ws Test
@@ -41,7 +42,10 @@ class PaymentWsTest extends TestCase
     /**
      * @return \Rebelo\ATWs\EFaturaMDVersion\Payment\Payment[]
      * @throws \Rebelo\ATWs\ATWsException
+     * @throws \Rebelo\Date\DateException
      * @throws \Rebelo\Date\DateFormatException
+     * @throws \Rebelo\Date\DateIntervalException
+     * @throws \Rebelo\Date\DateParseException
      */
     public function paymentWsDataProvider(): array
     {
@@ -163,7 +167,10 @@ class PaymentWsTest extends TestCase
      * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
+     * @throws \Rebelo\Date\DateException
      * @throws \Rebelo\Date\DateFormatException
+     * @throws \Rebelo\Date\DateIntervalException
+     * @throws \Rebelo\Date\DateParseException
      */
     public function testInstance(): void
     {
@@ -226,6 +233,7 @@ class PaymentWsTest extends TestCase
             $xmlWriter->endElement();
             $xmlWriter->endDocument();
 
+            /** @var string $xmlStr */
             $xmlStr = $xmlWriter->flush();
 
             if (false === $xml = \simplexml_load_string($xmlStr)) {
@@ -276,7 +284,7 @@ class PaymentWsTest extends TestCase
             );
 
             $this->assertSame(
-                $header->getTransactionDate()->format(Date::SQL_DATE),
+                $header->getTransactionDate()->format(Pattern::SQL_DATE),
                 (string)(($xml->xpath("//doc:TransactionDate") ?: [])[0])
             );
 
@@ -301,12 +309,12 @@ class PaymentWsTest extends TestCase
             );
 
             $this->assertSame(
-                $data->getPaymentStatus()->getPaymentStatusDate()->format(Date::DATE_T_TIME),
+                $data->getPaymentStatus()->getPaymentStatusDate()->format(Pattern::DATE_T_TIME),
                 (string)(($xml->xpath("//doc:PaymentStatusDate") ?: [])[0])
             );
 
             $this->assertSame(
-                $data->getSystemEntryDate()->format(Date::DATE_T_TIME),
+                $data->getSystemEntryDate()->format(Pattern::DATE_T_TIME),
                 (string)(($xml->xpath("//doc:SystemEntryDate") ?: [])[0])
             );
 
@@ -339,7 +347,7 @@ class PaymentWsTest extends TestCase
                     );
 
                     $this->assertSame(
-                        $sourceID->getInvoiceDate()->format(Date::SQL_DATE),
+                        $sourceID->getInvoiceDate()->format(Pattern::SQL_DATE),
                         (string)(($xpathSourceId->xpath(
                             \sprintf(
                                 "//doc:LineSummary[%s]/doc:SourceDocumentID[%s]/doc:InvoiceDate",

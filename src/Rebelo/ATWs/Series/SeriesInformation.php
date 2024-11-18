@@ -14,9 +14,10 @@ use Rebelo\Date\Date;
 
 /**
  * The Serial information returned by the operations of webservice
+ *
  * @since 1.0.0
  */
-class SeriesInformation
+readonly class SeriesInformation
 {
 
     /**
@@ -36,6 +37,7 @@ class SeriesInformation
      * @param string|null                               $statusReason                Pertinent remarks communicated about the end of the Series.
      * @param \Rebelo\Date\Date|null                    $statusDate                  Date of last change of status of the Series.
      * @param string                                    $registrationNif             Tax number of the taxpayer responsible for communicating the Series.
+     *
      * @since 1.0.0
      */
     public function __construct(
@@ -55,14 +57,13 @@ class SeriesInformation
         private ?string               $statusReason,
         private ?Date                 $statusDate,
         private string                $registrationNif,
-
-
     )
     {
     }
 
     /**
      * Series Identifier.
+     *
      * @return string
      * @since 1.0.0
      */
@@ -73,6 +74,7 @@ class SeriesInformation
 
     /**
      * Series type code.
+     *
      * @return \Rebelo\ATWs\Series\SeriesTypeCode
      * @since 1.0.0
      */
@@ -83,6 +85,7 @@ class SeriesInformation
 
     /**
      * Classification code given to the document to which the Series belongs.
+     *
      * @return \Rebelo\ATWs\Series\DocumentClassCode
      * @since 1.0.0
      */
@@ -93,6 +96,7 @@ class SeriesInformation
 
     /**
      * Series document type code.
+     *
      * @return \Rebelo\ATWs\Series\DocumentTypeCode
      * @since 1.0.0
      */
@@ -103,6 +107,7 @@ class SeriesInformation
 
     /**
      * Start of document sequence numbering in the Series.
+     *
      * @return int
      * @since 1.0.0
      */
@@ -113,6 +118,7 @@ class SeriesInformation
 
     /**
      * Date from which the use of the Series is expected.
+     *
      * @return \Rebelo\Date\Date
      * @since 1.0.0
      */
@@ -123,6 +129,7 @@ class SeriesInformation
 
     /**
      * Sequence of the last document issued in the Series.
+     *
      * @return int|null
      * @since 1.0.0
      */
@@ -133,6 +140,7 @@ class SeriesInformation
 
     /**
      * Code of means of processing the documents to be issued.
+     *
      * @return \Rebelo\ATWs\Series\ProcessingMediumCodes
      * @since 1.0.0
      */
@@ -143,6 +151,7 @@ class SeriesInformation
 
     /**
      * Billing program certificate number assigned by AT. If not applicable, the result is filled with “0” (zero).
+     *
      * @return int
      * @since 1.0.0
      */
@@ -153,6 +162,7 @@ class SeriesInformation
 
     /**
      * Series validation code, assigned by AT.
+     *
      * @return string
      * @since 1.0.0
      */
@@ -163,6 +173,7 @@ class SeriesInformation
 
     /**
      * Date of registration of the Series.
+     *
      * @return \Rebelo\Date\Date
      * @since 1.0.0
      */
@@ -173,6 +184,7 @@ class SeriesInformation
 
     /**
      * Code of the status that the Series has during the communication process.
+     *
      * @return \Rebelo\ATWs\Series\SeriesStatusCode
      * @since 1.0.0
      */
@@ -183,6 +195,7 @@ class SeriesInformation
 
     /**
      * Reason code for change of state
+     *
      * @return string|null
      * @since 1.0.0
      */
@@ -193,6 +206,7 @@ class SeriesInformation
 
     /**
      * Pertinent remarks communicated about the end of the Series.
+     *
      * @return string|null
      * @since 1.0.0
      */
@@ -203,6 +217,7 @@ class SeriesInformation
 
     /**
      * Date of last change of status of the Series.
+     *
      * @return \Rebelo\Date\Date|null
      * @since 1.0.0
      */
@@ -213,6 +228,7 @@ class SeriesInformation
 
     /**
      * Tax number of the taxpayer responsible for communicating the Series.
+     *
      * @return string
      * @since 1.0.0
      */

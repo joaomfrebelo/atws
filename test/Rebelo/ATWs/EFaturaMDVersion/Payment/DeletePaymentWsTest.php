@@ -17,6 +17,7 @@ use Rebelo\ATWs\EFaturaMDVersion\RecordChannel;
 use Rebelo\ATWs\TCredentials;
 use Rebelo\Base;
 use Rebelo\Date\Date;
+use Rebelo\Date\Pattern;
 
 /**
  * Delete payment test
@@ -153,6 +154,7 @@ class DeletePaymentWsTest extends TestCase
             $xmlWriter->endElement();
             $xmlWriter->endDocument();
 
+            /** @var string $xmlStr */
             $xmlStr = $xmlWriter->flush();
 
             if (false === $xml = \simplexml_load_string($xmlStr)) {
@@ -193,7 +195,7 @@ class DeletePaymentWsTest extends TestCase
                 );
 
                 $this->assertSame(
-                    $header->getTransactionDate()->format(Date::SQL_DATE),
+                    $header->getTransactionDate()->format(Pattern::SQL_DATE),
                     (string)(($xml->xpath("//doc:TransactionDate") ?: [])[$k])
                 );
 
@@ -219,12 +221,12 @@ class DeletePaymentWsTest extends TestCase
             } else {
 
                 $this->assertSame(
-                    $deletePayment->getDateRange()->getStartDate()->format(Date::SQL_DATE),
+                    $deletePayment->getDateRange()->getStartDate()->format(Pattern::SQL_DATE),
                     (string)(($xml->xpath("//doc:StartDate") ?: [])[0])
                 );
 
                 $this->assertSame(
-                    $deletePayment->getDateRange()->getStartDate()->format(Date::SQL_DATE),
+                    $deletePayment->getDateRange()->getStartDate()->format(Pattern::SQL_DATE),
                     (string)(($xml->xpath("//doc:EndDate") ?: [])[0])
                 );
             }

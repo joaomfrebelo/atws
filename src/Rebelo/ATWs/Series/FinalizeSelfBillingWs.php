@@ -30,6 +30,8 @@ class FinalizeSelfBillingWs extends ASelfBillingSeriesWs implements IFinalizeSel
      *
      * @return \Rebelo\ATWs\Series\SelfBillingResponse
      * @throws \Rebelo\ATWs\ATWsException
+     * @throws \Rebelo\Date\DateException
+     * @throws \Rebelo\Date\DateParseException
      * @since 2.0.2
      */
     public function submission(FinalizeSelfBillingSeries $finalizeSeries): SelfBillingResponse
@@ -67,14 +69,14 @@ class FinalizeSelfBillingWs extends ASelfBillingSeriesWs implements IFinalizeSel
             null,
             "classeDoc",
             null,
-            $this->finalizeSeries->getDocumentTypeCode()->getDocumentClassCode()->get(),
+            $this->finalizeSeries->getDocumentTypeCode()->getDocumentClassCode()->value,
         );
 
         $xml->writeElementNs(
             null,
             "tipoDoc",
             null,
-            $this->finalizeSeries->getDocumentTypeCode()->get()
+            $this->finalizeSeries->getDocumentTypeCode()->value
         );
 
         $xml->writeElementNs(
@@ -104,7 +106,7 @@ class FinalizeSelfBillingWs extends ASelfBillingSeriesWs implements IFinalizeSel
             null,
             "acordoRegistadoCom",
             null,
-            $this->finalizeSeries->getSelfBillingEntityCode()->get()
+            $this->finalizeSeries->getSelfBillingEntityCode()->value
         );
 
         $xml->writeElementNs(

@@ -34,17 +34,19 @@ class ConsultSelfBillingSeriesTest extends TestCase
     /**
      * @test
      * @return void
-     * @throws \Rebelo\Date\DateFormatException
      * @throws \Rebelo\ATWs\ATWsException
+     * @throws \Rebelo\Date\DateException
+     * @throws \Rebelo\Date\DateIntervalException
+     * @throws \Rebelo\Date\DateParseException
      */
     public function testInstance(): void
     {
         $series               = "A999";
-        $documentTypeCode     = SelfBillingDocumentTypeCode::FT();
+        $documentTypeCode     = SelfBillingDocumentTypeCode::FT;
         $seriesValidationCode = "AAA999";
         $fromRegistrationDate = (new Date())->addDays(-99);
         $toRegistrationDate   = new Date();
-        $entityCode           = SelfBillingEntityCode::CE();
+        $entityCode           = SelfBillingEntityCode::CE;
         $supplierTin          = "999999990";
 
         $consultSeries = new ConsultSelfBillingSeries(
@@ -85,7 +87,10 @@ class ConsultSelfBillingSeriesTest extends TestCase
     /**
      * @test
      * @return void
-     * @throws \Rebelo\Date\DateFormatException
+     * @throws \Rebelo\ATWs\ATWsException
+     * @throws \Rebelo\Date\DateException
+     * @throws \Rebelo\Date\DateIntervalException
+     * @throws \Rebelo\Date\DateParseException
      */
     public function testWrongDates(): void
     {

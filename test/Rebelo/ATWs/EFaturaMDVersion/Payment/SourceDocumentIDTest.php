@@ -32,7 +32,6 @@ class SourceDocumentIDTest extends TestCase
 
     /**
      * @return void
-     * @throws \Rebelo\Date\DateFormatException
      * @since 2.0.0
      */
     public function testInstance(): void

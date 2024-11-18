@@ -10,7 +10,7 @@ declare(strict_types=1);
 namespace Rebelo\ATWs\Series;
 
 use Rebelo\ATWs\AATWs;
-use Rebelo\Date\Date;
+use Rebelo\Date\Pattern;
 
 /**
  * Consult Self billing Agreement Webservice client
@@ -28,7 +28,6 @@ class ConsultSelfBillingAgreementWs extends ASelfBillingSeriesWs implements ICon
     /**
      * @param \XMLWriter $xml
      * @return void
-     * @throws \Rebelo\Date\DateFormatException
      * @since 2.0.2
      */
     protected function buildBody(\XMLWriter $xml): void
@@ -54,7 +53,7 @@ class ConsultSelfBillingAgreementWs extends ASelfBillingSeriesWs implements ICon
                 null,
                 "estado",
                 null,
-                $this->consultSelfBillingAgreement->getSettlementStatus()->get()
+                $this->consultSelfBillingAgreement->getSettlementStatus()->value
             );
         }
 
@@ -64,7 +63,7 @@ class ConsultSelfBillingAgreementWs extends ASelfBillingSeriesWs implements ICon
                 "periodoDeAutorizacaoDe",
                 null,
                 $this->consultSelfBillingAgreement->getAuthorizationPeriodFrom()->format(
-                    Date::SQL_DATE
+                    Pattern::SQL_DATE
                 )
             );
         }
@@ -75,7 +74,7 @@ class ConsultSelfBillingAgreementWs extends ASelfBillingSeriesWs implements ICon
                 "periodoDeAutorizacaoAte",
                 null,
                 $this->consultSelfBillingAgreement->getAuthorizationPeriodUntil()->format(
-                    Date::SQL_DATE
+                    Pattern::SQL_DATE
                 )
             );
         }
@@ -91,6 +90,8 @@ class ConsultSelfBillingAgreementWs extends ASelfBillingSeriesWs implements ICon
      *
      * @return \Rebelo\ATWs\Series\ConsultSelfBillingAgreementResponse
      * @throws \Rebelo\ATWs\ATWsException
+     * @throws \Rebelo\Date\DateException
+     * @throws \Rebelo\Date\DateParseException
      * @since 2.0.2
      */
     public function submission(ConsultSelfBillingAgreement $consultSelfBillingAgreement): ConsultSelfBillingAgreementResponse

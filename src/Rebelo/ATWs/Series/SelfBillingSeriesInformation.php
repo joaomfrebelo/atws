@@ -16,7 +16,7 @@ use Rebelo\Date\Date;
  * The Serial information returned by the operations of webservice
  * @since 1.0.0
  */
-class SelfBillingSeriesInformation
+readonly class SelfBillingSeriesInformation
 {
 
     /**

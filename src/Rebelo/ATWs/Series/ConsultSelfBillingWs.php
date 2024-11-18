@@ -11,7 +11,7 @@ declare(strict_types=1);
 namespace Rebelo\ATWs\Series;
 
 use Rebelo\ATWs\AATWs;
-use Rebelo\Date\Date;
+use Rebelo\Date\Pattern;
 
 /**
  * Consult Webservice
@@ -32,7 +32,6 @@ class ConsultSelfBillingWs extends ASelfBillingSeriesWs implements IConsultSelfB
      * @param \XMLWriter $xml
      *
      * @return void
-     * @throws \Rebelo\Date\DateFormatException
      * @since 2.0.2
      */
     protected function buildBody(\XMLWriter $xml): void
@@ -58,7 +57,7 @@ class ConsultSelfBillingWs extends ASelfBillingSeriesWs implements IConsultSelfB
                 null,
                 "tipoDoc",
                 null,
-                $this->consultSeries->getDocumentTypeCode()->get()
+                $this->consultSeries->getDocumentTypeCode()->value
             );
         }
 
@@ -76,7 +75,7 @@ class ConsultSelfBillingWs extends ASelfBillingSeriesWs implements IConsultSelfB
                 null,
                 "dataRegistoDe",
                 null,
-                $this->consultSeries->getFromRegistrationDate()->format(Date::SQL_DATE)
+                $this->consultSeries->getFromRegistrationDate()->format(Pattern::SQL_DATE)
             );
         }
 
@@ -85,7 +84,7 @@ class ConsultSelfBillingWs extends ASelfBillingSeriesWs implements IConsultSelfB
                 null,
                 "dataRegistoAte",
                 null,
-                $this->consultSeries->getToRegistrationDate()->format(Date::SQL_DATE)
+                $this->consultSeries->getToRegistrationDate()->format(Pattern::SQL_DATE)
             );
         }
 
@@ -103,7 +102,7 @@ class ConsultSelfBillingWs extends ASelfBillingSeriesWs implements IConsultSelfB
                 null,
                 "acordoRegistadoCom",
                 null,
-                $this->consultSeries->getSelfBillingEntityCode()->get()
+                $this->consultSeries->getSelfBillingEntityCode()->value
             );
         }
 
@@ -117,6 +116,8 @@ class ConsultSelfBillingWs extends ASelfBillingSeriesWs implements IConsultSelfB
      *
      * @return \Rebelo\ATWs\Series\SelfBillingResponse
      * @throws \Rebelo\ATWs\ATWsException
+     * @throws \Rebelo\Date\DateException
+     * @throws \Rebelo\Date\DateParseException
      * @since 2.0.2
      */
     public function submission(ConsultSelfBillingSeries $consultSeries): SelfBillingResponse

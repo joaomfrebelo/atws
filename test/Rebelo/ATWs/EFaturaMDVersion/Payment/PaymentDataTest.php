@@ -91,14 +91,15 @@ class PaymentDataTest extends TestCase
     /**
      * @test
      * @dataProvider paymentDataDataProvider
+     *
      * @param \Rebelo\ATWs\EFaturaMDVersion\Payment\PaymentHeader $paymentHeader
      * @param \Rebelo\ATWs\EFaturaMDVersion\Payment\PaymentStatus $paymentStatus
      * @param \Rebelo\Date\Date                                   $systemEntryDate
      * @param array                                               $lines
      * @param \Rebelo\ATWs\EFaturaMDVersion\DocumentTotals        $documentTotals
      * @param \Rebelo\ATWs\EFaturaMDVersion\WithholdingTax[]|null $withholdingTax
+     *
      * @return void
-     * @throws \Rebelo\Date\DateFormatException
      */
     public function testInstance(
         PaymentHeader  $paymentHeader,

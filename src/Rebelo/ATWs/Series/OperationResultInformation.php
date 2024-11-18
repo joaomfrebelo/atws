@@ -31,8 +31,8 @@ class OperationResultInformation
      * @since 1.0.0
      */
     public function __construct(
-        private int    $operationResultCode,
-        private string $operationResultMessage
+        private readonly int $operationResultCode,
+        private readonly string $operationResultMessage
     )
     {
         $this->log = \Logger::getLogger(\get_class($this));

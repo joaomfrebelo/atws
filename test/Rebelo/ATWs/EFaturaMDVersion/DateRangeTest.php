@@ -51,6 +51,9 @@ class DateRangeTest extends TestCase
      * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
+     * @throws \Rebelo\Date\DateException
+     * @throws \Rebelo\Date\DateIntervalException
+     * @throws \Rebelo\Date\DateParseException
      */
     public function testStartDateAfterEndDate(): void
     {

@@ -17,6 +17,7 @@ use Rebelo\ATWs\EFaturaMDVersion\Response;
 use Rebelo\ATWs\TCredentials;
 use Rebelo\Base;
 use Rebelo\Date\Date;
+use Rebelo\Date\Pattern;
 
 /**
  * Class Change Invoice Status Webservice Test
@@ -40,7 +41,6 @@ class ChangeInvoiceStatusWsTest extends TestCase
     /**
      * @return \Rebelo\ATWs\EFaturaMDVersion\Invoice\ChangeInvoiceStatus[]
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
      */
     public function changeInvoiceStatusDataProvider(): array
     {
@@ -72,7 +72,6 @@ class ChangeInvoiceStatusWsTest extends TestCase
      * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
      */
     public function testInstance(): void
     {
@@ -98,7 +97,6 @@ class ChangeInvoiceStatusWsTest extends TestCase
      * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
      * @throws \ReflectionException
      */
     public function testXml(): void
@@ -136,6 +134,7 @@ class ChangeInvoiceStatusWsTest extends TestCase
             $xmlWriter->endElement();
             $xmlWriter->endDocument();
 
+            /** @var string $xmlStr */
             $xmlStr = $xmlWriter->flush();
 
             if (false === $xml = \simplexml_load_string($xmlStr)) {
@@ -168,7 +167,7 @@ class ChangeInvoiceStatusWsTest extends TestCase
             );
 
             $this->assertSame(
-                $changeInvoiceStatus->getInvoiceHeader()->getInvoiceDate()->format(Date::SQL_DATE),
+                $changeInvoiceStatus->getInvoiceHeader()->getInvoiceDate()->format(Pattern::SQL_DATE),
                 (string)(($xml->xpath("//doc:InvoiceDate") ?: [])[0])
             );
 
@@ -198,7 +197,7 @@ class ChangeInvoiceStatusWsTest extends TestCase
             );
 
             $this->assertSame(
-                $changeInvoiceStatus->getNewInvoiceStatus()->getInvoiceStatusDate()->format(Date::DATE_T_TIME),
+                $changeInvoiceStatus->getNewInvoiceStatus()->getInvoiceStatusDate()->format(Pattern::DATE_T_TIME),
                 (string)(($xml->xpath("//doc:InvoiceStatusDate") ?: [])[0])
             );
 

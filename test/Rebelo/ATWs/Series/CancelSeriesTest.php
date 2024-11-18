@@ -36,7 +36,7 @@ class CancelSeriesTest extends TestCase
     public function testInstance(): void
     {
         $series = "B999";
-        $documentTypeCode = DocumentTypeCode::PF();
+        $documentTypeCode = DocumentTypeCode::PF;
         $seriesValidationCode = "99999999";
 
         foreach ([true, false] as $bool)
@@ -48,7 +48,7 @@ class CancelSeriesTest extends TestCase
             );
 
         $this->assertSame($series, $cancelSeries->getSeries());
-        $this->assertSame($documentTypeCode->get(), $cancelSeries->getDocumentTypeCode()->get());
+        $this->assertSame($documentTypeCode, $cancelSeries->getDocumentTypeCode());
         $this->assertSame($seriesValidationCode, $cancelSeries->getSeriesValidationCode());
         $this->assertSame($bool, $cancelSeries->isNoIssueDeclaration());
     }

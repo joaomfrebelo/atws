@@ -34,7 +34,6 @@ class OrderReferenceTest extends TestCase
 
     /**
      * @return void
-     * @throws \Rebelo\Date\DateFormatException
      */
     public function testInstance(): void
     {

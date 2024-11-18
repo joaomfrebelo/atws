@@ -30,22 +30,26 @@ class SeriesInformationTest extends TestCase
     }
 
     /**
+     * @return void
+     * @throws \Rebelo\Date\DateException
+     * @throws \Rebelo\Date\DateIntervalException
+     * @throws \Rebelo\Date\DateParseException
      * @test
      */
     public function testInstance(): void
     {
         $series = "A";
-        $seriesTypeCode = SeriesTypeCode::N();
-        $documentClassCode = DocumentClassCode::PY();
-        $documentTypeCode = DocumentTypeCode::RC();
+        $seriesTypeCode = SeriesTypeCode::N;
+        $documentClassCode = DocumentClassCode::PY;
+        $documentTypeCode = DocumentTypeCode::RC;
         $seriesInitialSequenceNumber = 9;
         $expectedInitialDateUse = (new Date())->addDays(-2);
         $seriesLastSequenceNumber = 999;
-        $processingMediumCode = ProcessingMediumCodes::PF();
+        $processingMediumCode = ProcessingMediumCodes::PF;
         $softwareCertificate = 9999;
         $seriesValidationCode = "12345789";
         $registerDate = (new Date())->addDays(-1);
-        $seriesStatusCode = SeriesStatusCode::N();
+        $seriesStatusCode = SeriesStatusCode::N;
         $statusReasonCode = "RE";
         $statusReason = "Status reason";
         $statusDate = new Date();
@@ -71,17 +75,17 @@ class SeriesInformationTest extends TestCase
         );
 
         $this->assertSame($series, $seriesInformation->getSeries());
-        $this->assertSame($seriesTypeCode->get(), $seriesInformation->getSeriesTypeCode()->get());
-        $this->assertSame($documentClassCode->get(), $seriesInformation->getDocumentClassCode()->get());
-        $this->assertSame($documentTypeCode->get(), $seriesInformation->getDocumentTypeCode()->get());
+        $this->assertSame($seriesTypeCode, $seriesInformation->getSeriesTypeCode());
+        $this->assertSame($documentClassCode, $seriesInformation->getDocumentClassCode());
+        $this->assertSame($documentTypeCode, $seriesInformation->getDocumentTypeCode());
         $this->assertSame($seriesInitialSequenceNumber, $seriesInformation->getSeriesInitialSequenceNumber());
         $this->assertSame($expectedInitialDateUse, $seriesInformation->getExpectedInitialDateUse());
         $this->assertSame($seriesLastSequenceNumber, $seriesInformation->getSeriesLastSequenceNumber());
-        $this->assertSame($processingMediumCode->get(), $seriesInformation->getProcessingMediumCode()->get());
+        $this->assertSame($processingMediumCode, $seriesInformation->getProcessingMediumCode());
         $this->assertSame($softwareCertificate, $seriesInformation->getSoftwareCertificate());
         $this->assertSame($seriesValidationCode, $seriesInformation->getSeriesValidationCode());
         $this->assertSame($registerDate, $seriesInformation->getRegisterDate());
-        $this->assertSame($seriesStatusCode->get(), $seriesInformation->getSeriesStatusCode()->get());
+        $this->assertSame($seriesStatusCode, $seriesInformation->getSeriesStatusCode());
         $this->assertSame($statusReasonCode, $seriesInformation->getStatusReasonCode());
         $this->assertSame($statusReason, $seriesInformation->getStatusReason());
         $this->assertSame($statusReasonCode, $seriesInformation->getStatusReasonCode());
@@ -90,22 +94,26 @@ class SeriesInformationTest extends TestCase
     }
 
     /**
+     * @return void
+     * @throws \Rebelo\Date\DateException
+     * @throws \Rebelo\Date\DateIntervalException
+     * @throws \Rebelo\Date\DateParseException
      * @test
      */
     public function testInstanceNull(): void
     {
         $series = "AB";
-        $seriesTypeCode = SeriesTypeCode::N();
-        $documentClassCode = DocumentClassCode::PY();
-        $documentTypeCode = DocumentTypeCode::RC();
+        $seriesTypeCode = SeriesTypeCode::N;
+        $documentClassCode = DocumentClassCode::PY;
+        $documentTypeCode = DocumentTypeCode::RC;
         $seriesInitialSequenceNumber = 9;
         $expectedInitialDateUse = (new Date())->addDays(-2);
         $seriesLastSequenceNumber = null;
-        $processingMediumCode = ProcessingMediumCodes::PF();
+        $processingMediumCode = ProcessingMediumCodes::PF;
         $softwareCertificate = 9999;
         $seriesValidationCode = "12345789";
         $registerDate = (new Date())->addDays(-1);
-        $seriesStatusCode = SeriesStatusCode::N();
+        $seriesStatusCode = SeriesStatusCode::N;
         $statusReasonCode = null;
         $statusReason = null;
         $statusDate = null;
@@ -131,17 +139,17 @@ class SeriesInformationTest extends TestCase
         );
 
         $this->assertSame($series, $seriesInformation->getSeries());
-        $this->assertSame($seriesTypeCode->get(), $seriesInformation->getSeriesTypeCode()->get());
-        $this->assertSame($documentClassCode->get(), $seriesInformation->getDocumentClassCode()->get());
-        $this->assertSame($documentTypeCode->get(), $seriesInformation->getDocumentTypeCode()->get());
+        $this->assertSame($seriesTypeCode, $seriesInformation->getSeriesTypeCode());
+        $this->assertSame($documentClassCode, $seriesInformation->getDocumentClassCode());
+        $this->assertSame($documentTypeCode, $seriesInformation->getDocumentTypeCode());
         $this->assertSame($seriesInitialSequenceNumber, $seriesInformation->getSeriesInitialSequenceNumber());
         $this->assertSame($expectedInitialDateUse, $seriesInformation->getExpectedInitialDateUse());
         $this->assertSame($seriesLastSequenceNumber, $seriesInformation->getSeriesLastSequenceNumber());
-        $this->assertSame($processingMediumCode->get(), $seriesInformation->getProcessingMediumCode()->get());
+        $this->assertSame($processingMediumCode, $seriesInformation->getProcessingMediumCode());
         $this->assertSame($softwareCertificate, $seriesInformation->getSoftwareCertificate());
         $this->assertSame($seriesValidationCode, $seriesInformation->getSeriesValidationCode());
         $this->assertSame($registerDate, $seriesInformation->getRegisterDate());
-        $this->assertSame($seriesStatusCode->get(), $seriesInformation->getSeriesStatusCode()->get());
+        $this->assertSame($seriesStatusCode, $seriesInformation->getSeriesStatusCode());
         $this->assertSame($statusReasonCode, $seriesInformation->getStatusReasonCode());
         $this->assertSame($statusReason, $seriesInformation->getStatusReason());
         $this->assertSame($statusReasonCode, $seriesInformation->getStatusReasonCode());

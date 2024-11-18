@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\Series;
 
-use PHPStan\Testing\TestCase;
+use PHPUnit\Framework\TestCase;
 use Rebelo\Base;
 
 /**
@@ -35,10 +35,10 @@ class FinalizeSelfBillingSeriesTest extends TestCase
     public function testInstance(): void
     {
         $series                = "AAA";
-        $documentTypeCode      = SelfBillingDocumentTypeCode::NC();
+        $documentTypeCode      = SelfBillingDocumentTypeCode::NC;
         $seriesValidationCode  = "99999999";
         $lastSequenceDocNumber = 99;
-        $entityCode            = SelfBillingEntityCode::CE();
+        $entityCode            = SelfBillingEntityCode::CE;
         $supplierTin           = "555555555";
         $reason                = "No reason";
 
@@ -53,7 +53,7 @@ class FinalizeSelfBillingSeriesTest extends TestCase
         );
 
         $this->assertSame($series, $finalizeSeries->getSeries());
-        $this->assertSame($documentTypeCode->get(), $finalizeSeries->getDocumentTypeCode()->get());
+        $this->assertSame($documentTypeCode, $finalizeSeries->getDocumentTypeCode());
         $this->assertSame($seriesValidationCode, $seriesValidationCode);
         $this->assertSame($lastSequenceDocNumber, $finalizeSeries->getLastSequenceDocNumber());
         $this->assertSame($entityCode, $finalizeSeries->getSelfBillingEntityCode());
@@ -68,10 +68,10 @@ class FinalizeSelfBillingSeriesTest extends TestCase
     public function testInstanceNull(): void
     {
         $series                = "AAA";
-        $documentTypeCode      = SelfBillingDocumentTypeCode::NC();
+        $documentTypeCode      = SelfBillingDocumentTypeCode::NC;
         $seriesValidationCode  = "99999999";
         $lastSequenceDocNumber = 99;
-        $entityCode            = SelfBillingEntityCode::CE();
+        $entityCode            = SelfBillingEntityCode::CE;
         $supplierTin           = "555555555";
         $reason                = null;
 
@@ -86,7 +86,7 @@ class FinalizeSelfBillingSeriesTest extends TestCase
         );
 
         $this->assertSame($series, $finalizeSeries->getSeries());
-        $this->assertSame($documentTypeCode->get(), $finalizeSeries->getDocumentTypeCode()->get());
+        $this->assertSame($documentTypeCode, $finalizeSeries->getDocumentTypeCode());
         $this->assertSame($seriesValidationCode, $seriesValidationCode);
         $this->assertSame($lastSequenceDocNumber, $finalizeSeries->getLastSequenceDocNumber());
         $this->assertSame($entityCode, $finalizeSeries->getSelfBillingEntityCode());

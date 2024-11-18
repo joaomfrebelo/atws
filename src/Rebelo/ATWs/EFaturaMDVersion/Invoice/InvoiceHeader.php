@@ -12,6 +12,7 @@ namespace Rebelo\ATWs\EFaturaMDVersion\Invoice;
 use Rebelo\ATWs\ATWsException;
 use Rebelo\ATWs\EFaturaMDVersion\AWs;
 use Rebelo\Date\Date;
+use Rebelo\Date\Pattern;
 
 /**
  * @author João Rebelo
@@ -34,7 +35,6 @@ class InvoiceHeader
      * @param string $customerTaxID        Purchaser's TIN
      * @param string $customerTaxIDCountry Purchaser's TIN country: Two-character code (alpha2) according to ISO 3166-1.
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
      * @since 2.0.0
      */
     public function __construct(
@@ -53,9 +53,7 @@ class InvoiceHeader
 
         $this->log->info("invoiceNo set to: " . $invoiceNo);
         $this->log->info(
-            "InvoiceDate set to: " . $invoiceDate->format(
-                Date::SQL_DATE
-            )
+            "InvoiceDate set to: " . $invoiceDate->format(Pattern::SQL_DATE)
         );
 
         $allowTypes = ['FT', 'FR', 'FS', 'NC', 'ND', 'RP', 'RE', 'CS', 'LD', 'RA'];
@@ -181,7 +179,6 @@ class InvoiceHeader
      * Build the xml
      * @param \XMLWriter $xml
      * @return void
-     * @throws \Rebelo\Date\DateFormatException
      * @since 2.0.0
      */
     public function buildXml(\XMLWriter $xml): void
@@ -204,7 +201,7 @@ class InvoiceHeader
             AWs::NS_AT_WS_BODY,
             "InvoiceDate",
             null,
-            $this->getInvoiceDate()->format(Date::SQL_DATE)
+            $this->getInvoiceDate()->format(Pattern::SQL_DATE)
         );
 
         $xml->writeElementNs(

@@ -36,9 +36,9 @@ class CancelSelfBillingSeriesTest extends TestCase
     public function testInstance(): void
     {
         $series               = "B999";
-        $documentTypeCode     = DocumentTypeCode::FT();
+        $documentTypeCode     = DocumentTypeCode::FT;
         $seriesValidationCode = "99999999";
-        $entityCode           = SelfBillingEntityCode::CE();
+        $entityCode           = SelfBillingEntityCode::CE;
         $supplierTin          = "555555550";
 
         foreach ([true, false] as $bool)
@@ -52,7 +52,7 @@ class CancelSelfBillingSeriesTest extends TestCase
             );
 
         $this->assertSame($series, $cancelSeries->getSeries());
-        $this->assertSame($documentTypeCode->get(), $cancelSeries->getDocumentTypeCode()->get());
+        $this->assertSame($documentTypeCode, $cancelSeries->getDocumentTypeCode());
         $this->assertSame($seriesValidationCode, $cancelSeries->getSeriesValidationCode());
         $this->assertSame($bool, $cancelSeries->isNoIssueDeclaration());
         $this->assertSame($entityCode, $cancelSeries->getSelfBillingEntityCode());

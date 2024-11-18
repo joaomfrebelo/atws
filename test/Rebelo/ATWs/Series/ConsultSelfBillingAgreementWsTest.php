@@ -35,6 +35,8 @@ class ConsultSelfBillingAgreementWsTest extends TestCase
     /**
      * @test
      * @throws \Rebelo\ATWs\ATWsException
+     * @throws \Rebelo\Date\DateException
+     * @throws \Rebelo\Date\DateParseException
      */
     public function testSubmission(): void
     {
@@ -59,7 +61,9 @@ class ConsultSelfBillingAgreementWsTest extends TestCase
     /**
      * @test
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
+     * @throws \Rebelo\Date\DateException
+     * @throws \Rebelo\Date\DateIntervalException
+     * @throws \Rebelo\Date\DateParseException
      */
     public function testSubmissionAll(): void
     {

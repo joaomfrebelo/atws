@@ -11,6 +11,7 @@ namespace Rebelo\ATWs\Series;
 
 use Rebelo\ATWs\ATWsException;
 use Rebelo\Date\Date;
+use Rebelo\Date\Pattern;
 use SimpleXMLElement;
 
 /**
@@ -82,6 +83,7 @@ class ConsultSelfBillingAgreementResponse
                     (string)$simpleXml->xpath("//msgResultOper")[0]
                 );
 
+                // @phpstan-ignore-next-line
                 $infoStack = $simpleXml->xpath("//infoAcordoAutofaturacao") ?? [];
 
                 for ($index = 0; $index < \count($infoStack); $index++) {
@@ -89,17 +91,17 @@ class ConsultSelfBillingAgreementResponse
                     $info = $infoStack[$index];
 
                     $response->selfBillingAgreementInfo[] = new SelfBillingAgreementInfo(
-                        new SelfBillingEntityCode((string)$info->{"acordoRegistadoCom"}),
+                        SelfBillingEntityCode::from((string)$info->{"acordoRegistadoCom"}),
                         (string)$info->{"nifAdquirente"},
                         (string)$info->{"nomeAdquirente"},
                         (string)$info->{"nifAssociadoAoAcordo"},
                         (string)$info->{"nomeNifAssociadoAoAcordo"},
                         \count($info->{"paisEstrangeiro"}) === 0 ?
                             null : (string)$info->{"paisEstrangeiro"},
-                        new SelfBillingSettlementStatus((string)$info->{"estado"}),
-                        Date::parse(Date::SQL_DATE, (string)$info->{"periodoAutorizacaoDe"}),
+                        SelfBillingSettlementStatus::from((string)$info->{"estado"}),
+                        Date::parse(Pattern::SQL_DATE, (string)$info->{"periodoAutorizacaoDe"}),
                         \count($info->{"periodoAutorizacaoAte"}) === 0 ?
-                            null : Date::parse(Date::SQL_DATE, (string)$info->{"periodoAutorizacaoDe"})
+                            null : Date::parse(Pattern::SQL_DATE, (string)$info->{"periodoAutorizacaoDe"})
                     );
                 }
             }

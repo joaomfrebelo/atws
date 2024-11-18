@@ -19,6 +19,7 @@ use Rebelo\ATWs\EFaturaMDVersion\Tax;
 use Rebelo\ATWs\TCredentials;
 use Rebelo\Base;
 use Rebelo\Date\Date;
+use Rebelo\Date\Pattern;
 
 /**
  * Work Document Webservice test
@@ -43,7 +44,10 @@ class WorkDocumentWsTest extends TestCase
     /**
      * @return \Rebelo\ATWs\EFaturaMDVersion\WorkDocument\WorkDocument[]
      * @throws \Rebelo\ATWs\ATWsException
+     * @throws \Rebelo\Date\DateException
      * @throws \Rebelo\Date\DateFormatException
+     * @throws \Rebelo\Date\DateIntervalException
+     * @throws \Rebelo\Date\DateParseException
      */
     public function workDataProvider(): array
     {
@@ -125,7 +129,10 @@ class WorkDocumentWsTest extends TestCase
      * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
+     * @throws \Rebelo\Date\DateException
      * @throws \Rebelo\Date\DateFormatException
+     * @throws \Rebelo\Date\DateIntervalException
+     * @throws \Rebelo\Date\DateParseException
      */
     public function testInstance(): void
     {
@@ -190,6 +197,7 @@ class WorkDocumentWsTest extends TestCase
             $xmlWriter->endElement();
             $xmlWriter->endDocument();
 
+            /** @var string $xmlStr */
             $xmlStr = $xmlWriter->flush();
 
             if (false === $xml = \simplexml_load_string($xmlStr)) {
@@ -240,7 +248,7 @@ class WorkDocumentWsTest extends TestCase
             );
 
             $this->assertSame(
-                $header->getWorkDate()->format(Date::SQL_DATE),
+                $header->getWorkDate()->format(Pattern::SQL_DATE),
                 (string)(($xml->xpath("//doc:WorkDate") ?: [])[0])
             );
 
@@ -265,7 +273,7 @@ class WorkDocumentWsTest extends TestCase
             );
 
             $this->assertSame(
-                $data->getDocumentStatus()->getWorkStatusDate()->format(Date::DATE_T_TIME),
+                $data->getDocumentStatus()->getWorkStatusDate()->format(Pattern::DATE_T_TIME),
                 (string)(($xml->xpath("//doc:WorkStatusDate") ?: [])[0])
             );
 
@@ -284,7 +292,7 @@ class WorkDocumentWsTest extends TestCase
             }
 
             $this->assertSame(
-                $data->getSystemEntryDate()->format(Date::DATE_T_TIME),
+                $data->getSystemEntryDate()->format(Pattern::DATE_T_TIME),
                 (string)(($xml->xpath("//doc:SystemEntryDate") ?: [])[0])
             );
 
@@ -316,7 +324,7 @@ class WorkDocumentWsTest extends TestCase
                     );
 
                     $this->assertSame(
-                        $sourceID->getInvoiceDate()->format(Date::SQL_DATE),
+                        $sourceID->getInvoiceDate()->format(Pattern::SQL_DATE),
                         (string)(($xpathSourceId->xpath(
                             \sprintf(
                                 "//doc:LineSummary[%s]/doc:SourceDocumentID[%s]/doc:InvoiceDate",
@@ -327,7 +335,7 @@ class WorkDocumentWsTest extends TestCase
                 }
 
                 $this->assertSame(
-                    $line->getTaxPointDate()->format(Date::SQL_DATE),
+                    $line->getTaxPointDate()->format(Pattern::SQL_DATE),
                     (string)(($xml->xpath("//doc:TaxPointDate") ?: [])[$k])
                 );
 

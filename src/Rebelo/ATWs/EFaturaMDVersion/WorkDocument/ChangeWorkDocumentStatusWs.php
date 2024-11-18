@@ -48,7 +48,6 @@ class ChangeWorkDocumentStatusWs extends AWs implements IChangeWorkDocumentStatu
      * Build the xml
      * @param \XMLWriter $xml
      * @return void
-     * @throws \Rebelo\Date\DateFormatException
      * @since  2.0.0
      */
     protected function buildBody(\XMLWriter $xml): void

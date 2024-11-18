@@ -33,22 +33,22 @@ class FinalizeSelfBillingSeries extends ASeries
      * @since 1.0.0
      */
     public function __construct(
-        private string                      $series,
-        private SelfBillingDocumentTypeCode $documentTypeCode,
-        private string                      $seriesValidationCode,
-        private int                         $lastSequenceDocNumber,
-        private SelfBillingEntityCode       $selfBillingEntityCode,
-        private string                      $supplierTin,
-        private ?string                     $reason = null,
+        private readonly string                      $series,
+        private readonly SelfBillingDocumentTypeCode $documentTypeCode,
+        private readonly string                      $seriesValidationCode,
+        private readonly int                         $lastSequenceDocNumber,
+        private readonly SelfBillingEntityCode       $selfBillingEntityCode,
+        private readonly string                      $supplierTin,
+        private readonly ?string                     $reason = null,
     )
     {
         parent::__construct();
         $this->log->debug(__METHOD__);
         $this->log->debug("Series set to: " . $this->series);
-        $this->log->debug("DocumentTypeCode set to: " . $this->documentTypeCode->get());
+        $this->log->debug("DocumentTypeCode set to: " . $this->documentTypeCode->value);
         $this->log->debug("SeriesValidationCode: " . $this->seriesValidationCode);
         $this->log->debug("lastSequenceDocNumber: " . $this->lastSequenceDocNumber);
-        $this->log->debug("SelfBillingEntityCode: " . $this->selfBillingEntityCode->get());
+        $this->log->debug("SelfBillingEntityCode: " . $this->selfBillingEntityCode->value);
         $this->log->debug("Supplier: " . $this->supplierTin);
         $this->log->debug("Reason: " . ($this->reason ?? "null"));
     }

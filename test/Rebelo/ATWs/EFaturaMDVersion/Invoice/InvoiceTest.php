@@ -10,7 +10,6 @@ declare(strict_types=1);
 namespace Rebelo\ATWs\EFaturaMDVersion\Invoice;
 
 use PHPUnit\Framework\TestCase;
-use Rebelo\ATWs\ATWsException;
 use Rebelo\ATWs\EFaturaMDVersion\DocumentTotals;
 use Rebelo\ATWs\EFaturaMDVersion\Line;
 use Rebelo\ATWs\EFaturaMDVersion\OrderReference;
@@ -40,8 +39,7 @@ class InvoiceTest extends TestCase
     /**
      * @test
      * @return void
-     * @throws ATWsException
-     * @throws \Rebelo\Date\DateFormatException
+     * @throws \Rebelo\ATWs\ATWsException
      */
     public function testInstance(): void
     {

@@ -39,7 +39,7 @@ class FinalizeSeries extends ASeries
         parent::__construct();
         $this->log->debug(__METHOD__);
         $this->log->debug("Series set to: " . $this->series);
-        $this->log->debug("DocumentTypeCode set to: " . $this->documentTypeCode->get());
+        $this->log->debug("DocumentTypeCode set to: " . $this->documentTypeCode->value);
         $this->log->debug("SeriesValidationCode: " . $this->seriesValidationCode);
         $this->log->debug("lastSequenceDocNumber: " . $this->lastSequenceDocNumber);
         $this->log->debug("Reason: " . ($this->reason ?? "null"));

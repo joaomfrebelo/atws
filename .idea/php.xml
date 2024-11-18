@@ -51,14 +51,14 @@
       <path value="$PROJECT_DIR$/vendor/nikic/php-parser" />
       <path value="$PROJECT_DIR$/vendor/joaomfrebelo/date" />
       <path value="$PROJECT_DIR$/vendor/jetbrains/phpstorm-attributes" />
-      <path value="$PROJECT_DIR$/vendor/joaomfrebelo/enum" />
-      <path value="$PROJECT_DIR$/vendor/jean85/pretty-package-versions" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php80" />
       <path value="$PROJECT_DIR$/vendor/joaomfrebelo/log4php" />
       <path value="$PROJECT_DIR$/vendor/mongodb/mongodb" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php81" />
+      <path value="$PROJECT_DIR$/vendor/psr/log" />
     </include_path>
   </component>
-  <component name="PhpProjectSharedConfiguration" php_language_level="8.0" />
+  <component name="PhpProjectSharedConfiguration" php_language_level="8.3" />
   <component name="PhpRuntimeConfiguration">
     <extensions>
       <extension name="Ev" enabled="false" />
@@ -117,9 +117,6 @@
       <extension name="odbc" enabled="false" />
       <extension name="pcntl" enabled="false" />
       <extension name="pdflib" enabled="false" />
-      <extension name="pdo_ibm" enabled="false" />
-      <extension name="pdo_pgsql" enabled="false" />
-      <extension name="pdo_sqlite" enabled="false" />
       <extension name="pgsql" enabled="false" />
       <extension name="posix" enabled="false" />
       <extension name="pspell" enabled="false" />

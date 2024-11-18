@@ -11,6 +11,7 @@ namespace Rebelo\ATWs\EFaturaMDVersion\Payment;
 
 use Rebelo\ATWs\EFaturaMDVersion\AWs;
 use Rebelo\Date\Date;
+use Rebelo\Date\Pattern;
 
 /**
  * SourceDocumentID
@@ -33,7 +34,6 @@ class SourceDocumentID
      *
      * @param string            $originatingON The type, series and number of the document supporting its issuance must be indicated.
      * @param \Rebelo\Date\Date $invoiceDate   The date of the invoice or amending document to which the payment refers must be indicated.
-     * @throws \Rebelo\Date\DateFormatException
      * @since 2.0.0
      */
     public function __construct(
@@ -45,7 +45,7 @@ class SourceDocumentID
         $this->log->debug(__METHOD__);
 
         $this->log->info("OriginatingON set to " . $this->originatingON);
-        $this->log->info("InvoiceDate set to " . $this->invoiceDate->format(Date::SQL_DATE));
+        $this->log->info("InvoiceDate set to " . $this->invoiceDate->format(Pattern::SQL_DATE));
     }
 
     /**
@@ -73,7 +73,6 @@ class SourceDocumentID
      * Build xml
      * @param \XMLWriter $xml
      * @return void
-     * @throws \Rebelo\Date\DateFormatException
      * @since 2.0.0
      */
     public function buildXml(\XMLWriter $xml): void
@@ -95,7 +94,7 @@ class SourceDocumentID
             AWs::NS_AT_WS_BODY,
             "InvoiceDate",
             null,
-            $this->getInvoiceDate()->format(Date::SQL_DATE)
+            $this->getInvoiceDate()->format(Pattern::SQL_DATE)
         );
 
         $xml->endElement();

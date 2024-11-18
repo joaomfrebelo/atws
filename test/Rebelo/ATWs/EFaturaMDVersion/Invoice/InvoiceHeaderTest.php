@@ -38,7 +38,6 @@ class InvoiceHeaderTest extends TestCase
      * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
      */
     public function testHeader(): void
     {
@@ -74,7 +73,6 @@ class InvoiceHeaderTest extends TestCase
      * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
      */
     public function testInstanceWrongInvoiceType(): void
     {
@@ -96,7 +94,6 @@ class InvoiceHeaderTest extends TestCase
      * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
      */
     public function testInstanceWrongCustomerTaxIdCountry(): void
     {

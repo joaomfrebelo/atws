@@ -12,6 +12,7 @@ namespace Rebelo\ATWs\EFaturaMDVersion;
 use Rebelo\ATWs\AATWs;
 use Rebelo\ATWs\ATWsException;
 use Rebelo\Date\Date;
+use Rebelo\Date\Pattern;
 
 /**
  * Line
@@ -43,7 +44,6 @@ class Line
      * @param Tax                                                 $tax                  Tax Rate (Tax)
      * @param string|null                                         $taxExemptionCode     Reason for VAT exemption: Mandatory field when it is an exempt transmission or service provision or in which, justifiably, there is no VAT settlement (fields 1.6.14.7.4 – Tax Percentage) or 1.6.14.7.5 – Total tax amount (TotalTaxAmount) is equal to zero); It must be filled in with the codes from the table “Codes of reasons for exemption or non-payment of VAT”, which appears in point 0 of this document.
      * @throws ATWsException
-     * @throws \Rebelo\Date\DateFormatException
      * @since 2.0.0
      */
     public function __construct(
@@ -60,7 +60,7 @@ class Line
         $this->log = \Logger::getLogger(\get_class($this));
         $this->log->debug(__METHOD__);
 
-        $this->log->info("Tax point date set to " . $this->taxPointDate->format(Date::SQL_DATE));
+        $this->log->info("Tax point date set to " . $this->taxPointDate->format(Pattern::SQL_DATE));
 
         $allowCreDebIndicator = ["D", "C"];
         if (\in_array($this->debitCreditIndicator, $allowCreDebIndicator) === false) {
@@ -243,7 +243,7 @@ class Line
             AWs::NS_AT_WS_BODY,
             "TaxPointDate",
             null,
-            $this->getTaxPointDate()->format(Date::SQL_DATE)
+            $this->getTaxPointDate()->format(Pattern::SQL_DATE)
         );
 
         foreach (($this->getReference() ?? []) as $reference) {

@@ -12,6 +12,7 @@ namespace Rebelo\ATWs\Series;
 
 use Rebelo\ATWs\ATWsException;
 use Rebelo\Date\Date;
+use Rebelo\Date\Pattern;
 
 /**
  * This functionality aims to make available the consultation of reported Series
@@ -31,38 +32,38 @@ class ConsultSeries extends ASeries
      * @param \Rebelo\Date\Date|null                         $toRegistrationDate    Enter the end date of the search interval.
      * @param \Rebelo\ATWs\Series\SeriesStatusCode|null      $seriesStatusCode      Indicate the status of the Series you want to consult.
      * @param \Rebelo\ATWs\Series\ProcessingMediumCodes|null $processingMediumCodes Code of means of processing the documents to be issued.
-     * @throws \Rebelo\Date\DateFormatException
+     *
      * @throws \Rebelo\ATWs\ATWsException
      * @since 1.0.0
      */
     public function __construct(
-        private ?string                $series = null,
-        private ?SeriesTypeCode        $seriesTypeCode = null,
-        private ?DocumentClassCode     $documentClassCode = null,
-        private ?DocumentTypeCode      $documentTypeCode = null,
-        private ?string                $seriesValidationCode = null,
-        private ?Date                  $fromRegistrationDate = null,
-        private ?Date                  $toRegistrationDate = null,
-        private ?SeriesStatusCode      $seriesStatusCode = null,
-        private ?ProcessingMediumCodes $processingMediumCodes = null
+        private readonly ?string            $series = null,
+        private readonly ?SeriesTypeCode    $seriesTypeCode = null,
+        private readonly ?DocumentClassCode $documentClassCode = null,
+        private readonly ?DocumentTypeCode  $documentTypeCode = null,
+        private readonly ?string            $seriesValidationCode = null,
+        private readonly ?Date              $fromRegistrationDate = null,
+        private readonly ?Date              $toRegistrationDate = null,
+        private readonly ?SeriesStatusCode  $seriesStatusCode = null,
+        private readonly ?ProcessingMediumCodes $processingMediumCodes = null
     )
     {
         parent::__construct();
         $this->log->debug(__METHOD__);
         $this->log->debug("Series set to: " . $this->series);
-        $this->log->debug("SeriesTypeCode set to: " . ($this->seriesTypeCode?->get() ?? "null"));
-        $this->log->debug("DocumentClassCode set to: " . ($this->documentClassCode?->get() ?? "null"));
-        $this->log->debug("DocumentTypeCode set to: " . ($this->documentTypeCode?->get() ?? "null"));
+        $this->log->debug("SeriesTypeCode set to: " . ($this->seriesTypeCode?->value ?? "null"));
+        $this->log->debug("DocumentClassCode set to: " . ($this->documentClassCode?->value ?? "null"));
+        $this->log->debug("DocumentTypeCode set to: " . ($this->documentTypeCode?->value ?? "null"));
         $this->log->debug("SeriesValidationCode set to: " . $this->seriesValidationCode);
         $this->log->debug(
             "ToRegistrationDate set to: "
-            . ($this->toRegistrationDate?->format(Date::SQL_DATE) ?? "null")
+            . ($this->toRegistrationDate?->format(Pattern::SQL_DATE) ?? "null")
         );
         $this->log->debug(
             "FromRegistrationDate set to: "
-            . ($this->fromRegistrationDate?->format(Date::SQL_DATE) ?? "null")
+            . ($this->fromRegistrationDate?->format(Pattern::SQL_DATE) ?? "null")
         );
-        $this->log->debug("ProcessingMediumCodes set to: " . ($this->processingMediumCodes?->get() ?? "null"));
+        $this->log->debug("ProcessingMediumCodes set to: " . ($this->processingMediumCodes?->value ?? "null"));
 
         if($this->fromRegistrationDate !== null && $this->toRegistrationDate !== null){
             if($this->toRegistrationDate->isEarlier($this->fromRegistrationDate)){

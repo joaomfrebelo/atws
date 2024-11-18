@@ -43,19 +43,23 @@ class SeriesRegisterTest extends TestCase
     /**
      * @test
      * @dataProvider providerSeries
+     *
      * @param string $series
+     *
      * @throws \Rebelo\ATWs\ATWsException
+     * @throws \Rebelo\Date\DateException
      * @throws \Rebelo\Date\DateFormatException
+     * @throws \Rebelo\Date\DateIntervalException
      * @throws \Rebelo\Date\DateParseException
      */
     public function testInstance(string $series): void
     {
-        $seriesTypeCode = SeriesTypeCode::N();
-        $documentTypeCode = DocumentTypeCode::OR();
+        $seriesTypeCode = SeriesTypeCode::N;
+        $documentTypeCode = DocumentTypeCode::OR;
         $seriesInitialSequenceNumber = 999;
         $expectedInitialDateUse = (new Date())->addMinutes(1);
         $softwareCertificate = 9999;
-        $processingMediumCode = ProcessingMediumCodes::PF();
+        $processingMediumCode = ProcessingMediumCodes::PF;
 
         $seriesRegister = new SeriesRegister(
             $series,
@@ -76,8 +80,8 @@ class SeriesRegisterTest extends TestCase
         $this->assertSame($softwareCertificate, $seriesRegister->getSoftwareCertificate());
         $this->assertSame($processingMediumCode, $seriesRegister->getProcessingMediumCode());
         $this->assertSame(
-            DocumentClassCode::mapDocTypeToClassDoc($seriesRegister->getDocumentTypeCode()->get())->get(),
-            $seriesRegister->getClassDocumentCode()->get()
+            DocumentClassCode::mapDocTypeToClassDoc($seriesRegister->getDocumentTypeCode()),
+            $seriesRegister->getClassDocumentCode()
         );
     }
 
@@ -95,9 +99,13 @@ class SeriesRegisterTest extends TestCase
     /**
      * @test
      * @dataProvider providerWrongSeries
+     *
      * @param string $series
+     *
      * @throws \Rebelo\ATWs\ATWsException
+     * @throws \Rebelo\Date\DateException
      * @throws \Rebelo\Date\DateFormatException
+     * @throws \Rebelo\Date\DateIntervalException
      * @throws \Rebelo\Date\DateParseException
      */
     public function testInstanceWrongSeries(string $series): void
@@ -105,12 +113,12 @@ class SeriesRegisterTest extends TestCase
         $this->expectException(ATWsException::class);
         $this->expectExceptionMessage("Series identifier not valid");
 
-        $seriesTypeCode = SeriesTypeCode::N();
-        $documentTypeCode = DocumentTypeCode::OR();
+        $seriesTypeCode = SeriesTypeCode::N;
+        $documentTypeCode = DocumentTypeCode::OR;
         $seriesInitialSequenceNumber = 999;
         $expectedInitialDateUse = (new Date())->addMinutes(1);
         $softwareCertificate = 9999;
-        $processingMediumCode = ProcessingMediumCodes::PF();
+        $processingMediumCode = ProcessingMediumCodes::PF;
 
         new SeriesRegister(
             $series,
@@ -137,9 +145,13 @@ class SeriesRegisterTest extends TestCase
     /**
      * @test
      * @dataProvider providerWrongNumber
+     *
      * @param int $seriesInitialSequenceNumber
+     *
      * @throws \Rebelo\ATWs\ATWsException
+     * @throws \Rebelo\Date\DateException
      * @throws \Rebelo\Date\DateFormatException
+     * @throws \Rebelo\Date\DateIntervalException
      * @throws \Rebelo\Date\DateParseException
      */
     public function testInstanceWrongNumber(int $seriesInitialSequenceNumber): void
@@ -148,11 +160,11 @@ class SeriesRegisterTest extends TestCase
         $this->expectExceptionMessage("SeriesInitialSequenceNumber identifier not valid");
 
         $series = "A";
-        $seriesTypeCode = SeriesTypeCode::N();
-        $documentTypeCode = DocumentTypeCode::OR();
+        $seriesTypeCode = SeriesTypeCode::N;
+        $documentTypeCode = DocumentTypeCode::OR;
         $expectedInitialDateUse = (new Date())->addMinutes(1);
         $softwareCertificate = 9999;
-        $processingMediumCode = ProcessingMediumCodes::PF();
+        $processingMediumCode = ProcessingMediumCodes::PF;
 
         new SeriesRegister(
             $series,
@@ -168,7 +180,9 @@ class SeriesRegisterTest extends TestCase
     /**
      * @test
      * @throws \Rebelo\ATWs\ATWsException
+     * @throws \Rebelo\Date\DateException
      * @throws \Rebelo\Date\DateFormatException
+     * @throws \Rebelo\Date\DateIntervalException
      * @throws \Rebelo\Date\DateParseException
      */
     public function testInstanceWrongDate(): void
@@ -177,12 +191,12 @@ class SeriesRegisterTest extends TestCase
         $this->expectExceptionMessage("ExpectedInitialDateUse can not be earlier that NOW");
 
         $series = "A";
-        $seriesTypeCode = SeriesTypeCode::N();
+        $seriesTypeCode = SeriesTypeCode::N;
         $seriesInitialSequenceNumber = 999;
-        $documentTypeCode = DocumentTypeCode::OR();
+        $documentTypeCode = DocumentTypeCode::OR;
         $expectedInitialDateUse = (new Date())->addDays(-1);
         $softwareCertificate = 9999;
-        $processingMediumCode = ProcessingMediumCodes::PF();
+        $processingMediumCode = ProcessingMediumCodes::PF;
 
         new SeriesRegister(
             $series,

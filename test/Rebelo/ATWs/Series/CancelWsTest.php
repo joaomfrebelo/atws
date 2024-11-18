@@ -34,12 +34,14 @@ class CancelWsTest extends TestCase
     /**
      * @test
      * @throws \Rebelo\ATWs\ATWsException
+     * @throws \Rebelo\Date\DateException
+     * @throws \Rebelo\Date\DateParseException
      */
     public function testSubmission(): void
     {
         $cancelSeries = new CancelSeries(
             \strtoupper(\substr(\md5(\microtime()), 0, 10)),
-            DocumentTypeCode::NC(),
+            DocumentTypeCode::NC,
             \strtoupper(\substr(\md5(\microtime()), 0, 8)),
             true,
         );

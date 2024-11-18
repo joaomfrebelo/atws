@@ -6,6 +6,8 @@
         <cache>
           <versions>
             <info id="Local" version="9.5.4" />
+            <info id="Local/home/rebelo/Repos/ATWS/vendor/autoload.php" version="9.6.13" />
+            <info id="Local/vendor/autoload.php" version="9.6.21" />
           </versions>
         </cache>
       </tool>

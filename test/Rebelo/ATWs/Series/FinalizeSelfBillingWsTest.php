@@ -35,16 +35,18 @@ class FinalizeSelfBillingWsTest extends TestCase
     /**
      * @test
      * @throws \Rebelo\ATWs\ATWsException
+     * @throws \Rebelo\Date\DateException
+     * @throws \Rebelo\Date\DateParseException
      */
     public function testSubmission(): void
     {
         foreach (["The reason", null] as $reason) {
             $finalizeSeries = new FinalizeSelfBillingSeries(
                 \strtoupper(\substr(\md5(\microtime()), 0, 10)),
-                DocumentTypeCode::FT(),
+                SelfBillingDocumentTypeCode::FT,
                 "99999999",
                 999,
-                SelfBillingEntityCode::CE(),
+                SelfBillingEntityCode::CE,
                 "999999990",
                 $reason
             );

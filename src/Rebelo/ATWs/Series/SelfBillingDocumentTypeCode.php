@@ -10,66 +10,39 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\Series;
 
-use Rebelo\Enum\AEnum;
-
 /**
  *
  * The Document Type Code
  *
- * @method static SelfBillingDocumentTypeCode FT()
- * @method static SelfBillingDocumentTypeCode FS()
- * @method static SelfBillingDocumentTypeCode FR()
- * @method static SelfBillingDocumentTypeCode ND()
- * @method static SelfBillingDocumentTypeCode NC()
  * @since 2.0.2
  */
-class SelfBillingDocumentTypeCode extends AEnum
+enum SelfBillingDocumentTypeCode :  string
 {
 
     /**
      * @since 1.0.0
      */
-    const FT = "FT";
+    case FT = "FT";
 
     /**
      * @since 1.0.0
      */
-    const FS = "FS";
+    case FS = "FS";
 
     /**
      * @since 1.0.0
      */
-    const FR = "FR";
+    case FR = "FR";
 
     /**
      * @since 1.0.0
      */
-    const ND = "ND";
+    case ND = "ND";
 
     /**
      * @since 1.0.0
      */
-    const NC = "NC";
-
-    /**
-     * @param string $value
-     * @throws \Rebelo\Enum\EnumException
-     * @since 1.0.0
-     */
-    public function __construct(string $value)
-    {
-        parent::__construct($value);
-    }
-
-    /**
-     * Get the string value
-     * @return string
-     * @since 1.0.0
-     */
-    public function get(): string
-    {
-        return (string)parent::get();
-    }
+    case NC = "NC";
 
     /**
      * Get the Document Class Code for this Document Type Code
@@ -79,7 +52,7 @@ class SelfBillingDocumentTypeCode extends AEnum
      */
     public function getDocumentClassCode(): DocumentClassCode
     {
-        return DocumentClassCode::mapDocTypeToClassDoc($this->get());
+        return DocumentClassCode::mapDocTypeToClassDoc($this->value);
     }
 
 }

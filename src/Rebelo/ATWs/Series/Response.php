@@ -12,10 +12,12 @@ namespace Rebelo\ATWs\Series;
 
 use Rebelo\ATWs\ATWsException;
 use Rebelo\Date\Date;
+use Rebelo\Date\Pattern;
 use SimpleXMLElement;
 
 /**
  * The Response from the SOAP server
+ *
  * @since 1.0.0
  */
 class Response
@@ -35,6 +37,7 @@ class Response
 
     /**
      * Stores if the response is OK
+     *
      * @var bool
      * @since 1.0.0
      */
@@ -50,7 +53,9 @@ class Response
 
     /**
      * Parse the XML response
+     *
      * @param string $xml
+     *
      * @return \Rebelo\ATWs\Series\Response
      * @throws \Rebelo\ATWs\ATWsException
      * @since 1.0.0
@@ -82,6 +87,7 @@ class Response
                     (string)$simpleXml->xpath("//msgResultOper")[0]
                 );
 
+                // @phpstan-ignore-next-line
                 $infoSerieStack = $simpleXml->xpath("//infoSerie") ?? [];
 
                 for ($index = 0; $index < \count($infoSerieStack); $index++) {
@@ -90,24 +96,24 @@ class Response
 
                     $response->seriesInformation[] = new SeriesInformation(
                         (string)$infoSerie->{"serie"},
-                        new SeriesTypeCode((string)$infoSerie->{"tipoSerie"}),
-                        new DocumentClassCode((string)$infoSerie->{"classeDoc"}),
-                        new DocumentTypeCode((string)$infoSerie->{"tipoDoc"}),
+                        SeriesTypeCode::from((string)$infoSerie->{"tipoSerie"}),
+                        DocumentClassCode:: from((string)$infoSerie->{"classeDoc"}),
+                        DocumentTypeCode::from((string)$infoSerie->{"tipoDoc"}),
                         (int)$infoSerie->{"numInicialSeq"},
-                        Date::parse(Date::SQL_DATE, (string)$infoSerie->{"dataInicioPrevUtiliz"}),
+                        Date::parse(Pattern::SQL_DATE, (string)$infoSerie->{"dataInicioPrevUtiliz"}),
                         \count($infoSerie->{"seqUltimoDocEmitido"}) === 0 ?
                             null : (int)$infoSerie->{"seqUltimoDocEmitido"},
-                        new ProcessingMediumCodes((string)$infoSerie->{"meioProcessamento"}),
+                        ProcessingMediumCodes::from((string)$infoSerie->{"meioProcessamento"}),
                         (int)$infoSerie->{"numCertSWFatur"},
                         (string)$infoSerie->{"codValidacaoSerie"},
-                        Date::parse(Date::SQL_DATE, (string)$infoSerie->{"dataRegisto"}),
-                        new SeriesStatusCode((string)$infoSerie->{"estado"}),
+                        Date::parse(Pattern::SQL_DATE, (string)$infoSerie->{"dataRegisto"}),
+                        SeriesStatusCode::from((string)$infoSerie->{"estado"}),
                         \count($infoSerie->{"motivoEstado"}) === 0 ?
                             null : (string)$infoSerie->{"motivoEstado"},
                         \count($infoSerie->{"justificacao"}) === 0 ?
                             null : (string)$infoSerie->{"justificacao"},
                         \count($infoSerie->{"dataEstado"}) === 0 ?
-                            null : Date::parse(Date::DATE_T_TIME, \substr((string)$infoSerie->{"dataEstado"}, 0, 19)),
+                            null : Date::parse(Pattern::DATE_T_TIME, \substr((string)$infoSerie->{"dataEstado"}, 0, 19)),
                         (string)$infoSerie->{"nifComunicou"}
                     );
                 }
@@ -142,6 +148,7 @@ class Response
 
     /**
      * get if the response is OK (Not error)
+     *
      * @return bool
      * @since 1.0.0
      */

@@ -11,9 +11,8 @@ declare(strict_types=1);
 namespace Rebelo\ATWs;
 
 use Rebelo\Date\Date;
-use Rebelo\Date\DateFormatException;
 use Rebelo\Date\DateNtpException;
-use Rebelo\Date\DateParseException;
+use Rebelo\Date\Pattern;
 
 /**
  * The  class
@@ -155,8 +154,8 @@ abstract class AATWs
      * Get to encrypt date created
      *
      * @return string
-     * @throws \Rebelo\Date\DateFormatException
      * @throws \Rebelo\ATWs\ATWsException
+     * @throws \Exception
      * @since 1.0.0
      */
     protected function getDateCreated(): string
@@ -179,7 +178,6 @@ abstract class AATWs
      *
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
      * @since 1.0.0
      */
     protected function buildHeader(\XMLWriter $xml): void
@@ -218,6 +216,8 @@ abstract class AATWs
      *
      * @return string
      * @throws \Rebelo\ATWs\ATWsException
+     * @throws \Rebelo\Date\DateException
+     * @throws \Rebelo\Date\DateParseException
      * @since 1.0.0
      */
     public function doRequest(): string
@@ -271,7 +271,7 @@ abstract class AATWs
         } catch (\Throwable $e) {
             try {
                 $this->validateCertificates();
-            } catch (ATWsException | DateFormatException | DateParseException $ex) {
+            } catch (ATWsException $ex) {
                 $this->log->error($ex->getMessage());
             }
             $this->log->error($e->getMessage());
@@ -284,7 +284,7 @@ abstract class AATWs
      *
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
+     * @throws \Rebelo\Date\DateException
      * @throws \Rebelo\Date\DateParseException
      * @since 1.0.0
      */
@@ -296,8 +296,8 @@ abstract class AATWs
         }
 
         $now = new Date();
-        $stamp = Date::UNIX_TIMESTAMP;
-        $dateFormat = Date::DATE_TIME;
+        $stamp = Pattern::UNIX_TIMESTAMP;
+        $dateFormat = Pattern::DATE_TIME;
         $certError = [];
 
         if ($pubCertParse = \openssl_x509_parse("file://" . ATWS_AT_PUB_KEY)) {

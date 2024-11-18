@@ -12,6 +12,7 @@ namespace Rebelo\ATWs\EFaturaMDVersion\WorkDocument;
 use Rebelo\ATWs\ATWsException;
 use Rebelo\ATWs\EFaturaMDVersion\AWs;
 use Rebelo\Date\Date;
+use Rebelo\Date\Pattern;
 
 /**
  * Work Document data header
@@ -36,7 +37,6 @@ class WorkHeader
      * @param string            $customerTaxID        NIF of the national/international acquirer. National TIN: Portuguese Tax Identification Number (without any country prefix). International TIN: NIF or equivalent in the respective country that has been collected in the issuer's invoicing system. When it has not been collected in the issuer's invoicing system, it must be filled in with 999999990.
      * @param string            $customerTaxIDCountry Country of the acquirer's TIN: Two-character code (alpha2) according to the ISO 3166-1 standard.
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
      * @since 2.0.0
      */
     public function __construct(
@@ -53,7 +53,7 @@ class WorkHeader
 
         $this->log->info("Document number set to " . $documentNumber);
         $this->log->info("ATCUD set to " . $atcud);
-        $this->log->info("WorkDate set to " . $workDate->format(Date::SQL_DATE));
+        $this->log->info("WorkDate set to " . $workDate->format(Pattern::SQL_DATE));
 
         $allowTypes = ['CM', 'CC', 'FC', 'FO', 'NE', 'OU', 'OR', 'PF', 'RP', 'RE', 'CS', 'LD', 'RA'];
 
@@ -172,7 +172,6 @@ class WorkHeader
      * Build the xml
      * @param \XMLWriter $xml
      * @return void
-     * @throws \Rebelo\Date\DateFormatException
      * @since 2.0.0
      */
     public function buildXml(\XMLWriter $xml): void
@@ -195,7 +194,7 @@ class WorkHeader
             AWs::NS_AT_WS_BODY,
             "WorkDate",
             null,
-            $this->getWorkDate()->format(Date::SQL_DATE)
+            $this->getWorkDate()->format(Pattern::SQL_DATE)
         );
 
         $xml->writeElementNs(

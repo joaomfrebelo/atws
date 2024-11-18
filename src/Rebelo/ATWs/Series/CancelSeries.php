@@ -31,16 +31,16 @@ class CancelSeries extends ASeries
      * @since 1.0.0
      */
     public function __construct(
-        private string           $series,
-        private DocumentTypeCode $documentTypeCode,
-        private string           $seriesValidationCode,
-        private bool             $noIssueDeclaration
+        private readonly string           $series,
+        private readonly DocumentTypeCode $documentTypeCode,
+        private readonly string           $seriesValidationCode,
+        private readonly bool $noIssueDeclaration
     )
     {
         parent::__construct();
         $this->log->debug(__METHOD__);
         $this->log->debug("Series set to: " . $this->series);
-        $this->log->debug("DocumentTypeCode set to: " . $this->documentTypeCode->get());
+        $this->log->debug("DocumentTypeCode set to: " . $this->documentTypeCode->value);
         $this->log->debug("SeriesValidationCode: " . $this->seriesValidationCode);
         $this->log->debug("NoIssueDeclaration: " . ($this->noIssueDeclaration ? "true" : "false"));
 

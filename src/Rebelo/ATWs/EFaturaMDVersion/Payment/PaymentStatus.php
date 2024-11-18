@@ -12,6 +12,7 @@ namespace Rebelo\ATWs\EFaturaMDVersion\Payment;
 use Rebelo\ATWs\ATWsException;
 use Rebelo\ATWs\EFaturaMDVersion\AWs;
 use Rebelo\Date\Date;
+use Rebelo\Date\Pattern;
 
 /**
  * @author João Rebelo
@@ -51,7 +52,7 @@ class PaymentStatus
         }
 
         $this->log->info("Payment status set to " . $this->paymentStatus);
-        $this->log->info("Payment status date set to " . $this->paymentStatusDate->format(Date::DATE_T_TIME));
+        $this->log->info("Payment status date set to " . $this->paymentStatusDate->format(Pattern::DATE_T_TIME));
     }
 
     /**
@@ -94,7 +95,7 @@ class PaymentStatus
             AWs::NS_AT_WS_BODY,
             "PaymentStatusDate",
             null,
-            $this->getPaymentStatusDate()->format(Date::DATE_T_TIME)
+            $this->getPaymentStatusDate()->format(Pattern::DATE_T_TIME)
         );
     }
 }

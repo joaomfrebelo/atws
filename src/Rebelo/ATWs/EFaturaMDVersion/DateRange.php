@@ -11,6 +11,7 @@ namespace Rebelo\ATWs\EFaturaMDVersion;
 
 use Rebelo\ATWs\ATWsException;
 use Rebelo\Date\Date;
+use Rebelo\Date\Pattern;
 
 /**
  * Date range
@@ -71,7 +72,6 @@ class DateRange
      * Build xml
      * @param \XMLWriter $xml
      * @return void
-     * @throws \Rebelo\Date\DateFormatException
      * @since 2.0.0
      */
     public function buildXml(\XMLWriter $xml): void
@@ -86,14 +86,14 @@ class DateRange
             AWs::NS_AT_WS_BODY,
             "StartDate",
             null,
-            $this->startDate->format(Date::SQL_DATE)
+            $this->startDate->format(Pattern::SQL_DATE)
         );
 
         $xml->writeElementNs(
             AWs::NS_AT_WS_BODY,
             "EndDate",
             null,
-            $this->endDate->format(Date::SQL_DATE)
+            $this->endDate->format(Pattern::SQL_DATE)
         );
 
         $xml->endElement();

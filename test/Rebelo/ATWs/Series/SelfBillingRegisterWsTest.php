@@ -34,7 +34,6 @@ class SelfBillingRegisterWsTest extends TestCase
 
     /**
      * @return array
-     * @throws \Rebelo\Enum\EnumException
      */
     public function codesDataProvider(): array
     {
@@ -56,8 +55,8 @@ class SelfBillingRegisterWsTest extends TestCase
                 }
 
                 $data[] = [
-                    new SelfBillingDocumentTypeCode($docType),
-                    new SelfBillingEntityCode($entityCode),
+                    SelfBillingDocumentTypeCode::from($docType),
+                    SelfBillingEntityCode::from($entityCode),
                     ($n % 2 === 0) ? "KR" : null,
                     ($n % 2 === 0) ? "Korean company" : null,
                 ];
@@ -78,7 +77,7 @@ class SelfBillingRegisterWsTest extends TestCase
      * @param string|null                                     $supplierName
      *
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
+     * @throws \Rebelo\Date\DateException
      * @throws \Rebelo\Date\DateParseException
      */
     public function testSubmission(

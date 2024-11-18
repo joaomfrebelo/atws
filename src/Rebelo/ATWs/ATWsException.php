@@ -26,7 +26,7 @@ class ATWsException extends \Exception
      * @param \Throwable|null $previous
      * @since 1.0.0
      */
-    #[Pure] public function __construct(string $message = "", int $code = 0, \Throwable $previous = null)
+    #[Pure] public function __construct(string $message = "", int $code = 0, \Throwable|null $previous = null)
     {
         parent::__construct($message, $code, $previous);
     }

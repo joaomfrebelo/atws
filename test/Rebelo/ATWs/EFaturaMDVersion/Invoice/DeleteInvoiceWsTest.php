@@ -18,6 +18,7 @@ use Rebelo\ATWs\EFaturaMDVersion\Response;
 use Rebelo\ATWs\TCredentials;
 use Rebelo\Base;
 use Rebelo\Date\Date;
+use Rebelo\Date\Pattern;
 
 /**
  * Class Delete Invoice Ws Test
@@ -41,7 +42,6 @@ class DeleteInvoiceWsTest extends TestCase
     /**
      * @return \Rebelo\ATWs\EFaturaMDVersion\Invoice\DeleteInvoice[]
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
      */
     public function deleteInvoiceDataProvider(): array
     {
@@ -103,7 +103,6 @@ class DeleteInvoiceWsTest extends TestCase
      * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
      */
     public function testInstance(): void
     {
@@ -130,7 +129,6 @@ class DeleteInvoiceWsTest extends TestCase
      * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
      * @throws \ReflectionException
      */
     public function testXml(): void
@@ -168,6 +166,7 @@ class DeleteInvoiceWsTest extends TestCase
             $xmlWriter->endElement();
             $xmlWriter->endDocument();
 
+            /** @var string $xmlStr */
             $xmlStr = $xmlWriter->flush();
 
             if (false === $xml = \simplexml_load_string($xmlStr)) {
@@ -208,7 +207,7 @@ class DeleteInvoiceWsTest extends TestCase
                 );
 
                 $this->assertSame(
-                    $header->getInvoiceDate()->format(Date::SQL_DATE),
+                    $header->getInvoiceDate()->format(Pattern::SQL_DATE),
                     (string)(($xml->xpath("//doc:InvoiceDate") ?: [])[$k])
                 );
 
@@ -239,12 +238,12 @@ class DeleteInvoiceWsTest extends TestCase
             } else {
 
                 $this->assertSame(
-                    $deleteInvoice->getDateRange()->getStartDate()->format(Date::SQL_DATE),
+                    $deleteInvoice->getDateRange()->getStartDate()->format(Pattern::SQL_DATE),
                     (string)(($xml->xpath("//doc:StartDate") ?: [])[0])
                 );
 
                 $this->assertSame(
-                    $deleteInvoice->getDateRange()->getStartDate()->format(Date::SQL_DATE),
+                    $deleteInvoice->getDateRange()->getStartDate()->format(Pattern::SQL_DATE),
                     (string)(($xml->xpath("//doc:EndDate") ?: [])[0])
                 );
             }

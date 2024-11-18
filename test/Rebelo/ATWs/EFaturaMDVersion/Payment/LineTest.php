@@ -141,7 +141,6 @@ class LineTest extends TestCase
      * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
      */
     public function testWrongDebitCreditIndicator(): void
     {
@@ -162,7 +161,6 @@ class LineTest extends TestCase
      * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
      */
     public function testSettlementAmountLessThanZero(): void
     {
@@ -183,7 +181,6 @@ class LineTest extends TestCase
      * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
      */
     public function testAmountLessThanZero(): void
     {

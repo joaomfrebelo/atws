@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace Rebelo\ATWs\StockMovement;
 
 use Rebelo\Date\Date;
+use Rebelo\Date\Pattern;
 
 /**
  * AStockMovement
@@ -70,13 +71,13 @@ abstract class AStockMovement
         $this->log->debug("DocumentNumber set to: " . $documentNumber);
         $this->log->debug(
             "MovementDate set to: " . $movementDate->format(
-                Date::SQL_DATE
+                Pattern::SQL_DATE
             )
         );
         $this->log->debug("MovementType set to: " . $movementType);
         $this->log->debug(
             "MovementStartTime set to: " . (
-                ($movementStartTime?->format(Date::DATE_T_TIME)) ?? "null"
+                ($movementStartTime?->format(Pattern::DATE_T_TIME)) ?? "null"
             )
         );
         $this->log->debug("VehicleID set to: " . ($vehicleID ?? "null"));

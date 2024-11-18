@@ -12,6 +12,7 @@ namespace Rebelo\ATWs\EFaturaMDVersion\WorkDocument;
 use Rebelo\ATWs\ATWsException;
 use Rebelo\ATWs\EFaturaMDVersion\AWs;
 use Rebelo\Date\Date;
+use Rebelo\Date\Pattern;
 
 /**
  * @author João Rebelo
@@ -30,7 +31,6 @@ class WorkStatus
      * @param string            $workStatus     Document status. It can take on the following values: N – Normal; A – Canceled; F – Billed.
      * @param \Rebelo\Date\Date $workStatusDate Date when the document state was last saved.
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
      * @since 2.0.0
      */
     public function __construct(
@@ -51,7 +51,7 @@ class WorkStatus
         }
 
         $this->log->info("Work status set to " . $this->workStatus);
-        $this->log->info("Work status date set to " . $this->workStatusDate->format(Date::DATE_T_TIME));
+        $this->log->info("Work status date set to " . $this->workStatusDate->format(Pattern::DATE_T_TIME));
 
     }
 
@@ -79,7 +79,6 @@ class WorkStatus
      * Build xml
      * @param \XMLWriter $xml
      * @return void
-     * @throws \Rebelo\Date\DateFormatException
      * @since 2.0.0
      */
     public function buildXml(\XMLWriter $xml): void
@@ -95,7 +94,7 @@ class WorkStatus
             AWs::NS_AT_WS_BODY,
             "WorkStatusDate",
             null,
-            $this->getWorkStatusDate()->format(Date::DATE_T_TIME)
+            $this->getWorkStatusDate()->format(Pattern::DATE_T_TIME)
         );
     }
 

@@ -10,6 +10,7 @@ namespace Rebelo\ATWs\EFaturaMDVersion\Payment;
 
 use Rebelo\ATWs\EFaturaMDVersion\DocumentTotals;
 use Rebelo\Date\Date;
+use Rebelo\Date\Pattern;
 
 /**
  * Payment Data
@@ -32,7 +33,6 @@ class PaymentData
      * @param \Rebelo\ATWs\EFaturaMDVersion\Payment\Line[]        $lines           Payment lines
      * @param \Rebelo\ATWs\EFaturaMDVersion\DocumentTotals        $documentTotals  Payment totals
      * @param \Rebelo\ATWs\EFaturaMDVersion\WithholdingTax[]|null $withholdingTax  Withholding tax
-     * @throws \Rebelo\Date\DateFormatException
      * @since 2.0.0
      */
     public function __construct(
@@ -46,7 +46,9 @@ class PaymentData
     {
         $this->log = \Logger::getLogger(\get_class($this));
         $this->log->debug(__METHOD__);
-        $this->log->info("SystemEntryDate set to " . $this->systemEntryDate->format(Date::DATE_T_TIME));
+        $this->log->info(
+            "SystemEntryDate set to " . $this->systemEntryDate->format(Pattern::DATE_T_TIME)
+        );
     }
 
     /**

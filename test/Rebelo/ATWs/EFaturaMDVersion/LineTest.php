@@ -36,7 +36,6 @@ class LineTest extends TestCase
      * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
      */
     public function testInstance(): void
     {
@@ -85,7 +84,6 @@ class LineTest extends TestCase
      * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
      */
     public function testWrongDebitCredit(): void
     {
@@ -119,7 +117,6 @@ class LineTest extends TestCase
      * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
      */
     public function testTaxTotalBaseAndAmountBothSet(): void
     {
@@ -153,7 +150,6 @@ class LineTest extends TestCase
      * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
      */
     public function testTaxTotalBaseAndAmountBothNull(): void
     {
@@ -187,7 +183,6 @@ class LineTest extends TestCase
      * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
      */
     public function testTaxExemptionCodeNullWithTaxExemptionVatIse(): void
     {
@@ -221,7 +216,6 @@ class LineTest extends TestCase
      * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
      */
     public function testTaxExemptionCodeNullWithTaxExemptionTotalAmountZero(): void
     {
@@ -255,7 +249,6 @@ class LineTest extends TestCase
      * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
      */
     public function testTaxExemptionCodeWrongFormat(): void
     {
@@ -292,7 +285,6 @@ class LineTest extends TestCase
      * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
      */
     public function testTaxExemptionCodeNotSet(): void
     {

@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace Rebelo\ATWs\EFaturaMDVersion;
 
 use Rebelo\Date\Date;
+use Rebelo\Date\Pattern;
 
 /**
  * Order Reference
@@ -29,7 +30,6 @@ class OrderReference
      * Reference to the source document (OrderReferences)
      * @param string            $originatingON The type, series and number of the document shall be indicated. In case the document is included in SAF-T (PT), the numbering structure of the field of origin shall be used.
      * @param \Rebelo\Date\Date $orderDate     The document order reference date
-     * @throws \Rebelo\Date\DateFormatException
      * @since 1.0.0
      */
     public function __construct(
@@ -40,7 +40,7 @@ class OrderReference
         $this->log = \Logger::getLogger(\get_class($this));
         $this->log->debug(__METHOD__);
         $this->log->info("originatingON set to: " . $this->originatingON);
-        $this->log->info("orderDate set to: " . $this->orderDate->format(Date::SQL_DATE));
+        $this->log->info("orderDate set to: " . $this->orderDate->format(Pattern::SQL_DATE));
     }
 
     /**
@@ -69,7 +69,6 @@ class OrderReference
      * Build xml
      * @param \XMLWriter $xml
      * @return void
-     * @throws \Rebelo\Date\DateFormatException
      * @since 2.0.0
      */
     public function buildlXml(\XMLWriter $xml): void
@@ -91,7 +90,7 @@ class OrderReference
             AWs::NS_AT_WS_BODY,
             "OrderDate",
             null,
-            $this->getOrderDate()->format(Date::SQL_DATE)
+            $this->getOrderDate()->format(Pattern::SQL_DATE)
         );
 
         $xml->endElement();

@@ -11,7 +11,7 @@ declare(strict_types=1);
 namespace Rebelo\ATWs\Series;
 
 use Rebelo\ATWs\AATWs;
-use Rebelo\Date\Date;
+use Rebelo\Date\Pattern;
 
 /**
  * Consult Webservice
@@ -30,7 +30,6 @@ class ConsultWs extends ASeriesWs implements IConsultWs
      * Submit the consult series to the web service
      * @param \XMLWriter $xml
      * @return void
-     * @throws \Rebelo\Date\DateFormatException
      * @since 1.0.0
      */
     protected function buildBody(\XMLWriter $xml): void
@@ -56,7 +55,7 @@ class ConsultWs extends ASeriesWs implements IConsultWs
                 null,
                 "tipoSerie",
                 null,
-                $this->consultSeries->getSeriesTypeCode()->get()
+                $this->consultSeries->getSeriesTypeCode()->value
             );
         }
 
@@ -65,7 +64,7 @@ class ConsultWs extends ASeriesWs implements IConsultWs
                 null,
                 "classeDoc",
                 null,
-                $this->consultSeries->getDocumentClassCode()->get()
+                $this->consultSeries->getDocumentClassCode()->value
             );
         }
 
@@ -74,7 +73,7 @@ class ConsultWs extends ASeriesWs implements IConsultWs
                 null,
                 "tipoDoc",
                 null,
-                $this->consultSeries->getDocumentTypeCode()->get()
+                $this->consultSeries->getDocumentTypeCode()->value
             );
         }
 
@@ -92,7 +91,7 @@ class ConsultWs extends ASeriesWs implements IConsultWs
                 null,
                 "dataRegistoDe",
                 null,
-                $this->consultSeries->getFromRegistrationDate()->format(Date::SQL_DATE)
+                $this->consultSeries->getFromRegistrationDate()->format(Pattern::SQL_DATE)
             );
         }
 
@@ -101,7 +100,7 @@ class ConsultWs extends ASeriesWs implements IConsultWs
                 null,
                 "dataRegistoAte",
                 null,
-                $this->consultSeries->getToRegistrationDate()->format(Date::SQL_DATE)
+                $this->consultSeries->getToRegistrationDate()->format(Pattern::SQL_DATE)
             );
         }
 
@@ -110,7 +109,7 @@ class ConsultWs extends ASeriesWs implements IConsultWs
                 null,
                 "estado",
                 null,
-                $this->consultSeries->getSeriesStatusCode()->get()
+                $this->consultSeries->getSeriesStatusCode()->value
             );
         }
 
@@ -119,7 +118,7 @@ class ConsultWs extends ASeriesWs implements IConsultWs
                 null,
                 "meioProcessamento",
                 null,
-                $this->consultSeries->getProcessingMediumCodes()->get()
+                $this->consultSeries->getProcessingMediumCodes()->value
             );
         }
 
@@ -130,8 +129,11 @@ class ConsultWs extends ASeriesWs implements IConsultWs
 
     /**
      * @param \Rebelo\ATWs\Series\ConsultSeries $consultSeries
+     *
      * @return \Rebelo\ATWs\Series\Response
      * @throws \Rebelo\ATWs\ATWsException
+     * @throws \Rebelo\Date\DateException
+     * @throws \Rebelo\Date\DateParseException
      * @since 1.0.0
      */
     public function submission(ConsultSeries $consultSeries): Response

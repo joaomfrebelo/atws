@@ -41,7 +41,7 @@ class FinalizeWsTest extends TestCase
         foreach (["The reason", null] as $reason) {
             $finalizeSeries = new FinalizeSeries(
                 \strtoupper(\substr(\md5(\microtime()), 0, 10)),
-                DocumentTypeCode::FT(),
+                DocumentTypeCode::FT,
                 "99999999",
                 999,
                 $reason

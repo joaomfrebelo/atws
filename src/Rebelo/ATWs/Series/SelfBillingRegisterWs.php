@@ -7,12 +7,11 @@
  */
 declare(strict_types=1);
 
-
 namespace Rebelo\ATWs\Series;
 
 use Rebelo\ATWs\AATWs;
 use Rebelo\ATWs\ATWsException;
-use Rebelo\Date\Date;
+use Rebelo\Date\Pattern;
 
 /**
  * Self billing series WS client register
@@ -33,6 +32,8 @@ class SelfBillingRegisterWs extends ASelfBillingSeriesWs implements ISelfBilling
      *
      * @return \Rebelo\ATWs\Series\SelfBillingResponse
      * @throws \Rebelo\ATWs\ATWsException
+     * @throws \Rebelo\Date\DateException
+     * @throws \Rebelo\Date\DateParseException
      * @since 2.0.2
      */
     public function submission(SelfBillingSeriesRegister $seriesRegister): SelfBillingResponse
@@ -47,7 +48,6 @@ class SelfBillingRegisterWs extends ASelfBillingSeriesWs implements ISelfBilling
      * @param \XMLWriter $xml
      *
      * @return void
-     * @throws \Rebelo\Date\DateFormatException
      * @throws \Rebelo\ATWs\ATWsException
      * @since 2.0.2
      */
@@ -78,7 +78,7 @@ class SelfBillingRegisterWs extends ASelfBillingSeriesWs implements ISelfBilling
             null,
             "tipoDoc",
             null,
-            $this->seriesRegister->getDocumentTypeCode()->get()
+            $this->seriesRegister->getDocumentTypeCode()->value
         );
 
         $xml->writeElementNs(
@@ -92,7 +92,7 @@ class SelfBillingRegisterWs extends ASelfBillingSeriesWs implements ISelfBilling
             null,
             "dataInicioPrevUtiliz",
             null,
-            $this->seriesRegister->getExpectedInitialDateUse()->format(Date::SQL_DATE)
+            $this->seriesRegister->getExpectedInitialDateUse()->format(Pattern::SQL_DATE)
         );
 
         $xml->writeElementNs(
@@ -106,7 +106,7 @@ class SelfBillingRegisterWs extends ASelfBillingSeriesWs implements ISelfBilling
             null,
             "comunicarEmNomeDe",
             null,
-            $this->seriesRegister->getSelfBillingEntityCode()->get()
+            $this->seriesRegister->getSelfBillingEntityCode()->value
         );
 
         $xml->writeElementNs(

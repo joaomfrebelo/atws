@@ -34,15 +34,17 @@ class CancelSelfBillingWsTest extends TestCase
     /**
      * @test
      * @throws \Rebelo\ATWs\ATWsException
+     * @throws \Rebelo\Date\DateException
+     * @throws \Rebelo\Date\DateParseException
      */
     public function testSubmission(): void
     {
         $cancelSeries = new CancelSelfBillingSeries(
             \strtoupper(\substr(\md5(\microtime()), 0, 10)),
-            DocumentTypeCode::NC(),
+            DocumentTypeCode::NC,
             \strtoupper(\substr(\md5(\microtime()), 0, 8)),
             true,
-            SelfBillingEntityCode::CE(),
+            SelfBillingEntityCode::CE,
             "999999999"
         );
 

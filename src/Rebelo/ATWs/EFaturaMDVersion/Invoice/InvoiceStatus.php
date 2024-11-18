@@ -12,6 +12,7 @@ namespace Rebelo\ATWs\EFaturaMDVersion\Invoice;
 use Rebelo\ATWs\ATWsException;
 use Rebelo\ATWs\EFaturaMDVersion\AWs;
 use Rebelo\Date\Date;
+use Rebelo\Date\Pattern;
 
 /**
  * @author João Rebelo
@@ -30,7 +31,6 @@ class InvoiceStatus
      * @param string            $invoiceStatus     Document status. It can take on the following values: N – Normal; A – Canceled; F – Billed;S – Self-billed.
      * @param \Rebelo\Date\Date $invoiceStatusDate Date when the document state was last saved.
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
      * @since 2.0.0
      */
     public function __construct(
@@ -51,7 +51,9 @@ class InvoiceStatus
         }
 
         $this->log->info("Invoice status set to " . $this->invoiceStatus);
-        $this->log->info("Invoice status date set to " . $this->invoiceStatusDate->format(Date::DATE_T_TIME));
+        $this->log->info(
+            "Invoice status date set to " . $this->invoiceStatusDate->format(Pattern::DATE_T_TIME)
+        );
 
     }
 
@@ -79,7 +81,6 @@ class InvoiceStatus
      * Build xml
      * @param \XMLWriter $xml
      * @return void
-     * @throws \Rebelo\Date\DateFormatException
      * @since 2.0.0
      */
     public function buildXml(\XMLWriter $xml): void
@@ -95,7 +96,7 @@ class InvoiceStatus
             AWs::NS_AT_WS_BODY,
             "InvoiceStatusDate",
             null,
-            $this->getInvoiceStatusDate()->format(Date::DATE_T_TIME)
+            $this->getInvoiceStatusDate()->format(Pattern::DATE_T_TIME)
         );
     }
 

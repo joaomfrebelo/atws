@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\Series;
 
-use PHPStan\Testing\TestCase;
+use PHPUnit\Framework\TestCase;
 use Rebelo\Base;
 
 /**
@@ -35,7 +35,7 @@ class FinalizeSeriesTest extends TestCase
     public function testInstance(): void
     {
         $series = "AAA";
-        $documentTypeCode = DocumentTypeCode::NC();
+        $documentTypeCode = DocumentTypeCode::NC;
         $seriesValidationCode = "99999999";
         $lastSequenceDocNumber = 99;
         $reason = "No reason";
@@ -49,7 +49,7 @@ class FinalizeSeriesTest extends TestCase
         );
 
         $this->assertSame($series, $finalizeSeries->getSeries());
-        $this->assertSame($documentTypeCode->get(), $finalizeSeries->getDocumentTypeCode()->get());
+        $this->assertSame($documentTypeCode, $finalizeSeries->getDocumentTypeCode());
         $this->assertSame($seriesValidationCode, $seriesValidationCode);
         $this->assertSame($lastSequenceDocNumber, $finalizeSeries->getLastSequenceDocNumber());
         $this->assertSame($reason, $finalizeSeries->getReason());
@@ -62,7 +62,7 @@ class FinalizeSeriesTest extends TestCase
     public function testInstanceNull(): void
     {
         $series = "AAA";
-        $documentTypeCode = DocumentTypeCode::NC();
+        $documentTypeCode = DocumentTypeCode::NC;
         $seriesValidationCode = "999999999";
         $lastSequenceDocNumber = 99;
 
@@ -75,12 +75,11 @@ class FinalizeSeriesTest extends TestCase
         );
 
         $this->assertSame($series, $finalizeSeries->getSeries());
-        $this->assertSame($documentTypeCode->get(), $finalizeSeries->getDocumentTypeCode()->get());
+        $this->assertSame($documentTypeCode, $finalizeSeries->getDocumentTypeCode());
         $this->assertSame($seriesValidationCode, $seriesValidationCode);
         $this->assertSame($lastSequenceDocNumber, $finalizeSeries->getLastSequenceDocNumber());
         $this->assertNull($finalizeSeries->getReason());
 
     }
-
 
 }

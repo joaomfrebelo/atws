@@ -11,7 +11,7 @@ declare(strict_types=1);
 namespace Rebelo\ATWs\Series;
 
 use Rebelo\ATWs\AATWs;
-use Rebelo\Date\Date;
+use Rebelo\Date\Pattern;
 
 /**
  *
@@ -29,8 +29,11 @@ class RegisterWs extends ASeriesWs implements IRegisterWs
      * Submit the request to the webservice
      *
      * @param \Rebelo\ATWs\Series\SeriesRegister $seriesRegister
+     *
      * @return \Rebelo\ATWs\Series\Response
      * @throws \Rebelo\ATWs\ATWsException
+     * @throws \Rebelo\Date\DateException
+     * @throws \Rebelo\Date\DateParseException
      * @since 1.0.0
      */
     public function submission(SeriesRegister $seriesRegister): Response
@@ -43,8 +46,8 @@ class RegisterWs extends ASeriesWs implements IRegisterWs
 
     /**
      * @param \XMLWriter $xml
+     *
      * @return void
-     * @throws \Rebelo\Date\DateFormatException
      * @throws \Rebelo\ATWs\ATWsException
      * @since 1.0.0
      */
@@ -68,21 +71,21 @@ class RegisterWs extends ASeriesWs implements IRegisterWs
             null,
             "tipoSerie",
             null,
-            $this->seriesRegister->getSeriesTypeCode()->get()
+            $this->seriesRegister->getSeriesTypeCode()->value
         );
 
         $xml->writeElementNs(
             null,
             "classeDoc",
             null,
-            $this->seriesRegister->getDocumentTypeCode()->getDocumentClassCode()->get()
+            $this->seriesRegister->getDocumentTypeCode()->getDocumentClassCode()->value
         );
 
         $xml->writeElementNs(
             null,
             "tipoDoc",
             null,
-            $this->seriesRegister->getDocumentTypeCode()->get()
+            $this->seriesRegister->getDocumentTypeCode()->value
         );
 
         $xml->writeElementNs(
@@ -96,7 +99,7 @@ class RegisterWs extends ASeriesWs implements IRegisterWs
             null,
             "dataInicioPrevUtiliz",
             null,
-            $this->seriesRegister->getExpectedInitialDateUse()->format(Date::SQL_DATE)
+            $this->seriesRegister->getExpectedInitialDateUse()->format(Pattern::SQL_DATE)
         );
 
         $xml->writeElementNs(
@@ -110,7 +113,7 @@ class RegisterWs extends ASeriesWs implements IRegisterWs
             null,
             "meioProcessamento",
             null,
-            $this->seriesRegister->getProcessingMediumCode()->get()
+            $this->seriesRegister->getProcessingMediumCode()->value
         );
 
         $xml->endElement(); //registarSerie

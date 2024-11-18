@@ -37,7 +37,6 @@ class DeleteWorkDocumentTest extends TestCase
      * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
      */
     public function testInstanceDocumentList(): void
     {
@@ -136,7 +135,7 @@ class DeleteWorkDocumentTest extends TestCase
     /**
      * @test
      * @return void
-     * @throws \Rebelo\Date\DateFormatException
+     * @throws \Rebelo\ATWs\ATWsException
      */
     public function testDocumentListNotEmptyOrNullAndDateRangeNotNull(): void
     {

@@ -27,8 +27,11 @@ class CancelWs extends ASeriesWs implements ICancelWs
 
     /**
      * @param \Rebelo\ATWs\Series\CancelSeries $cancelSeries
+     *
      * @return \Rebelo\ATWs\Series\Response
      * @throws \Rebelo\ATWs\ATWsException
+     * @throws \Rebelo\Date\DateException
+     * @throws \Rebelo\Date\DateParseException
      * @since 1.0.0
      */
     public function submission(CancelSeries $cancelSeries): Response
@@ -65,14 +68,14 @@ class CancelWs extends ASeriesWs implements ICancelWs
             null,
             "classeDoc",
             null,
-            $this->cancelSeries->getDocumentTypeCode()->getDocumentClassCode()->get()
+            $this->cancelSeries->getDocumentTypeCode()->getDocumentClassCode()->value
         );
 
         $xml->writeElementNs(
             null,
             "tipoDoc",
             null,
-            $this->cancelSeries->getDocumentTypeCode()->get()
+            $this->cancelSeries->getDocumentTypeCode()->value
         );
 
         $xml->writeElementNs(
