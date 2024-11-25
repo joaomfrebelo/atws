@@ -37,6 +37,9 @@ class SubsequentAgriculturalStockMovementTest extends TestCase
     /**
      *
      * @return array
+     * @throws \Rebelo\Date\DateException
+     * @throws \Rebelo\Date\DateIntervalException
+     * @throws \Rebelo\Date\DateParseException
      */
     public function provider(): array
     {
@@ -98,6 +101,7 @@ class SubsequentAgriculturalStockMovementTest extends TestCase
     /**
      * @dataProvider provider
      * @test
+     *
      * @param string          $taxRegistrationNumber
      * @param string          $atcud
      * @param string          $companyName
@@ -114,9 +118,9 @@ class SubsequentAgriculturalStockMovementTest extends TestCase
      * @param string|null     $vehicleID
      * @param OrderReferences $orderReferences
      * @param array           $lines
+     *
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
      */
     public function testInstance(
         string          $taxRegistrationNumber,
@@ -180,7 +184,10 @@ class SubsequentAgriculturalStockMovementTest extends TestCase
     /**
      * @test
      * @return void
-     * @throws \Rebelo\Date\DateFormatException
+     * @throws \Rebelo\ATWs\ATWsException
+     * @throws \Rebelo\Date\DateException
+     * @throws \Rebelo\Date\DateIntervalException
+     * @throws \Rebelo\Date\DateParseException
      */
     public function testWrongMovementType(): void
     {
@@ -212,7 +219,9 @@ class SubsequentAgriculturalStockMovementTest extends TestCase
      * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
+     * @throws \Rebelo\Date\DateException
+     * @throws \Rebelo\Date\DateIntervalException
+     * @throws \Rebelo\Date\DateParseException
      */
     public function testWrongMovementStatus(): void
     {

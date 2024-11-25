@@ -72,6 +72,7 @@ class PriorAgriculturalStockMovementTest extends TestCase
     /**
      * @dataProvider provider
      * @test
+     *
      * @param string       $taxRegistrationNumber
      * @param string       $atcud
      * @param string       $companyName
@@ -84,9 +85,9 @@ class PriorAgriculturalStockMovementTest extends TestCase
      * @param Date         $movementStartTime
      * @param bool         $inAcores
      * @param string|array $farmerTaxID
+     *
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
      */
     public function testInstance(
         string       $taxRegistrationNumber,
@@ -137,7 +138,6 @@ class PriorAgriculturalStockMovementTest extends TestCase
      * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
      */
     public function testWrongMovementType(): void
     {
@@ -163,7 +163,7 @@ class PriorAgriculturalStockMovementTest extends TestCase
      *
      * @test
      * @return void
-     * @throws \Rebelo\Date\DateFormatException
+     * @throws \Rebelo\ATWs\ATWsException
      */
     public function testWrongMovementStatus(): void
     {

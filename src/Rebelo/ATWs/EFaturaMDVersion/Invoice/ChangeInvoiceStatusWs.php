@@ -33,7 +33,6 @@ class ChangeInvoiceStatusWs extends AWs implements IChangeInvoiceStatusWs
      * Build the invoice request xml body
      * @param \XMLWriter $xml
      * @return void
-     * @throws \Rebelo\Date\DateFormatException
      * @since 1.0.0
      */
     protected function buildBody(\XMLWriter $xml): void
@@ -91,9 +90,13 @@ class ChangeInvoiceStatusWs extends AWs implements IChangeInvoiceStatusWs
 
     /**
      * Submit the change invoice status to the AT webservice
+     *
      * @param \Rebelo\ATWs\EFaturaMDVersion\Invoice\ChangeInvoiceStatus $changeInvoiceStatus
+     *
      * @return \Rebelo\ATWs\EFaturaMDVersion\Response
      * @throws \Rebelo\ATWs\ATWsException
+     * @throws \Rebelo\Date\DateException
+     * @throws \Rebelo\Date\DateParseException
      * @since 1.0.0
      */
     public function submit(ChangeInvoiceStatus $changeInvoiceStatus): Response

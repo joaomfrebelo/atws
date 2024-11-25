@@ -41,8 +41,8 @@ class PriorAgriculturalStockMovement extends AStockMovement
      * @param \Rebelo\Date\Date $movementStartTime     Date type: <<YYYY-MM-DD>>.
      * @param bool              $inAzores              Field indicating whether the loading place is located in Azores or on the Mainland and Madeira
      * @param string|array      $farmerTaxID           Producer's TIN. Fill in the Portuguese TIN without spaces and without any country prefix.
+     *
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
      * @since 2.1.0
      */
     public function __construct(

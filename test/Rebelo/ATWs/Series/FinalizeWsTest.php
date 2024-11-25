@@ -35,6 +35,8 @@ class FinalizeWsTest extends TestCase
     /**
      * @test
      * @throws \Rebelo\ATWs\ATWsException
+     * @throws \Rebelo\Date\DateException
+     * @throws \Rebelo\Date\DateParseException
      */
     public function testSubmission(): void
     {

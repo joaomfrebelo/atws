@@ -39,7 +39,6 @@ class ChangePaymentStatusWsTest extends TestCase
     /**
      * @return \Rebelo\ATWs\EFaturaMDVersion\Payment\ChangePaymentStatus[]
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
      */
     public function changePaymentStatusDataProvider(): array
     {
@@ -75,8 +74,9 @@ class ChangePaymentStatusWsTest extends TestCase
     /**
      * @test
      * @return void
-     * @throws \Rebelo\Date\DateFormatException
      * @throws \Rebelo\ATWs\ATWsException
+     * @throws \Rebelo\Date\DateException
+     * @throws \Rebelo\Date\DateParseException
      */
     public function testInstance(): void
     {
@@ -102,7 +102,6 @@ class ChangePaymentStatusWsTest extends TestCase
      * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
      * @throws \ReflectionException
      */
     public function testXml(): void

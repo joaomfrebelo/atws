@@ -22,7 +22,7 @@ abstract class AWs extends AATWs
      * The WSDL file path
      * @since 2.0.0
      */
-    public const WSDL = __DIR__ . DIRECTORY_SEPARATOR . "eFaturaMDVersion.wsdl";
+    public const string WSDL = __DIR__ . DIRECTORY_SEPARATOR . "eFaturaMDVersion.wsdl";
 
     /**
      * Namespace of
@@ -30,13 +30,13 @@ abstract class AWs extends AATWs
      *
      * @since 2.0.0
      */
-    const NS_AT_WS_BODY = "doc";
+    const string NS_AT_WS_BODY = "doc";
 
     /**
      * The web services version
      * @since 2.0.0
      */
-    const E_FATURA_MD_VERSION = "0.0.1";
+    const string E_FATURA_MD_VERSION = "0.0.1";
 
     /**
      *

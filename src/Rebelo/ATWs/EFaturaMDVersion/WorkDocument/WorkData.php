@@ -36,7 +36,7 @@ class WorkData
      * @param \Rebelo\Date\Date                                     $systemEntryDate Record recording date to the second, at the time of signature.
      * @param \Rebelo\ATWs\EFaturaMDVersion\Line[]                  $lines           Document Lines by Rate (Line)
      * @param \Rebelo\ATWs\EFaturaMDVersion\DocumentTotals          $documentTotals  The Document Totals
-     * @throws \Rebelo\Date\DateFormatException
+     *
      * @throws \Rebelo\ATWs\ATWsException
      * @since 2.0.0
      */

@@ -45,7 +45,6 @@ class WorkDocumentWsTest extends TestCase
      * @return \Rebelo\ATWs\EFaturaMDVersion\WorkDocument\WorkDocument[]
      * @throws \Rebelo\ATWs\ATWsException
      * @throws \Rebelo\Date\DateException
-     * @throws \Rebelo\Date\DateFormatException
      * @throws \Rebelo\Date\DateIntervalException
      * @throws \Rebelo\Date\DateParseException
      */
@@ -130,7 +129,6 @@ class WorkDocumentWsTest extends TestCase
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
      * @throws \Rebelo\Date\DateException
-     * @throws \Rebelo\Date\DateFormatException
      * @throws \Rebelo\Date\DateIntervalException
      * @throws \Rebelo\Date\DateParseException
      */

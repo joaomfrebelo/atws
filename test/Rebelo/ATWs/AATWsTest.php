@@ -34,10 +34,12 @@ class AATWsTest extends TestCase
     /**
      * @dataProvider certPathProvider
      * @test
+     *
      * @param string $path
+     *
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
+     * @throws \Rebelo\Date\DateException
      * @throws \Rebelo\Date\DateParseException
      */
     public function testValidateCertificates(string $path): void

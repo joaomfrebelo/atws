@@ -39,11 +39,11 @@ class ConsultSelfBillingAgreementTest extends TestCase
     {
         $data = [];
         $data[] = [
-            "999999990", SelfBillingSettlementStatus::A(), new Date(), (new Date())->addDays(1)
+            "999999990", SelfBillingSettlementStatus::A, new Date(), (new Date())->addDays(1)
         ];
 
         $data[] = [
-            null, SelfBillingSettlementStatus::A(), new Date(), (new Date())->addDays(1)
+            null, SelfBillingSettlementStatus::A, new Date(), (new Date())->addDays(1)
         ];
 
         $data[] = [
@@ -51,12 +51,12 @@ class ConsultSelfBillingAgreementTest extends TestCase
         ];
 
         $data[] = [
-            "999999990", SelfBillingSettlementStatus::A(), null, (new Date())->addDays(1)
+            "999999990", SelfBillingSettlementStatus::A, null, (new Date())->addDays(1)
         ];
 
 
         $data[] = [
-            "999999990", SelfBillingSettlementStatus::A(), new Date(), null
+            "999999990", SelfBillingSettlementStatus::A, new Date(), null
         ];
 
         return $data;

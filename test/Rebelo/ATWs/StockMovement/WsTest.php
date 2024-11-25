@@ -59,7 +59,9 @@ class WsTest extends TestCase
 
     /**
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
+     * @throws \Rebelo\Date\DateException
+     * @throws \Rebelo\Date\DateIntervalException
+     * @throws \Rebelo\Date\DateParseException
      */
     public function testStockMovementSubmission(): void
     {
@@ -107,7 +109,9 @@ class WsTest extends TestCase
 
     /**
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
+     * @throws \Rebelo\Date\DateException
+     * @throws \Rebelo\Date\DateIntervalException
+     * @throws \Rebelo\Date\DateParseException
      */
     public function testStockMovementDelaySubmission(): void
     {
@@ -151,7 +155,9 @@ class WsTest extends TestCase
 
     /**
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
+     * @throws \Rebelo\Date\DateException
+     * @throws \Rebelo\Date\DateIntervalException
+     * @throws \Rebelo\Date\DateParseException
      */
     public function testStockMovementSubmissionWithNoNull(): void
     {
@@ -198,7 +204,9 @@ class WsTest extends TestCase
 
     /**
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
+     * @throws \Rebelo\Date\DateException
+     * @throws \Rebelo\Date\DateIntervalException
+     * @throws \Rebelo\Date\DateParseException
      */
     public function testStockMovementSubmissionMultipleLines(): void
     {
@@ -248,7 +256,9 @@ class WsTest extends TestCase
 
     /**
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
+     * @throws \Rebelo\Date\DateException
+     * @throws \Rebelo\Date\DateIntervalException
+     * @throws \Rebelo\Date\DateParseException
      */
     public function testStockMovementSubmissionMultipleGD(): void
     {
@@ -298,7 +308,9 @@ class WsTest extends TestCase
 
     /**
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
+     * @throws \Rebelo\Date\DateException
+     * @throws \Rebelo\Date\DateIntervalException
+     * @throws \Rebelo\Date\DateParseException
      */
     public function testStockMovementSubmissionAllNull(): void
     {

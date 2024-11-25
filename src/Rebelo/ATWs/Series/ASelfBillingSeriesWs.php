@@ -24,7 +24,7 @@ abstract class ASelfBillingSeriesWs extends AATWs
      * Namespace prefix
      * @since 2.0.2
      */
-    const NS_REGISTARSERIE = "ns0";
+    const string NS_REGISTARSERIE = "ns0";
 
     /**
      * Get the Invoice webservice WSDL URI

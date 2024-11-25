@@ -37,8 +37,8 @@ class SelfBillingRegisterWsTest extends TestCase
      */
     public function codesDataProvider(): array
     {
-        $constDocType            = (new \ReflectionClass(SelfBillingDocumentTypeCode::class))->getConstants();
-        $selfBillingEntitiesCode = (new \ReflectionClass(SelfBillingEntityCode::class))->getConstants();
+        $constDocType            = SelfBillingDocumentTypeCode::cases();
+        $selfBillingEntitiesCode = SelfBillingEntityCode::cases();
 
         $data = [];
 
@@ -46,17 +46,17 @@ class SelfBillingRegisterWsTest extends TestCase
         foreach ($selfBillingEntitiesCode as $entityCode) {
             foreach ($constDocType as $docType) {
 
-                if($docType !== "FT" && $entityCode !== "FN"){
+                if($docType !== SelfBillingDocumentTypeCode::FT && $entityCode !== SelfBillingEntityCode::FN){
                     continue;
                 }
 
-                if($docType === "FT" && $entityCode === "CE"){
+                if($docType === SelfBillingDocumentTypeCode::FT && $entityCode === SelfBillingEntityCode::CE){
                     continue;
                 }
 
                 $data[] = [
-                    SelfBillingDocumentTypeCode::from($docType),
-                    SelfBillingEntityCode::from($entityCode),
+                    $docType,
+                    $entityCode,
                     ($n % 2 === 0) ? "KR" : null,
                     ($n % 2 === 0) ? "Korean company" : null,
                 ];

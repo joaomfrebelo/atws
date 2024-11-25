@@ -27,8 +27,11 @@ class FinalizeWs extends ASeriesWs implements IFinalizeWs
 
     /**
      * @param \Rebelo\ATWs\Series\FinalizeSeries $finalizeSeries
+     *
      * @return \Rebelo\ATWs\Series\Response
      * @throws \Rebelo\ATWs\ATWsException
+     * @throws \Rebelo\Date\DateException
+     * @throws \Rebelo\Date\DateParseException
      * @since 1.0.0
      */
     public function submission(FinalizeSeries $finalizeSeries): Response

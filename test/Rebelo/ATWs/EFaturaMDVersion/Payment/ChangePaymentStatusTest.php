@@ -36,7 +36,6 @@ class ChangePaymentStatusTest extends TestCase
     /**
      * @return array
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
      */
     public function changePaymentStatusData(): array
     {

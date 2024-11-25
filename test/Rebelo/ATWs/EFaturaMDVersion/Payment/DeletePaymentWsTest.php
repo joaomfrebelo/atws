@@ -41,7 +41,6 @@ class DeletePaymentWsTest extends TestCase
     /**
      * @return \Rebelo\ATWs\EFaturaMDVersion\Payment\DeletePayment[]
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
      */
     public function deletePaymentDataProvider(): array
     {
@@ -91,7 +90,8 @@ class DeletePaymentWsTest extends TestCase
      * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
+     * @throws \Rebelo\Date\DateException
+     * @throws \Rebelo\Date\DateParseException
      */
     public function testInstance(): void
     {
@@ -116,7 +116,6 @@ class DeletePaymentWsTest extends TestCase
      * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
      * @throws \ReflectionException
      */
     public function testXml(): void

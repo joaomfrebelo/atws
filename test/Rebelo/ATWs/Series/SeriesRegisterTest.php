@@ -48,7 +48,6 @@ class SeriesRegisterTest extends TestCase
      *
      * @throws \Rebelo\ATWs\ATWsException
      * @throws \Rebelo\Date\DateException
-     * @throws \Rebelo\Date\DateFormatException
      * @throws \Rebelo\Date\DateIntervalException
      * @throws \Rebelo\Date\DateParseException
      */
@@ -104,7 +103,6 @@ class SeriesRegisterTest extends TestCase
      *
      * @throws \Rebelo\ATWs\ATWsException
      * @throws \Rebelo\Date\DateException
-     * @throws \Rebelo\Date\DateFormatException
      * @throws \Rebelo\Date\DateIntervalException
      * @throws \Rebelo\Date\DateParseException
      */
@@ -150,7 +148,6 @@ class SeriesRegisterTest extends TestCase
      *
      * @throws \Rebelo\ATWs\ATWsException
      * @throws \Rebelo\Date\DateException
-     * @throws \Rebelo\Date\DateFormatException
      * @throws \Rebelo\Date\DateIntervalException
      * @throws \Rebelo\Date\DateParseException
      */
@@ -181,7 +178,6 @@ class SeriesRegisterTest extends TestCase
      * @test
      * @throws \Rebelo\ATWs\ATWsException
      * @throws \Rebelo\Date\DateException
-     * @throws \Rebelo\Date\DateFormatException
      * @throws \Rebelo\Date\DateIntervalException
      * @throws \Rebelo\Date\DateParseException
      */

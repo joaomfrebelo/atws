@@ -15,6 +15,7 @@ use Rebelo\ATWs\ATWsException;
 /**
  * This functionality aims to provide the action of canceling
  * the communication of a previously communicated Series, by error.
+ *
  * @since 2.0.2
  */
 class CancelSelfBillingSeries extends ASeries
@@ -24,23 +25,23 @@ class CancelSelfBillingSeries extends ASeries
      * This functionality aims to provide the action of canceling the communication
      * of a previously communicated Series, by error.
      *
-     * @param string                                    $series                The identifier of the Series whose communication you want to cancel.
-     * @param \Rebelo\ATWs\Series\DocumentTypeCode      $documentTypeCode      Indicate the type of document to which the Series whose communication you want to cancel belongs.
-     * @param string                                    $seriesValidationCode  Indicate the Series validation code, assigned by the AT, whose communication you want to cancel.
-     * @param bool                                      $noIssueDeclaration    Informative indication that the taxable person was aware that he should not cancel the communication of a Series if he has already used documents issued with the information thereof.     The communication will not be accepted if the taxable person does not indicate (filling in this parameter with the true value) that he was aware of the condition presented.
-     * @param \Rebelo\ATWs\Series\SelfBillingEntityCode $selfBillingEntityCode Indicate the type of entity with whom established the prior Self-invoicing Agreement.
-     * @param string                                    $supplierTin           Indicate the TIN of the entity with whom established the prior Self-invoicing Agreement.
+     * @param string                                          $series                The identifier of the Series whose communication you want to cancel.
+     * @param \Rebelo\ATWs\Series\SelfBillingDocumentTypeCode $documentTypeCode      Indicate the type of document to which the Series whose communication you want to cancel belongs.
+     * @param string                                          $seriesValidationCode  Indicate the Series validation code, assigned by the AT, whose communication you want to cancel.
+     * @param bool                                            $noIssueDeclaration    Informative indication that the taxable person was aware that he should not cancel the communication of a Series if he has already used documents issued with the information thereof.     The communication will not be accepted if the taxable person does not indicate (filling in this parameter with the true value) that he was aware of the condition presented.
+     * @param \Rebelo\ATWs\Series\SelfBillingEntityCode       $selfBillingEntityCode Indicate the type of entity with whom established the prior Self-invoicing Agreement.
+     * @param string                                          $supplierTin           Indicate the TIN of the entity with whom established the prior Self-invoicing Agreement.
      *
      * @throws \Rebelo\ATWs\ATWsException
      * @since 2.0.2
      */
     public function __construct(
-        private readonly string                $series,
-        private readonly DocumentTypeCode      $documentTypeCode,
-        private readonly string                $seriesValidationCode,
-        private readonly bool                  $noIssueDeclaration,
-        private readonly SelfBillingEntityCode $selfBillingEntityCode,
-        private readonly string                $supplierTin,
+        private readonly string                      $series,
+        private readonly SelfBillingDocumentTypeCode $documentTypeCode,
+        private readonly string                      $seriesValidationCode,
+        private readonly bool                        $noIssueDeclaration,
+        private readonly SelfBillingEntityCode       $selfBillingEntityCode,
+        private readonly string                      $supplierTin,
     )
     {
         parent::__construct();
@@ -61,6 +62,7 @@ class CancelSelfBillingSeries extends ASeries
 
     /**
      * The identifier of the Series whose communication you want to cancel.
+     *
      * @return string
      * @since 2.0.2
      */
@@ -71,16 +73,18 @@ class CancelSelfBillingSeries extends ASeries
 
     /**
      * Indicate the type of document to which the Series whose communication you want to cancel belongs.
-     * @return \Rebelo\ATWs\Series\DocumentTypeCode
+     *
+     * @return \Rebelo\ATWs\Series\SelfBillingDocumentTypeCode
      * @since 2.0.2
      */
-    public function getDocumentTypeCode(): DocumentTypeCode
+    public function getDocumentTypeCode(): SelfBillingDocumentTypeCode
     {
         return $this->documentTypeCode;
     }
 
     /**
      * Indicate the Series validation code, assigned by the AT, whose communication you want to cancel.
+     *
      * @return string
      * @since 2.0.2
      */
@@ -92,6 +96,7 @@ class CancelSelfBillingSeries extends ASeries
     /**
      * Informative indication that the taxable person was aware that he should not cancel
      * the communication of a Series if he has already used documents issued with the information thereof.     The communication will not be accepted if the taxable person does not indicate (filling in this parameter with the true value) that he was aware of the condition presented.
+     *
      * @return bool
      * @since 2.0.2
      */
@@ -102,6 +107,7 @@ class CancelSelfBillingSeries extends ASeries
 
     /**
      * Indicate the type of entity with whom established the prior Self-invoicing Agreement.
+     *
      * @return \Rebelo\ATWs\Series\SelfBillingEntityCode
      * @since 2.0.2
      */
@@ -113,6 +119,7 @@ class CancelSelfBillingSeries extends ASeries
     /**
      * Indicate the classification given to the document to which the Series belongs to be communicated to the AT.
      * Composed of a set of values
+     *
      * @return \Rebelo\ATWs\Series\DocumentClassCode
      * @throws \Rebelo\ATWs\ATWsException
      * @since 2.0.2
@@ -124,6 +131,7 @@ class CancelSelfBillingSeries extends ASeries
 
     /**
      * Indicate the TIN of the entity with whom established the prior Self-invoicing Agreement.
+     *
      * @return string
      * @since 2.0.2
      */

@@ -64,7 +64,6 @@ class RegisterWsTest extends TestCase
      *
      * @throws \Rebelo\ATWs\ATWsException
      * @throws \Rebelo\Date\DateException
-     * @throws \Rebelo\Date\DateFormatException
      * @throws \Rebelo\Date\DateParseException
      */
     public function testSubmission(

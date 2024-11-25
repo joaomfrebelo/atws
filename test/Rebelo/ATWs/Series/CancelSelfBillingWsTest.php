@@ -41,7 +41,7 @@ class CancelSelfBillingWsTest extends TestCase
     {
         $cancelSeries = new CancelSelfBillingSeries(
             \strtoupper(\substr(\md5(\microtime()), 0, 10)),
-            DocumentTypeCode::NC,
+            SelfBillingDocumentTypeCode::NC,
             \strtoupper(\substr(\md5(\microtime()), 0, 8)),
             true,
             SelfBillingEntityCode::CE,

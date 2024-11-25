@@ -17,6 +17,7 @@ use Rebelo\Date\Pattern;
 /**
  * This functionality aims to allow the communication of the Series to the AT,
  * through their registration, so that a unique validation code for the Series is assigned.
+ *
  * @since 1.0.0
  */
 class SeriesRegister extends ASeries
@@ -33,19 +34,20 @@ class SeriesRegister extends ASeries
      * @param \Rebelo\Date\Date                         $expectedInitialDateUse      Indicate the date from which the Series is expected to be used
      * @param int                                       $softwareCertificate         Indicate the invoicing program certificate number assigned by AT. If not applicable, it must be filled in with “0” (zero).
      * @param \Rebelo\ATWs\Series\ProcessingMediumCodes $processingMediumCode        Code of means of processing the documents to be issued.
+     *
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
+     * @throws \Rebelo\Date\DateException
      * @throws \Rebelo\Date\DateParseException
      * @since 1.0.0
      */
     public function __construct(
-        private string                $series,
-        private SeriesTypeCode        $seriesTypeCode,
-        private DocumentTypeCode      $documentTypeCode,
-        private int                   $seriesInitialSequenceNumber,
-        private Date                  $expectedInitialDateUse,
-        private int                   $softwareCertificate,
-        private ProcessingMediumCodes $processingMediumCode
+        private readonly string                $series,
+        private readonly SeriesTypeCode        $seriesTypeCode,
+        private readonly DocumentTypeCode      $documentTypeCode,
+        private readonly int                   $seriesInitialSequenceNumber,
+        private readonly Date                  $expectedInitialDateUse,
+        private readonly int                   $softwareCertificate,
+        private readonly ProcessingMediumCodes $processingMediumCode
     )
     {
         parent::__construct();
@@ -80,6 +82,7 @@ class SeriesRegister extends ASeries
 
     /**
      * Indicate the identifier of the Series you want to communicate to AT.
+     *
      * @return string
      * @since 1.0.0
      */
@@ -90,6 +93,7 @@ class SeriesRegister extends ASeries
 
     /**
      * Indicate the type of Series you want to communicate to AT
+     *
      * @return \Rebelo\ATWs\Series\SeriesTypeCode
      * @since 1.0.0
      */
@@ -100,6 +104,7 @@ class SeriesRegister extends ASeries
 
     /**
      * Indicate the type of document to which the Series belongs to communicate to AT.
+     *
      * @return \Rebelo\ATWs\Series\DocumentTypeCode
      * @since 1.0.0
      */
@@ -110,6 +115,7 @@ class SeriesRegister extends ASeries
 
     /**
      * Indicate the beginning of the document's sequence numbering in the Series.
+     *
      * @return int
      * @since 1.0.0
      */
@@ -120,6 +126,7 @@ class SeriesRegister extends ASeries
 
     /**
      * Indicate the date from which the Series is expected to be used
+     *
      * @return \Rebelo\Date\Date
      * @since 1.0.0
      */
@@ -130,6 +137,7 @@ class SeriesRegister extends ASeries
 
     /**
      * Indicate the invoicing program certificate number assigned by AT. If not applicable, it must be filled in with “0” (zero).
+     *
      * @return int
      * @since 1.0.0
      */
@@ -140,6 +148,7 @@ class SeriesRegister extends ASeries
 
     /**
      * Code of means of processing the documents to be issued.
+     *
      * @return \Rebelo\ATWs\Series\ProcessingMediumCodes
      * @since 1.0.0
      */
@@ -151,6 +160,7 @@ class SeriesRegister extends ASeries
     /**
      * Indicate the classification given to the document to which the Series belongs to be communicated to the AT.
      * Composed of a set of values
+     *
      * @return \Rebelo\ATWs\Series\DocumentClassCode
      * @throws \Rebelo\ATWs\ATWsException
      * @since 1.0.0

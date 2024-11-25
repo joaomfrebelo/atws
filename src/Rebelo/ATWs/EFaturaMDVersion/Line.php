@@ -216,9 +216,10 @@ class Line
 
     /**
      * Build xml
+     *
      * @param \XMLWriter $xml
+     *
      * @return void
-     * @throws \Rebelo\Date\DateFormatException
      * @since 2.0.0
      */
     public function buildXml(\XMLWriter $xml): void

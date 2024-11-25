@@ -43,7 +43,6 @@ class PaymentWsTest extends TestCase
      * @return \Rebelo\ATWs\EFaturaMDVersion\Payment\Payment[]
      * @throws \Rebelo\ATWs\ATWsException
      * @throws \Rebelo\Date\DateException
-     * @throws \Rebelo\Date\DateFormatException
      * @throws \Rebelo\Date\DateIntervalException
      * @throws \Rebelo\Date\DateParseException
      */
@@ -168,7 +167,6 @@ class PaymentWsTest extends TestCase
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
      * @throws \Rebelo\Date\DateException
-     * @throws \Rebelo\Date\DateFormatException
      * @throws \Rebelo\Date\DateIntervalException
      * @throws \Rebelo\Date\DateParseException
      */
@@ -195,7 +193,9 @@ class PaymentWsTest extends TestCase
      * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
+     * @throws \Rebelo\Date\DateException
+     * @throws \Rebelo\Date\DateIntervalException
+     * @throws \Rebelo\Date\DateParseException
      * @throws \ReflectionException
      * @throws \Exception
      */

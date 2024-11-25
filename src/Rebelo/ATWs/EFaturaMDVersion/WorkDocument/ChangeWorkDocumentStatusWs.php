@@ -105,9 +105,13 @@ class ChangeWorkDocumentStatusWs extends AWs implements IChangeWorkDocumentStatu
 
     /**
      * Submit the change document status to teh AT webservice
+     *
      * @param \Rebelo\ATWs\EFaturaMDVersion\WorkDocument\ChangeWokDocumentStatus $changeWokDocumentStatus
+     *
      * @return \Rebelo\ATWs\EFaturaMDVersion\Response
      * @throws \Rebelo\ATWs\ATWsException
+     * @throws \Rebelo\Date\DateException
+     * @throws \Rebelo\Date\DateParseException
      * @since 2.0.0
      */
     public function submit(ChangeWokDocumentStatus $changeWokDocumentStatus): Response

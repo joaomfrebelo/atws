@@ -36,7 +36,7 @@ class CancelSelfBillingSeriesTest extends TestCase
     public function testInstance(): void
     {
         $series               = "B999";
-        $documentTypeCode     = DocumentTypeCode::FT;
+        $documentTypeCode     = SelfBillingDocumentTypeCode::FT;
         $seriesValidationCode = "99999999";
         $entityCode           = SelfBillingEntityCode::CE;
         $supplierTin          = "555555550";

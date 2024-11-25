@@ -37,6 +37,9 @@ class StockMovementTest extends TestCase
     /**
      *
      * @return array
+     * @throws \Rebelo\Date\DateException
+     * @throws \Rebelo\Date\DateIntervalException
+     * @throws \Rebelo\Date\DateParseException
      */
     public function provider(): array
     {
@@ -115,6 +118,7 @@ class StockMovementTest extends TestCase
     /**
      * @dataProvider provider
      * @test
+     *
      * @param string       $taxRegistrationNumber
      * @param string       $atcud
      * @param string       $companyName
@@ -134,9 +138,9 @@ class StockMovementTest extends TestCase
      * @param Date         $movementStartTime
      * @param string|null  $vehicleID
      * @param array        $lines
+     *
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
      */
     public function testInstance(
         string   $taxRegistrationNumber,
@@ -211,7 +215,9 @@ class StockMovementTest extends TestCase
      * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
+     * @throws \Rebelo\Date\DateException
+     * @throws \Rebelo\Date\DateIntervalException
+     * @throws \Rebelo\Date\DateParseException
      */
     public function testWrongMovementType(): void
     {
@@ -246,7 +252,9 @@ class StockMovementTest extends TestCase
      * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
+     * @throws \Rebelo\Date\DateException
+     * @throws \Rebelo\Date\DateIntervalException
+     * @throws \Rebelo\Date\DateParseException
      */
     public function testWrongMovementStatus(): void
     {
@@ -280,7 +288,10 @@ class StockMovementTest extends TestCase
     /**
      * @test
      * @return void
-     * @throws \Rebelo\Date\DateFormatException
+     * @throws \Rebelo\ATWs\ATWsException
+     * @throws \Rebelo\Date\DateException
+     * @throws \Rebelo\Date\DateIntervalException
+     * @throws \Rebelo\Date\DateParseException
      */
     public function testSupplierAndCustomerSetToNull(): void
     {
@@ -314,7 +325,10 @@ class StockMovementTest extends TestCase
     /**
      * @test
      * @return void
-     * @throws \Rebelo\Date\DateFormatException
+     * @throws \Rebelo\ATWs\ATWsException
+     * @throws \Rebelo\Date\DateException
+     * @throws \Rebelo\Date\DateIntervalException
+     * @throws \Rebelo\Date\DateParseException
      */
     public function testSupplierAndCustomerSetToNotNull(): void
     {

@@ -43,7 +43,7 @@ abstract class AStockMovement
      * @param Address|null           $addressTo
      * @param Address|null           $addressFrom
      * @param string|null            $vehicleID
-     * @throws \Rebelo\Date\DateFormatException
+     *
      * @since 1.0.0
      */
     public function __construct(

@@ -9,8 +9,6 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\Series;
 
-use Rebelo\Enum\AEnum;
-
 /**
  * Series type codes
  * @since 1.0.0

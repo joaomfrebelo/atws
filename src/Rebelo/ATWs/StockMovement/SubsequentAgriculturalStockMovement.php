@@ -47,8 +47,8 @@ class SubsequentAgriculturalStockMovement extends AStockMovement
      * @param ?string                                       $vehicleID
      * @param ?\Rebelo\ATWs\StockMovement\OrderReferences   $orderReferences
      * @param \Rebelo\ATWs\StockMovement\AgriculturalLine[] $lines                 Document lines with goods (Line)
+     *
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
      * @since 2.1.0
      */
     public function __construct(

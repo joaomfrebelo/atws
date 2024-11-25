@@ -34,7 +34,6 @@ class DeletePaymentTest extends TestCase
     /**
      * @return array
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
      */
     public function deletePaymentData(): array
     {

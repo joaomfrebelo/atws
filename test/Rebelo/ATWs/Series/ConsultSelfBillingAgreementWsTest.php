@@ -69,7 +69,7 @@ class ConsultSelfBillingAgreementWsTest extends TestCase
     {
         $consult = new ConsultSelfBillingAgreement(
             "555555559",
-            SelfBillingSettlementStatus::F(),
+            SelfBillingSettlementStatus::F,
             (new Date())->addDays(-99),
             new Date()
         );

@@ -24,7 +24,7 @@ abstract class ASeriesWs extends AATWs
      * Namespace prefix
      * @since 1.0.0
      */
-    const NS_REGISTARSERIE = "ns0";
+    const string NS_REGISTARSERIE = "ns0";
 
     /**
      * Get the Invoice webservice WSDL URI

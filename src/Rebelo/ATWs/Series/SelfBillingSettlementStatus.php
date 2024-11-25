@@ -5,9 +5,6 @@ namespace Rebelo\ATWs\Series;
 /**
  * Status of Self-billing Agreements
  *
- * @method static SelfBillingSettlementStatus A()
- * @method static SelfBillingSettlementStatus F()
- *
  * @since 2.0.2
  */
 enum SelfBillingSettlementStatus: string

@@ -31,9 +31,10 @@ class DeleteInvoiceWs extends AWs implements IDeleteInvoiceWs
 
     /**
      * Build the invoice request xml body
+     *
      * @param \XMLWriter $xml
+     *
      * @return void
-     * @throws \Rebelo\Date\DateFormatException
      * @since 1.0.0
      */
     protected function buildBody(\XMLWriter $xml): void
@@ -104,9 +105,13 @@ class DeleteInvoiceWs extends AWs implements IDeleteInvoiceWs
 
     /**
      * Submit to the AT webservice the invoices to delete
+     *
      * @param \Rebelo\ATWs\EFaturaMDVersion\Invoice\DeleteInvoice $deleteInvoice
+     *
      * @return \Rebelo\ATWs\EFaturaMDVersion\Response
      * @throws \Rebelo\ATWs\ATWsException
+     * @throws \Rebelo\Date\DateException
+     * @throws \Rebelo\Date\DateParseException
      * @since 1.0.0
      */
     public function submit(DeleteInvoice $deleteInvoice): Response

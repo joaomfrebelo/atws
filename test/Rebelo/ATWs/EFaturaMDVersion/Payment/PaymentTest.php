@@ -33,7 +33,6 @@ class PaymentTest extends TestCase
     /**
      * @return array
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
      */
     public function paymentDataProvider(): array
     {

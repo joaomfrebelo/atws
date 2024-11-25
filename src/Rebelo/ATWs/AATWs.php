@@ -26,28 +26,28 @@ abstract class AATWs
      * The encryption cipher
      * @since 1.0.0
      */
-    const CIPHER = "aes-128-ecb";
+    const string CIPHER = "aes-128-ecb";
 
     /**
      * The decimals to be use in float format
      *
      * @since 1.0.0
      */
-    const DECIMALS = 7;
+    const int DECIMALS = 7;
 
     /**
      * The xml header block name space
      *
      * @since 1.0.0
      */
-    const NS_ENVELOPE = "S";
+    const string NS_ENVELOPE = "S";
 
     /**
      * The xml security block name space
      *
      * @since 1.0.0
      */
-    const NS_SECURITY = "wss";
+    const string NS_SECURITY = "wss";
 
     /**
      *

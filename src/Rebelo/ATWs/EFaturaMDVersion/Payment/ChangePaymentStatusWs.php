@@ -45,9 +45,10 @@ class ChangePaymentStatusWs extends AWs implements IChangePaymentStatusWs
 
     /**
      * Build the xml
+     *
      * @param \XMLWriter $xml
+     *
      * @return void
-     * @throws \Rebelo\Date\DateFormatException
      * @since  2.0.0
      */
     protected function buildBody(\XMLWriter $xml): void
@@ -105,9 +106,13 @@ class ChangePaymentStatusWs extends AWs implements IChangePaymentStatusWs
 
     /**
      * Submit the change document status to teh AT webservice
+     *
      * @param \Rebelo\ATWs\EFaturaMDVersion\Payment\ChangePaymentStatus $changePaymentStatus
+     *
      * @return \Rebelo\ATWs\EFaturaMDVersion\Response
      * @throws \Rebelo\ATWs\ATWsException
+     * @throws \Rebelo\Date\DateException
+     * @throws \Rebelo\Date\DateParseException
      * @since 2.0.0
      */
     public function submit(ChangePaymentStatus $changePaymentStatus): Response

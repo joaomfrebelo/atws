@@ -47,8 +47,8 @@ class StockMovement extends AStockMovement
      * @param \Rebelo\Date\Date      $movementStartTime     Date and time type: << YYYY-MM-DD Thh: mm: ss >>
      * @param string|null            $vehicleID             Vehicle registration
      * @param array                  $lines                 Document lines with goods (Line)
+     *
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
      * @since 2.1.0
      */
     public function __construct(

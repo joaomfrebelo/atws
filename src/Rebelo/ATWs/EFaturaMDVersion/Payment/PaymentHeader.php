@@ -34,8 +34,8 @@ class PaymentHeader
      * @param string            $paymentType
      * @param string            $customerTaxID
      * @param string            $customerTaxIDCountry
+     *
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
      * @since 2.0.0
      */
     public function __construct(
@@ -150,9 +150,10 @@ class PaymentHeader
 
     /**
      * Build the xml
+     *
      * @param \XMLWriter $xml
+     *
      * @return void
-     * @throws \Rebelo\Date\DateFormatException
      * @since 2.0.0
      */
     public function buildXml(\XMLWriter $xml): void

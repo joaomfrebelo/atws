@@ -48,9 +48,10 @@ class InvoiceWs extends AWs implements IInvoiceWs
 
     /**
      * Build the invoice request xml body
+     *
      * @param \XMLWriter $xml
+     *
      * @return void
-     * @throws \Rebelo\Date\DateFormatException
      * @since 1.0.0
      */
     protected function buildBody(\XMLWriter $xml): void
@@ -175,9 +176,13 @@ class InvoiceWs extends AWs implements IInvoiceWs
 
     /**
      * Submit the invoice to the AT webservice
+     *
      * @param \Rebelo\ATWs\EFaturaMDVersion\Invoice\Invoice $invoice
+     *
      * @return \Rebelo\ATWs\EFaturaMDVersion\Response
      * @throws \Rebelo\ATWs\ATWsException
+     * @throws \Rebelo\Date\DateException
+     * @throws \Rebelo\Date\DateParseException
      * @since 1.0.0
      */
     public function submit(Invoice $invoice): Response

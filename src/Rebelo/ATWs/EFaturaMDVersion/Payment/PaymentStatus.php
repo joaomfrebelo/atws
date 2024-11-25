@@ -30,8 +30,8 @@ class PaymentStatus
     /**
      * @param string            $paymentStatus     Document status. It can take on the following values: N – Normal; A – Canceled;
      * @param \Rebelo\Date\Date $paymentStatusDate Date when the document state was last saved.
+     *
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
      * @since 2.0.0
      */
     public function __construct(
@@ -77,9 +77,10 @@ class PaymentStatus
 
     /**
      * Build xml
+     *
      * @param \XMLWriter $xml
+     *
      * @return void
-     * @throws \Rebelo\Date\DateFormatException
      * @since 2.0.0
      */
     public function buildXml(\XMLWriter $xml): void
