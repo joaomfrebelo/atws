@@ -99,9 +99,12 @@ class ConsultSelfBillingAgreementResponse
                         \count($info->{"paisEstrangeiro"}) === 0 ?
                             null : (string)$info->{"paisEstrangeiro"},
                         SelfBillingSettlementStatus::from((string)$info->{"estado"}),
-                        Date::parse(Pattern::SQL_DATE, (string)$info->{"periodoAutorizacaoDe"}),
+                        Date::parse(
+                            Pattern::SQL_DATE,
+                            (string)$info->{"periodoAutorizacaoDe"}
+                        ),
                         \count($info->{"periodoAutorizacaoAte"}) === 0 ?
-                            null : Date::parse(Pattern::SQL_DATE, (string)$info->{"periodoAutorizacaoDe"})
+                            null : Date::parse(Pattern::SQL_DATE, (string)$info->{"periodoAutorizacaoAte"})
                     );
                 }
             }
