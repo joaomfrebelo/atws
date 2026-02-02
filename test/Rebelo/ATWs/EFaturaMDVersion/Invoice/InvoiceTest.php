@@ -142,6 +142,4 @@ class InvoiceTest extends TestCase
 
         }
     }
-
-
 }

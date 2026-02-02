@@ -29,6 +29,13 @@ abstract class AATWs
     const string CIPHER = "aes-128-ecb";
 
     /**
+     * Symmetric key length in bytes
+     *
+     * @since 1.0.1
+     */
+    const int SYMETRIC_KEY_LENGTH = 16;
+
+    /**
      * The decimals to be use in float format
      *
      * @since 1.0.0
@@ -133,6 +140,14 @@ abstract class AATWs
      */
     protected function base64EncodeEncryptAesEcbPkcs5pad(string $data): string
     {
+        $keyLength = strlen($this->symmetricKey);
+
+        if (self::CIPHER === 'aes-128-ecb' && $keyLength !== 16) {
+            throw new ATWsException("AES-128-ECB requires a 16-byte key");
+        }elseif (self::CIPHER === 'aes-256-ecb' && $keyLength !== 32) {
+            throw new ATWsException("AES-256-ECB requires a 32-byte key");
+        }
+
         if (false === $encrypt = \openssl_encrypt($data, self::CIPHER, $this->symmetricKey)) {
             throw new ATWsException("Failing to encrypt data");
         }
@@ -147,7 +162,7 @@ abstract class AATWs
      */
     private function genSimKey(): void
     {
-        $this->symmetricKey = \substr(\md5(\uniqid(\microtime())), 0, 16);
+        $this->symmetricKey = \substr(\md5(\uniqid(\microtime())), 0, self::SYMETRIC_KEY_LENGTH);
     }
 
     /**
@@ -236,6 +251,14 @@ abstract class AATWs
             $xml->endElement();// EndEnvelop
             $xml->endDocument();
 
+            $context = stream_context_create(
+                [
+                'ssl' => [
+                    'crypto_method' => STREAM_CRYPTO_METHOD_TLSv1_3_CLIENT
+                ]
+                ]
+            );
+
             $soap = new \SoapClient(
                 $this->getWsdl(),
                 [
@@ -247,7 +270,7 @@ abstract class AATWs
                     "use" => SOAP_ENCODED,
                     "soap_version" => SOAP_1_2,
                     "wsdl_cache" => $this->isTest ? WSDL_CACHE_NONE : WSDL_CACHE_MEMORY,
-                    //    'stream_context' => $stream,
+                    'context' => $context,
                 ]
             );
 
@@ -267,6 +290,7 @@ abstract class AATWs
             }
 
             $this->log->debug("Response: " . $response);
+
             return $response;
         } catch (\Throwable $e) {
             try {

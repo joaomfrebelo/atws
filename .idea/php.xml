@@ -51,10 +51,8 @@
       <path value="$PROJECT_DIR$/vendor/nikic/php-parser" />
       <path value="$PROJECT_DIR$/vendor/joaomfrebelo/date" />
       <path value="$PROJECT_DIR$/vendor/jetbrains/phpstorm-attributes" />
-      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php80" />
       <path value="$PROJECT_DIR$/vendor/joaomfrebelo/log4php" />
       <path value="$PROJECT_DIR$/vendor/mongodb/mongodb" />
-      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php81" />
       <path value="$PROJECT_DIR$/vendor/psr/log" />
     </include_path>
   </component>

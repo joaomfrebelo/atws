@@ -40,6 +40,7 @@ abstract class AResponse
 
     /**
      * The SimpleXMElement instance of the response string
+     *
      * @var \SimpleXMLElement
      * @since 1.0.0
      */
@@ -94,26 +95,37 @@ abstract class AResponse
 
         try {
 
+            $namespaces = $simpleXml->getNamespaces(true);
+            foreach ($namespaces as $key => $namespace) {
+                $simpleXml->registerXPathNamespace($key, $namespace);
+            }
+
+        } catch (\Throwable $e) {
+            $e->getMessage();
+            throw new ATWsException($e->getMessage());
+        }
+
+        try {
+
             try {
                 if (false !== $body = $simpleXml->xpath("//env:Body")) {
 
                     if (\count($body) > 0) {
 
-                        $registerInvoiceCode = $body[0]->children()->children()->children();
+                        $code = (string)$simpleXml->xpath("//ns2:CodigoResposta")[0];
+                        //$code          = (string)$registerInvoiceCode->{"CodigoResposta"};
+                        $message = (string)$simpleXml->xpath("//ns2:Mensagem")[0];
+                        //$message       = (string)$registerInvoiceCode->{"Mensagem"};
+                        $resp->code    = \is_numeric($code) ? (int)$code : 9999;
+                        $resp->message = \trim($message) === "" ?
+                            "Unknown response message" :
+                            \html_entity_decode($message);
+                        return $resp;
 
-                        if ($registerInvoiceCode !== null) {
-                            $code          = (string)$registerInvoiceCode->{"CodigoResposta"};
-                            $message       = (string)$registerInvoiceCode->{"Mensagem"};
-                            $resp->code    = \is_numeric($code) ? (int)$code : 9999;
-                            $resp->message = \trim($message) === "" ?
-                                "Unknown response message" :
-                                \html_entity_decode($message);
-                            return $resp;
-                        }
                     }
                 }
             } catch (\Throwable) {
-
+                //throw new ATWsException("Problema devido à alteração do namespace de resposta da AT: " . $e->getMessage());
             }
 
             try {
@@ -162,11 +174,11 @@ abstract class AResponse
         }
 
         throw new ATWsException("XML parser not available for XML response");
-
     }
 
     /**
      * get if the response is OK (Not error)
+     *
      * @return bool
      * @since 1.0.0
      */

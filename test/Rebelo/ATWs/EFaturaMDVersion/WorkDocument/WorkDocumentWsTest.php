@@ -50,7 +50,6 @@ class WorkDocumentWsTest extends TestCase
      */
     public function workDataProvider(): array
     {
-
         $data = [];
 
         foreach (['CM', 'CC', 'FC', 'FO', 'NE', 'OU', 'OR', 'PF', 'RP', 'RE', 'CS', 'LD', 'RA'] as $k => $workType) {
