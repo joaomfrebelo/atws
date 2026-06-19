@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\EFaturaMDVersion\Invoice;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Rebelo\ATWs\ATWsException;
 use Rebelo\ATWs\EFaturaMDVersion\DocumentTotals;
@@ -28,20 +29,20 @@ use Rebelo\Date\Date;
 class InvoiceDataTest extends TestCase
 {
     /**
-     * @test
      * @return void
      */
+    #[Test]
     public function testReflection(): void
     {
-        (new Base())->testReflection(InvoiceData::class);
+        (new Base(InvoiceData::class))->testReflection(InvoiceData::class);
         $this->assertTrue(true);
     }
 
     /**
-     * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
      */
+    #[Test]
     public function testInstance(): void
     {
 
@@ -118,10 +119,10 @@ class InvoiceDataTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
      */
+    #[Test]
     public function testWrongEacCode(): void
     {
         $this->expectException(ATWsException::class);

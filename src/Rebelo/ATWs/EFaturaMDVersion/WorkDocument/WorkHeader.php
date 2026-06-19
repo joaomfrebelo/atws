@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\EFaturaMDVersion\WorkDocument;
 
+use Rebelo\ATWs\AATWs;
 use Rebelo\ATWs\ATWsException;
 use Rebelo\ATWs\EFaturaMDVersion\AWs;
 use Rebelo\Date\Date;
@@ -22,13 +23,6 @@ use Rebelo\Date\Pattern;
  */
 class WorkHeader
 {
-    /**
-     *
-     * @var \Logger
-     * @since 2.0.0
-     */
-    protected \Logger $log;
-
     /**
      * @param string            $documentNumber       Unique document ID: It must be identical to what appears in the SAF-T (PT) file, when generated from the invoicing system that issued this document; It must respect the format defined in the legislation on the SAF-T (PT) file, in force at the time of communication of the elements of the conference documents:     o It consists of the document's internal code, followed by a space, followed by the document series identifier, followed by a slash (/), and a sequential number of the document within the series; There cannot be records with the same identification.
      * @param string            $atcud                This field must contain the Document's Unique Code. The field must be filled in with «0» (zero) until its regulation.
@@ -48,12 +42,11 @@ class WorkHeader
         protected string $customerTaxIDCountry
     )
     {
-        $this->log = \Logger::getLogger(\get_class($this));
-        $this->log->debug(__METHOD__);
+        AATWs::$logger?->debug(__METHOD__);
 
-        $this->log->info("Document number set to " . $documentNumber);
-        $this->log->info("ATCUD set to " . $atcud);
-        $this->log->info("WorkDate set to " . $workDate->format(Pattern::SQL_DATE));
+        AATWs::$logger?->info("Document number set to " . $documentNumber);
+        AATWs::$logger?->info("ATCUD set to " . $atcud);
+        AATWs::$logger?->info("WorkDate set to " . $workDate->format(Pattern::SQL_DATE));
 
         $allowTypes = ['CM', 'CC', 'FC', 'FO', 'NE', 'OU', 'OR', 'PF', 'RP', 'RE', 'CS', 'LD', 'RA'];
 
@@ -62,21 +55,21 @@ class WorkHeader
                 "WorkType type only can be '%s'",
                 \join("', '", $allowTypes),
             );
-            $this->log->error($msg);
+            AATWs::$logger?->error($msg);
             throw new ATWsException($msg);
         }
 
-        $this->log->info("WorkType set to " . $workType);
+        AATWs::$logger?->info("WorkType set to " . $workType);
 
-        $this->log->info("CustomerTaxID set to " . $customerTaxID);
+        AATWs::$logger?->info("CustomerTaxID set to " . $customerTaxID);
 
         if (\preg_match("/^([A-Z]{2}|Desconhecido)$/", $this->customerTaxIDCountry) !== 1) {
             $msg = "Wrong format for CustomerTaxIdCountry";
-            $this->log->error($msg);
+            AATWs::$logger?->error($msg);
             throw new ATWsException($msg);
         }
 
-        $this->log->info("CustomerTaxIDCountry" . $customerTaxIDCountry);
+        AATWs::$logger?->info("CustomerTaxIDCountry" . $customerTaxIDCountry);
 
     }
 

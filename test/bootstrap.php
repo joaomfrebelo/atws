@@ -1,17 +1,25 @@
-<?php
+<?php /** @noinspection PhpUnused */
 /**
  * MIT License
+ *
  * @license https://github.com/joaomfrebelo@gmail.com/at-ws/blob/master/LICENSE
  * Copyright (c) 2021 Joao M F Rebelo
  */
+
+use Monolog\Handler\FirePHPHandler;
+use Monolog\Handler\StreamHandler;
+use Monolog\Level;
+use Monolog\Logger;
+use Monolog\Processor\IntrospectionProcessor;
+use Monolog\Processor\MemoryUsageProcessor;
+use Rebelo\ATWs\AATWs;
 
 require_once __DIR__
     . DIRECTORY_SEPARATOR . ".."
     . DIRECTORY_SEPARATOR . "vendor"
     . DIRECTORY_SEPARATOR . "autoload.php";
 
-require_once __DIR__
-    . DIRECTORY_SEPARATOR . 'Base.php';
+require_once __DIR__ . DIRECTORY_SEPARATOR . 'Base.php';
 
 /**
  * Indicate that is a UNITTEST running
@@ -66,23 +74,37 @@ const ATWS_TEST_CERTIFICATE_PASSPHRASE = "TESTEwebservice";
 const ATWS_TEST_CREDENTIALS = __DIR__ . DIRECTORY_SEPARATOR . "AtWebservicesTestCredentials.ini";
 
 \spl_autoload_register(
-    function ($class) {
-        if (\str_starts_with("\\", $class)) {
-            /** @var string Class name Stripped of the first backslash */
-            $class = \substr($class, 1, \strlen($class) - 1);
-        }
+    function ($class)
+    {
+            if (\str_starts_with("\\", $class)) {
+                /** string Class name Stripped of the first backslash */
+                $class = \substr($class, 1, \strlen($class) - 1);
+            }
 
-        $pathBase = __DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR;
-        $pathSrc = $pathBase . "src" . DIRECTORY_SEPARATOR . $class . ".php";
-        if (is_file($pathSrc)) {
-            require_once $pathSrc;
-            return;
-        }
+            $pathBase = __DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR;
+            $pathSrc  = $pathBase . "src" . DIRECTORY_SEPARATOR . $class . ".php";
+            if (is_file($pathSrc)) {
+                require_once $pathSrc;
+                return;
+            }
 
-        $pathTests = $pathBase . "tests" . DIRECTORY_SEPARATOR . $class . ".php";
-        if (is_file($pathTests)) {
-            require_once $pathTests;
-        }
+            $pathTests = $pathBase . "tests" . DIRECTORY_SEPARATOR . $class . ".php";
+            if (is_file($pathTests)) {
+                require_once $pathTests;
+            }
     }
 );
 
+$logger = new Logger("test");
+$logger->pushHandler(new StreamHandler('php://stdout', Level::Info));
+$logger->pushHandler(new StreamHandler('php://stdout', Level::Alert));
+$logger->pushHandler(new StreamHandler('php://stdout', Level::Debug));
+$logger->pushHandler(new StreamHandler('php://stdout', Level::Notice));
+$logger->pushHandler(new StreamHandler('php://stdout', Level::Error));
+$logger->pushHandler(new StreamHandler('php://stdout', Level::Emergency));
+$logger->pushHandler(new StreamHandler('php://stdout', Level::Critical));
+$logger->pushHandler(new StreamHandler('php://stdout', Level::Warning));
+$logger->pushHandler(new FirePHPHandler());
+$logger->pushProcessor(new IntrospectionProcessor());
+$logger->pushProcessor(new MemoryUsageProcessor());
+AATWs::$logger = $logger;

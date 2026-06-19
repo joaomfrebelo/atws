@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\EFaturaMDVersion\Payment;
 
+use Rebelo\ATWs\AATWs;
 use Rebelo\ATWs\EFaturaMDVersion\DocumentTotals;
 use Rebelo\Date\Date;
 use Rebelo\Date\Pattern;
@@ -18,14 +19,6 @@ use Rebelo\Date\Pattern;
  */
 class PaymentData
 {
-
-    /**
-     *
-     * @var \Logger
-     * @since 2.0.0
-     */
-    protected \Logger $log;
-
     /**
      * @param \Rebelo\ATWs\EFaturaMDVersion\Payment\PaymentHeader $paymentHeader   The payment header
      * @param \Rebelo\ATWs\EFaturaMDVersion\Payment\PaymentStatus $paymentStatus   The payment status
@@ -44,9 +37,8 @@ class PaymentData
         protected ?array         $withholdingTax
     )
     {
-        $this->log = \Logger::getLogger(\get_class($this));
-        $this->log->debug(__METHOD__);
-        $this->log->info(
+        AATWs::$logger?->debug(__METHOD__);
+        AATWs::$logger?->info(
             "SystemEntryDate set to " . $this->systemEntryDate->format(Pattern::DATE_T_TIME)
         );
     }

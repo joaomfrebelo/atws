@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\EFaturaMDVersion;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Rebelo\ATWs\ATWsException;
 use Rebelo\Base;
@@ -22,20 +23,20 @@ use Rebelo\Date\Date;
 class DateRangeTest extends TestCase
 {
     /**
-     * @test
      * @return void
      */
+    #[Test]
     public function testReflection(): void
     {
-        (new Base())->testReflection(DateRange::class);
+        (new Base(DateRange::class))->testReflection(DateRange::class);
         $this->assertTrue(true);
     }
 
     /**
-     * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
      */
+    #[Test]
     public function testInstance(): void
     {
         $startDate = new Date();
@@ -48,13 +49,13 @@ class DateRangeTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
      * @throws \Rebelo\Date\DateException
      * @throws \Rebelo\Date\DateIntervalException
      * @throws \Rebelo\Date\DateParseException
      */
+    #[Test]
     public function testStartDateAfterEndDate(): void
     {
         $this->expectException(ATWsException::class);

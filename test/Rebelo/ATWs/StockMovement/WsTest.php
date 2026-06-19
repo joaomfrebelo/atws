@@ -10,6 +10,8 @@ declare(strict_types=1);
 namespace Rebelo\ATWs\StockMovement;
 
 use JetBrains\PhpStorm\ArrayShape;
+use PHPUnit\Framework\Attributes\BeforeClass;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Rebelo\Base;
 use Rebelo\Date\Date;
@@ -35,9 +37,9 @@ class WsTest extends TestCase
     public static string $taxRegistrationNumber;
 
     /**
-     * @beforeClass
      * @throws \Exception
      */
+    #[BeforeClass]
     public static function before(): void
     {
         if (false === $credentials = \parse_ini_file(ATWS_TEST_CREDENTIALS)) {
@@ -48,12 +50,12 @@ class WsTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      */
+    #[Test]
     public function testReflection(): void
     {
-        (new Base())->testReflection(Ws::class);
+        (new Base(Ws::class))->testReflection(Ws::class);
         $this->assertTrue(true);
     }
 
@@ -63,6 +65,7 @@ class WsTest extends TestCase
      * @throws \Rebelo\Date\DateIntervalException
      * @throws \Rebelo\Date\DateParseException
      */
+    #[Test]
     public function testStockMovementSubmission(): void
     {
 
@@ -113,6 +116,7 @@ class WsTest extends TestCase
      * @throws \Rebelo\Date\DateIntervalException
      * @throws \Rebelo\Date\DateParseException
      */
+    #[Test]
     public function testStockMovementDelaySubmission(): void
     {
 
@@ -159,6 +163,7 @@ class WsTest extends TestCase
      * @throws \Rebelo\Date\DateIntervalException
      * @throws \Rebelo\Date\DateParseException
      */
+    #[Test]
     public function testStockMovementSubmissionWithNoNull(): void
     {
         $stockMovement = new StockMovement(
@@ -208,6 +213,7 @@ class WsTest extends TestCase
      * @throws \Rebelo\Date\DateIntervalException
      * @throws \Rebelo\Date\DateParseException
      */
+    #[Test]
     public function testStockMovementSubmissionMultipleLines(): void
     {
         $stockMovement = new StockMovement(
@@ -260,6 +266,7 @@ class WsTest extends TestCase
      * @throws \Rebelo\Date\DateIntervalException
      * @throws \Rebelo\Date\DateParseException
      */
+    #[Test]
     public function testStockMovementSubmissionMultipleGD(): void
     {
         $stockMovement = new StockMovement(
@@ -312,6 +319,7 @@ class WsTest extends TestCase
      * @throws \Rebelo\Date\DateIntervalException
      * @throws \Rebelo\Date\DateParseException
      */
+    #[Test]
     public function testStockMovementSubmissionAllNull(): void
     {
         $stockMovement = new StockMovement(
@@ -359,10 +367,12 @@ class WsTest extends TestCase
     }
 
     /**
-     * @test
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
+     * @throws \Rebelo\Date\DateException
+     * @throws \Rebelo\Date\DateIntervalException
+     * @throws \Rebelo\Date\DateParseException
      */
+    #[Test]
     public function testPriorAgricultureStockMovementSubmission(): void
     {
         $agriculture = new PriorAgriculturalStockMovement(
@@ -400,10 +410,12 @@ class WsTest extends TestCase
     }
 
     /**
-     * @test
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
+     * @throws \Rebelo\Date\DateException
+     * @throws \Rebelo\Date\DateIntervalException
+     * @throws \Rebelo\Date\DateParseException
      */
+    #[Test]
     public function testPriorAgricultureStockMovementFarmerStackTaxIDSubmission(): void
     {
         $agriculture = new PriorAgriculturalStockMovement(
@@ -441,10 +453,12 @@ class WsTest extends TestCase
     }
 
     /**
-     * @test
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
+     * @throws \Rebelo\Date\DateException
+     * @throws \Rebelo\Date\DateIntervalException
+     * @throws \Rebelo\Date\DateParseException
      */
+    #[Test]
     public function testPriorAgricultureStockMovementSubmissionAzores(): void
     {
         $agriculture = new PriorAgriculturalStockMovement(
@@ -482,10 +496,12 @@ class WsTest extends TestCase
     }
 
     /**
-     * @test
      * @throws \Rebelo\ATWs\ATWsException
-     * @throws \Rebelo\Date\DateFormatException
+     * @throws \Rebelo\Date\DateException
+     * @throws \Rebelo\Date\DateIntervalException
+     * @throws \Rebelo\Date\DateParseException
      */
+    #[Test]
     public function testSubsequentAgriculturalStockMovementSubmission(): void
     {
         $agriculture = new SubsequentAgriculturalStockMovement(

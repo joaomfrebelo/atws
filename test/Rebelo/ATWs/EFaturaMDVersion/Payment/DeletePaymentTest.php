@@ -8,6 +8,8 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\EFaturaMDVersion\Payment;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Rebelo\ATWs\EFaturaMDVersion\DateRange;
 use Rebelo\ATWs\EFaturaMDVersion\RecordChannel;
@@ -22,12 +24,12 @@ class DeletePaymentTest extends TestCase
 {
 
     /**
-     * @test
      * @return void
      */
+    #[Test]
     public function testReflection(): void
     {
-        (new Base())->testReflection(DeletePayment::class);
+        (new Base(DeletePayment::class))->testReflection(DeletePayment::class);
         $this->assertTrue(true);
     }
 
@@ -35,7 +37,7 @@ class DeletePaymentTest extends TestCase
      * @return array
      * @throws \Rebelo\ATWs\ATWsException
      */
-    public function deletePaymentData(): array
+    public static function deletePaymentData(): array
     {
         $data = [];
 
@@ -69,8 +71,6 @@ class DeletePaymentTest extends TestCase
     }
 
     /**
-     * @test
-     * @dataProvider deletePaymentData
      * @param string                                           $taxRegistrationNumber
      * @param array|null                                       $documentList
      * @param \Rebelo\ATWs\EFaturaMDVersion\DateRange|null     $dateRange
@@ -79,6 +79,8 @@ class DeletePaymentTest extends TestCase
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
      */
+    #[Test]
+    #[DataProvider("deletePaymentData")]
     public function testInstance(
         string         $taxRegistrationNumber,
         ?array         $documentList,
@@ -103,6 +105,5 @@ class DeletePaymentTest extends TestCase
         $this->assertSame($recordChannel, $deletePayment->getRecordChannel());
 
     }
-
 
 }

@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\EFaturaMDVersion\WorkDocument;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Rebelo\ATWs\EFaturaMDVersion\RecordChannel;
 use Rebelo\Base;
@@ -23,20 +24,20 @@ class ChangeWokDocumentStatusTest extends TestCase
 {
 
     /**
-     * @test
      * @return void
      */
+    #[Test]
     public function testReflection(): void
     {
-        (new Base())->testReflection(ChangeWokDocumentStatus::class);
+        (new Base(ChangeWokDocumentStatus::class))->testReflection(ChangeWokDocumentStatus::class);
         $this->assertTrue(true);
     }
 
     /**
-     * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
      */
+    #[Test]
     public function testInstance(): void
     {
 

@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace Rebelo\ATWs;
 
 use JetBrains\PhpStorm\ArrayShape;
+use PHPUnit\Framework\Attributes\BeforeClass;
 
 /**
  *
@@ -31,9 +32,9 @@ trait TCredentials
     public static string $taxRegistrationNumber;
 
     /**
-     * @beforeClass
      * @throws \Exception
      */
+    #[BeforeClass]
     public static function before(): void
     {
         if (false === $credentials = \parse_ini_file(ATWS_TEST_CREDENTIALS)) {

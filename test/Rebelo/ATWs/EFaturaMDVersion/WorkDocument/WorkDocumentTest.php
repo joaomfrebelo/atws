@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\EFaturaMDVersion\WorkDocument;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Rebelo\ATWs\EFaturaMDVersion\DocumentTotals;
 use Rebelo\ATWs\EFaturaMDVersion\Line;
@@ -25,20 +26,20 @@ class WorkDocumentTest extends TestCase
 {
 
     /**
-     * @test
      * @return void
      */
+    #[Test]
     public function testReflection(): void
     {
-        (new Base())->testReflection(WorkDocument::class);
+        (new Base(WorkDocument::class))->testReflection(WorkDocument::class);
         $this->assertTrue(true);
     }
 
     /**
-     * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
      */
+    #[Test]
     public function testInstance(): void
     {
 

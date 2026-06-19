@@ -151,6 +151,7 @@ class Response
      *
      * @return bool
      * @since 1.0.0
+     * @noinspection PhpUnused
      */
     public function isResponseOk(): bool
     {

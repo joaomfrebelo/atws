@@ -9,6 +9,8 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\Series;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -20,7 +22,7 @@ class DocumentClassCodeTest extends TestCase
     /**
      * @return array
      */
-    public function providerMapData(): array
+    public static function providerMapData(): array
     {
         $stack = [];
         foreach (["FT", "FS", "FR", "ND", "NC"] as $type) {
@@ -61,13 +63,14 @@ class DocumentClassCodeTest extends TestCase
     }
 
     /**
-     * @test
      * @dataProvider providerMapData
      * @param string|\Rebelo\ATWs\Series\DocumentTypeCode $documentType
      * @param \Rebelo\ATWs\Series\DocumentClassCode       $expectedClass
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
      */
+    #[Test]
+    #[DataProvider("providerMapData")]
     public function testMapString(string|DocumentTypeCode $documentType, DocumentClassCode $expectedClass): void
     {
         $this->assertSame($expectedClass, DocumentClassCode::mapDocTypeToClassDoc($documentType));

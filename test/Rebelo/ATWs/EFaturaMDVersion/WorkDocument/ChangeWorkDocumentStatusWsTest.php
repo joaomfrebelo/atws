@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection PhpExpressionResultUnusedInspection */
 /**
  * MIT License
  *
@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\EFaturaMDVersion\WorkDocument;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Rebelo\ATWs\AATWs;
 use Rebelo\ATWs\EFaturaMDVersion\AWs;
@@ -27,12 +28,12 @@ class ChangeWorkDocumentStatusWsTest extends TestCase
     use TCredentials;
 
     /**
-     * @test
      * @return void
      */
+    #[Test]
     public function testReflection(): void
     {
-        (new Base())->testReflection(ChangeWorkDocumentStatusWs::class);
+        (new Base(ChangeWorkDocumentStatusWs::class))->testReflection(ChangeWorkDocumentStatusWs::class);
         $this->assertTrue(true);
     }
 
@@ -80,12 +81,12 @@ class ChangeWorkDocumentStatusWsTest extends TestCase
 
 
     /**
-     * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
      * @throws \Rebelo\Date\DateException
      * @throws \Rebelo\Date\DateParseException
      */
+    #[Test]
     public function testInstance(): void
     {
 
@@ -107,11 +108,11 @@ class ChangeWorkDocumentStatusWsTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
      * @throws \ReflectionException
      */
+    #[Test]
     public function testXml(): void
     {
 

@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\StockMovement;
 
+use Rebelo\ATWs\AATWs;
 use Rebelo\ATWs\ATWsException;
 use Rebelo\Date\Date;
 
@@ -76,23 +77,23 @@ class PriorAgriculturalStockMovement extends AStockMovement
             null
         );
 
-        $this->log->debug("MovementType set to: " . $movementType);
-        $this->log->debug("MovementStatus set to: " . $movementStatus);
-        $this->log->debug("InAzores set to: " . ($inAzores ? "true" : "false"));
-        $this->log->debug(
+        AATWs::$logger?->debug("MovementType set to: " . $movementType);
+        AATWs::$logger?->debug("MovementStatus set to: " . $movementStatus);
+        AATWs::$logger?->debug("InAzores set to: " . ($inAzores ? "true" : "false"));
+        AATWs::$logger?->debug(
             "FarmerTaxID set to: " .
             \join("; ", \is_array($farmerTaxID) ? $farmerTaxID : [$farmerTaxID])
         );
 
         if (\in_array($movementType, ["GR", "GT"]) === false) {
             $msg = "MovementType only can be 'GR', 'GT'";
-            $this->log->error($msg);
+            AATWs::$logger?->error($msg);
             throw new ATWsException($msg);
         }
 
         if (\in_array($movementStatus, ["N", "T", "A", "M"]) === false) {
             $msg = "MovementStatus only can be 'N', 'T', 'A', 'M'";
-            $this->log->error($msg);
+            AATWs::$logger?->error($msg);
             throw new ATWsException($msg);
         }
     }

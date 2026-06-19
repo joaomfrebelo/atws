@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\EFaturaMDVersion\Invoice;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Rebelo\ATWs\EFaturaMDVersion\RecordChannel;
 use Rebelo\Base;
@@ -24,19 +25,19 @@ class ChangeInvoiceStatusTest extends TestCase
 {
 
     /**
-     * @test
      * @return void
      */
+    #[Test]
     public function testReflection(): void
     {
-        (new Base())->testReflection(ChangeInvoiceStatus::class);
+        (new Base(ChangeInvoiceStatus::class))->testReflection(ChangeInvoiceStatus::class);
     }
 
     /**
-     * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
      */
+    #[Test]
     public function testInstance(): void
     {
         $channel = new RecordChannel("System", "1.9.9");

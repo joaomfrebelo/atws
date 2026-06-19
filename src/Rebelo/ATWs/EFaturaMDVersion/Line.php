@@ -22,14 +22,6 @@ use Rebelo\Date\Pattern;
  */
 class Line
 {
-
-    /**
-     *
-     * @var \Logger
-     * @since 1.0.0
-     */
-    protected \Logger $log;
-
     /**
      * Document Lines by Rate (LineSummary)
      * Summary of invoice lines by tax rate and reason for exemption or non-payment:
@@ -57,10 +49,9 @@ class Line
         protected ?string    $taxExemptionCode
     )
     {
-        $this->log = \Logger::getLogger(\get_class($this));
-        $this->log->debug(__METHOD__);
+        AATWs::$logger?->debug(__METHOD__);
 
-        $this->log->info("Tax point date set to " . $this->taxPointDate->format(Pattern::SQL_DATE));
+        AATWs::$logger?->info("Tax point date set to " . $this->taxPointDate->format(Pattern::SQL_DATE));
 
         $allowCreDebIndicator = ["D", "C"];
         if (\in_array($this->debitCreditIndicator, $allowCreDebIndicator) === false) {
@@ -68,47 +59,47 @@ class Line
                 "Debit Credit indicator must be on of '%s'",
                 \join("', '", $allowCreDebIndicator)
             );
-            $this->log->error($msg);
+            AATWs::$logger?->error($msg);
             throw new ATWsException($msg);
         }
 
         if ($this->totalTaxBase !== null && $this->amount !== null) {
             $msg = "TotalTaxBase and Amount cannot be both set at same time";
-            $this->log->error($msg);
+            AATWs::$logger?->error($msg);
             throw new ATWsException($msg);
         }
 
         if ($this->totalTaxBase === null && $this->amount === null) {
             $msg = "One of TotalTaxBase or Amount must be set";
-            $this->log->error($msg);
+            AATWs::$logger?->error($msg);
             throw new ATWsException($msg);
         }
 
-        $this->log->info("TotalTaxBase set to :" . ($this->totalTaxBase ?? "null"));
-        $this->log->info("Amount set to :" . ($this->amount ?? "null"));
+        AATWs::$logger?->info("TotalTaxBase set to :" . ($this->totalTaxBase ?? "null"));
+        AATWs::$logger?->info("Amount set to :" . ($this->amount ?? "null"));
 
         if ($this->taxExemptionCode === null) {
             if ($this->tax->getTaxPercentage() === 0.0 || $this->tax->getTaxCode() === "ISE" || $this->tax->getTotalTaxAmount() === 0.0) {
                 $msg = "Tax exemption TaxExemptionCode must be set";
-                $this->log->error($msg);
+                AATWs::$logger?->error($msg);
                 throw new ATWsException($msg);
             }
         } else {
 
             if (\preg_match("/^(M[0-9]{2})$/", $this->taxExemptionCode) !== 1) {
                 $msg = "Wrong tax exemption code format";
-                $this->log->error($msg);
+                AATWs::$logger?->error($msg);
                 throw new ATWsException($msg);
             }
 
             if (($this->tax->getTaxPercentage() ?? 0.0) > 0.0 || ($this->tax->getTotalTaxAmount() ?? 0.0) > 0.0) {
                 $msg = "Tax exemption TaxExemptionCode cannot be set";
-                $this->log->error($msg);
+                AATWs::$logger?->error($msg);
                 throw new ATWsException($msg);
             }
         }
 
-        $this->log->info("TaxExemptionCode set to :" . ($taxExemptionCode ?? "null"));
+        AATWs::$logger?->info("TaxExemptionCode set to :" . ($taxExemptionCode ?? "null"));
     }
 
     /**

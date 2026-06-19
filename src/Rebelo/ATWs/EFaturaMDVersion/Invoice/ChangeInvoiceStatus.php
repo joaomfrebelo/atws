@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\EFaturaMDVersion\Invoice;
 
+use Rebelo\ATWs\AATWs;
 use Rebelo\ATWs\EFaturaMDVersion\RecordChannel;
 
 /**
@@ -18,12 +19,6 @@ use Rebelo\ATWs\EFaturaMDVersion\RecordChannel;
  */
 class ChangeInvoiceStatus
 {
-
-    /**
-     * @var \Logger
-     * @since 2.0.0
-     */
-    protected \Logger $log;
 
     /**
      * Change the invoice status
@@ -40,8 +35,7 @@ class ChangeInvoiceStatus
         protected ?RecordChannel $recordChannel
     )
     {
-        $this->log = \Logger::getLogger(\get_class($this));
-        $this->log->debug(__METHOD__);
+        AATWs::$logger?->debug(__METHOD__);
     }
 
     /**

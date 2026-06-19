@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\EFaturaMDVersion\Invoice;
 
+use Rebelo\ATWs\AATWs;
 use Rebelo\ATWs\ATWsException;
 use Rebelo\ATWs\EFaturaMDVersion\AWs;
 use Rebelo\Date\Date;
@@ -20,11 +21,6 @@ use Rebelo\Date\Pattern;
  */
 class InvoiceHeader
 {
-    /**
-     * @var \Logger
-     * @since 2.0.0
-     */
-    protected \Logger $log;
 
     /**
      * @param string $invoiceNo            Unique identification of the sales document. It must be identical to that contained in the SAF-T (PT) file
@@ -48,11 +44,10 @@ class InvoiceHeader
     )
     {
 
-        $this->log = \Logger::getLogger(\get_class($this));
-        $this->log->debug(__METHOD__);
+        AATWs::$logger?->debug(__METHOD__);
 
-        $this->log->info("invoiceNo set to: " . $invoiceNo);
-        $this->log->info(
+        AATWs::$logger?->info("invoiceNo set to: " . $invoiceNo);
+        AATWs::$logger?->info(
             "InvoiceDate set to: " . $invoiceDate->format(Pattern::SQL_DATE)
         );
 
@@ -63,27 +58,27 @@ class InvoiceHeader
                 "Invoice type only can be '%s'",
                 \join("', '", $allowTypes),
             );
-            $this->log->error($msg);
+            AATWs::$logger?->error($msg);
             throw new ATWsException($msg);
         }
 
-        $this->log->info("InvoiceType set to: " . $invoiceType);
-        $this->log->info(
+        AATWs::$logger?->info("InvoiceType set to: " . $invoiceType);
+        AATWs::$logger?->info(
             \sprintf(
                 "Self billing Indicator set to %s",
                 $this->selfBillingIndicator ? "true" : "false"
             )
         );
 
-        $this->log->info("CustomerTaxID set to: " . $customerTaxID);
+        AATWs::$logger?->info("CustomerTaxID set to: " . $customerTaxID);
 
         if (\preg_match("/^([A-Z]{2}|Desconhecido)$/", $this->customerTaxIDCountry) !== 1) {
             $msg = "Wrong format for CustomerTaxIdCountry";
-            $this->log->error($msg);
+            AATWs::$logger?->error($msg);
             throw new ATWsException($msg);
         }
 
-        $this->log->info("CustomerTaxIDCountry set to: " . $this->customerTaxIDCountry);
+        AATWs::$logger?->info("CustomerTaxIDCountry set to: " . $this->customerTaxIDCountry);
 
     }
 

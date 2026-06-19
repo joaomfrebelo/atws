@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection PhpExpressionResultUnusedInspection */
 /**
  * MIT License
  *
@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\EFaturaMDVersion\Payment;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Rebelo\ATWs\AATWs;
 use Rebelo\ATWs\EFaturaMDVersion\AWs;
@@ -30,12 +31,12 @@ class PaymentWsTest extends TestCase
     use TCredentials;
 
     /**
-     * @test
      * @return void
      */
+    #[Test]
     public function testReflection(): void
     {
-        (new Base())->testReflection(PaymentWs::class);
+        (new Base(PaymentWs::class))->testReflection(PaymentWs::class);
         $this->assertTrue(true);
     }
 
@@ -163,13 +164,13 @@ class PaymentWsTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
      * @throws \Rebelo\Date\DateException
      * @throws \Rebelo\Date\DateIntervalException
      * @throws \Rebelo\Date\DateParseException
      */
+    #[Test]
     public function testInstance(): void
     {
         foreach ($this->paymentWsDataProvider() as $payment) {
@@ -190,7 +191,6 @@ class PaymentWsTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
      * @throws \Rebelo\Date\DateException
@@ -199,6 +199,7 @@ class PaymentWsTest extends TestCase
      * @throws \ReflectionException
      * @throws \Exception
      */
+    #[Test]
     public function testXml(): void
     {
         foreach ($this->paymentWsDataProvider() as $payment) {

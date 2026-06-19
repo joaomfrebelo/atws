@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\EFaturaMDVersion;
 
+use Rebelo\ATWs\AATWs;
 use Rebelo\Date\Date;
 use Rebelo\Date\Pattern;
 
@@ -19,13 +20,6 @@ use Rebelo\Date\Pattern;
  */
 class OrderReference
 {
-
-    /**
-     * @var \Logger
-     * @since 1.0.0
-     */
-    protected \Logger $log;
-
     /**
      * Reference to the source document (OrderReferences)
      * @param string            $originatingON The type, series and number of the document shall be indicated. In case the document is included in SAF-T (PT), the numbering structure of the field of origin shall be used.
@@ -37,10 +31,9 @@ class OrderReference
         protected Date   $orderDate
     )
     {
-        $this->log = \Logger::getLogger(\get_class($this));
-        $this->log->debug(__METHOD__);
-        $this->log->info("originatingON set to: " . $this->originatingON);
-        $this->log->info("orderDate set to: " . $this->orderDate->format(Pattern::SQL_DATE));
+        AATWs::$logger?->debug(__METHOD__);
+        AATWs::$logger?->info("originatingON set to: " . $this->originatingON);
+        AATWs::$logger?->info("orderDate set to: " . $this->orderDate->format(Pattern::SQL_DATE));
     }
 
     /**

@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\EFaturaMDVersion;
 
+use Rebelo\ATWs\AATWs;
 use Rebelo\ATWs\ATWsException;
 
 /**
@@ -18,13 +19,6 @@ use Rebelo\ATWs\ATWsException;
  */
 class WithholdingTax
 {
-
-    /**
-     * @var \Logger
-     * @since 2.0.0
-     */
-    protected \Logger $log;
-
     /**
      * @param string $withholdingTaxType   IRS – Personal Income Tax; IRC – Corporate Income Tax; IS – Stamp Duty.
      * @param float  $withholdingTaxAmount The amount of tax withheld or to be withheld must be indicated.
@@ -36,8 +30,7 @@ class WithholdingTax
         protected float  $withholdingTaxAmount
     )
     {
-        $this->log = \Logger::getLogger(\get_class($this));
-        $this->log->debug(__METHOD__);
+        AATWs::$logger?->debug(__METHOD__);
 
         $allowType = ['IRS', 'IRC', 'IS'];
 
@@ -46,19 +39,19 @@ class WithholdingTax
                 "Withholding Tax Type only allow '%s'",
                 \join("', '", $allowType)
             );
-            $this->log->error($msg);
+            AATWs::$logger?->error($msg);
             throw new ATWsException($msg);
         }
 
-        $this->log->info("Withholding Tax Type set to " . $this->withholdingTaxType);
+        AATWs::$logger?->info("Withholding Tax Type set to " . $this->withholdingTaxType);
 
         if ($this->withholdingTaxAmount < 0.0) {
             $msg = "Withholding Tax Amount cannot be less than zero";
-            $this->log->error($msg);
+            AATWs::$logger?->error($msg);
             throw new ATWsException($msg);
         }
 
-        $this->log->info("Withholding Tax Amount " . $this->withholdingTaxAmount);
+        AATWs::$logger?->info("Withholding Tax Amount " . $this->withholdingTaxAmount);
     }
 
     /**

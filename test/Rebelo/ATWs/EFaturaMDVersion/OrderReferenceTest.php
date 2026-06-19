@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\EFaturaMDVersion;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Rebelo\Base;
 use Rebelo\Date\Date;
@@ -23,12 +24,12 @@ class OrderReferenceTest extends TestCase
 {
 
     /**
-     * @test
      * @return void
      */
+    #[Test]
     public function testReflection(): void
     {
-        (new Base())->testReflection(OrderReference::class);
+        (new Base(OrderReference::class))->testReflection(OrderReference::class);
         $this->assertTrue(true);
     }
 

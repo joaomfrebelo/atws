@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\Series;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Rebelo\ATWs\ATWsException;
 use Rebelo\Base;
@@ -22,23 +23,23 @@ class ConsultSelfBillingSeriesTest extends TestCase
 {
 
     /**
-     * @test
      * @return void
      */
+    #[Test]
     public function testReflection(): void
     {
-        (new Base())->testReflection(ConsultSelfBillingSeries::class);
+        (new Base(ConsultSelfBillingSeries::class))->testReflection(ConsultSelfBillingSeries::class);
         $this->assertTrue(true);
     }
 
     /**
-     * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
      * @throws \Rebelo\Date\DateException
      * @throws \Rebelo\Date\DateIntervalException
      * @throws \Rebelo\Date\DateParseException
      */
+    #[Test]
     public function testInstance(): void
     {
         $series               = "A999";
@@ -69,9 +70,9 @@ class ConsultSelfBillingSeriesTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      */
+    #[Test]
     public function testInstanceNull(): void
     {
         $consultSeries = new ConsultSelfBillingSeries();
@@ -85,13 +86,13 @@ class ConsultSelfBillingSeriesTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
      * @throws \Rebelo\Date\DateException
      * @throws \Rebelo\Date\DateIntervalException
      * @throws \Rebelo\Date\DateParseException
      */
+    #[Test]
     public function testWrongDates(): void
     {
         $this->expectException(ATWsException::class);

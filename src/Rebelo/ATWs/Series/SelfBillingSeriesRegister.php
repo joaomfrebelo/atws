@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\Series;
 
+use Rebelo\ATWs\AATWs;
 use Rebelo\ATWs\ATWsException;
 use Rebelo\Date\Date;
 use Rebelo\Date\Pattern;
@@ -55,33 +56,33 @@ class SelfBillingSeriesRegister extends ASeries
     )
     {
         parent::__construct();
-        $this->log->debug(__METHOD__);
-        $this->log->debug("Series set to: " . $this->series);
-        $this->log->debug("DocumentTypeCode set to: " . $this->documentTypeCode->value);
-        $this->log->debug("SeriesInitialSequenceNumber set to: " . $this->seriesInitialSequenceNumber);
-        $this->log->debug("ExpectedInitialDateUse set to: " . $this->expectedInitialDateUse->format(Pattern::SQL_DATE));
-        $this->log->debug("SoftwareCertificate set to: " . $this->softwareCertificate);
-        $this->log->debug("selfBillingEntityCode set to: " . $this->selfBillingEntityCode->value);
-        $this->log->debug("Supplier tin set to: " . $this->supplierTin);
-        $this->log->debug("Supplier country set to: " . ($this->supplierCountry ?? "null"));
-        $this->log->debug("ForeignSupplierName set to: " . ($this->foreignSupplierName ?? "null"));
+        AATWs::$logger?->debug(__METHOD__);
+        AATWs::$logger?->debug("Series set to: " . $this->series);
+        AATWs::$logger?->debug("DocumentTypeCode set to: " . $this->documentTypeCode->value);
+        AATWs::$logger?->debug("SeriesInitialSequenceNumber set to: " . $this->seriesInitialSequenceNumber);
+        AATWs::$logger?->debug("ExpectedInitialDateUse set to: " . $this->expectedInitialDateUse->format(Pattern::SQL_DATE));
+        AATWs::$logger?->debug("SoftwareCertificate set to: " . $this->softwareCertificate);
+        AATWs::$logger?->debug("selfBillingEntityCode set to: " . $this->selfBillingEntityCode->value);
+        AATWs::$logger?->debug("Supplier tin set to: " . $this->supplierTin);
+        AATWs::$logger?->debug("Supplier country set to: " . ($this->supplierCountry ?? "null"));
+        AATWs::$logger?->debug("ForeignSupplierName set to: " . ($this->foreignSupplierName ?? "null"));
 
         $today = Date::parse(Pattern::SQL_DATE, (new Date())->format(Pattern::SQL_DATE));
         if ($this->getExpectedInitialDateUse()->isEarlier($today)) {
             $msg = "ExpectedInitialDateUse can not be earlier that NOW";
-            $this->log->error($msg);
+            AATWs::$logger?->error($msg);
             throw new ATWsException($msg);
         }
 
         if (!static::isValidSeries($this->series)) {
             $msg = "Series identifier not valid";
-            $this->log->error($msg);
+            AATWs::$logger?->error($msg);
             throw new ATWsException($msg);
         }
 
         if (!static::isValidSeriesInitialSequenceNumber($this->seriesInitialSequenceNumber)) {
             $msg = "SeriesInitialSequenceNumber identifier not valid";
-            $this->log->error($msg);
+            AATWs::$logger?->error($msg);
             throw new ATWsException($msg);
         }
     }

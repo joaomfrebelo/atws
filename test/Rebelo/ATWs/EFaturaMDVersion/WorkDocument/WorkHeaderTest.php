@@ -8,6 +8,7 @@
 
 namespace Rebelo\ATWs\EFaturaMDVersion\WorkDocument;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Rebelo\ATWs\ATWsException;
 use Rebelo\Base;
@@ -22,20 +23,20 @@ class WorkHeaderTest extends TestCase
 {
 
     /**
-     * @test
      * @return void
      */
+    #[Test]
     public function testReflection(): void
     {
-        (new Base())->testReflection(WorkHeader::class);
+        (new Base(WorkHeader::class))->testReflection(WorkHeader::class);
         $this->assertTrue(true);
     }
 
     /**
-     * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
      */
+    #[Test]
     public function testInstance(): void
     {
 
@@ -66,10 +67,10 @@ class WorkHeaderTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
      */
+    #[Test]
     public function testWrongWorkType(): void
     {
         $this->expectException(ATWsException::class);
@@ -86,10 +87,10 @@ class WorkHeaderTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
      */
+    #[Test]
     public function testWrongCustomerTaxIDCountry(): void
     {
         $this->expectException(ATWsException::class);

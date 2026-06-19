@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\EFaturaMDVersion\WorkDocument;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Rebelo\ATWs\ATWsException;
 use Rebelo\ATWs\EFaturaMDVersion\DocumentTotals;
@@ -26,20 +27,20 @@ class WorkDataTest extends TestCase
 {
 
     /**
-     * @test
      * @return void
      */
+    #[Test]
     public function testReflection(): void
     {
-        (new Base())->testReflection(WorkData::class);
+        (new Base(WorkData::class))->testReflection(WorkData::class);
         $this->assertTrue(true);
     }
 
     /**
-     * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
      */
+    #[Test]
     public function testInstance(): void
     {
         $workHeader      = new WorkHeader(
@@ -78,10 +79,10 @@ class WorkDataTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
      */
+    #[Test]
     public function testWrongEacCode(): void
     {
         $this->expectException(ATWsException::class);

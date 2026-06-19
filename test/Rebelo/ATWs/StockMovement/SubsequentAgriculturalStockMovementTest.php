@@ -9,6 +9,8 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\StockMovement;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Rebelo\ATWs\ATWsException;
 use Rebelo\Base;
@@ -23,12 +25,12 @@ class SubsequentAgriculturalStockMovementTest extends TestCase
 {
 
     /**
-     * @test
      * @return void
      */
+    #[Test]
     public function testReflection(): void
     {
-        (new Base())->testReflection(
+        (new Base(SubsequentAgriculturalStockMovement::class))->testReflection(
             SubsequentAgriculturalStockMovement::class
         );
         $this->assertTrue(true);
@@ -41,7 +43,7 @@ class SubsequentAgriculturalStockMovementTest extends TestCase
      * @throws \Rebelo\Date\DateIntervalException
      * @throws \Rebelo\Date\DateParseException
      */
-    public function provider(): array
+    public static function provider(): array
     {
         $companyAddress = new Address(
             "Rua da Escola Gerais",
@@ -89,7 +91,6 @@ class SubsequentAgriculturalStockMovementTest extends TestCase
                 [
                     "movementStatus" => "T",
                     "movementType" => "GT",
-                    "customerName" => null,
                     "addressTo" => null,
                     "movementEndTime" => null,
                     "vehicleID" => null,
@@ -99,9 +100,6 @@ class SubsequentAgriculturalStockMovementTest extends TestCase
     }
 
     /**
-     * @dataProvider provider
-     * @test
-     *
      * @param string          $taxRegistrationNumber
      * @param string          $atcud
      * @param string          $companyName
@@ -122,6 +120,8 @@ class SubsequentAgriculturalStockMovementTest extends TestCase
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
      */
+    #[Test]
+    #[DataProvider("provider")]
     public function testInstance(
         string          $taxRegistrationNumber,
         string          $atcud,
@@ -141,7 +141,7 @@ class SubsequentAgriculturalStockMovementTest extends TestCase
         array           $lines
     ): void
     {
-        $atockMovement = new SubsequentAgriculturalStockMovement(
+        $stockMovement = new SubsequentAgriculturalStockMovement(
             $taxRegistrationNumber,
             $atcud,
             $companyName,
@@ -161,34 +161,34 @@ class SubsequentAgriculturalStockMovementTest extends TestCase
         );
 
         $this->assertSame(
-            $taxRegistrationNumber, $atockMovement->getTaxRegistrationNumber()
+            $taxRegistrationNumber, $stockMovement->getTaxRegistrationNumber()
         );
-        $this->assertSame($atcud, $atockMovement->getAtcud());
-        $this->assertSame($companyName, $atockMovement->getCompanyName());
-        $this->assertSame($companyAddress, $atockMovement->getCompanyAddress());
-        $this->assertSame($documentNumber, $atockMovement->getDocumentNumber());
-        $this->assertSame($movementStatus, $atockMovement->getMovementStatus());
-        $this->assertSame($movementDate, $atockMovement->getMovementDate());
-        $this->assertSame($movementStartTime, $atockMovement->getMovementStartTime());
-        $this->assertSame($addressTo, $atockMovement->getAddressTo());
-        $this->assertSame($addressFrom, $atockMovement->getAddressFrom());
-        $this->assertSame($movementEndTime, $atockMovement->getMovementEndTime());
-        $this->assertSame($movementStartTime, $atockMovement->getMovementStartTime());
-        $this->assertSame($vehicleID, $atockMovement->getVehicleID());
-        $this->assertSame($lines, $atockMovement->getLines());
-        $this->assertSame($movementType, $atockMovement->getMovementType());
-        $this->assertSame($farmerTaxID, $atockMovement->getFarmerTaxID());
-        $this->assertSame($orderReferences, $atockMovement->getOrderReferences());
+        $this->assertSame($atcud, $stockMovement->getAtcud());
+        $this->assertSame($companyName, $stockMovement->getCompanyName());
+        $this->assertSame($companyAddress, $stockMovement->getCompanyAddress());
+        $this->assertSame($documentNumber, $stockMovement->getDocumentNumber());
+        $this->assertSame($movementStatus, $stockMovement->getMovementStatus());
+        $this->assertSame($movementDate, $stockMovement->getMovementDate());
+        $this->assertSame($movementStartTime, $stockMovement->getMovementStartTime());
+        $this->assertSame($addressTo, $stockMovement->getAddressTo());
+        $this->assertSame($addressFrom, $stockMovement->getAddressFrom());
+        $this->assertSame($movementEndTime, $stockMovement->getMovementEndTime());
+        $this->assertSame($movementStartTime, $stockMovement->getMovementStartTime());
+        $this->assertSame($vehicleID, $stockMovement->getVehicleID());
+        $this->assertSame($lines, $stockMovement->getLines());
+        $this->assertSame($movementType, $stockMovement->getMovementType());
+        $this->assertSame($farmerTaxID, $stockMovement->getFarmerTaxID());
+        $this->assertSame($orderReferences, $stockMovement->getOrderReferences());
     }
 
     /**
-     * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
      * @throws \Rebelo\Date\DateException
      * @throws \Rebelo\Date\DateIntervalException
      * @throws \Rebelo\Date\DateParseException
      */
+    #[Test]
     public function testWrongMovementType(): void
     {
         $this->expectException(ATWsException::class);
@@ -216,13 +216,13 @@ class SubsequentAgriculturalStockMovementTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
      * @throws \Rebelo\Date\DateException
      * @throws \Rebelo\Date\DateIntervalException
      * @throws \Rebelo\Date\DateParseException
      */
+    #[Test]
     public function testWrongMovementStatus(): void
     {
         $this->expectException(ATWsException::class);

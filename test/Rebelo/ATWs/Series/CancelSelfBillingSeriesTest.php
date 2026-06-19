@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\Series;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Rebelo\Base;
 
@@ -19,20 +20,20 @@ use Rebelo\Base;
 class CancelSelfBillingSeriesTest extends TestCase
 {
     /**
-     * @test
      * @return void
      */
+    #[Test]
     public function testReflection(): void
     {
-        (new Base())->testReflection(CancelSelfBillingSeries::class);
+        (new Base(CancelSelfBillingSeries::class))->testReflection(CancelSelfBillingSeries::class);
         $this->assertTrue(true);
     }
 
     /**
-     * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
      */
+    #[Test]
     public function testInstance(): void
     {
         $series               = "B999";

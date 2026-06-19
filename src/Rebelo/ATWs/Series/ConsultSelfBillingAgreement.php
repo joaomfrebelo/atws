@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\Series;
 
+use Rebelo\ATWs\AATWs;
 use Rebelo\Date\Date;
 use Rebelo\Date\Pattern;
 
@@ -16,15 +17,8 @@ use Rebelo\Date\Pattern;
  *
  * @since 2.0.2
  */
-class ConsultSelfBillingAgreement
+readonly class ConsultSelfBillingAgreement
 {
-    /**
-     *
-     * @var \Logger
-     * @since 2.0.2
-     */
-    protected \Logger $log;
-
     /**
      * @param string|null                                          $tinAssociatedWithTheAgreement Indicate the TIN of the entity with which you established the prior Self-invoicing Agreement.
      * @param \Rebelo\ATWs\Series\SelfBillingSettlementStatus|null $settlementStatus              Indicate the status of the Self-Billing Agreement you wish to consult.
@@ -34,21 +28,20 @@ class ConsultSelfBillingAgreement
      * @since 2.0.2
      */
     public function __construct(
-        private readonly ?string                      $tinAssociatedWithTheAgreement,
-        private readonly ?SelfBillingSettlementStatus $settlementStatus,
-        private readonly ?Date                        $authorizationPeriodFrom,
-        private readonly ?Date                        $authorizationPeriodUntil,
+        private ?string                      $tinAssociatedWithTheAgreement,
+        private ?SelfBillingSettlementStatus $settlementStatus,
+        private ?Date                        $authorizationPeriodFrom,
+        private ?Date                        $authorizationPeriodUntil,
     )
     {
-        $this->log = \Logger::getLogger(\get_class($this));
-        $this->log->debug(__METHOD__);
-        $this->log->debug("TinAssociatedWithTheAgreement set to: " . ($this->tinAssociatedWithTheAgreement ?? "null"));
-        $this->log->debug("settlementStatus set to: " . ($this->settlementStatus?->value ?? "null"));
-        $this->log->debug(
+        AATWs::$logger?->debug(__METHOD__);
+        AATWs::$logger?->debug("TinAssociatedWithTheAgreement set to: " . ($this->tinAssociatedWithTheAgreement ?? "null"));
+        AATWs::$logger?->debug("settlementStatus set to: " . ($this->settlementStatus?->value ?? "null"));
+        AATWs::$logger?->debug(
             "authorizationPeriodFrom set to: " . (
                 $this->authorizationPeriodFrom?->format(Pattern::SQL_DATE) ?? "null")
         );
-        $this->log->debug(
+        AATWs::$logger?->debug(
             "authorizationPeriodUntil set to: " . (
                 $this->authorizationPeriodUntil?->format(Pattern::SQL_DATE) ?? "null")
         );

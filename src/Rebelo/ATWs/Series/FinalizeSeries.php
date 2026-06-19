@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection PhpUnused */
 
 /**
  * MIT License
@@ -9,6 +9,8 @@ declare(strict_types=1);
 
 
 namespace Rebelo\ATWs\Series;
+
+use Rebelo\ATWs\AATWs;
 
 /**
  * This functionality is intended to indicate that a Series was valid for a set of documents,
@@ -40,12 +42,12 @@ class FinalizeSeries extends ASeries
     )
     {
         parent::__construct();
-        $this->log->debug(__METHOD__);
-        $this->log->debug("Series set to: " . $this->series);
-        $this->log->debug("DocumentTypeCode set to: " . $this->documentTypeCode->value);
-        $this->log->debug("SeriesValidationCode: " . $this->seriesValidationCode);
-        $this->log->debug("lastSequenceDocNumber: " . $this->lastSequenceDocNumber);
-        $this->log->debug("Reason: " . ($this->reason ?? "null"));
+        AATWs::$logger?->debug(__METHOD__);
+        AATWs::$logger?->debug("Series set to: " . $this->series);
+        AATWs::$logger?->debug("DocumentTypeCode set to: " . $this->documentTypeCode->value);
+        AATWs::$logger?->debug("SeriesValidationCode: " . $this->seriesValidationCode);
+        AATWs::$logger?->debug("lastSequenceDocNumber: " . $this->lastSequenceDocNumber);
+        AATWs::$logger?->debug("Reason: " . ($this->reason ?? "null"));
     }
 
     /**

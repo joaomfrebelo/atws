@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\EFaturaMDVersion\Payment;
 
+use Rebelo\ATWs\AATWs;
 use Rebelo\ATWs\ATWsException;
 use Rebelo\ATWs\EFaturaMDVersion\AWs;
 use Rebelo\Date\Date;
@@ -20,13 +21,6 @@ use Rebelo\Date\Pattern;
  */
 class PaymentStatus
 {
-
-    /**
-     * @var \Logger
-     * @since 2.0.0
-     */
-    protected \Logger $log;
-
     /**
      * @param string            $paymentStatus     Document status. It can take on the following values: N – Normal; A – Canceled;
      * @param \Rebelo\Date\Date $paymentStatusDate Date when the document state was last saved.
@@ -39,20 +33,19 @@ class PaymentStatus
         protected Date   $paymentStatusDate
     )
     {
-        $this->log = \Logger::getLogger(\get_class($this));
-        $this->log->debug(__METHOD__);
+        AATWs::$logger?->debug(__METHOD__);
 
         $allowStatus = ['N', 'A'];
         if (\in_array($this->paymentStatus, $allowStatus) === false) {
             $msg = \sprintf(
                 "PaymentStatus must be one of '%s'", \join("', '", $allowStatus)
             );
-            $this->log->error($msg);
+            AATWs::$logger?->error($msg);
             throw new ATWsException($msg);
         }
 
-        $this->log->info("Payment status set to " . $this->paymentStatus);
-        $this->log->info("Payment status date set to " . $this->paymentStatusDate->format(Pattern::DATE_T_TIME));
+        AATWs::$logger?->info("Payment status set to " . $this->paymentStatus);
+        AATWs::$logger?->info("Payment status date set to " . $this->paymentStatusDate->format(Pattern::DATE_T_TIME));
     }
 
     /**

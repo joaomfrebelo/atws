@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\EFaturaMDVersion\Payment;
 
+use Rebelo\ATWs\AATWs;
 use Rebelo\ATWs\EFaturaMDVersion\AWs;
 use Rebelo\Date\Date;
 use Rebelo\Date\Pattern;
@@ -22,13 +23,6 @@ use Rebelo\Date\Pattern;
 class SourceDocumentID
 {
     /**
-     *
-     * @var \Logger
-     * @since 2.0.0
-     */
-    protected \Logger $log;
-
-    /**
      * Reference to the source document (SourceDocumentID)
      * If there is a need to make more than one reference, this structure can be generated as many times as necessary.
      *
@@ -41,11 +35,9 @@ class SourceDocumentID
         protected Date   $invoiceDate
     )
     {
-        $this->log = \Logger::getLogger(\get_class($this));
-        $this->log->debug(__METHOD__);
-
-        $this->log->info("OriginatingON set to " . $this->originatingON);
-        $this->log->info("InvoiceDate set to " . $this->invoiceDate->format(Pattern::SQL_DATE));
+        AATWs::$logger?->debug(__METHOD__);
+        AATWs::$logger?->info("OriginatingON set to " . $this->originatingON);
+        AATWs::$logger?->info("InvoiceDate set to " . $this->invoiceDate->format(Pattern::SQL_DATE));
     }
 
     /**

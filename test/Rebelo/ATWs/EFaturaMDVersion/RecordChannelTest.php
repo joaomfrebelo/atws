@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\EFaturaMDVersion;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Rebelo\Base;
 
@@ -21,19 +22,19 @@ use Rebelo\Base;
 class RecordChannelTest extends TestCase
 {
     /**
-     * @test
      * @return void
      */
+    #[Test]
     public function testReflection(): void
     {
-        (new Base())->testReflection(RecordChannel::class);
+        (new Base(RecordChannel::class))->testReflection(RecordChannel::class);
         $this->assertTrue(true);
     }
 
     /**
-     * @test
      * @return void
      */
+    #[Test]
     public function testInstance(): void
     {
         $system  = "System";

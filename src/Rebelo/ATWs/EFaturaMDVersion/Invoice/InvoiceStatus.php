@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\EFaturaMDVersion\Invoice;
 
+use Rebelo\ATWs\AATWs;
 use Rebelo\ATWs\ATWsException;
 use Rebelo\ATWs\EFaturaMDVersion\AWs;
 use Rebelo\Date\Date;
@@ -22,12 +23,6 @@ class InvoiceStatus
 {
 
     /**
-     * @var \Logger
-     * @since 2.0.0
-     */
-    protected \Logger $log;
-
-    /**
      * @param string            $invoiceStatus     Document status. It can take on the following values: N – Normal; A – Canceled; F – Billed;S – Self-billed.
      * @param \Rebelo\Date\Date $invoiceStatusDate Date when the document state was last saved.
      * @throws \Rebelo\ATWs\ATWsException
@@ -38,20 +33,19 @@ class InvoiceStatus
         protected Date   $invoiceStatusDate
     )
     {
-        $this->log = \Logger::getLogger(\get_class($this));
-        $this->log->debug(__METHOD__);
+        AATWs::$logger?->debug(__METHOD__);
 
         $allowStatus = ['N', 'A', 'F', 'S'];
         if (\in_array($this->invoiceStatus, $allowStatus) === false) {
             $msg = \sprintf(
                 "InvoiceStatus must be one of '%s'", \join("', '", $allowStatus)
             );
-            $this->log->error($msg);
+            AATWs::$logger?->error($msg);
             throw new ATWsException($msg);
         }
 
-        $this->log->info("Invoice status set to " . $this->invoiceStatus);
-        $this->log->info(
+        AATWs::$logger?->info("Invoice status set to " . $this->invoiceStatus);
+        AATWs::$logger?->info(
             "Invoice status date set to " . $this->invoiceStatusDate->format(Pattern::DATE_T_TIME)
         );
 

@@ -8,6 +8,8 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\EFaturaMDVersion\Payment;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Rebelo\ATWs\EFaturaMDVersion\RecordChannel;
 use Rebelo\ATWs\TCredentials;
@@ -24,12 +26,12 @@ class ChangePaymentStatusTest extends TestCase
     use TCredentials;
 
     /**
-     * @test
      * @return void
      */
+    #[Test]
     public function testReflection(): void
     {
-        (new Base())->testReflection(ChangePaymentStatus::class);
+        (new Base(ChangePaymentStatus::class))->testReflection(ChangePaymentStatus::class);
         $this->assertTrue(true);
     }
 
@@ -37,7 +39,7 @@ class ChangePaymentStatusTest extends TestCase
      * @return array
      * @throws \Rebelo\ATWs\ATWsException
      */
-    public function changePaymentStatusData(): array
+    public static function changePaymentStatusData(): array
     {
         $data = [];
 
@@ -51,14 +53,14 @@ class ChangePaymentStatusTest extends TestCase
     }
 
     /**
-     * @test
-     * @dataProvider changePaymentStatusData
      * @param string                                              $taxRegistrationNumber
      * @param \Rebelo\ATWs\EFaturaMDVersion\Payment\PaymentHeader $header
      * @param \Rebelo\ATWs\EFaturaMDVersion\Payment\PaymentStatus $newPaymentStatus
      * @param \Rebelo\ATWs\EFaturaMDVersion\RecordChannel|null    $recordChannel
      * @return void
      */
+    #[Test]
+    #[DataProvider("changePaymentStatusData")]
     public function testInstance(
         string         $taxRegistrationNumber,
         PaymentHeader  $header,

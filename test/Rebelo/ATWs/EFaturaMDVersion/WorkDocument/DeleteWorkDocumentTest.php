@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\EFaturaMDVersion\WorkDocument;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Rebelo\ATWs\ATWsException;
 use Rebelo\ATWs\EFaturaMDVersion\DateRange;
@@ -24,20 +25,20 @@ class DeleteWorkDocumentTest extends TestCase
 {
 
     /**
-     * @test
      * @return void
      */
+    #[Test]
     public function testReflection(): void
     {
-        (new Base())->testReflection(DeleteWorkDocument::class);
+        (new Base(DeleteWorkDocument::class))->testReflection(DeleteWorkDocument::class);
         $this->assertTrue(true);
     }
 
     /**
-     * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
      */
+    #[Test]
     public function testInstanceDocumentList(): void
     {
 
@@ -74,10 +75,10 @@ class DeleteWorkDocumentTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
      */
+    #[Test]
     public function testInstanceDateRange(): void
     {
 
@@ -105,9 +106,9 @@ class DeleteWorkDocumentTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      */
+    #[Test]
     public function testDocumentListEmptyOrNullAndDateRangeNull(): void
     {
 
@@ -133,10 +134,10 @@ class DeleteWorkDocumentTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
      */
+    #[Test]
     public function testDocumentListNotEmptyOrNullAndDateRangeNotNull(): void
     {
         $this->expectException(ATWsException::class);

@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\EFaturaMDVersion;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Rebelo\ATWs\ATWsException;
 use Rebelo\Base;
@@ -23,20 +24,20 @@ class LineTest extends TestCase
 {
 
     /**
-     * @test
      * @return void
      */
+    #[Test]
     public function testReflection(): void
     {
-        (new Base())->testReflection(Line::class);
+        (new Base(Line::class))->testReflection(Line::class);
         $this->assertTrue(true);
     }
 
     /**
-     * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
      */
+    #[Test]
     public function testInstance(): void
     {
 
@@ -81,10 +82,10 @@ class LineTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
      */
+    #[Test]
     public function testWrongDebitCredit(): void
     {
 
@@ -114,10 +115,10 @@ class LineTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
      */
+    #[Test]
     public function testTaxTotalBaseAndAmountBothSet(): void
     {
 
@@ -147,10 +148,10 @@ class LineTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
      */
+    #[Test]
     public function testTaxTotalBaseAndAmountBothNull(): void
     {
 
@@ -180,10 +181,10 @@ class LineTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
      */
+    #[Test]
     public function testTaxExemptionCodeNullWithTaxExemptionVatIse(): void
     {
 
@@ -213,10 +214,10 @@ class LineTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
      */
+    #[Test]
     public function testTaxExemptionCodeNullWithTaxExemptionTotalAmountZero(): void
     {
 
@@ -246,10 +247,10 @@ class LineTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
      */
+    #[Test]
     public function testTaxExemptionCodeWrongFormat(): void
     {
 
@@ -282,10 +283,10 @@ class LineTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
      */
+    #[Test]
     public function testTaxExemptionCodeNotSet(): void
     {
         $orderReference = [new OrderReference("FT 9/99999", new Date())];

@@ -10,6 +10,8 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\Series;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Rebelo\ATWs\TCredentials;
 use Rebelo\Base;
@@ -23,19 +25,19 @@ class SelfBillingRegisterWsTest extends TestCase
     use TCredentials;
 
     /**
-     * @test
      * @return void
      */
+    #[Test]
     public function testReflection(): void
     {
-        (new Base())->testReflection(SelfBillingRegisterWs::class);
+        (new Base(SelfBillingRegisterWs::class))->testReflection(SelfBillingRegisterWs::class);
         $this->assertTrue(true);
     }
 
     /**
      * @return array
      */
-    public function codesDataProvider(): array
+    public static function codesDataProvider(): array
     {
         $constDocType            = SelfBillingDocumentTypeCode::cases();
         $selfBillingEntitiesCode = SelfBillingEntityCode::cases();
@@ -68,9 +70,6 @@ class SelfBillingRegisterWsTest extends TestCase
 
     /**
      *
-     * @test
-     * @dataProvider codesDataProvider
-     *
      * @param \Rebelo\ATWs\Series\SelfBillingDocumentTypeCode $docType
      * @param \Rebelo\ATWs\Series\SelfBillingEntityCode       $entityCode
      * @param string|null                                     $supplierCountry
@@ -80,6 +79,8 @@ class SelfBillingRegisterWsTest extends TestCase
      * @throws \Rebelo\Date\DateException
      * @throws \Rebelo\Date\DateParseException
      */
+    #[Test]
+    #[DataProvider("codesDataProvider")]
     public function testSubmission(
         SelfBillingDocumentTypeCode $docType,
         SelfBillingEntityCode       $entityCode,

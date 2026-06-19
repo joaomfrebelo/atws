@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\Series;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Rebelo\ATWs\TCredentials;
 use Rebelo\Base;
@@ -22,21 +23,21 @@ class CancelWsTest extends TestCase
     use TCredentials;
 
     /**
-     * @test
      * @return void
      */
+    #[Test]
     public function testReflection(): void
     {
-        (new Base())->testReflection(CancelWs::class);
+        (new Base(CancelWs::class))->testReflection(CancelWs::class);
         $this->assertTrue(true);
     }
 
     /**
-     * @test
      * @throws \Rebelo\ATWs\ATWsException
      * @throws \Rebelo\Date\DateException
      * @throws \Rebelo\Date\DateParseException
      */
+    #[Test]
     public function testSubmission(): void
     {
         $cancelSeries = new CancelSeries(

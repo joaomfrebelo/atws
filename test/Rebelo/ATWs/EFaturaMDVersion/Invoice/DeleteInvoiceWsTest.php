@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection PhpExpressionResultUnusedInspection */
 
 /**
  * MIT License
@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\EFaturaMDVersion\Invoice;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Rebelo\ATWs\AATWs;
 use Rebelo\ATWs\EFaturaMDVersion\AWs;
@@ -30,12 +31,12 @@ class DeleteInvoiceWsTest extends TestCase
     use TCredentials;
 
     /**
-     * @test
      * @return void
      */
+    #[Test]
     public function testReflection(): void
     {
-        (new Base())->testReflection(DeleteInvoiceWs::class);
+        (new Base(DeleteInvoiceWs::class))->testReflection(DeleteInvoiceWs::class);
         $this->assertTrue(true);
     }
 
@@ -100,12 +101,12 @@ class DeleteInvoiceWsTest extends TestCase
 
 
     /**
-     * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
      * @throws \Rebelo\Date\DateException
      * @throws \Rebelo\Date\DateParseException
      */
+    #[Test]
     public function testInstance(): void
     {
 
@@ -128,11 +129,11 @@ class DeleteInvoiceWsTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
      * @throws \ReflectionException
      */
+    #[Test]
     public function testXml(): void
     {
 

@@ -128,9 +128,10 @@ class ConsultSelfBillingAgreementResponse
 
     /**
      * Get the self billing agreement info
+     *
      * @return \Rebelo\ATWs\Series\SelfBillingAgreementInfo[]
-     * @since 2.0.2
-     */
+     * @since        2.0.2
+     * @noinspection PhpUnused*/
     public function getSelfBillingAgreementInfo(): array
     {
         return $this->selfBillingAgreementInfo;

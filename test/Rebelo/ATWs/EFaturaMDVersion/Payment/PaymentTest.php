@@ -8,6 +8,8 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\EFaturaMDVersion\Payment;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Rebelo\ATWs\EFaturaMDVersion\DocumentTotals;
 use Rebelo\ATWs\EFaturaMDVersion\RecordChannel;
@@ -21,12 +23,12 @@ class PaymentTest extends TestCase
 {
 
     /**
-     * @test
      * @return void
      */
+    #[Test]
     public function testReflection(): void
     {
-        (new Base())->testReflection(Payment::class);
+        (new Base(Payment::class))->testReflection(Payment::class);
         $this->assertTrue(true);
     }
 
@@ -34,7 +36,7 @@ class PaymentTest extends TestCase
      * @return array
      * @throws \Rebelo\ATWs\ATWsException
      */
-    public function paymentDataProvider(): array
+    public static function paymentDataProvider(): array
     {
         $data = [];
 
@@ -69,7 +71,6 @@ class PaymentTest extends TestCase
     }
 
     /**
-     * @test
      * @dataProvider paymentDataProvider
      * @param string                                            $taxRegistrationNumber
      * @param string                                            $taxEntity
@@ -78,6 +79,8 @@ class PaymentTest extends TestCase
      * @param \Rebelo\ATWs\EFaturaMDVersion\RecordChannel|null  $recordChannel
      * @return void
      */
+    #[Test]
+    #[DataProvider("paymentDataProvider")]
     public function testInstance(
         string         $taxRegistrationNumber,
         string         $taxEntity,

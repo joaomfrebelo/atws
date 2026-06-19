@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\EFaturaMDVersion\Payment;
 
+use Rebelo\ATWs\AATWs;
 use Rebelo\ATWs\ATWsException;
 use Rebelo\ATWs\EFaturaMDVersion\DateRange;
 use Rebelo\ATWs\EFaturaMDVersion\RecordChannel;
@@ -19,12 +20,6 @@ use Rebelo\ATWs\EFaturaMDVersion\RecordChannel;
  */
 class DeletePayment
 {
-    /**
-     * @var \Logger
-     * @since 2.0.0
-     */
-    protected \Logger $log;
-
     /**
      * Delete payment document
      * @param string                                                     $taxRegistrationNumber Issuer TIN Portuguese Tax Identification Number (without any country prefix).
@@ -43,27 +38,26 @@ class DeletePayment
         protected ?RecordChannel $recordChannel
     )
     {
-        $this->log = \Logger::getLogger(\get_class($this));
-        $this->log->debug(__METHOD__);
+        AATWs::$logger?->debug(__METHOD__);
 
         $docListIsEmpty = $this->documentList === null || \count($this->documentList) === 0;
 
         if ($docListIsEmpty === true && $this->dateRange === null) {
             $msg = "One of DocumentList and DateRange cannot be null or empty";
-            $this->log->error($msg);
+            AATWs::$logger?->error($msg);
             throw new ATWsException($msg);
         }
 
         if ($docListIsEmpty === false && $this->dateRange !== null) {
             $msg = "One of DocumentList and DateRange must be null or empty";
-            $this->log->error($msg);
+            AATWs::$logger?->error($msg);
             throw new ATWsException($msg);
         }
 
         $reasonLength = \strlen($this->reason);
         if ($reasonLength < 10 || $reasonLength > 500) {
             $msg = "Reason length must be between 10 and 500";
-            $this->log->error($msg);
+            AATWs::$logger?->error($msg);
             throw new ATWsException($msg);
         }
 

@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\EFaturaMDVersion;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Rebelo\ATWs\ATWsException;
 use Rebelo\Base;
@@ -22,20 +23,20 @@ use Rebelo\Base;
 class TaxTest extends TestCase
 {
     /**
-     * @test
      * @return void
      */
+    #[Test]
     public function testReflection(): void
     {
-        (new Base())->testReflection(Tax::class);
+        (new Base(Tax::class))->testReflection(Tax::class);
         $this->assertTrue(true);
     }
 
     /**
-     * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
      */
+    #[Test]
     public function testInstance(): void
     {
 
@@ -61,10 +62,10 @@ class TaxTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
      */
+    #[Test]
     public function testWrongTaxType(): void
     {
         $this->expectException(ATWsException::class);
@@ -87,10 +88,10 @@ class TaxTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
      */
+    #[Test]
     public function testWrongTaxCountryRegion(): void
     {
         $this->expectException(ATWsException::class);
@@ -113,10 +114,10 @@ class TaxTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
      */
+    #[Test]
     public function testWrongTaxPercentageAndTaxAmountSetToNull(): void
     {
         $this->expectException(ATWsException::class);
@@ -139,10 +140,10 @@ class TaxTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
      */
+    #[Test]
     public function testWrongTaxPercentageAndTaxAmountSetToNotNull(): void
     {
         $this->expectException(ATWsException::class);
@@ -165,10 +166,10 @@ class TaxTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
      */
+    #[Test]
     public function testWrongTaxPercentageGreaterThan100(): void
     {
         $this->expectException(ATWsException::class);
@@ -191,10 +192,10 @@ class TaxTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
      */
+    #[Test]
     public function testWrongTaxPercentageLessThanZero(): void
     {
         $this->expectException(ATWsException::class);
@@ -217,10 +218,10 @@ class TaxTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
      */
+    #[Test]
     public function testWrongTaxAmountLessThanZero(): void
     {
         $this->expectException(ATWsException::class);

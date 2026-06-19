@@ -9,6 +9,8 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\Series;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Rebelo\Base;
 use Rebelo\Date\Date;
@@ -20,12 +22,12 @@ use Rebelo\Date\Pattern;
 class ConsultSelfBillingAgreementTest extends TestCase
 {
     /**
-     * @test
      * @return void
      */
+    #[Test]
     public function testReflection(): void
     {
-        (new Base())->testReflection(ConsultSelfBillingAgreement::class);
+        (new Base(ConsultSelfBillingAgreement::class))->testReflection(ConsultSelfBillingAgreement::class);
         $this->assertTrue(true);
     }
 
@@ -35,7 +37,7 @@ class ConsultSelfBillingAgreementTest extends TestCase
      * @throws \Rebelo\Date\DateIntervalException
      * @throws \Rebelo\Date\DateParseException
      */
-    public function instanceDataProvider(): array
+    public static function instanceDataProvider(): array
     {
         $data = [];
         $data[] = [
@@ -63,9 +65,6 @@ class ConsultSelfBillingAgreementTest extends TestCase
     }
 
     /**
-     * @test
-     * @dataProvider instanceDataProvider
-     *
      * @param string|null                                          $tinAssociatedWithTheAgreement
      * @param \Rebelo\ATWs\Series\SelfBillingSettlementStatus|null $settlementStatus
      * @param \Rebelo\Date\Date|null                               $authorizationPeriodFrom
@@ -73,6 +72,8 @@ class ConsultSelfBillingAgreementTest extends TestCase
      *
      * @return void
      */
+    #[Test]
+    #[DataProvider("instanceDataProvider")]
     public function testInstance(
         ?string                      $tinAssociatedWithTheAgreement,
         ?SelfBillingSettlementStatus $settlementStatus,

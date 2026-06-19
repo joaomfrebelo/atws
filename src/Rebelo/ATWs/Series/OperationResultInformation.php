@@ -10,20 +10,15 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\Series;
 
+use Rebelo\ATWs\AATWs;
+
 /**
  * The results returned by the operation.
+ *
  * @since 1.0.0
  */
-class OperationResultInformation
+readonly class OperationResultInformation
 {
-
-    /**
-     *
-     * @var \Logger
-     * @since 1.0.0
-     */
-    protected \Logger $log;
-
     /**
      * The results returned by the operation.
      * @param int    $operationResultCode    Operation result code
@@ -31,13 +26,12 @@ class OperationResultInformation
      * @since 1.0.0
      */
     public function __construct(
-        private readonly int $operationResultCode,
-        private readonly string $operationResultMessage
+        private int    $operationResultCode,
+        private string $operationResultMessage
     )
     {
-        $this->log = \Logger::getLogger(\get_class($this));
-        $this->log->debug("OperationResultCode: " . $this->operationResultCode);
-        $this->log->debug("OperationResultMessage: " . $this->operationResultMessage);
+        AATWs::$logger?->debug("OperationResultCode: " . $this->operationResultCode);
+        AATWs::$logger?->debug("OperationResultMessage: " . $this->operationResultMessage);
     }
 
     /**

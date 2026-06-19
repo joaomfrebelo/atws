@@ -15,17 +15,8 @@ namespace Rebelo\ATWs\Series;
  */
 class ASeries
 {
-
-    /**
-     *
-     * @var \Logger
-     * @since 1.0.0
-     */
-    protected \Logger $log;
-
     public function __construct()
     {
-        $this->log = \Logger::getLogger(\get_class($this));
     }
 
     /**

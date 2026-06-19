@@ -40,13 +40,6 @@ abstract class AWs extends AATWs
 
     /**
      *
-     * @var \Logger
-     * @since 2.0.0
-     */
-    protected \Logger $log;
-
-    /**
-     *
      * @param string $username            AT (e-fatura) username
      * @param string $password            AT (e-fatura) password
      * @param string $certificatePath     The certificate path

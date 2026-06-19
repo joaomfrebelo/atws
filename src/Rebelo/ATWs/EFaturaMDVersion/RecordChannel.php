@@ -9,18 +9,13 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\EFaturaMDVersion;
 
+use Rebelo\ATWs\AATWs;
+
 /**
  * @since 2.0.0
  */
 class RecordChannel
 {
-    /**
-     *
-     * @var \Logger
-     * @since 2.0.0
-     */
-    protected \Logger $log;
-
     /**
      * @param string      $system
      * @param string|null $version
@@ -31,11 +26,10 @@ class RecordChannel
         protected ?string $version
     )
     {
-        $this->log = \Logger::getLogger(\get_class($this));
-        $this->log->debug(__METHOD__);
+        AATWs::$logger?->debug(__METHOD__);
 
-        $this->log->info("System set to " . $this->system);
-        $this->log->info("Version set to " . ($this->version ?? "null"));
+        AATWs::$logger?->info("System set to " . $this->system);
+        AATWs::$logger?->info("Version set to " . ($this->version ?? "null"));
 
     }
 

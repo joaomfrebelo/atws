@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\Series;
 
+use Rebelo\ATWs\AATWs;
 use Rebelo\ATWs\ATWsException;
 use Rebelo\Date\Date;
 use Rebelo\Date\Pattern;
@@ -49,21 +50,21 @@ class ConsultSeries extends ASeries
     )
     {
         parent::__construct();
-        $this->log->debug(__METHOD__);
-        $this->log->debug("Series set to: " . $this->series);
-        $this->log->debug("SeriesTypeCode set to: " . ($this->seriesTypeCode?->value ?? "null"));
-        $this->log->debug("DocumentClassCode set to: " . ($this->documentClassCode?->value ?? "null"));
-        $this->log->debug("DocumentTypeCode set to: " . ($this->documentTypeCode?->value ?? "null"));
-        $this->log->debug("SeriesValidationCode set to: " . $this->seriesValidationCode);
-        $this->log->debug(
+        AATWs::$logger?->debug(__METHOD__);
+        AATWs::$logger?->debug("Series set to: " . $this->series);
+        AATWs::$logger?->debug("SeriesTypeCode set to: " . ($this->seriesTypeCode?->value ?? "null"));
+        AATWs::$logger?->debug("DocumentClassCode set to: " . ($this->documentClassCode?->value ?? "null"));
+        AATWs::$logger?->debug("DocumentTypeCode set to: " . ($this->documentTypeCode?->value ?? "null"));
+        AATWs::$logger?->debug("SeriesValidationCode set to: " . $this->seriesValidationCode);
+        AATWs::$logger?->debug(
             "ToRegistrationDate set to: "
             . ($this->toRegistrationDate?->format(Pattern::SQL_DATE) ?? "null")
         );
-        $this->log->debug(
+        AATWs::$logger?->debug(
             "FromRegistrationDate set to: "
             . ($this->fromRegistrationDate?->format(Pattern::SQL_DATE) ?? "null")
         );
-        $this->log->debug("ProcessingMediumCodes set to: " . ($this->processingMediumCodes?->value ?? "null"));
+        AATWs::$logger?->debug("ProcessingMediumCodes set to: " . ($this->processingMediumCodes?->value ?? "null"));
 
         if($this->fromRegistrationDate !== null && $this->toRegistrationDate !== null){
             if($this->toRegistrationDate->isEarlier($this->fromRegistrationDate)){

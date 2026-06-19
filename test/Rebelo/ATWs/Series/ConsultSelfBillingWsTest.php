@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\Series;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Rebelo\ATWs\TCredentials;
 use Rebelo\Base;
@@ -24,21 +25,21 @@ class ConsultSelfBillingWsTest extends TestCase
     use TCredentials;
 
     /**
-     * @test
      * @return void
      */
+    #[Test]
     public function testReflection(): void
     {
-        (new Base())->testReflection(ConsultSelfBillingWs::class);
+        (new Base(ConsultSelfBillingWs::class))->testReflection(ConsultSelfBillingWs::class);
         $this->assertTrue(true);
     }
 
     /**
-     * @test
      * @throws \Rebelo\ATWs\ATWsException
      * @throws \Rebelo\Date\DateException
      * @throws \Rebelo\Date\DateParseException
      */
+    #[Test]
     public function testSubmission(): void
     {
         $consultWs = new ConsultSelfBillingWs(
@@ -56,11 +57,11 @@ class ConsultSelfBillingWsTest extends TestCase
     }
 
     /**
-     * @test
      * @throws \Rebelo\ATWs\ATWsException
      * @throws \Rebelo\Date\DateException
      * @throws \Rebelo\Date\DateParseException
      */
+    #[Test]
     public function testSubmissionNotNull(): void
     {
         $consultSeries = new ConsultSelfBillingSeries(

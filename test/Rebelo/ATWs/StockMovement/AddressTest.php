@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\StockMovement;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Rebelo\Base;
 
@@ -21,12 +22,12 @@ class AddressTest extends TestCase
 {
 
     /**
-     * @test
      * @return void
      */
+    #[Test]
     public function testInstance(): void
     {
-        (new Base())->testReflection(Address::class);
+        (new Base(Address::class))->testReflection(Address::class);
 
         $addressDetail = "Rua da Escolas Gerais";
         $city = "Lisboa";

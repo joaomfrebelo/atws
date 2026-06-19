@@ -19,14 +19,6 @@ use Rebelo\ATWs\AATWs;
  */
 class DocumentTotals
 {
-
-    /**
-     *
-     * @var \Logger
-     * @since 1.0.0
-     */
-    protected \Logger $log;
-
     /**
      * DocumentTotals
      * @param float $taxPayable Amount of tax payable
@@ -40,8 +32,7 @@ class DocumentTotals
         protected float $grossTotal
     )
     {
-        $this->log = \Logger::getLogger(\get_class($this));
-        $this->log->debug(__METHOD__);
+        AATWs::$logger?->debug(__METHOD__);
     }
 
     /**

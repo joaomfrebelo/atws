@@ -142,9 +142,10 @@ class SelfBillingResponse
 
     /**
      * get if the response is OK (Not error)
+     *
      * @return bool
-     * @since 2.0.2
-     */
+     * @since        2.0.2
+     * @noinspection PhpUnused*/
     public function isResponseOk(): bool
     {
         return $this->isResponseOk;

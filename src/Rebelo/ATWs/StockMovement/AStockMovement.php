@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\StockMovement;
 
+use Rebelo\ATWs\AATWs;
 use Rebelo\Date\Date;
 use Rebelo\Date\Pattern;
 
@@ -19,14 +20,6 @@ use Rebelo\Date\Pattern;
  */
 abstract class AStockMovement
 {
-
-    /**
-     *
-     * @var \Logger
-     * @since 1.0.0
-     */
-    protected \Logger $log;
-
     /**
      *
      *
@@ -62,25 +55,24 @@ abstract class AStockMovement
         protected ?string  $vehicleID
     )
     {
-        $this->log = \Logger::getLogger(\get_class($this));
-        $this->log->debug(__METHOD__);
+        AATWs::$logger?->debug(__METHOD__);
 
-        $this->log->debug("TaxRegistrationNumber set to: " . $taxRegistrationNumber);
-        $this->log->debug("ATCUD set to: " . $atcud);
-        $this->log->debug("CompanyName set to: " . $companyName);
-        $this->log->debug("DocumentNumber set to: " . $documentNumber);
-        $this->log->debug(
+        AATWs::$logger?->debug("TaxRegistrationNumber set to: " . $taxRegistrationNumber);
+        AATWs::$logger?->debug("ATCUD set to: " . $atcud);
+        AATWs::$logger?->debug("CompanyName set to: " . $companyName);
+        AATWs::$logger?->debug("DocumentNumber set to: " . $documentNumber);
+        AATWs::$logger?->debug(
             "MovementDate set to: " . $movementDate->format(
                 Pattern::SQL_DATE
             )
         );
-        $this->log->debug("MovementType set to: " . $movementType);
-        $this->log->debug(
+        AATWs::$logger?->debug("MovementType set to: " . $movementType);
+        AATWs::$logger?->debug(
             "MovementStartTime set to: " . (
                 ($movementStartTime?->format(Pattern::DATE_T_TIME)) ?? "null"
             )
         );
-        $this->log->debug("VehicleID set to: " . ($vehicleID ?? "null"));
+        AATWs::$logger?->debug("VehicleID set to: " . ($vehicleID ?? "null"));
     }
 
     /**

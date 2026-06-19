@@ -9,6 +9,8 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\StockMovement;
 
+use Rebelo\ATWs\AATWs;
+
 /**
  * Line
  *
@@ -17,14 +19,6 @@ namespace Rebelo\ATWs\StockMovement;
  */
 class OrderReferences
 {
-
-    /**
-     *
-     * @var \Logger
-     * @since 1.0.0
-     */
-    protected \Logger $log;
-
     /**
      * Order References
      *
@@ -37,10 +31,9 @@ class OrderReferences
         protected string $movementType
     )
     {
-        $this->log = \Logger::getLogger(\get_class($this));
-        $this->log->debug(__METHOD__);
-        $this->log->debug("OriginatingOn set to: " . $originatingOn);
-        $this->log->debug("MovementType set to: " . $movementType);
+        AATWs::$logger?->debug(__METHOD__);
+        AATWs::$logger?->debug("OriginatingOn set to: " . $originatingOn);
+        AATWs::$logger?->debug("MovementType set to: " . $movementType);
     }
 
     /**

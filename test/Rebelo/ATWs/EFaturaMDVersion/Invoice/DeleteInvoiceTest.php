@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\EFaturaMDVersion\Invoice;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Rebelo\ATWs\ATWsException;
 use Rebelo\ATWs\EFaturaMDVersion\DateRange;
@@ -24,20 +25,20 @@ use Rebelo\Date\Date;
 class DeleteInvoiceTest extends TestCase
 {
     /**
-     * @test
      * @return void
      */
+    #[Test]
     public function testReflection(): void
     {
-        (new Base())->testReflection(DeleteInvoice::class);
+        (new Base(DeleteInvoice::class))->testReflection(DeleteInvoice::class);
         $this->assertTrue(true);
     }
 
     /**
-     * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
      */
+    #[Test]
     public function testInstanceDocumentList(): void
     {
         $channel = new RecordChannel("System", "9.9.9");
@@ -82,13 +83,13 @@ class DeleteInvoiceTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
      * @throws \Rebelo\Date\DateException
      * @throws \Rebelo\Date\DateIntervalException
      * @throws \Rebelo\Date\DateParseException
      */
+    #[Test]
     public function testInstanceDateRange(): void
     {
         $channel = new RecordChannel("System", "9.9.9");
@@ -121,9 +122,9 @@ class DeleteInvoiceTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      */
+    #[Test]
     public function testEmptyAndNullDocListWithNullDateRange(): void
     {
 
@@ -156,9 +157,9 @@ class DeleteInvoiceTest extends TestCase
 
 
     /**
-     * @test
      * @return void
      */
+    #[Test]
     public function testNotEmptyDocListWithNotNullDateRange(): void
     {
 

@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\EFaturaMDVersion;
 
+use Rebelo\ATWs\AATWs;
 use Rebelo\ATWs\ATWsException;
 use Rebelo\Date\Date;
 use Rebelo\Date\Pattern;
@@ -22,13 +23,6 @@ class DateRange
 {
 
     /**
-     *
-     * @var \Logger
-     * @since 2.0.0
-     */
-    protected \Logger $log;
-
-    /**
      * @param \Rebelo\Date\Date $startDate
      * @param \Rebelo\Date\Date $endDate
      * @throws \Rebelo\ATWs\ATWsException
@@ -39,12 +33,11 @@ class DateRange
         protected Date $endDate
     )
     {
-        $this->log = \Logger::getLogger(\get_class($this));
-        $this->log->debug(__METHOD__);
+        AATWs::$logger?->debug(__METHOD__);
 
         if ($this->startDate->isLater($this->endDate)) {
             $msg = "Start date cannot be after end date";
-            $this->log->error($msg);
+            AATWs::$logger?->error($msg);
             throw new ATWsException($msg);
         }
 

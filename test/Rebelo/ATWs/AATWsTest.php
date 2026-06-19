@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection PhpUnused */
 
 /**
  * MIT License
@@ -9,6 +9,8 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -23,7 +25,7 @@ class AATWsTest extends TestCase
      *
      * @return array
      */
-    public function certPathProvider(): array
+    public static function certPathProvider(): array
     {
         return [
             [ATWS_TEST_CERTIFICATE],
@@ -33,7 +35,6 @@ class AATWsTest extends TestCase
 
     /**
      * @dataProvider certPathProvider
-     * @test
      *
      * @param string $path
      *
@@ -42,6 +43,8 @@ class AATWsTest extends TestCase
      * @throws \Rebelo\Date\DateException
      * @throws \Rebelo\Date\DateParseException
      */
+    #[Test]
+    #[DataProvider("certPathProvider")]
     public function testValidateCertificates(string $path): void
     {
 

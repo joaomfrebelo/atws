@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\Series;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Rebelo\Base;
 
@@ -19,19 +20,19 @@ use Rebelo\Base;
 class FinalizeSelfBillingSeriesTest extends TestCase
 {
     /**
-     * @test
      * @return void
      */
+    #[Test]
     public function testReflection(): void
     {
-        (new Base())->testReflection(FinalizeSelfBillingSeries::class);
+        (new Base(FinalizeSelfBillingSeries::class))->testReflection(FinalizeSelfBillingSeries::class);
         $this->assertTrue(true);
     }
 
     /**
-     * @test
      * @return void
      */
+    #[Test]
     public function testInstance(): void
     {
         $series                = "AAA";
@@ -62,9 +63,9 @@ class FinalizeSelfBillingSeriesTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      */
+    #[Test]
     public function testInstanceNull(): void
     {
         $series                = "AAA";
@@ -93,6 +94,5 @@ class FinalizeSelfBillingSeriesTest extends TestCase
         $this->assertSame($supplierTin, $finalizeSeries->getSupplierTin());
         $this->assertSame($reason, $finalizeSeries->getReason());
     }
-
 
 }

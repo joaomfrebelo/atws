@@ -9,6 +9,8 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\StockMovement;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Rebelo\ATWs\ATWsException;
 use Rebelo\Base;
@@ -23,12 +25,12 @@ class PriorAgriculturalStockMovementTest extends TestCase
 {
 
     /**
-     * @test
      * @return void
      */
+    #[Test]
     public function testReflection(): void
     {
-        (new Base())->testReflection(
+        (new Base(PriorAgriculturalStockMovement::class))->testReflection(
             PriorAgriculturalStockMovement::class
         );
         $this->assertTrue(true);
@@ -38,7 +40,7 @@ class PriorAgriculturalStockMovementTest extends TestCase
      *
      * @return array
      */
-    public function provider(): array
+    public static function provider(): array
     {
         $companyAddress = new Address(
             "Rua da Escola Gerais",
@@ -70,8 +72,6 @@ class PriorAgriculturalStockMovementTest extends TestCase
     }
 
     /**
-     * @dataProvider provider
-     * @test
      *
      * @param string       $taxRegistrationNumber
      * @param string       $atcud
@@ -89,6 +89,8 @@ class PriorAgriculturalStockMovementTest extends TestCase
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
      */
+    #[Test]
+    #[DataProvider("provider")]
     public function testInstance(
         string       $taxRegistrationNumber,
         string       $atcud,
@@ -135,10 +137,10 @@ class PriorAgriculturalStockMovementTest extends TestCase
 
     /**
      *
-     * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
      */
+    #[Test]
     public function testWrongMovementType(): void
     {
         $this->expectException(ATWsException::class);
@@ -161,10 +163,10 @@ class PriorAgriculturalStockMovementTest extends TestCase
 
     /**
      *
-     * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
      */
+    #[Test]
     public function testWrongMovementStatus(): void
     {
         $this->expectException(ATWsException::class);

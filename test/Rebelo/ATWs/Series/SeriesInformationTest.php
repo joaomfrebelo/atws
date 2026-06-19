@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\Series;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Rebelo\Base;
 use Rebelo\Date\Date;
@@ -20,12 +21,12 @@ class SeriesInformationTest extends TestCase
 {
 
     /**
-     * @test
      * @return void
      */
+    #[Test]
     public function testReflection(): void
     {
-        (new Base())->testReflection(SeriesInformation::class);
+        (new Base(SeriesInformation::class))->testReflection(SeriesInformation::class);
         $this->assertTrue(true);
     }
 
@@ -34,8 +35,8 @@ class SeriesInformationTest extends TestCase
      * @throws \Rebelo\Date\DateException
      * @throws \Rebelo\Date\DateIntervalException
      * @throws \Rebelo\Date\DateParseException
-     * @test
      */
+    #[Test]
     public function testInstance(): void
     {
         $series = "A";
@@ -98,8 +99,8 @@ class SeriesInformationTest extends TestCase
      * @throws \Rebelo\Date\DateException
      * @throws \Rebelo\Date\DateIntervalException
      * @throws \Rebelo\Date\DateParseException
-     * @test
      */
+    #[Test]
     public function testInstanceNull(): void
     {
         $series = "AB";

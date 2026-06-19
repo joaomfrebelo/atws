@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\StockMovement;
 
+use Rebelo\ATWs\AATWs;
 use Rebelo\ATWs\ATWsException;
 use Rebelo\Date\Date;
 
@@ -87,18 +88,18 @@ class SubsequentAgriculturalStockMovement extends AStockMovement
             $vehicleID
         );
 
-        $this->log->debug("MovementType set to: " . $movementType);
-        $this->log->debug("MovementStatus set to: " . $movementStatus);
+        AATWs::$logger?->debug("MovementType set to: " . $movementType);
+        AATWs::$logger?->debug("MovementStatus set to: " . $movementStatus);
 
         if (\in_array($movementType, ["GR", "GT"]) === false) {
             $msg = "MovementType only can be 'GR', 'GT'";
-            $this->log->error($msg);
+            AATWs::$logger?->error($msg);
             throw new ATWsException($msg);
         }
 
         if (\in_array($movementStatus, ["N", "T"]) === false) {
             $msg = "MovementStatus only can be 'N', 'T'";
-            $this->log->error($msg);
+            AATWs::$logger?->error($msg);
             throw new ATWsException($msg);
         }
 

@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\Series;
 
+use Rebelo\ATWs\AATWs;
 use Rebelo\ATWs\ATWsException;
 
 /**
@@ -45,17 +46,17 @@ class CancelSelfBillingSeries extends ASeries
     )
     {
         parent::__construct();
-        $this->log->debug(__METHOD__);
-        $this->log->debug("Series set to: " . $this->series);
-        $this->log->debug("DocumentTypeCode set to: " . $this->documentTypeCode->value);
-        $this->log->debug("SeriesValidationCode: " . $this->seriesValidationCode);
-        $this->log->debug("NoIssueDeclaration: " . ($this->noIssueDeclaration ? "true" : "false"));
-        $this->log->debug("selfBillingEntityCode set to: " . $this->selfBillingEntityCode->value);
-        $this->log->debug("Supplier tin set to: " . $this->supplierTin);
+        AATWs::$logger?->debug(__METHOD__);
+        AATWs::$logger?->debug("Series set to: " . $this->series);
+        AATWs::$logger?->debug("DocumentTypeCode set to: " . $this->documentTypeCode->value);
+        AATWs::$logger?->debug("SeriesValidationCode: " . $this->seriesValidationCode);
+        AATWs::$logger?->debug("NoIssueDeclaration: " . ($this->noIssueDeclaration ? "true" : "false"));
+        AATWs::$logger?->debug("selfBillingEntityCode set to: " . $this->selfBillingEntityCode->value);
+        AATWs::$logger?->debug("Supplier tin set to: " . $this->supplierTin);
 
         if (!static::isValidSeries($this->series)) {
             $msg = "Series identifier not valid";
-            $this->log->error($msg);
+            AATWs::$logger?->error($msg);
             throw new ATWsException($msg);
         }
     }
@@ -123,6 +124,7 @@ class CancelSelfBillingSeries extends ASeries
      * @return \Rebelo\ATWs\Series\DocumentClassCode
      * @throws \Rebelo\ATWs\ATWsException
      * @since 2.0.2
+     * @noinspection PhpUnused
      */
     public function getClassDocumentCode(): DocumentClassCode
     {

@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\Series;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Rebelo\Base;
 
@@ -19,19 +20,18 @@ class OperationResultInformationTest extends TestCase
 {
 
     /**
-     * @test
      * @return void
      */
     public function testReflection(): void
     {
-        (new Base())->testReflection(OperationResultInformation::class);
+        (new Base(OperationResultInformation::class))->testReflection(OperationResultInformation::class);
         $this->assertTrue(true);
     }
 
     /**
-     * @test
      * @return void
      */
+    #[Test]
     public function testInstance(): void
     {
         $resultCode = 999;

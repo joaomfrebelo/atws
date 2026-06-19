@@ -9,6 +9,8 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\StockMovement;
 
+use Rebelo\ATWs\AATWs;
+
 /**
  * Address
  *
@@ -17,14 +19,6 @@ namespace Rebelo\ATWs\StockMovement;
  */
 class Address
 {
-
-    /**
-     *
-     * @var \Logger
-     * @since 1.0.0
-     */
-    protected \Logger $log;
-
     /**
      * The address structure
      * @param string $addressDetail The Address
@@ -38,11 +32,10 @@ class Address
         protected string $postalCode
     )
     {
-        $this->log = \Logger::getLogger(\get_class($this));
-        $this->log->debug(__METHOD__);
-        $this->log->debug("AddressDetail set to: " . $addressDetail);
-        $this->log->debug("City set to: " . $city);
-        $this->log->debug("Postal code set to: " . $postalCode);
+        AATWs::$logger?->debug(__METHOD__);
+        AATWs::$logger?->debug("AddressDetail set to: " . $addressDetail);
+        AATWs::$logger?->debug("City set to: " . $city);
+        AATWs::$logger?->debug("Postal code set to: " . $postalCode);
     }
 
     /**

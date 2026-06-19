@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\EFaturaMDVersion\WorkDocument;
 
+use Rebelo\ATWs\AATWs;
 use Rebelo\ATWs\ATWsException;
 use Rebelo\ATWs\EFaturaMDVersion\DocumentTotals;
 use Rebelo\Date\Date;
@@ -21,13 +22,6 @@ use Rebelo\Date\Pattern;
  */
 class WorkData
 {
-
-    /**
-     * @var \Logger
-     * @since 2.0.0
-     */
-    protected \Logger $log;
-
     /**
      * @param \Rebelo\ATWs\EFaturaMDVersion\WorkDocument\WorkHeader $workHeader      The work document header
      * @param \Rebelo\ATWs\EFaturaMDVersion\WorkDocument\WorkStatus $documentStatus  The actual work document status
@@ -50,19 +44,18 @@ class WorkData
         protected DocumentTotals $documentTotals
     )
     {
-        $this->log = \Logger::getLogger(\get_class($this));
-        $this->log->debug(__METHOD__);
+        AATWs::$logger?->debug(__METHOD__);
 
-        $this->log->info("Hash characters set to " . $this->hashCharacters);
-        $this->log->info("EACCode set to " . ($this->eacCode ?? "null"));
+        AATWs::$logger?->info("Hash characters set to " . $this->hashCharacters);
+        AATWs::$logger?->info("EACCode set to " . ($this->eacCode ?? "null"));
 
         if ($this->eacCode !== null && \preg_match("/^[0-9]{5}$/", $this->eacCode) !== 1) {
             $msg = "EACCode must respect the regexp ^[0-9]{5}$";
-            $this->log->error($msg);
+            AATWs::$logger?->error($msg);
             throw new ATWsException($msg);
         }
 
-        $this->log->info("SystemEntryDate set to " . $this->systemEntryDate->format(Pattern::DATE_T_TIME));
+        AATWs::$logger?->info("SystemEntryDate set to " . $this->systemEntryDate->format(Pattern::DATE_T_TIME));
     }
 
     /**

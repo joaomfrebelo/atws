@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\StockMovement;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Rebelo\Base;
 
@@ -21,19 +22,18 @@ class LineTest extends TestCase
 {
 
     /**
-     * @test
      * @return void
      */
     public function testReflection(): void
     {
-        (new Base())->testReflection(Line::class);
+        (new Base(Line::class))->testReflection(Line::class);
         $this->assertTrue(true);
     }
 
     /**
-     * @test
      * @return void
      */
+    #[Test]
     public function testInstance(): void
     {
         $productDescription = "The product";
@@ -60,9 +60,9 @@ class LineTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      */
+    #[Test]
     public function testInstanceEmptyOrderReferences(): void
     {
         $productDescription = "The product";

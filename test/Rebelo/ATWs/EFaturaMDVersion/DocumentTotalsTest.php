@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\EFaturaMDVersion;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Rebelo\Base;
 
@@ -21,12 +22,12 @@ class DocumentTotalsTest extends TestCase
 {
 
     /**
-     * @test
      * @return void
      */
+    #[Test]
     public function testInstance(): void
     {
-        (new Base())->testReflection(DocumentTotals::class);
+        (new Base(DocumentTotals::class))->testReflection(DocumentTotals::class);
 
         $taxPayable = 1.99;
         $netTotal = 4.00;

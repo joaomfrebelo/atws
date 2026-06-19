@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\EFaturaMDVersion\Invoice;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Rebelo\ATWs\EFaturaMDVersion\DocumentTotals;
 use Rebelo\ATWs\EFaturaMDVersion\Line;
@@ -27,20 +28,20 @@ class InvoiceTest extends TestCase
 {
 
     /**
-     * @test
      * @return void
      */
+    #[Test]
     public function testReflection(): void
     {
-        (new Base())->testReflection(Invoice::class);
+        (new Base(Invoice::class))->testReflection(Invoice::class);
         $this->assertTrue(true);
     }
 
     /**
-     * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
      */
+    #[Test]
     public function testInstance(): void
     {
         foreach (['FT', 'FR', 'FS', 'NC', 'ND', 'RP', 'RE', 'CS', 'LD', 'RA'] as $k => $invoiceType) {

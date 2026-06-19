@@ -1,7 +1,8 @@
-<?php
+<?php /** @noinspection PhpUnused */
 
 namespace Rebelo\ATWs\Series;
 
+use Rebelo\ATWs\AATWs;
 use Rebelo\Date\Date;
 use Rebelo\Date\Pattern;
 
@@ -9,16 +10,8 @@ use Rebelo\Date\Pattern;
  * Info self billing agreement
  * @since 2.0.2
  */
-class SelfBillingAgreementInfo
+readonly class SelfBillingAgreementInfo
 {
-
-    /**
-     *
-     * @var \Logger
-     * @since 2.0.2
-     */
-    protected \Logger $log;
-
     /**
      * @param \Rebelo\ATWs\Series\SelfBillingEntityCode       $selfBillingEntityCode          Type of entity with whom the prior Self-Billing Agreement was established.
      * @param string                                          $tinBuyer                       TIN of the other entity with which you established the prior Self-billing Agreement.
@@ -33,29 +26,28 @@ class SelfBillingAgreementInfo
      * @since 2.0.2
      */
     public function __construct(
-        private readonly SelfBillingEntityCode       $selfBillingEntityCode,
-        private readonly string                      $tinBuyer,
-        private readonly string                      $nameBuyer,
-        private readonly string                      $tinAssociatedWithTheAgreement,
-        private readonly string                      $nameAssociatedWithTheAgreement,
-        private readonly ?string                     $foreignCountry,
-        private readonly SelfBillingSettlementStatus $selfBillingSettlementStatus,
-        private readonly Date                        $authorizationPeriodFrom,
-        private readonly ?Date $authorizationPeriodUntil
+        private SelfBillingEntityCode       $selfBillingEntityCode,
+        private string                      $tinBuyer,
+        private string                      $nameBuyer,
+        private string                      $tinAssociatedWithTheAgreement,
+        private string                      $nameAssociatedWithTheAgreement,
+        private ?string                     $foreignCountry,
+        private SelfBillingSettlementStatus $selfBillingSettlementStatus,
+        private Date                        $authorizationPeriodFrom,
+        private ?Date                       $authorizationPeriodUntil
     )
     {
-        $this->log = \Logger::getLogger(\get_class($this));
-        $this->log->debug(__METHOD__);
-        $this->log->debug("Agreement With set to:" . $this->selfBillingEntityCode->value);
-        $this->log->debug("Tin buyer set to:" . $this->tinBuyer);
-        $this->log->debug("Name buyer set to:" . $this->nameBuyer);
-        $this->log->debug("Tin associated with the agreement set to:" . $this->tinAssociatedWithTheAgreement);
-        $this->log->debug("Name associated with the agreement set to:" . $this->nameAssociatedWithTheAgreement);
-        $this->log->debug("Foreign country set to:" . ($this->foreignCountry ?? "null"));
-        $this->log->debug(
+        AATWs::$logger?->debug(__METHOD__);
+        AATWs::$logger?->debug("Agreement With set to:" . $this->selfBillingEntityCode->value);
+        AATWs::$logger?->debug("Tin buyer set to:" . $this->tinBuyer);
+        AATWs::$logger?->debug("Name buyer set to:" . $this->nameBuyer);
+        AATWs::$logger?->debug("Tin associated with the agreement set to:" . $this->tinAssociatedWithTheAgreement);
+        AATWs::$logger?->debug("Name associated with the agreement set to:" . $this->nameAssociatedWithTheAgreement);
+        AATWs::$logger?->debug("Foreign country set to:" . ($this->foreignCountry ?? "null"));
+        AATWs::$logger?->debug(
             "Foreign country set to:" . $this->authorizationPeriodFrom->format(Pattern::SQL_DATE)
         );
-        $this->log->debug(
+        AATWs::$logger?->debug(
             "Foreign country set to:" . ($this->authorizationPeriodUntil?->format(Pattern::SQL_DATE) ?? "null")
         );
 

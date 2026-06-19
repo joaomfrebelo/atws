@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\EFaturaMDVersion\WorkDocument;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Rebelo\ATWs\ATWsException;
 use Rebelo\Base;
@@ -23,20 +24,20 @@ class WorkStatusTest extends TestCase
 {
 
     /**
-     * @test
      * @return void
      */
+    #[Test]
     public function testReflection(): void
     {
-        (new Base())->testReflection(WorkStatus::class);
+        (new Base(WorkStatus::class))->testReflection(WorkStatus::class);
         $this->assertTrue(true);
     }
 
     /**
-     * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
      */
+    #[Test]
     public function testInstance(): void
     {
 
@@ -50,16 +51,15 @@ class WorkStatusTest extends TestCase
 
 
     /**
-     * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
      */
+    #[Test]
     public function testWongStatus(): void
     {
         $this->expectException(ATWsException::class);
         $this->expectExceptionMessage("WorkStatus must be one of 'N', 'A', 'F'");
         new WorkStatus("S", new Date());
     }
-
 
 }

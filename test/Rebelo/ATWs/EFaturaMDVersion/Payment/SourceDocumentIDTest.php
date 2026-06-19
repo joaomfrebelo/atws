@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\EFaturaMDVersion\Payment;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Rebelo\Base;
 use Rebelo\Date\Date;
@@ -21,12 +22,12 @@ class SourceDocumentIDTest extends TestCase
 {
 
     /**
-     * @test
      * @return void
      */
+    #[Test]
     public function testReflection(): void
     {
-        (new Base())->testReflection(SourceDocumentID::class);
+        (new Base(SourceDocumentID::class))->testReflection(SourceDocumentID::class);
         $this->assertTrue(true);
     }
 
@@ -34,6 +35,7 @@ class SourceDocumentIDTest extends TestCase
      * @return void
      * @since 2.0.0
      */
+    #[Test]
     public function testInstance(): void
     {
         $originatingON = "FT A/999";

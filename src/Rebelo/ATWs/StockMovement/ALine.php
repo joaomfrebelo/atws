@@ -19,14 +19,6 @@ use Rebelo\ATWs\AATWs;
  */
 abstract class ALine
 {
-
-    /**
-     *
-     * @var \Logger
-     * @since 1.0.0
-     */
-    protected \Logger $log;
-
     /**
      * Document lines with goods (Line)
      *
@@ -43,13 +35,12 @@ abstract class ALine
         protected ?float $unitPrice
     )
     {
-        $this->log = \Logger::getLogger(\get_class($this));
-        $this->log->debug(__METHOD__);
+        AATWs::$logger?->debug(__METHOD__);
 
-        $this->log->debug("ProductDescription set to :" . $productDescription);
-        $this->log->debug("Quantity set to :" . $quantity);
-        $this->log->debug("UnitOfMeasure set to:" . $unitOfMeasure);
-        $this->log->debug("UnitPrice amount set to :" . $unitPrice);
+        AATWs::$logger?->debug("ProductDescription set to :" . $productDescription);
+        AATWs::$logger?->debug("Quantity set to :" . $quantity);
+        AATWs::$logger?->debug("UnitOfMeasure set to:" . $unitOfMeasure);
+        AATWs::$logger?->debug("UnitPrice amount set to :" . $unitPrice);
     }
 
     /**

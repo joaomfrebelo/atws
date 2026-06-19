@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\EFaturaMDVersion\Invoice;
 
+use Rebelo\ATWs\AATWs;
 use Rebelo\ATWs\ATWsException;
 use Rebelo\ATWs\EFaturaMDVersion\DateRange;
 use Rebelo\ATWs\EFaturaMDVersion\RecordChannel;
@@ -22,19 +23,14 @@ use Rebelo\ATWs\EFaturaMDVersion\RecordChannel;
 class DeleteInvoice
 {
     /**
-     *
-     * @var \Logger
-     * @since 2.0.0
-     */
-    protected \Logger $log;
-
-    /**
      * Delete invoice
+     *
      * @param string                                                     $taxRegistrationNumber Issuer TIN Portuguese Tax Identification Number (without any country prefix).
      * @param \Rebelo\ATWs\EFaturaMDVersion\Invoice\InvoiceHeader[]|null $documentList          List of business documents (documentsList) This field is mutually exclusive with the field “1.4 – Date Range (dateRange)”. Only one of the fields must be filled in.
      * @param \Rebelo\ATWs\EFaturaMDVersion\DateRange|null               $dateRange             This field is mutually exclusive with the field “1.3 – List of commercial documents (documentsList)”. Only one of the fields must be filled in.
      * @param string                                                     $reason                The reason that led to the deletion of commercial documents must be indicated.
      * @param \Rebelo\ATWs\EFaturaMDVersion\RecordChannel|null           $recordChannel
+     *
      * @throws \Rebelo\ATWs\ATWsException
      * @since  2.0.0
      */
@@ -46,27 +42,26 @@ class DeleteInvoice
         protected ?RecordChannel $recordChannel
     )
     {
-        $this->log = \Logger::getLogger(\get_class($this));
-        $this->log->debug(__METHOD__);
+        AATWs::$logger?->debug(__METHOD__);
 
         $docListIsEmpty = $this->documentList === null || \count($this->documentList) === 0;
 
         if ($docListIsEmpty === true && $this->dateRange === null) {
             $msg = "One of DocumentList and DateRange cannot be null or empty";
-            $this->log->error($msg);
+            AATWs::$logger?->error($msg);
             throw new ATWsException($msg);
         }
 
         if ($docListIsEmpty === false && $this->dateRange !== null) {
             $msg = "One of DocumentList and DateRange must be null or empty";
-            $this->log->error($msg);
+            AATWs::$logger?->error($msg);
             throw new ATWsException($msg);
         }
 
         $reasonLength = \strlen($this->reason);
         if ($reasonLength < 10 || $reasonLength > 500) {
             $msg = "Reason length must be between 10 and 500";
-            $this->log->error($msg);
+            AATWs::$logger?->error($msg);
             throw new ATWsException($msg);
         }
 
@@ -87,6 +82,7 @@ class DeleteInvoice
      * List of business documents (documentsList)
      * This field is mutually exclusive with the field “1.4 – Date Range (dateRange)”.
      * Only one of the fields must be filled in.
+     *
      * @return array|null
      * @since  2.0.0
      */
@@ -98,6 +94,7 @@ class DeleteInvoice
     /**
      * This field is mutually exclusive with the field “1.3 – List of commercial documents (documentsList)”.
      * Only one of the fields must be filled in.
+     *
      * @return \Rebelo\ATWs\EFaturaMDVersion\DateRange|null
      * @since  2.0.0
      */
@@ -117,6 +114,7 @@ class DeleteInvoice
 
     /**
      * The reason that led to the deletion of commercial documents must be indicated.
+     *
      * @return \Rebelo\ATWs\EFaturaMDVersion\RecordChannel|null
      * @since  2.0.0
      */

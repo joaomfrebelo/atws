@@ -9,6 +9,8 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\StockMovement;
 
+use Rebelo\ATWs\AATWs;
+
 /**
  * Line
  *
@@ -38,7 +40,7 @@ class Line extends ALine
     {
         parent::__construct($productDescription, $quantity, $unitOfMeasure, $unitPrice);
         foreach ($originatingON as $ordRef) {
-            $this->log->debug("OriginatingON set to :" . $ordRef);
+            AATWs::$logger?->debug("OriginatingON set to :" . $ordRef);
         }
     }
 

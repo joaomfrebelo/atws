@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\Series;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Rebelo\Base;
 
@@ -19,19 +20,19 @@ use Rebelo\Base;
 class FinalizeSeriesTest extends TestCase
 {
     /**
-     * @test
      * @return void
      */
+    #[Test]
     public function testReflection(): void
     {
-        (new Base())->testReflection(FinalizeSeries::class);
+        (new Base(FinalizeSeries::class))->testReflection(FinalizeSeries::class);
         $this->assertTrue(true);
     }
 
     /**
-     * @test
      * @return void
      */
+    #[Test]
     public function testInstance(): void
     {
         $series = "AAA";
@@ -56,9 +57,9 @@ class FinalizeSeriesTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      */
+    #[Test]
     public function testInstanceNull(): void
     {
         $series = "AAA";

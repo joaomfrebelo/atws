@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\StockMovement;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Rebelo\Base;
 
@@ -21,21 +22,21 @@ class ResponseTest extends TestCase
 {
 
     /**
-     * @test
      * @return void
      */
+    #[Test]
     public function testReflection(): void
     {
-        (new Base())->testReflection(Response::class);
+        (new Base(Response::class))->testReflection(Response::class);
         $this->assertTrue(true);
     }
 
     /**
-     * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
      * @throws \Exception
      */
+    #[Test]
     public function testResponse(): void
     {
         $file = \file_get_contents(ATWS_STOCK_MOVEMENT_RESPONSE_DIR . DIRECTORY_SEPARATOR . "GTResponse.xml");

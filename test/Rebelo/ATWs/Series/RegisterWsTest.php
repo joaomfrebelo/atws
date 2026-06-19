@@ -10,6 +10,8 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\Series;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Rebelo\ATWs\TCredentials;
 use Rebelo\Base;
@@ -23,19 +25,19 @@ class RegisterWsTest extends TestCase
     use TCredentials;
 
     /**
-     * @test
      * @return void
      */
+    #[Test]
     public function testReflection(): void
     {
-        (new Base())->testReflection(RegisterWs::class);
+        (new Base(RegisterWs::class))->testReflection(RegisterWs::class);
         $this->assertTrue(true);
     }
 
     /**
      * @return array
      */
-    public function codesDataProvider(): array
+    public static function codesDataProvider(): array
     {
         $constProcMedium = [ProcessingMediumCodes::PF]; // ProcessingMediumCodes::cases();
         $constSeriesType = [SeriesTypeCode::N];         // SeriesTypeCode::cases();
@@ -55,9 +57,6 @@ class RegisterWsTest extends TestCase
 
     /**
      *
-     * @test
-     * @dataProvider codesDataProvider
-     *
      * @param \Rebelo\ATWs\Series\ProcessingMediumCodes $procMedium
      * @param \Rebelo\ATWs\Series\SeriesTypeCode        $seriesType
      * @param \Rebelo\ATWs\Series\DocumentTypeCode      $docType
@@ -66,6 +65,8 @@ class RegisterWsTest extends TestCase
      * @throws \Rebelo\Date\DateException
      * @throws \Rebelo\Date\DateParseException
      */
+    #[Test]
+    #[DataProvider("codesDataProvider")]
     public function testSubmission(
         ProcessingMediumCodes $procMedium,
         SeriesTypeCode        $seriesType,

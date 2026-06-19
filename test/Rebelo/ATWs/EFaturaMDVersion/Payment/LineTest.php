@@ -9,6 +9,8 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\EFaturaMDVersion\Payment;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Rebelo\ATWs\ATWsException;
 use Rebelo\ATWs\EFaturaMDVersion\Tax;
@@ -21,12 +23,12 @@ use Rebelo\Date\Date;
 class LineTest extends TestCase
 {
     /**
-     * @test
      * @return void
      */
+    #[Test]
     public function testReflection(): void
     {
-        (new Base())->testReflection(Line::class);
+        (new Base(Line::class))->testReflection(Line::class);
         $this->assertTrue(true);
     }
 
@@ -34,7 +36,7 @@ class LineTest extends TestCase
      * @return array
      * @throws \Rebelo\ATWs\ATWsException
      */
-    public function lineDataProvider(): array
+    public static function lineDataProvider(): array
     {
         $data = [];
 
@@ -78,8 +80,7 @@ class LineTest extends TestCase
     }
 
     /**
-     * @test
-     * @dataProvider lineDataProvider
+     *
      * @param array                                  $sourceDocumentID
      * @param float|null                             $settlementAmount
      * @param string                                 $debitCreditIndicator
@@ -89,6 +90,8 @@ class LineTest extends TestCase
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
      */
+    #[Test]
+    #[DataProvider("lineDataProvider")]
     public function testInstance(
         array   $sourceDocumentID,
         ?float  $settlementAmount,
@@ -118,10 +121,10 @@ class LineTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
      */
+    #[Test]
     public function testEmptySourceDocumentsID(): void
     {
         $this->expectException(ATWsException::class);
@@ -138,10 +141,10 @@ class LineTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
      */
+    #[Test]
     public function testWrongDebitCreditIndicator(): void
     {
         $this->expectException(ATWsException::class);
@@ -158,10 +161,10 @@ class LineTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
      */
+    #[Test]
     public function testSettlementAmountLessThanZero(): void
     {
         $this->expectException(ATWsException::class);
@@ -178,10 +181,10 @@ class LineTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
      */
+    #[Test]
     public function testAmountLessThanZero(): void
     {
         $this->expectException(ATWsException::class);

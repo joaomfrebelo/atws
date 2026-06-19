@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\EFaturaMDVersion;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Rebelo\ATWs\ATWsException;
 use Rebelo\Base;
@@ -22,20 +23,20 @@ use Rebelo\Base;
 class WithholdingTaxTest extends TestCase
 {
     /**
-     * @test
      * @return void
      */
+    #[Test]
     public function testReflection(): void
     {
-        (new Base())->testReflection(WithholdingTax::class);
+        (new Base(WithholdingTax::class))->testReflection(WithholdingTax::class);
         $this->assertTrue(true);
     }
 
     /**
-     * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
      */
+    #[Test]
     public function testInstance(): void
     {
         foreach (["IRS", "IRC", "IS"] as $k => $taxType) {
@@ -49,10 +50,10 @@ class WithholdingTaxTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
      */
+    #[Test]
     public function testWrongTaxType(): void
     {
         $this->expectException(ATWsException::class);
@@ -61,10 +62,10 @@ class WithholdingTaxTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
      */
+    #[Test]
     public function testTaxAmountLessThanZero(): void
     {
         $this->expectException(ATWsException::class);

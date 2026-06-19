@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\EFaturaMDVersion\WorkDocument;
 
+use Rebelo\ATWs\AATWs;
 use Rebelo\ATWs\ATWsException;
 use Rebelo\ATWs\EFaturaMDVersion\AWs;
 use Rebelo\Date\Date;
@@ -20,13 +21,6 @@ use Rebelo\Date\Pattern;
  */
 class WorkStatus
 {
-
-    /**
-     * @var \Logger
-     * @since 2.0.0
-     */
-    protected \Logger $log;
-
     /**
      * @param string            $workStatus     Document status. It can take on the following values: N – Normal; A – Canceled; F – Billed.
      * @param \Rebelo\Date\Date $workStatusDate Date when the document state was last saved.
@@ -38,20 +32,19 @@ class WorkStatus
         protected Date   $workStatusDate
     )
     {
-        $this->log = \Logger::getLogger(\get_class($this));
-        $this->log->debug(__METHOD__);
+        AATWs::$logger?->debug(__METHOD__);
 
         $allowStatus = ['N', 'A', 'F'];
         if (\in_array($this->workStatus, $allowStatus) === false) {
             $msg = \sprintf(
                 "WorkStatus must be one of '%s'", \join("', '", $allowStatus)
             );
-            $this->log->error($msg);
+            AATWs::$logger?->error($msg);
             throw new ATWsException($msg);
         }
 
-        $this->log->info("Work status set to " . $this->workStatus);
-        $this->log->info("Work status date set to " . $this->workStatusDate->format(Pattern::DATE_T_TIME));
+        AATWs::$logger?->info("Work status set to " . $this->workStatus);
+        AATWs::$logger?->info("Work status date set to " . $this->workStatusDate->format(Pattern::DATE_T_TIME));
 
     }
 

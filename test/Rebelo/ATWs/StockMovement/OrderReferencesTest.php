@@ -9,7 +9,9 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\StockMovement;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Rebelo\ATWs\EFaturaMDVersion\OrderReference;
 use Rebelo\Base;
 
 /**
@@ -21,19 +23,19 @@ class OrderReferencesTest extends TestCase
 {
 
     /**
-     * @test
      * @return void
      */
+    #[Test]
     public function testReflection(): void
     {
-        (new Base())->testReflection(OrderReferences::class);
+        (new Base(OrderReference::class))->testReflection(OrderReferences::class);
         $this->assertTrue(true);
     }
 
     /**
-     * @test
      * @return void
      */
+    #[Test]
     public function testInstance(): void
     {
         $originatingOn = "GTR 1999/1";

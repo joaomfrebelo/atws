@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\Series;
 
+use Rebelo\ATWs\AATWs;
 use Rebelo\ATWs\ATWsException;
 
 /**
@@ -38,15 +39,15 @@ class CancelSeries extends ASeries
     )
     {
         parent::__construct();
-        $this->log->debug(__METHOD__);
-        $this->log->debug("Series set to: " . $this->series);
-        $this->log->debug("DocumentTypeCode set to: " . $this->documentTypeCode->value);
-        $this->log->debug("SeriesValidationCode: " . $this->seriesValidationCode);
-        $this->log->debug("NoIssueDeclaration: " . ($this->noIssueDeclaration ? "true" : "false"));
+        AATWs::$logger?->debug(__METHOD__);
+        AATWs::$logger?->debug("Series set to: " . $this->series);
+        AATWs::$logger?->debug("DocumentTypeCode set to: " . $this->documentTypeCode->value);
+        AATWs::$logger?->debug("SeriesValidationCode: " . $this->seriesValidationCode);
+        AATWs::$logger?->debug("NoIssueDeclaration: " . ($this->noIssueDeclaration ? "true" : "false"));
 
         if (!static::isValidSeries($this->series)) {
             $msg = "Series identifier not valid";
-            $this->log->error($msg);
+            AATWs::$logger?->error($msg);
             throw new ATWsException($msg);
         }
     }
@@ -95,10 +96,11 @@ class CancelSeries extends ASeries
     /**
      * Indicate the classification given to the document to which the Series belongs to be communicated to the AT.
      * Composed of a set of values
+     *
      * @return \Rebelo\ATWs\Series\DocumentClassCode
      * @throws \Rebelo\ATWs\ATWsException
-     * @since 1.0.0
-     */
+     * @since        1.0.0
+     * @noinspection PhpUnused*/
     public function getClassDocumentCode(): DocumentClassCode
     {
         return $this->documentTypeCode->getDocumentClassCode();

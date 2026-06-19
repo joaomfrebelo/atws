@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection PhpRedundantOptionalArgumentInspection */
 
 /**
  * MIT License
@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs;
 
+use Monolog\Logger;
 use Rebelo\Date\Date;
 use Rebelo\Date\DateNtpException;
 use Rebelo\Date\Pattern;
@@ -23,6 +24,12 @@ use Rebelo\Date\Pattern;
 abstract class AATWs
 {
     /**
+     * @var \Monolog\Logger|null
+     * @since 4.0.0
+     */
+    public static Logger|null  $logger = null;
+
+    /**
      * The encryption cipher
      * @since 1.0.0
      */
@@ -33,7 +40,7 @@ abstract class AATWs
      *
      * @since 1.0.1
      */
-    const int SYMETRIC_KEY_LENGTH = 16;
+    const int SYMMETRIC_KEY_LENGTH = 16;
 
     /**
      * The decimals to be use in float format
@@ -58,13 +65,6 @@ abstract class AATWs
 
     /**
      *
-     * @var \Logger
-     * @since 1.0.0
-     */
-    protected \Logger $log;
-
-    /**
-     *
      * @param string $username            AT (e-fatura) username
      * @param string $password            AT (e-fatura) password
      * @param string $certificatePath     The certificate path
@@ -81,12 +81,11 @@ abstract class AATWs
         protected bool   $isTest
     )
     {
-        $this->log = \Logger::getLogger(\get_class($this));
-        $this->log->debug(__METHOD__);
-        $this->log->debug("Username set to:" . $username);
-        $this->log->debug("Password set to:" . \str_pad("", \strlen($password), "*"));
-        $this->log->debug("Certificate path set to:" . $certificatePath);
-        $this->log->debug(
+        AATWs::$logger?->debug(__METHOD__);
+        AATWs::$logger?->debug("Username set to:" . $username);
+        AATWs::$logger?->debug("Password set to:" . \str_pad("", \strlen($password), "*"));
+        AATWs::$logger?->debug("Certificate path set to:" . $certificatePath);
+        AATWs::$logger?->debug(
             "Certificate password set to: " . \str_pad(
                 "", \strlen($certificatePassword), "*"
             )
@@ -162,7 +161,7 @@ abstract class AATWs
      */
     private function genSimKey(): void
     {
-        $this->symmetricKey = \substr(\md5(\uniqid(\microtime())), 0, self::SYMETRIC_KEY_LENGTH);
+        $this->symmetricKey = \substr(\md5(\uniqid(\microtime())), 0, self::SYMMETRIC_KEY_LENGTH);
     }
 
     /**
@@ -179,10 +178,10 @@ abstract class AATWs
         try {
             $gmt = Date::ntp(null, new \DateTimeZone("UTC"))->format($gmtFormat);
         } catch (DateNtpException $e) {
-            $this->log->error($e->getMessage());
+            AATWs::$logger?->error($e->getMessage());
             $gmt = \gmdate($gmtFormat);
         }
-        $this->log->debug("Date create (UTC): " . $gmt);
+        AATWs::$logger?->debug("Date create (UTC): " . $gmt);
         return $this->base64EncodeEncryptAesEcbPkcs5pad($gmt);
     }
 
@@ -275,7 +274,7 @@ abstract class AATWs
             );
 
             $soapXml = $xml->outputMemory();
-            $this->log->debug($soapXml);
+            AATWs::$logger?->debug($soapXml);
 
             $response = $soap->__doRequest(
                 $soapXml,
@@ -289,16 +288,16 @@ abstract class AATWs
                 throw new ATWsException("atws_con_error " . \openssl_error_string());
             }
 
-            $this->log->debug("Response: " . $response);
+            AATWs::$logger?->debug("Response: " . $response);
 
             return $response;
         } catch (\Throwable $e) {
             try {
                 $this->validateCertificates();
             } catch (ATWsException $ex) {
-                $this->log->error($ex->getMessage());
+                AATWs::$logger?->error($ex->getMessage());
             }
-            $this->log->error($e->getMessage());
+            AATWs::$logger?->error($e->getMessage());
             throw new ATWsException($e->getMessage(), $e->getCode(), $e->getPrevious());
         }
     }
@@ -315,7 +314,7 @@ abstract class AATWs
     protected function validateCertificates(): void
     {
         if (\file_exists(ATWS_AT_PUB_KEY) === false) {
-            $this->log->error("File not exist: " . ATWS_AT_PUB_KEY);
+            AATWs::$logger?->error("File not exist: " . ATWS_AT_PUB_KEY);
             throw new ATWsException("AT public certificate file not exists");
         }
 
@@ -328,11 +327,11 @@ abstract class AATWs
             $pubFromDate = Date::parse($stamp, (string)$pubCertParse["validFrom_time_t"]);
             $pubToDate = Date::parse($stamp, (string)$pubCertParse["validTo_time_t"]);
 
-            $this->log->debug("AT public cert name: " . $pubCertParse["name"]);
-            $this->log->debug(
+            AATWs::$logger?->debug("AT public cert name: " . $pubCertParse["name"]);
+            AATWs::$logger?->debug(
                 "AT public cert valid from: " . $pubFromDate->format($dateFormat)
             );
-            $this->log->debug(
+            AATWs::$logger?->debug(
                 "AT public cert valid to: " . $pubToDate->format($dateFormat)
             );
 
@@ -340,7 +339,7 @@ abstract class AATWs
                 $certError[] = "AT public key out of date";
             }
         } else {
-            $this->log->error("Error debugging AT public key");
+            AATWs::$logger?->error("Error debugging AT public key");
         }
 
 
@@ -365,11 +364,11 @@ abstract class AATWs
             $certFromDate = Date::parse($stamp, (string)$cert["validFrom_time_t"]);
             $certTodate = Date::parse($stamp, (string)$cert["validTo_time_t"]);
 
-            $this->log->debug("Company cert name: " . $cert["name"]);
-            $this->log->debug(
+            AATWs::$logger?->debug("Company cert name: " . $cert["name"]);
+            AATWs::$logger?->debug(
                 "Company cert valid from: " . $certFromDate->format($dateFormat)
             );
-            $this->log->debug(
+            AATWs::$logger?->debug(
                 "Company cert valid to: " . $certTodate->format($dateFormat)
             );
 
@@ -377,11 +376,11 @@ abstract class AATWs
                 $certError[] = "Company certificate out of date";
             }
         } else {
-            $this->log->error("Error debugging company certificate");
+            AATWs::$logger?->error("Error debugging company certificate");
         }
         if (\count($certError) > 0) {
             foreach ($certError as $error) {
-                $this->log->error($error);
+                AATWs::$logger?->error($error);
             }
             throw new ATWsException("Certificates out of date");
         }

@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\Series;
 
+use Rebelo\ATWs\AATWs;
 use Rebelo\ATWs\ATWsException;
 use Rebelo\Date\Date;
 use Rebelo\Date\Pattern;
@@ -45,15 +46,15 @@ class ConsultSelfBillingSeries extends ASeries
     )
     {
         parent::__construct();
-        $this->log->debug(__METHOD__);
-        $this->log->debug("Series set to: " . $this->series);
-        $this->log->debug("DocumentTypeCode set to: " . ($this->documentTypeCode?->value ?? "null"));
-        $this->log->debug("SeriesValidationCode set to: " . $this->seriesValidationCode);
-        $this->log->debug(
+        AATWs::$logger?->debug(__METHOD__);
+        AATWs::$logger?->debug("Series set to: " . $this->series);
+        AATWs::$logger?->debug("DocumentTypeCode set to: " . ($this->documentTypeCode?->value ?? "null"));
+        AATWs::$logger?->debug("SeriesValidationCode set to: " . $this->seriesValidationCode);
+        AATWs::$logger?->debug(
             "ToRegistrationDate set to: "
             . ($this->toRegistrationDate?->format(Pattern::SQL_DATE) ?? "null")
         );
-        $this->log->debug(
+        AATWs::$logger?->debug(
             "FromRegistrationDate set to: "
             . ($this->fromRegistrationDate?->format(Pattern::SQL_DATE) ?? "null")
         );
@@ -64,8 +65,8 @@ class ConsultSelfBillingSeries extends ASeries
             }
         }
 
-        $this->log->debug("SelfBillingEntityCode: " . ($this->selfBillingEntityCode?->value ?? "null"));
-        $this->log->debug("Supplier: " . ($this->supplierTin ?? "null"));
+        AATWs::$logger?->debug("SelfBillingEntityCode: " . ($this->selfBillingEntityCode?->value ?? "null"));
+        AATWs::$logger?->debug("Supplier: " . ($this->supplierTin ?? "null"));
 
     }
 

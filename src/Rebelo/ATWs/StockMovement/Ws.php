@@ -29,13 +29,6 @@ class Ws extends AATWs implements IWs
     const string WSDL = __DIR__ . DIRECTORY_SEPARATOR . "documentosTransporte.wsdl";
 
     /**
-     *
-     * @var \Logger
-     * @since 1.0.0
-     */
-    protected \Logger $log;
-
-    /**
      * @var \Rebelo\ATWs\StockMovement\StockMovement|\Rebelo\ATWs\StockMovement\PriorAgriculturalStockMovement|\Rebelo\ATWs\StockMovement\SubsequentAgriculturalStockMovement
      * @since 1.0.0
      */

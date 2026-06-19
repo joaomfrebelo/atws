@@ -12,6 +12,7 @@ namespace Rebelo\ATWs\EFaturaMDVersion\Invoice;
 
 
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Rebelo\ATWs\ATWsException;
 use Rebelo\Base;
@@ -25,20 +26,20 @@ use Rebelo\Date\Date;
 class InvoiceHeaderTest extends TestCase
 {
     /**
-     * @test
      * @return void
      */
+    #[Test]
     public function testReflection(): void
     {
-        (new Base())->testReflection(InvoiceHeader::class);
+        (new Base(InvoiceHeader::class))->testReflection(InvoiceHeader::class);
         $this->assertTrue(true);
     }
 
     /**
-     * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
      */
+    #[Test]
     public function testHeader(): void
     {
         foreach (['FT', 'FR', 'FS', 'NC', 'ND', 'RP', 'RE', 'CS', 'LD', 'RA'] as $k => $invoiceType) {
@@ -70,10 +71,10 @@ class InvoiceHeaderTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
      */
+    #[Test]
     public function testInstanceWrongInvoiceType(): void
     {
         $this->expectException(ATWsException::class);
@@ -91,10 +92,10 @@ class InvoiceHeaderTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      * @throws \Rebelo\ATWs\ATWsException
      */
+    #[Test]
     public function testInstanceWrongCustomerTaxIdCountry(): void
     {
         $this->expectException(ATWsException::class);

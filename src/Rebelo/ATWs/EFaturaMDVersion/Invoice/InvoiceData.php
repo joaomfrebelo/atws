@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\EFaturaMDVersion\Invoice;
 
+use Rebelo\ATWs\AATWs;
 use Rebelo\ATWs\ATWsException;
 use Rebelo\ATWs\EFaturaMDVersion\DocumentTotals;
 use Rebelo\Date\Date;
@@ -21,12 +22,6 @@ use Rebelo\Date\Pattern;
  */
 class InvoiceData
 {
-
-    /**
-     * @var \Logger
-     * @since 2.0.0
-     */
-    protected \Logger $log;
 
     /**
      * @param \Rebelo\ATWs\EFaturaMDVersion\Invoice\InvoiceHeader $invoiceHeader          The invoice header
@@ -55,33 +50,32 @@ class InvoiceData
         protected ?array         $withholdingTax
     )
     {
-        $this->log = \Logger::getLogger(\get_class($this));
-        $this->log->debug(__METHOD__);
+        AATWs::$logger?->debug(__METHOD__);
 
-        $this->log->info("Hash characters set to " . $this->hashCharacters);
-        $this->log->info(
+        AATWs::$logger?->info("Hash characters set to " . $this->hashCharacters);
+        AATWs::$logger?->info(
             \sprintf(
                 "Cash VAT Scheme Indicator set to %s",
                 $this->cashVATSchemeIndicator ? "true" : "false"
             )
         );
 
-        $this->log->info(
+        AATWs::$logger?->info(
             \sprintf(
                 "Paper less Indicator set to %s",
                 $this->paperLessIndicator ? "true" : "false"
             )
         );
 
-        $this->log->info("EACCode set to " . ($this->eacCode ?? "null"));
+        AATWs::$logger?->info("EACCode set to " . ($this->eacCode ?? "null"));
 
         if ($this->eacCode !== null && \preg_match("/^[0-9]{5}$/", $this->eacCode) !== 1) {
             $msg = "Invoice EACCode must respect the regexp ^[0-9]{5}$";
-            $this->log->error($msg);
+            AATWs::$logger?->error($msg);
             throw new ATWsException($msg);
         }
 
-        $this->log->info(
+        AATWs::$logger?->info(
             "SystemEntryDate set to " . $this->systemEntryDate->format(Pattern::DATE_T_TIME)
         );
     }

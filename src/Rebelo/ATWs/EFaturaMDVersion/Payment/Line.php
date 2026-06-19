@@ -21,12 +21,6 @@ use Rebelo\ATWs\EFaturaMDVersion\Tax;
 class Line
 {
     /**
-     * @var \Logger
-     * @since 2.0.0
-     */
-    protected \Logger $log;
-
-    /**
      * Receipt Lines by Fee (LineSummary)
      * Summary of receipt lines by tax rate and reason for exemption or non-payment.
      * There must be one, and only one line, for each tax (TaxType, TaxCountryRegion, TaxCode)
@@ -51,12 +45,11 @@ class Line
         protected ?string $taxExemptionCode
     )
     {
-        $this->log = \Logger::getLogger(\get_class($this));
-        $this->log->debug(__METHOD__);
+        AATWs::$logger?->debug(__METHOD__);
 
         if (\count($this->sourceDocumentID) === 0) {
             $msg = "SourceDocumentID cannot be empty";
-            $this->log->error($msg);
+            AATWs::$logger?->error($msg);
             throw new ATWsException($msg);
         }
 
@@ -66,35 +59,35 @@ class Line
                 "Debit Credit indicator must be on of '%s'",
                 \join("', '", $allowCreDebIndicator)
             );
-            $this->log->error($msg);
+            AATWs::$logger?->error($msg);
             throw new ATWsException($msg);
         }
 
-        $this->log->info("DebitCreditIndicator set to " . $this->debitCreditIndicator);
+        AATWs::$logger?->info("DebitCreditIndicator set to " . $this->debitCreditIndicator);
 
         if ($this->settlementAmount !== null && $this->settlementAmount < 0.0) {
             $msg = "SettlementAmount cannot be less than zero";
-            $this->log->error($msg);
+            AATWs::$logger?->error($msg);
             throw new ATWsException($msg);
         }
 
-        $this->log->info("SettlementAmount set to " . ((string)($this->settlementAmount ?? "null")));
+        AATWs::$logger?->info("SettlementAmount set to " . ((string)($this->settlementAmount ?? "null")));
 
         if ($this->amount < 0.0) {
             $msg = "Amount cannot be less than zero";
-            $this->log->error($msg);
+            AATWs::$logger?->error($msg);
             throw new ATWsException($msg);
         }
 
-        $this->log->info("Amount set to " . ((string)$this->amount));
+        AATWs::$logger?->info("Amount set to " . ((string)$this->amount));
 
         if ($this->taxExemptionCode !== null && \preg_match("/^(M[0-9]{2})$/", $this->taxExemptionCode) !== 1) {
             $msg = "Wrong tax exemption code format";
-            $this->log->error($msg);
+            AATWs::$logger?->error($msg);
             throw new ATWsException($msg);
         }
 
-        $this->log->info("TaxExemptionCode set to " . ($this->taxExemptionCode ?? "null"));
+        AATWs::$logger?->info("TaxExemptionCode set to " . ($this->taxExemptionCode ?? "null"));
     }
 
     /**

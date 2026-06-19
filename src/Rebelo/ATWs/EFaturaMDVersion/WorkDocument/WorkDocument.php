@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\EFaturaMDVersion\WorkDocument;
 
+use Rebelo\ATWs\AATWs;
 use Rebelo\ATWs\EFaturaMDVersion\DocBase;
 use Rebelo\ATWs\EFaturaMDVersion\RecordChannel;
 
@@ -22,13 +23,6 @@ class WorkDocument
 {
 
     use DocBase;
-
-    /**
-     *
-     * @var \Logger
-     * @since 2.0.0
-     */
-    protected \Logger $log;
 
     /**
      * @param string                                              $taxRegistrationNumber     Issuer TIN Portuguese Tax Identification Number (without any country prefix).
@@ -45,11 +39,10 @@ class WorkDocument
         protected ?RecordChannel $recordChannel
     )
     {
-        $this->log = \Logger::getLogger(\get_class($this));
-        $this->log->debug(__METHOD__);
-        $this->log->info("TaxRegistrationNumber set to: " . $taxRegistrationNumber);
-        $this->log->info("TaxEntity set to: " . $this->taxEntity);
-        $this->log->info("SoftwareCertificateNumber set to: " . $this->softwareCertificateNumber);
+        AATWs::$logger?->debug(__METHOD__);
+        AATWs::$logger?->info("TaxRegistrationNumber set to: " . $taxRegistrationNumber);
+        AATWs::$logger?->info("TaxEntity set to: " . $this->taxEntity);
+        AATWs::$logger?->info("SoftwareCertificateNumber set to: " . $this->softwareCertificateNumber);
     }
 
     /**

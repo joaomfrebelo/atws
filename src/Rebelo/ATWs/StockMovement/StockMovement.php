@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\StockMovement;
 
+use Rebelo\ATWs\AATWs;
 use Rebelo\ATWs\ATWsException;
 use Rebelo\Date\Date;
 use Rebelo\Date\Pattern;
@@ -90,37 +91,37 @@ class StockMovement extends AStockMovement
             $vehicleID
         );
 
-        $this->log->debug("MovementType set to: " . $movementType);
-        $this->log->debug("MovementStatus set to: " . $movementStatus);
-        $this->log->debug("CustomerTaxID set to: " . $customerTaxID);
-        $this->log->debug("SupplierTaxID set to: " . $supplierTaxID);
-        $this->log->debug("CustomerName set to: " . $customerName);
-        $this->log->debug(
+        AATWs::$logger?->debug("MovementType set to: " . $movementType);
+        AATWs::$logger?->debug("MovementStatus set to: " . $movementStatus);
+        AATWs::$logger?->debug("CustomerTaxID set to: " . $customerTaxID);
+        AATWs::$logger?->debug("SupplierTaxID set to: " . $supplierTaxID);
+        AATWs::$logger?->debug("CustomerName set to: " . $customerName);
+        AATWs::$logger?->debug(
             "MovementEndTime set to: " . (
                 ($movementEndTime?->format(Pattern::DATE_T_TIME)) ?? "null")
         );
 
         if (\in_array($movementType, ["GR", "GT", "GA", "GC", "GD"]) === false) {
             $msg = "MovementType only can be 'GR', 'GT', 'GA', 'GC', 'GD'";
-            $this->log->error($msg);
+            AATWs::$logger?->error($msg);
             throw new ATWsException($msg);
         }
 
         if (\in_array($movementStatus, ["N", "T", "A"]) === false) {
             $msg = "MovementStatus only can be 'N', 'T', 'A'";
-            $this->log->error($msg);
+            AATWs::$logger?->error($msg);
             throw new ATWsException($msg);
         }
 
         if ($supplierTaxID === null && $customerTaxID === null) {
             $msg = "SupplierTaxID and CustomerTaxID can not be mull at same time";
-            $this->log->error($msg);
+            AATWs::$logger?->error($msg);
             throw new ATWsException($msg);
         }
 
         if ($supplierTaxID !== null && $customerTaxID !== null) {
             $msg = "SupplierTaxID and CustomerTaxID can not be set at same time";
-            $this->log->error($msg);
+            AATWs::$logger?->error($msg);
             throw new ATWsException($msg);
         }
     }

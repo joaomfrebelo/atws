@@ -9,6 +9,8 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\Series;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Rebelo\ATWs\ATWsException;
 use Rebelo\Base;
@@ -20,12 +22,12 @@ use Rebelo\Date\Date;
 class SeriesRegisterTest extends TestCase
 {
     /**
-     * @test
      * @return void
      */
+    #[Test]
     public function testReflection(): void
     {
-        (new Base())->testReflection(SeriesRegister::class);
+        (new Base(SeriesRegister::class))->testReflection(SeriesRegister::class);
         $this->assertTrue(true);
     }
 
@@ -33,7 +35,7 @@ class SeriesRegisterTest extends TestCase
      * Wrong Series data provider
      * @return array
      */
-    public function providerSeries(): array
+    public static function providerSeries(): array
     {
         return [
             ["A-A"], ["A_A"], ["A.A"], ["A"], ["AAA"]
@@ -41,9 +43,6 @@ class SeriesRegisterTest extends TestCase
     }
 
     /**
-     * @test
-     * @dataProvider providerSeries
-     *
      * @param string $series
      *
      * @throws \Rebelo\ATWs\ATWsException
@@ -51,6 +50,8 @@ class SeriesRegisterTest extends TestCase
      * @throws \Rebelo\Date\DateIntervalException
      * @throws \Rebelo\Date\DateParseException
      */
+    #[Test]
+    #[DataProvider("providerSeries")]
     public function testInstance(string $series): void
     {
         $seriesTypeCode = SeriesTypeCode::N;
@@ -88,7 +89,7 @@ class SeriesRegisterTest extends TestCase
      * Wrong Series data provider
      * @return array
      */
-    public function providerWrongSeries(): array
+    public static function providerWrongSeries(): array
     {
         return [
             ["-A"], ["A-"], [".A"], ["A."], ["_A"], ["A_"], [""], ["A A"], [" "], ["AÇ"], ["É"]
@@ -96,8 +97,6 @@ class SeriesRegisterTest extends TestCase
     }
 
     /**
-     * @test
-     * @dataProvider providerWrongSeries
      *
      * @param string $series
      *
@@ -106,6 +105,8 @@ class SeriesRegisterTest extends TestCase
      * @throws \Rebelo\Date\DateIntervalException
      * @throws \Rebelo\Date\DateParseException
      */
+    #[Test]
+    #[DataProvider("providerWrongSeries")]
     public function testInstanceWrongSeries(string $series): void
     {
         $this->expectException(ATWsException::class);
@@ -133,7 +134,7 @@ class SeriesRegisterTest extends TestCase
      * Wrong Sequential number data provider
      * @return array
      */
-    public function providerWrongNumber(): array
+    public static function providerWrongNumber(): array
     {
         return [
             [-1], [0],
@@ -141,8 +142,6 @@ class SeriesRegisterTest extends TestCase
     }
 
     /**
-     * @test
-     * @dataProvider providerWrongNumber
      *
      * @param int $seriesInitialSequenceNumber
      *
@@ -151,6 +150,8 @@ class SeriesRegisterTest extends TestCase
      * @throws \Rebelo\Date\DateIntervalException
      * @throws \Rebelo\Date\DateParseException
      */
+    #[Test]
+    #[DataProvider("providerWrongNumber")]
     public function testInstanceWrongNumber(int $seriesInitialSequenceNumber): void
     {
         $this->expectException(ATWsException::class);
@@ -175,12 +176,12 @@ class SeriesRegisterTest extends TestCase
     }
 
     /**
-     * @test
      * @throws \Rebelo\ATWs\ATWsException
      * @throws \Rebelo\Date\DateException
      * @throws \Rebelo\Date\DateIntervalException
      * @throws \Rebelo\Date\DateParseException
      */
+    #[Test]
     public function testInstanceWrongDate(): void
     {
         $this->expectException(ATWsException::class);

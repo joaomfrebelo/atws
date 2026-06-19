@@ -8,6 +8,8 @@
 
 namespace Rebelo\ATWs\EFaturaMDVersion\Payment;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Rebelo\ATWs\EFaturaMDVersion\DocumentTotals;
 use Rebelo\ATWs\EFaturaMDVersion\Tax;
@@ -22,12 +24,12 @@ class PaymentDataTest extends TestCase
 {
 
     /**
-     * @test
      * @return void
      */
+    #[Test]
     public function testReflection(): void
     {
-        (new Base())->testReflection(PaymentData::class);
+        (new Base(PaymentData::class))->testReflection(PaymentData::class);
         $this->assertTrue(true);
     }
 
@@ -35,7 +37,7 @@ class PaymentDataTest extends TestCase
      * @return array
      * @throws \Rebelo\ATWs\ATWsException
      */
-    public function paymentDataDataProvider(): array
+    public static function paymentDataDataProvider(): array
     {
         $data = [];
 
@@ -88,9 +90,6 @@ class PaymentDataTest extends TestCase
     }
 
     /**
-     * @test
-     * @dataProvider paymentDataDataProvider
-     *
      * @param \Rebelo\ATWs\EFaturaMDVersion\Payment\PaymentHeader $paymentHeader
      * @param \Rebelo\ATWs\EFaturaMDVersion\Payment\PaymentStatus $paymentStatus
      * @param \Rebelo\Date\Date                                   $systemEntryDate
@@ -100,6 +99,8 @@ class PaymentDataTest extends TestCase
      *
      * @return void
      */
+    #[Test]
+    #[DataProvider("paymentDataDataProvider")]
     public function testInstance(
         PaymentHeader  $paymentHeader,
         PaymentStatus  $paymentStatus,
@@ -126,6 +127,5 @@ class PaymentDataTest extends TestCase
         $this->assertSame($documentTotals, $paymentData->getDocumentTotals());
         $this->assertSame($withholdingTax, $paymentData->getWithholdingTax());
     }
-
 
 }

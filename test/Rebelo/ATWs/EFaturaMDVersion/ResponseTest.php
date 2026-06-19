@@ -9,6 +9,8 @@ declare(strict_types=1);
 
 namespace Rebelo\ATWs\EFaturaMDVersion;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Rebelo\ATWs\ATWsException;
 use Rebelo\Base;
@@ -22,19 +24,19 @@ class ResponseTest extends TestCase
 {
 
     /**
-     * @test
      * @return void
      */
+    #[Test]
     public function testReflection(): void
     {
-        (new Base())->testReflection(Response::class);
+        (new Base(Response::class))->testReflection(Response::class);
         $this->assertTrue(true);
     }
 
     /**
      * @return array[]
      */
-    public function responsesProvider(): array
+    public static function responsesProvider(): array
     {
         $baseDir = ATWS_INVOICE_RESPONSE_DIR . DIRECTORY_SEPARATOR;
         return [
@@ -49,14 +51,15 @@ class ResponseTest extends TestCase
     }
 
     /**
-     * @test
-     * @dataProvider responsesProvider
+     *
      * @param string $filePath
      * @param int    $code
      * @param string $message
      * @throws \Rebelo\ATWs\ATWsException
      * @throws \Exception
      */
+    #[Test]
+    #[DataProvider("responsesProvider")]
     public function testResponses(string $filePath, int $code, string $message): void
     {
         $xml = \file_get_contents($filePath);
@@ -72,6 +75,7 @@ class ResponseTest extends TestCase
     /***
      * @throws \Rebelo\ATWs\ATWsException
      */
+    #[Test]
     public function testWrongXmlResponses(): void
     {
         $this->expectException(ATWsException::class);
